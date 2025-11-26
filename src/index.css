@@ -1,0 +1,436 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  
+  body {
+    @apply m-0 p-0 font-sans antialiased;
+    background-image: url('/images/backgorund.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  
+  #root {
+    background-image: url('/images/backgorund.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  /* Hero Section Container */
+  .hero-section-container {
+    position: relative;
+  }
+  
+  /* Exact gradient for hero section - light sky blue → peach/orange → light pink/purple */
+  .hero-gradient-exact {
+    background: linear-gradient(90deg, 
+      #6BB6FF 0%, 
+      #7FC8E8 10%, 
+      #87CEEB 20%, 
+      #B0E0E6 30%, 
+      #FFE4B5 45%, 
+      #FFDAB9 55%, 
+      #FFA07A 70%, 
+      #FFB6C1 85%, 
+      #DDA0DD 95%, 
+      #EE82EE 100%
+    );
+    position: relative;
+  }
+
+  /* More rounded bottom corners for hero section */
+  .hero-bottom-rounded {
+    border-bottom-left-radius: 48px;
+    border-bottom-right-radius: 48px;
+  }
+  
+  /* Main Hero Panel - Translucent White with Light Blue Border */
+  .hero-panel {
+    position: relative;
+  }
+  
+  .hero-panel-inner {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid rgba(173, 216, 230, 0.6);
+    border-radius: 24px;
+    padding: 48px 40px;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* Countdown Timer Box - Clean Layout */
+  .countdown-timer-box-exact {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+  }
+
+  /* Pink Circular Om Icon */
+  .om-circle-icon {
+    width: 44px;
+    height: 44px;
+    background: #EC4899;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+    flex-shrink: 0;
+  }
+
+  .om-symbol-text {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  
+  /* Individual Time Boxes */
+  .countdown-time-box {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    color: white;
+    min-width: 52px;
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Join Now Button - Clean Design with Yellow Border */
+  .join-now-button-exact {
+    background: linear-gradient(180deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
+    border: 3px solid #FBBF24;
+    border-radius: 16px;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 
+      0 6px 20px rgba(59, 130, 246, 0.5),
+      0 2px 8px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 50 !important;
+    cursor: pointer;
+  }
+
+  .join-now-button-exact:hover {
+    box-shadow: 
+      0 8px 24px rgba(59, 130, 246, 0.6),
+      0 3px 10px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Join Now Button - Large Size for Right Side */
+  .join-now-button-exact-large {
+    background: linear-gradient(180deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
+    border: 3px solid #FBBF24;
+    border-radius: 16px;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 
+      0 8px 24px rgba(59, 130, 246, 0.6),
+      0 3px 10px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 50 !important;
+    cursor: pointer;
+  }
+
+  .join-now-button-exact-large:hover {
+    box-shadow: 
+      0 10px 28px rgba(59, 130, 246, 0.7),
+      0 4px 12px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Hero Main Text - Rounded White Font */
+  .hero-main-text {
+    font-family: 'Inter', 'Arial Rounded MT Bold', 'Arial', sans-serif;
+    font-weight: 700;
+    color: white;
+    text-shadow: 
+      0 0 2px rgba(0, 0, 0, 0.5),
+      0 0 4px rgba(0, 0, 0, 0.4),
+      0 2px 6px rgba(0, 0, 0, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.2);
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.4);
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+
+  /* Unified Blur Rectangle for All Content */
+  .hero-unified-blur-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 200px);
+    min-height: 420px;
+    background: rgba(173, 216, 230, 0.25);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  /* Glossy button effect with enhanced shine */
+  .glossy-button {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 50%, #1D4ED8 100%);
+    box-shadow: 
+      0 4px 15px rgba(59, 130, 246, 0.4), 
+      0 2px 5px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .glossy-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+  }
+  
+  .glossy-button:hover::before {
+    left: 100%;
+  }
+  
+  .glossy-button:hover {
+    box-shadow: 
+      0 6px 20px rgba(59, 130, 246, 0.5), 
+      0 3px 8px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  /* Scroll texture for course card - parchment/scroll effect */
+  .scroll-texture {
+    background-color: #FEF3C7;
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        rgba(139, 69, 19, 0.03) 0px,
+        rgba(139, 69, 19, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+      ),
+      linear-gradient(
+        180deg,
+        rgba(139, 69, 19, 0.05) 0%,
+        transparent 5%,
+        transparent 95%,
+        rgba(139, 69, 19, 0.05) 100%
+      );
+    position: relative;
+  }
+  
+  /* Card shadow - soft and subtle */
+  .card-shadow {
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      0 0 0 1px rgba(0, 0, 0, 0.02);
+  }
+
+  /* Progress and Teacher Note Card - Same gradient and styling */
+  .progress-teacher-card {
+    background: linear-gradient(135deg, 
+      rgba(147, 197, 253, 0.3) 0%, 
+      rgba(191, 219, 254, 0.2) 50%, 
+      rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  /* Progress Card Exact - Matching image gradient (light blue/cyan to cream/white) */
+  .progress-card-exact {
+    background: linear-gradient(135deg, 
+      rgba(173, 216, 230, 0.35) 0%, 
+      rgba(176, 224, 230, 0.25) 25%, 
+      rgba(240, 248, 255, 0.4) 50%,
+      rgba(255, 250, 240, 0.7) 75%,
+      rgba(255, 253, 250, 0.9) 100%
+    );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+
+  /* Teacher Note Card Exact - Matching image gradient (light pink/purple to light blue/purple) */
+  .teacher-note-card-exact {
+    background: linear-gradient(135deg, 
+      rgba(250, 200, 230, 0.4) 0%, 
+      rgba(240, 200, 250, 0.35) 25%, 
+      rgba(220, 200, 255, 0.3) 50%,
+      rgba(200, 220, 255, 0.35) 75%,
+      rgba(180, 230, 255, 0.4) 100%
+    );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+
+  /* Assignment Card Exact - Light yellow-beige gradient */
+  .assignment-card-exact {
+    background: linear-gradient(135deg, 
+      rgba(255, 248, 220, 0.6) 0%, 
+      rgba(255, 245, 200, 0.5) 50%,
+      rgba(250, 240, 190, 0.6) 100%
+    );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+
+  /* Assignment Button - Less Yellow Gradient */
+  .assignment-button-exact {
+    background: linear-gradient(90deg, #FFD700 0%, #FFE44D 40%, #90EE90 70%, #87CEEB 100%);
+  }
+
+  /* Quiz Card Exact - Light blue-white gradient */
+  .quiz-card-exact {
+    background: linear-gradient(135deg, 
+      rgba(230, 240, 255, 0.6) 0%, 
+      rgba(240, 248, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0.7) 100%
+    );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+
+  /* Quiz Button - Light Blue to Darker Blue Gradient */
+  .quiz-button-exact {
+    background: linear-gradient(90deg, #87CEEB 0%, #5F9EA0 50%, #4682B4 100%);
+  }
+
+  /* System Check Card Exact - Light green gradient */
+  .system-check-card-exact {
+    background: linear-gradient(135deg, 
+      rgba(220, 255, 220, 0.6) 0%, 
+      rgba(240, 255, 240, 0.5) 50%,
+      rgba(250, 255, 250, 0.7) 100%
+    );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+
+  /* System Check Button - Light Green to Darker Green Gradient */
+  .system-check-button-exact {
+    background: linear-gradient(90deg, #90EE90 0%, #7CCD7C 50%, #32CD32 100%);
+  }
+  
+  /* Progress bar gradient - orange gradient (exact match) */
+  .progress-gradient {
+    background: linear-gradient(90deg, #F97316 0%, #FB923C 50%, #FDBA74 100%);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Progress bar gradient exact - vibrant orange */
+  .progress-gradient-exact {
+    background: linear-gradient(90deg, #FF6B35 0%, #FF8C42 50%, #FFA07A 100%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Cloud effect */
+  .cloud {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    filter: blur(40px);
+  }
+  
+  /* Lotus flower effect */
+  .lotus {
+    background: rgba(251, 182, 206, 0.3);
+    border-radius: 50%;
+    filter: blur(8px);
+  }
+
+  /* Sun Glow Behind Chariot */
+  .sun-glow {
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(255, 255, 200, 0.6) 0%, rgba(255, 255, 150, 0.4) 40%, rgba(255, 200, 100, 0.2) 70%, transparent 100%);
+    border-radius: 50%;
+    filter: blur(20px);
+    position: relative;
+  }
+
+  .sun-glow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 255, 180, 0.8) 0%, rgba(255, 255, 120, 0.5) 50%, transparent 100%);
+    border-radius: 50%;
+    filter: blur(15px);
+  }
+
+  /* Course Card Image - Left Side with White Border */
+  .course-card-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border: 15px solid white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: block;
+    margin: 0;
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
+
