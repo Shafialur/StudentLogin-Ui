@@ -211,7 +211,7 @@ const HeroSection = () => {
           <img 
             src="/images/lotus1.png" 
             alt="Lotus flower" 
-            className="w-20 h-20 object-contain opacity-100 max-w-full h-auto"
+            className="w-14 h-14 object-contain opacity-100 max-w-full h-auto"
           />
         </motion.div>
 
@@ -283,7 +283,7 @@ const HeroSection = () => {
                 {/* Sun Behind Chariot */}
                 <motion.div 
                   className="absolute hidden md:block" 
-                  style={{ zIndex: 16, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+                  style={{ zIndex: 16, top: '0%', left: '50%', transform: 'translate(-50%, -50%)' }}
                   animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
