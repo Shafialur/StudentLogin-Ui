@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import HeroSection from './HeroSection'
 import CourseCard from './CourseCard'
 import ProgressCard from './ProgressCard'
@@ -8,40 +9,103 @@ import QuizCard from './QuizCard'
 import SystemCheckCard from './SystemCheckCard'
 
 const Dashboard = () => {
+  // Animation variants for cards
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.5,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }
+    })
+  }
+
   return (
-    <div className="min-h-screen">
+    <div className="h-screen overflow-hidden md:overflow-hidden overflow-y-auto md:overflow-y-hidden flex flex-col">
       {/* Hero Section */}
       <HeroSection />
 
       {/* Dashboard Cards Section */}
-      <div className="max-w-full mx-auto px-6 py-6">
-        {/* Grid Layout: 10 columns (4 for Course = 40%, 3 for Progress = 30%, 3 for Teacher = 30%, 2 each for bottom = 20% each) */}
-        <div className="grid gap-6 pl-[40px] pt-[40px] pr-[40px]" style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr', height: '600px' }}>
+      <div className="max-w-full mx-auto px-4 sm:px-5 md:px-6 py-1 pb-[10px]">
+        {/* Mobile/Tablet: Stacked Layout | Desktop: Grid Layout */}
+        <div className="flex flex-col md:grid gap-4 md:gap-3 md:pl-[40px] md:pt-[10px] md:pr-[40px] md:pb-[10px] pl-0 pt-4 pr-0 md:!h-[calc(48vh-20px)] md:!max-h-[360px]" 
+          style={{ 
+            gridTemplateColumns: 'repeat(10, 1fr)', 
+            gridTemplateRows: '1fr 1fr', 
+            height: 'auto',
+            maxHeight: 'none'
+          }}>
           {/* Column 1-4: Course Card - Full height spanning 2 rows (40% width) */}
-          <div style={{ gridColumn: '1 / 5', gridRow: '1 / 3' }}>
+          <motion.div 
+            className="dashboard-grid-item-1"
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            custom={0}
+            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+          >
             <CourseCard />
-          </div>
+          </motion.div>
 
           {/* Column 5-7: Progress Card (top) - 30% width */}
-          <div style={{ gridColumn: '5 / 8', gridRow: '1' }}>
+          <motion.div 
+            className="dashboard-grid-item-2"
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            custom={1}
+            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+          >
             <ProgressCard />
-          </div>
+          </motion.div>
 
           {/* Column 8-10: Teacher Note Card (top) - 30% width */}
-          <div style={{ gridColumn: '8 / 11', gridRow: '1' }}>
+          <motion.div 
+            className="dashboard-grid-item-3"
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            custom={2}
+            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+          >
             <TeacherNoteCard />
-          </div>
+          </motion.div>
 
           {/* Bottom Row: Three cards in 60% space (20% each = 2 columns each) */}
-          <div style={{ gridColumn: '5 / 7', gridRow: '2' }}>
+          <motion.div 
+            className="dashboard-grid-item-4"
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            custom={3}
+            whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+          >
             <AssignmentCard />
-          </div>
-          <div style={{ gridColumn: '7 / 9', gridRow: '2' }}>
+          </motion.div>
+          <motion.div 
+            className="dashboard-grid-item-5"
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            custom={4}
+            whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+          >
             <QuizCard />
-          </div>
-          <div style={{ gridColumn: '9 / 11', gridRow: '2' }}>
+          </motion.div>
+          <motion.div 
+            className="dashboard-grid-item-6"
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            custom={5}
+            whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+          >
             <SystemCheckCard />
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

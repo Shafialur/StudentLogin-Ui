@@ -9,7 +9,18 @@
   
   body {
     @apply m-0 p-0 font-sans antialiased;
-    background-image: url('/images/backgorund.png');
+    background: 
+      /* Soft radial glow in center */
+      radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 60%),
+      /* Top highlight */
+      radial-gradient(ellipse 100% 40% at 50% 0%, rgba(135, 206, 250, 0.2) 0%, transparent 50%),
+      /* Bottom warm glow */
+      radial-gradient(ellipse 100% 50% at 50% 100%, rgba(255, 200, 150, 0.15) 0%, transparent 50%),
+      /* Corner accents */
+      radial-gradient(circle at 0% 0%, rgba(180, 220, 255, 0.1) 0%, transparent 30%),
+      radial-gradient(circle at 100% 100%, rgba(255, 220, 180, 0.1) 0%, transparent 30%),
+      /* Base image */
+      url('/images/backgorund.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -18,12 +29,33 @@
   }
   
   #root {
-    background-image: url('/images/backgorund.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    position: relative;
     min-height: 100vh;
+  }
+  
+  /* Animated subtle glow overlay */
+  #root::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(ellipse 60% 40% at 30% 20%, rgba(135, 206, 250, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 30% at 70% 80%, rgba(255, 180, 150, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+    animation: backgroundPulse 8s ease-in-out infinite alternate;
+  }
+  
+  @keyframes backgroundPulse {
+    0% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 }
 
@@ -109,17 +141,25 @@
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border: 1.5px solid rgba(255, 255, 255, 0.5);
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 8px 12px;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     font-family: 'Courier New', monospace;
     color: white;
-    min-width: 52px;
+    min-width: 50px;
     text-align: center;
     line-height: 1.2;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+  
+  @media (min-width: 768px) {
+    .countdown-time-box {
+      padding: 10px 16px;
+      font-size: 1.75rem;
+      min-width: 60px;
+    }
   }
   
   /* Join Now Button - Clean Design with Yellow Border */
@@ -186,31 +226,49 @@
     font-weight: 700;
     color: white;
     text-shadow: 
-      0 0 2px rgba(0, 0, 0, 0.5),
-      0 0 4px rgba(0, 0, 0, 0.4),
-      0 2px 6px rgba(0, 0, 0, 0.3),
-      0 4px 8px rgba(0, 0, 0, 0.2);
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.4);
+      0 0 2px rgba(255, 127, 80, 0.6),
+      0 0 4px rgba(255, 140, 105, 0.5),
+      0 2px 6px rgba(255, 99, 71, 0.4),
+      0 4px 8px rgba(255, 182, 193, 0.3);
+    -webkit-text-stroke: 1px rgba(255, 127, 80, 0.6);
     letter-spacing: -0.5px;
     line-height: 1.3;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
   }
 
-  /* Unified Blur Rectangle for All Content */
+  /* Unified Blur Rectangle for All Content - Glassmorphism */
   .hero-unified-blur-background {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: calc(100% + 200px);
-    min-height: 420px;
-    background: rgba(173, 216, 230, 0.25);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: calc(100% + 100px);
+    min-height: 300px;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(240, 248, 255, 0.2) 25%,
+      rgba(255, 255, 255, 0.18) 50%,
+      rgba(255, 245, 238, 0.2) 75%,
+      rgba(255, 255, 255, 0.25) 100%
+    );
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border-radius: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-top: 2px solid rgba(255, 255, 255, 0.8);
+    border-left: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 
+      /* Outer glow */
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      0 4px 16px rgba(255, 255, 255, 0.3);
     z-index: 1;
     pointer-events: none;
+  }
+  
+  @media (min-width: 768px) {
+    .hero-unified-blur-background {
+      width: calc(100% + 500px);
+    }
   }
   
   /* Glossy button effect with enhanced shine */
@@ -270,12 +328,19 @@
     position: relative;
   }
   
-  /* Card shadow - soft and subtle */
+  /* Card shadow - enhanced drop shadow and inner glow */
   .card-shadow {
     box-shadow: 
-      0 4px 6px -1px rgba(0, 0, 0, 0.1), 
-      0 2px 4px -1px rgba(0, 0, 0, 0.06),
-      0 0 0 1px rgba(0, 0, 0, 0.02);
+      /* Drop shadow - enhanced outer shadow */
+      0 20px 40px -8px rgba(0, 0, 0, 0.3), 
+      0 12px 24px -6px rgba(0, 0, 0, 0.25),
+      0 6px 12px -3px rgba(0, 0, 0, 0.2),
+      0 2px 6px -1px rgba(0, 0, 0, 0.15),
+      /* Inner glow - enhanced white glow inside */
+      inset 0 4px 16px rgba(255, 255, 255, 0.7),
+      inset 0 -4px 16px rgba(255, 255, 255, 0.5),
+      inset 0 0 40px rgba(255, 255, 255, 0.4),
+      inset 0 0 60px rgba(255, 255, 255, 0.2);
   }
 
   /* Progress and Teacher Note Card - Same gradient and styling */
@@ -290,83 +355,219 @@
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
 
-  /* Progress Card Exact - Matching image gradient (light blue/cyan to cream/white) */
+  /* Progress Card Exact - Cyan to warm orange gradient */
   .progress-card-exact {
     background: linear-gradient(135deg, 
-      rgba(173, 216, 230, 0.35) 0%, 
-      rgba(176, 224, 230, 0.25) 25%, 
-      rgba(240, 248, 255, 0.4) 50%,
-      rgba(255, 250, 240, 0.7) 75%,
-      rgba(255, 253, 250, 0.9) 100%
+      rgba(180, 220, 230, 0.85) 0%, 
+      rgba(200, 230, 235, 0.7) 15%, 
+      rgba(220, 235, 240, 0.6) 30%,
+      rgba(255, 235, 210, 0.7) 50%,
+      rgba(255, 220, 180, 0.8) 70%,
+      rgba(255, 210, 160, 0.85) 85%,
+      rgba(255, 200, 140, 0.9) 100%
     );
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.9);
+    border-left: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 
+      /* Drop shadow */
+      0 20px 40px -8px rgba(0, 0, 0, 0.15), 
+      0 12px 24px -6px rgba(0, 0, 0, 0.1),
+      /* Glass reflection */
+      inset 0 1px 2px rgba(255, 255, 255, 1),
+      /* Inner glow gradient - cyan to warm orange */
+      inset 0 0 40px rgba(180, 220, 230, 0.3),
+      inset 0 -30px 50px rgba(255, 200, 140, 0.4);
   }
 
-  /* Teacher Note Card Exact - Matching image gradient (light pink/purple to light blue/purple) */
+  /* Teacher Note Card Exact - Glassmorphism with gradient inner glow */
   .teacher-note-card-exact {
     background: linear-gradient(135deg, 
-      rgba(250, 200, 230, 0.4) 0%, 
-      rgba(240, 200, 250, 0.35) 25%, 
-      rgba(220, 200, 255, 0.3) 50%,
-      rgba(200, 220, 255, 0.35) 75%,
-      rgba(180, 230, 255, 0.4) 100%
+      rgba(250, 200, 230, 0.25) 0%, 
+      rgba(240, 200, 250, 0.2) 25%, 
+      rgba(220, 200, 255, 0.25) 50%,
+      rgba(200, 220, 255, 0.3) 75%,
+      rgba(180, 230, 255, 0.35) 100%
     );
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
+    border-left: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+      /* Drop shadow */
+      0 20px 40px -8px rgba(0, 0, 0, 0.2), 
+      0 12px 24px -6px rgba(0, 0, 0, 0.15),
+      /* Glass reflection */
+      inset 0 1px 1px rgba(255, 255, 255, 0.9),
+      /* Inner glow gradient - pink to purple to blue */
+      inset 0 0 30px rgba(250, 200, 230, 0.4),
+      inset 0 0 60px rgba(200, 180, 255, 0.3),
+      inset 0 -20px 40px rgba(180, 230, 255, 0.25);
   }
 
-  /* Assignment Card Exact - Light yellow-beige gradient */
+  /* Assignment Card Exact - Glassmorphism with gradient inner glow */
   .assignment-card-exact {
     background: linear-gradient(135deg, 
-      rgba(255, 248, 220, 0.6) 0%, 
-      rgba(255, 245, 200, 0.5) 50%,
-      rgba(250, 240, 190, 0.6) 100%
+      rgba(255, 248, 220, 0.3) 0%, 
+      rgba(255, 245, 200, 0.25) 50%,
+      rgba(250, 240, 190, 0.35) 100%
     );
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
+    border-left: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+      /* Drop shadow */
+      0 20px 40px -8px rgba(0, 0, 0, 0.2), 
+      0 12px 24px -6px rgba(0, 0, 0, 0.15),
+      /* Glass reflection */
+      inset 0 1px 1px rgba(255, 255, 255, 0.9),
+      /* Inner glow gradient - warm yellow to orange */
+      inset 0 0 30px rgba(255, 248, 220, 0.5),
+      inset 0 0 60px rgba(255, 223, 150, 0.3),
+      inset 0 -20px 40px rgba(255, 200, 100, 0.2);
   }
 
-  /* Assignment Button - Less Yellow Gradient */
+  /* Assignment Button - Glassmorphism with yellow-green-blue gradient spread */
   .assignment-button-exact {
-    background: linear-gradient(90deg, #FFD700 0%, #FFE44D 40%, #90EE90 70%, #87CEEB 100%);
+    background: linear-gradient(90deg, 
+      rgba(255, 215, 0, 0.9) 0%, 
+      rgba(255, 225, 50, 0.85) 20%, 
+      rgba(200, 240, 130, 0.8) 45%, 
+      rgba(144, 238, 180, 0.75) 65%, 
+      rgba(130, 220, 220, 0.8) 85%,
+      rgba(135, 206, 235, 0.85) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+      0 4px 15px rgba(255, 215, 0, 0.25),
+      0 2px 8px rgba(144, 238, 144, 0.2),
+      inset 0 2px 4px rgba(255, 255, 255, 0.5),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .assignment-button-exact:hover {
+    box-shadow: 
+      0 6px 20px rgba(255, 215, 0, 0.35),
+      0 3px 10px rgba(144, 238, 144, 0.25),
+      inset 0 2px 4px rgba(255, 255, 255, 0.6),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  /* Quiz Card Exact - Light blue-white gradient */
+  /* Quiz Card Exact - Glassmorphism with smooth spread blue gradient */
   .quiz-card-exact {
     background: linear-gradient(135deg, 
-      rgba(230, 240, 255, 0.6) 0%, 
-      rgba(240, 248, 255, 0.5) 50%,
-      rgba(255, 255, 255, 0.7) 100%
+      rgba(173, 216, 250, 0.6) 0%, 
+      rgba(180, 220, 255, 0.55) 10%,
+      rgba(190, 225, 255, 0.5) 20%,
+      rgba(200, 230, 255, 0.48) 30%,
+      rgba(210, 235, 255, 0.46) 40%,
+      rgba(220, 240, 255, 0.48) 50%,
+      rgba(230, 245, 255, 0.5) 60%,
+      rgba(240, 248, 255, 0.52) 70%,
+      rgba(245, 250, 255, 0.54) 80%,
+      rgba(250, 252, 255, 0.56) 90%,
+      rgba(255, 255, 255, 0.58) 100%
     );
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
+    border-left: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+      /* Drop shadow */
+      0 20px 40px -8px rgba(0, 0, 0, 0.2), 
+      0 12px 24px -6px rgba(0, 0, 0, 0.15),
+      /* Glass reflection */
+      inset 0 1px 1px rgba(255, 255, 255, 0.9),
+      /* Inner glow gradient - blue tones spread smoothly */
+      inset 0 0 60px rgba(135, 206, 250, 0.3),
+      inset 0 0 100px rgba(176, 224, 230, 0.2),
+      inset 0 -30px 60px rgba(200, 230, 255, 0.15);
   }
 
-  /* Quiz Button - Light Blue to Darker Blue Gradient */
+  /* Quiz Button - Glassmorphism with blue gradient */
   .quiz-button-exact {
-    background: linear-gradient(90deg, #87CEEB 0%, #5F9EA0 50%, #4682B4 100%);
+    background: linear-gradient(90deg, 
+      rgba(135, 206, 235, 0.85) 0%, 
+      rgba(95, 158, 160, 0.8) 50%, 
+      rgba(70, 130, 180, 0.85) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 
+      0 4px 15px rgba(70, 130, 180, 0.3),
+      inset 0 2px 4px rgba(255, 255, 255, 0.5),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .quiz-button-exact:hover {
+    box-shadow: 
+      0 6px 20px rgba(70, 130, 180, 0.4),
+      inset 0 2px 4px rgba(255, 255, 255, 0.6),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  /* System Check Card Exact - Light green gradient */
+  /* System Check Card Exact - Glassmorphism with smooth spread green gradient */
   .system-check-card-exact {
     background: linear-gradient(135deg, 
-      rgba(220, 255, 220, 0.6) 0%, 
-      rgba(240, 255, 240, 0.5) 50%,
-      rgba(250, 255, 250, 0.7) 100%
+      rgba(173, 255, 173, 0.6) 0%, 
+      rgba(180, 255, 180, 0.55) 10%,
+      rgba(190, 255, 190, 0.5) 20%,
+      rgba(200, 255, 200, 0.48) 30%,
+      rgba(210, 255, 210, 0.46) 40%,
+      rgba(220, 255, 220, 0.48) 50%,
+      rgba(230, 255, 230, 0.5) 60%,
+      rgba(240, 255, 240, 0.52) 70%,
+      rgba(245, 255, 245, 0.54) 80%,
+      rgba(250, 255, 250, 0.56) 90%,
+      rgba(255, 255, 255, 0.58) 100%
     );
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
+    border-left: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+      /* Drop shadow */
+      0 20px 40px -8px rgba(0, 0, 0, 0.2), 
+      0 12px 24px -6px rgba(0, 0, 0, 0.15),
+      /* Glass reflection */
+      inset 0 1px 1px rgba(255, 255, 255, 0.9),
+      /* Inner glow gradient - green tones spread smoothly */
+      inset 0 0 60px rgba(144, 238, 144, 0.3),
+      inset 0 0 100px rgba(152, 251, 152, 0.2),
+      inset 0 -30px 60px rgba(200, 255, 200, 0.15);
   }
 
-  /* System Check Button - Light Green to Darker Green Gradient */
+  /* System Check Button - Glassmorphism with green gradient */
   .system-check-button-exact {
-    background: linear-gradient(90deg, #90EE90 0%, #7CCD7C 50%, #32CD32 100%);
+    background: linear-gradient(90deg, 
+      rgba(144, 238, 144, 0.85) 0%, 
+      rgba(124, 205, 124, 0.8) 50%, 
+      rgba(50, 205, 50, 0.85) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 
+      0 4px 15px rgba(50, 205, 50, 0.3),
+      inset 0 2px 4px rgba(255, 255, 255, 0.5),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .system-check-button-exact:hover {
+    box-shadow: 
+      0 6px 20px rgba(50, 205, 50, 0.4),
+      inset 0 2px 4px rgba(255, 255, 255, 0.6),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
   }
   
   /* Progress bar gradient - orange gradient (exact match) */
@@ -375,10 +576,19 @@
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  /* Progress bar gradient exact - vibrant orange */
+  /* Progress bar gradient exact - vibrant orange with glassmorphism */
   .progress-gradient-exact {
-    background: linear-gradient(90deg, #FF6B35 0%, #FF8C42 50%, #FFA07A 100%);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90deg, 
+      rgba(255, 107, 53, 0.9) 0%, 
+      rgba(255, 140, 66, 0.85) 50%, 
+      rgba(255, 160, 122, 0.8) 100%
+    );
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 
+      0 4px 12px rgba(255, 107, 53, 0.4),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
   }
   
   /* Cloud effect */
@@ -418,15 +628,35 @@
     filter: blur(15px);
   }
 
-  /* Course Card Image - Left Side with White Border */
+  /* Responsive Grid Classes for Dashboard */
+  @media (min-width: 768px) {
+    .dashboard-grid-item-1 { grid-column: 1 / 5; grid-row: 1 / 3; }
+    .dashboard-grid-item-2 { grid-column: 5 / 8; grid-row: 1; }
+    .dashboard-grid-item-3 { grid-column: 8 / 11; grid-row: 1; }
+    .dashboard-grid-item-4 { grid-column: 5 / 7; grid-row: 2; }
+    .dashboard-grid-item-5 { grid-column: 7 / 9; grid-row: 2; }
+    .dashboard-grid-item-6 { grid-column: 9 / 11; grid-row: 2; }
+  }
+
+  /* Course Card Image - Glassmorphism with gradient inner glow */
   .course-card-image {
     width: 100%;
     max-width: 100%;
     height: auto;
     object-fit: cover;
-    border: 15px solid white;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 12px solid rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    box-shadow: 
+      /* Drop shadow */
+      0 20px 40px -8px rgba(0, 0, 0, 0.25), 
+      0 12px 24px -6px rgba(0, 0, 0, 0.2),
+      /* Outer glow */
+      0 0 30px rgba(255, 255, 255, 0.3),
+      /* Glass reflection */
+      inset 0 1px 1px rgba(255, 255, 255, 0.9),
+      /* Inner glow gradient */
+      inset 0 0 40px rgba(255, 255, 255, 0.5),
+      inset 0 0 80px rgba(200, 220, 255, 0.3);
     display: block;
     margin: 0;
     margin-left: 0;
