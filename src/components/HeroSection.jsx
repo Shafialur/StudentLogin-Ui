@@ -283,7 +283,7 @@ const HeroSection = () => {
                 {/* Sun Behind Chariot */}
                 <motion.div 
                   className="absolute hidden md:block" 
-                  style={{ zIndex: 16, top: '0%', left: '50%', transform: 'translate(-50%, -50%)' }}
+                  style={{ zIndex: 16, top: '0%', left: '10%', transform: 'translate(-50%, -50%)' }}
                   animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
