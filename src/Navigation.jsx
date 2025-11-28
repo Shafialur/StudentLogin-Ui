@@ -6,17 +6,14 @@ const Navigation = () => {
   const location = useLocation()
 
   const navItems = [
-    { path: '/gita', label: 'Gita' },
-    { path: '/english', label: 'English' },
-    { path: '/maths', label: 'Maths' }
+    { path: '/gita', label: 'Gita' }
   ]
 
   return (
     <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md rounded-full px-4 py-2 shadow-lg border border-white/20">
       <div className="flex gap-2">
         {navItems.map((item) => {
-          const isActive = location.pathname === item.path || 
-                          (item.path === '/english' && location.pathname === '/')
+          const isActive = location.pathname === item.path
           return (
             <Link
               key={item.path}

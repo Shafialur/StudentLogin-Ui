@@ -65,6 +65,39 @@
     position: relative;
   }
   
+  /* Scalable Hero Wrapper - Uniform scaling for entire hero section */
+  .hero-scale-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    transform-origin: top center;
+    will-change: transform;
+  }
+  
+  /* Hero scale container - wraps all hero content */
+  .hero-scale-container {
+    position: relative;
+    width: 100%;
+    transform-origin: top center;
+  }
+  
+  /* Page scale wrapper - scales entire page uniformly */
+  .page-scale-wrapper {
+    position: relative;
+    transform-origin: top center;
+    will-change: transform;
+  }
+  
+  /* Container to handle scaled content properly */
+  .page-scale-container {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+  }
+  
   /* Exact gradient for hero section - light sky blue → peach/orange → light pink/purple */
   .hero-gradient-exact {
     background: linear-gradient(90deg, 

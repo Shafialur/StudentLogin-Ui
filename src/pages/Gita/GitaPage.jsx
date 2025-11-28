@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useHeroScale } from '../../hooks/useHeroScale'
 import HeroSection from './components/HeroSection'
 import CourseCard from './components/CourseCard'
 import ProgressCard from './components/ProgressCard'
@@ -9,6 +10,7 @@ import QuizCard from './components/QuizCard'
 import SystemCheckCard from './components/SystemCheckCard'
 
 const GitaPage = () => {
+  const pageScale = useHeroScale()
   // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -26,7 +28,7 @@ const GitaPage = () => {
 
   return (
     <div 
-      className="h-screen overflow-hidden md:overflow-hidden overflow-y-auto md:overflow-y-hidden flex flex-col"
+      className="h-screen overflow-hidden md:overflow-hidden overflow-y-auto md:overflow-y-hidden relative"
       style={{
         background: `
           linear-gradient(135deg, 
@@ -41,11 +43,29 @@ const GitaPage = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: 'fixed',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start'
       }}
     >
-      {/* Hero Section */}
-      <HeroSection />
+      {/* Scalable Page Wrapper - Entire page scales as single unit */}
+      <div 
+        className="page-scale-wrapper"
+        style={{
+          transform: `scale(${pageScale})`,
+          transformOrigin: 'top center',
+          width: '1920px',
+          maxWidth: '1920px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          position: 'relative',
+          height: '100vh',
+          flexShrink: 0
+        }}
+      >
+        {/* Hero Section */}
+        <HeroSection />
 
       {/* Dashboard Cards Section */}
       <div className="max-w-full mx-auto px-4 sm:px-5 md:px-6 py-1 pb-[10px]">
@@ -125,6 +145,7 @@ const GitaPage = () => {
             <SystemCheckCard />
           </motion.div>
         </div>
+      </div>
       </div>
     </div>
   )
