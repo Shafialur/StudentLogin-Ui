@@ -1,14 +1,14 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import HeroSection from './HeroSection'
-import CourseCard from './CourseCard'
-import ProgressCard from './ProgressCard'
-import TeacherNoteCard from './TeacherNoteCard'
-import AssignmentCard from './AssignmentCard'
-import QuizCard from './QuizCard'
-import SystemCheckCard from './SystemCheckCard'
+import HeroSection from './components/HeroSection'
+import CourseCard from './components/CourseCard'
+import ProgressCard from './components/ProgressCard'
+import TeacherNoteCard from './components/TeacherNoteCard'
+import AssignmentCard from './components/AssignmentCard'
+import QuizCard from './components/QuizCard'
+import SystemCheckCard from './components/SystemCheckCard'
 
-const Dashboard = () => {
+const MathsPage = () => {
   // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -25,7 +25,24 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="h-screen overflow-hidden md:overflow-hidden overflow-y-auto md:overflow-y-hidden flex flex-col">
+    <div 
+      className="h-screen overflow-hidden md:overflow-hidden overflow-y-auto md:overflow-y-hidden flex flex-col"
+      style={{
+        background: `
+          linear-gradient(135deg, 
+            rgba(176, 196, 222, 0.25) 0%, 
+            rgba(221, 160, 221, 0.2) 30%,
+            rgba(255, 182, 193, 0.2) 60%,
+            rgba(255, 218, 185, 0.18) 100%
+          ),
+          url(/images/backgorund.png)
+        `,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       {/* Hero Section */}
       <HeroSection />
 
@@ -112,5 +129,5 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default MathsPage
 

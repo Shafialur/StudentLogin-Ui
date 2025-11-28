@@ -1,28 +1,25 @@
 import React from 'react'
-import Dashboard from './components/Dashboard'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import GitaPage from './pages/Gita/GitaPage'
+import EnglishPage from './pages/English/EnglishPage'
+import MathsPage from './pages/Maths/MathsPage'
+import Navigation from './Navigation'
 
 function App() {
   return (
-    <div className="h-screen overflow-hidden overflow-x-hidden md:overflow-hidden relative" style={{ 
-      background: `
-        linear-gradient(135deg, 
-          rgba(135, 206, 235, 0.15) 0%, 
-          rgba(176, 224, 230, 0.12) 20%,
-          rgba(255, 228, 181, 0.1) 50%,
-          rgba(255, 182, 193, 0.12) 80%,
-          rgba(221, 160, 221, 0.1) 100%
-        ),
-        url(/images/backgorund.png)
-      `,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundAttachment: 'fixed'
-    }}>
-      <div className="relative z-10">
-        <Dashboard />
+    <Router>
+      <div className="h-screen overflow-hidden overflow-x-hidden md:overflow-hidden relative">
+        <Navigation />
+        <div className="relative z-10">
+          <Routes>
+            <Route path="/" element={<Navigate to="/gita" replace />} />
+            <Route path="/gita" element={<GitaPage />} />
+            <Route path="/english" element={<EnglishPage />} />
+            <Route path="/maths" element={<MathsPage />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   )
 }
 
