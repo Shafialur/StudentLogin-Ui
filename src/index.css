@@ -89,6 +89,35 @@
     will-change: transform;
   }
   
+  /* Responsive UI Container - Makes UI appear like 67% zoom using CSS zoom */
+  /* This ensures the UI looks exactly the same on all laptop screens */
+  .ui-responsive-container {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+    zoom: 0.67;
+  }
+  
+  /* Ensure consistent appearance on all laptop/desktop screens */
+  @media (min-width: 768px) {
+    .ui-responsive-container {
+      zoom: 0.67;
+      width: 100%;
+      max-width: 1920px;
+    }
+  }
+  
+  /* Mobile: No zoom, use responsive design */
+  @media (max-width: 767px) {
+    .ui-responsive-container {
+      zoom: 1 !important;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  
   /* Container to handle scaled content properly */
   .page-scale-container {
     overflow: hidden;

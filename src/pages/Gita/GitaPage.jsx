@@ -1,6 +1,5 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { useHeroScale } from '../../hooks/useHeroScale'
 import HeroSection from './components/HeroSection'
 import CourseCard from './components/CourseCard'
 import ProgressCard from './components/ProgressCard'
@@ -10,7 +9,6 @@ import QuizCard from './components/QuizCard'
 import SystemCheckCard from './components/SystemCheckCard'
 
 const GitaPage = () => {
-  const pageScale = useHeroScale()
   // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -49,25 +47,22 @@ const GitaPage = () => {
         alignItems: 'flex-start'
       }}
     >
-      {/* Scalable Page Wrapper - Entire page scales as single unit */}
+      {/* Responsive Container - Makes UI appear exactly the same on all laptop screens */}
       <div 
-        className="page-scale-wrapper"
+        className="ui-responsive-container"
         style={{
-          transform: `scale(${pageScale})`,
-          transformOrigin: 'top center',
-          width: '1920px',
+          width: '100%',
           maxWidth: '1920px',
           marginLeft: 'auto',
           marginRight: 'auto',
           position: 'relative',
-          height: '100vh',
-          flexShrink: 0
+          height: '100vh'
         }}
       >
         {/* Hero Section */}
         <HeroSection />
 
-      {/* Dashboard Cards Section */}
+        {/* Dashboard Cards Section */}
       <div className="max-w-full mx-auto px-4 sm:px-5 md:px-6 py-1 pb-[10px]">
         {/* Mobile/Tablet: Stacked Layout | Desktop: Grid Layout */}
         <div className="flex flex-col md:grid gap-4 md:gap-3 md:pl-[40px] md:pt-[10px] md:pr-[40px] md:pb-[10px] pl-0 pt-4 pr-0 md:!h-[calc(48vh-20px)] md:!max-h-[360px]" 
