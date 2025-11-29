@@ -25,45 +25,45 @@ const GitaPage = () => {
   }
 
   return (
-    <div 
-      className="h-screen overflow-hidden md:overflow-hidden overflow-y-auto md:overflow-y-hidden relative"
-      style={{
-        background: `
-          linear-gradient(135deg, 
-            rgba(135, 206, 235, 0.2) 0%, 
-            rgba(176, 224, 230, 0.18) 20%,
-            rgba(255, 228, 181, 0.15) 50%,
-            rgba(255, 182, 193, 0.18) 80%,
-            rgba(221, 160, 221, 0.15) 100%
-          ),
-          url(/images/backgorund.png)
-        `,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-start'
-      }}
-    >
-      {/* Responsive Container - Makes UI appear exactly the same on all laptop screens */}
+    <div className="w-full min-h-screen overflow-y-auto overflow-x-hidden">
       <div 
-        className="ui-responsive-container"
+        className="h-screen overflow-hidden md:overflow-hidden overflow-y-auto md:overflow-y-hidden relative"
         style={{
-          width: '100%',
-          maxWidth: '1920px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          position: 'relative',
-          height: '100vh'
+          background: `
+            linear-gradient(135deg, 
+              rgba(135, 206, 235, 0.2) 0%, 
+              rgba(176, 224, 230, 0.18) 20%,
+              rgba(255, 228, 181, 0.15) 50%,
+              rgba(255, 182, 193, 0.18) 80%,
+              rgba(221, 160, 221, 0.15) 100%
+            ),
+            url(/images/backgorund.png)
+          `,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-start'
         }}
       >
+        {/* Responsive Container - Makes UI appear exactly the same on all laptop screens */}
+        <div 
+          className="ui-responsive-container sm:min-h-screen md:h-screen w-full"
+          style={{
+            width: '100%',
+            maxWidth: '100%',
+            marginLeft: '0',
+            marginRight: '0',
+            position: 'relative'
+          }}
+        >
         {/* Hero Section */}
         <HeroSection />
 
         {/* Dashboard Cards Section */}
-      <div className="max-w-full mx-auto px-4 sm:px-5 md:px-6 py-1 pb-[10px]">
+      <div className="max-w-full mx-auto px-4 sm:px-5 md:px-6 py-1 pb-[10px] sm:scale-90 md:scale-100">
         {/* Mobile/Tablet: Stacked Layout | Desktop: Grid Layout */}
         <div className="flex flex-col md:grid gap-4 md:gap-3 md:pl-[40px] md:pt-[10px] md:pr-[40px] md:pb-[10px] pl-0 pt-4 pr-0 md:!h-[calc(48vh-20px)] md:!max-h-[360px]" 
           style={{ 
@@ -142,6 +142,7 @@ const GitaPage = () => {
         </div>
       </div>
       </div>
+    </div>
     </div>
   )
 }

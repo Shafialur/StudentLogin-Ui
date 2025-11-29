@@ -78,9 +78,9 @@ const HeroSection = () => {
   }
 
   return (
-    <div className="relative w-full hero-section-container overflow-x-hidden">
+    <div className="relative w-full hero-section-container overflow-x-hidden -mx-0 md:-mx-0">
       {/* Hero Section Background with Gradient */}
-      <div className="relative w-full min-h-[500px] md:h-[38vh] hero-gradient-exact overflow-hidden hero-bottom-rounded md:!min-h-[340px] md:!max-h-[360px]">
+      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[38vh] hero-gradient-exact overflow-hidden hero-bottom-rounded md:!min-h-[340px] md:!max-h-[360px]">
         {/* Background Design Symbols - Left and Right Top Corners */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
           <motion.div
@@ -216,7 +216,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Main Content Container */}
-        <div className="relative h-full min-h-[500px] md:min-h-0 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex flex-col md:flex-row items-center justify-center py-6 md:py-0" style={{ zIndex: 10 }}>
+        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:min-h-0 w-full max-w-full md:max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex flex-col md:flex-row items-center justify-center py-4 sm:py-5 md:py-0 scale-85 sm:scale-90 md:scale-100" style={{ zIndex: 10 }}>
           {/* Single Blur Rectangle for All Content */}
           <div className="hero-unified-blur-background"></div>
           
@@ -229,7 +229,7 @@ const HeroSection = () => {
               initial="hidden"
               animate="visible"
             >
-              <h1 className="text-xl sm:text-2xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white hero-main-text">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white hero-main-text sm:text-center md:text-left">
                 Namaste, Krishna! <br className="hidden md:block" />
                Ready for Gita Wisdom - <br className="hidden md:block" />Inner Peace?
               </h1>
@@ -240,7 +240,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                <div className="countdown-timer-box-exact">
+                <div className="countdown-timer-box-exact sm:scale-90 md:scale-100">
                   {/* Om Symbol */}
                   <motion.img 
                     src="/images/om-symbol.png" 
@@ -254,7 +254,7 @@ const HeroSection = () => {
                   <span className="text-base sm:text-lg md:text-xl font-bold text-white ml-2 sm:ml-3 md:ml-4" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
                   
                   {/* Time Boxes with Spacing */}
-                  <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 ml-2 sm:ml-3 md:ml-4">
+                  <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 ml-2 sm:ml-3 md:ml-4 sm:flex-wrap">
                     <span className="countdown-time-box text-lg sm:text-xl md:text-2xl">
                       {formatTime(timeLeft.hours)}
                     </span>
@@ -321,7 +321,7 @@ const HeroSection = () => {
                 
                 {/* Chariot - Main Illustration */}
                 <motion.div 
-                  className="w-full max-w-[280px] sm:max-w-[380px] md:!w-[520px] md:!h-[320px] md:!mt-[45px] h-auto"
+                  className="w-full max-w-[280px] sm:max-w-[280px] md:max-w-[380px] md:!w-[520px] md:!h-[320px] md:!mt-[45px] h-auto sm:scale-75 md:scale-100"
                   style={{ zIndex: 20, position: 'relative' }}
                   animate={floatAnimation}
                 >
@@ -338,7 +338,7 @@ const HeroSection = () => {
 
         {/* Join Now Button - Right Side of Hero Section */}
         <motion.div 
-          className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8" 
+          className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 scale-50 sm:scale-65 md:scale-100" 
           style={{ zIndex: 50 }}
           variants={buttonVariants}
           initial="hidden"
