@@ -25,9 +25,9 @@ const GitaPage = () => {
   }
 
   return (
-    <div className="w-full min-h-screen overflow-y-auto overflow-x-hidden">
+    <div className="w-full h-screen overflow-y-auto overflow-x-hidden">
       <div 
-        className="h-screen overflow-hidden md:overflow-hidden overflow-y-auto md:overflow-y-hidden relative"
+        className="h-screen overflow-y-auto md:overflow-y-auto overflow-x-hidden relative"
         style={{
           background: `
             linear-gradient(135deg, 
@@ -50,7 +50,7 @@ const GitaPage = () => {
       >
         {/* Responsive Container - Makes UI appear exactly the same on all laptop screens */}
         <div 
-          className="ui-responsive-container sm:min-h-screen md:h-screen w-full"
+          className="ui-responsive-container sm:min-h-screen md:min-h-screen w-full md:flex md:flex-col"
           style={{
             width: '100%',
             maxWidth: '100%',
@@ -60,17 +60,19 @@ const GitaPage = () => {
           }}
         >
         {/* Hero Section */}
-        <HeroSection />
+        <div className="md:flex-shrink-0 relative z-20">
+          <HeroSection />
+        </div>
 
-        {/* Dashboard Cards Section */}
-      <div className="max-w-full mx-auto px-4 sm:px-5 md:px-6 py-1 pb-[10px] sm:scale-90 md:scale-100">
+        {/* Dashboard Cards Section - 10px gap after hero, consistent bottom gap */}
+      <div className="max-w-full mx-auto px-4 sm:px-5 md:px-6 sm:scale-90 md:scale-100 relative z-10 md:mt-[10px]" style={{ marginBottom: '30px' }}>
         {/* Mobile/Tablet: Stacked Layout | Desktop: Grid Layout */}
-        <div className="flex flex-col md:grid gap-4 md:gap-3 md:pl-[40px] md:pt-[10px] md:pr-[40px] md:pb-[10px] pl-0 pt-4 pr-0 md:!h-[calc(48vh-20px)] md:!max-h-[360px]" 
+        <div className="flex flex-col md:grid md:pl-[40px] md:pt-[10px] md:pr-[40px] pl-0 pt-4 pr-0 md:w-full" 
           style={{ 
             gridTemplateColumns: 'repeat(10, 1fr)', 
-            gridTemplateRows: '1fr 1fr', 
-            height: 'auto',
-            maxHeight: 'none'
+            gridTemplateRows: 'minmax(200px, auto) minmax(200px, auto)',
+            alignItems: 'stretch',
+            gap: '16px'
           }}>
           {/* Column 1-4: Course Card - Full height spanning 2 rows (40% width) */}
           <motion.div 

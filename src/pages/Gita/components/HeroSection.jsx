@@ -124,11 +124,11 @@ const HeroSection = () => {
           />
         </div>
 
-        {/* Main Cloud - Bottom Right Below Chariot */}
+        {/* Main Cloud - Desktop: Bottom Right (unchanged) */}
         <div className="absolute right-0 pointer-events-none hidden md:block" style={{ zIndex: 18, bottom: '-80px' }}>
           <img 
             src="/images/main-cloud.png" 
-            alt="Main cloud" 
+            alt="Main cloud desktop" 
             className="object-contain max-w-full h-auto"
             style={{ width: '900px', height: 'auto', maxHeight: '450px' }}
           />
@@ -217,25 +217,62 @@ const HeroSection = () => {
 
         {/* Main Content Container */}
         <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:min-h-0 w-full max-w-full md:max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex flex-col md:flex-row items-center justify-center py-4 sm:py-5 md:py-0 scale-85 sm:scale-90 md:scale-100" style={{ zIndex: 10 }}>
-          {/* Single Blur Rectangle for All Content */}
-          <div className="hero-unified-blur-background"></div>
+          {/* Single Blur Rectangle for All Content - Mobile Only */}
+          <div className="hero-unified-blur-background-mobile md:hidden"></div>
+          {/* Desktop Blur Background */}
+          <div className="hero-unified-blur-background hidden md:block"></div>
+          
+          {/* Clipping Container for Mobile Cloud - Matches blur rectangle bounds with overflow to show 75% */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none block md:hidden overflow-hidden" style={{ zIndex: 24, width: 'calc(100% - 32px)', height: '320px', maxHeight: '320px', borderRadius: '24px' }}>
+            {/* Mobile Main Cloud - Right bottom, 90% inside, small portion outside */}
+            <div className="absolute pointer-events-none" style={{ right: '-30px', bottom: '-20px' }}>
+              <img 
+                src="/images/main-cloud.png" 
+                alt="Main cloud mobile" 
+                className="object-contain"
+                style={{ width: '380px', height: 'auto', maxHeight: '190px' }}
+              />
+            </div>
+          </div>
           
           {/* All Content in One Container */}
-          <div className="relative w-full flex flex-col md:flex-row items-center gap-6 md:gap-24 py-4 md:!ml-[-80px]" style={{ zIndex: 15 }}>
+          <div className="relative w-full flex flex-col md:flex-row items-center gap-3 sm:gap-4 md:gap-24 py-4 sm:py-5 md:py-4 md:!ml-[-80px]" style={{ zIndex: 15 }}>
+            
+            {/* Small Clouds Behind Chariot - Mobile Only */}
+            {/* Left Small Cloud */}
+            <div className="absolute pointer-events-none block md:hidden" style={{ zIndex: 12, left: '10%', top: '65%', transform: 'translateY(-50%)' }}>
+              <img 
+                src="/images/cloud2.png" 
+                alt="Small cloud left" 
+                className="object-contain opacity-80"
+                style={{ width: '80px', height: 'auto' }}
+              />
+            </div>
+            {/* Right Small Cloud */}
+            <div className="absolute pointer-events-none block md:hidden" style={{ zIndex: 12, right: '15%', top: '65%', transform: 'translateY(-50%)' }}>
+              <img 
+                src="/images/cloud2.png" 
+                alt="Small cloud right" 
+                className="object-contain opacity-80"
+                style={{ width: '80px', height: 'auto' }}
+              />
+            </div>
+            
             {/* Left Side - Text Content */}
             <motion.div 
-              className="flex-1 pl-0 w-full md:w-auto md:!-ml-8"
+              className="flex-1 pl-0 w-full md:w-auto md:!-ml-8 flex flex-col items-center md:items-start"
               variants={textVariants}
               initial="hidden"
               animate="visible"
             >
-              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white hero-main-text sm:text-center md:text-left">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left">
                 Namaste, Krishna! <br className="hidden md:block" />
                Ready for Gita Wisdom - <br className="hidden md:block" />Inner Peace?
               </h1>
               
               {/* Countdown Timer */}
               <motion.div
+                className="w-full flex justify-center md:justify-start"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
@@ -273,7 +310,7 @@ const HeroSection = () => {
 
             {/* Right Side - Chariot */}
             <motion.div 
-              className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto md:!mr-[-60px]" 
+              className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto md:!mr-[-60px] -mt-2 md:mt-0" 
               style={{ zIndex: 20 }}
               variants={chariotVariants}
               initial="hidden"
@@ -282,8 +319,8 @@ const HeroSection = () => {
               <div className="flex flex-col items-center justify-center relative translate-y-0 md:!-translate-y-[30px]">
                 {/* Sun Behind Chariot */}
                 <motion.div 
-                  className="absolute hidden md:block" 
-                  style={{ zIndex: 16, top: '0%', left: '10%', transform: 'translate(-50%, -50%)' }}
+                  className="absolute block -top-[8%] md:top-[0%]" 
+                  style={{ zIndex: 16, left: '10%', transform: 'translate(-50%, -50%)' }}
                   animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -321,7 +358,7 @@ const HeroSection = () => {
                 
                 {/* Chariot - Main Illustration */}
                 <motion.div 
-                  className="w-full max-w-[280px] sm:max-w-[280px] md:max-w-[380px] md:!w-[520px] md:!h-[320px] md:!mt-[45px] h-auto sm:scale-75 md:scale-100"
+                  className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-[380px] md:!w-[520px] md:!h-[320px] md:!mt-[45px] h-auto scale-75 sm:scale-75 md:scale-100"
                   style={{ zIndex: 20, position: 'relative' }}
                   animate={floatAnimation}
                 >
@@ -336,9 +373,9 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Join Now Button - Right Side of Hero Section */}
+        {/* Join Now Button - Right Side of Hero Section - Smaller on Mobile */}
         <motion.div 
-          className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 scale-50 sm:scale-65 md:scale-100" 
+          className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 md:bottom-8 md:right-8 scale-[0.45] sm:scale-60 md:scale-100" 
           style={{ zIndex: 50 }}
           variants={buttonVariants}
           initial="hidden"
@@ -346,9 +383,9 @@ const HeroSection = () => {
           whileHover="hover"
           whileTap={{ scale: 0.95 }}
         >
-          <button className="join-now-button-exact-large text-sm sm:text-base md:text-lg">
+          <button className="join-now-button-exact-large text-xs sm:text-sm md:text-lg">
             <motion.svg 
-              className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-yellow-300" 
+              className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 text-yellow-300" 
               fill="currentColor" 
               viewBox="0 0 20 20"
               animate={{ rotate: [0, 10, -10, 0] }}
@@ -356,7 +393,7 @@ const HeroSection = () => {
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </motion.svg>
-            <span className="text-white font-bold text-base sm:text-lg md:text-xl ml-1 sm:ml-1.5 md:ml-2">Join Now</span>
+            <span className="text-white font-bold text-xs sm:text-sm md:text-xl ml-0.5 sm:ml-1 md:ml-2">Join Now</span>
           </button>
         </motion.div>
       </div>
