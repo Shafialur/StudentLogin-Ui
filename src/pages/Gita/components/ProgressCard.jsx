@@ -14,12 +14,12 @@ const ProgressCard = () => {
   }, [progress])
   
   return (
-    <div className="progress-card-exact rounded-2xl p-4 sm:p-5 md:p-6 card-shadow" style={{ height: '100%', width: '100%' }}>
-      <h3 className="text-xl sm:text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Your Progress</h3>
+    <div className="progress-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow" style={{ height: '100%', width: '100%' }}>
+      <h3 className="text-base sm:text-lg md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">Your Progress</h3>
       
-      <div className="space-y-7">
+      <div className="space-y-4 sm:space-y-5 md:space-y-7">
         {/* Progress Bar - Glass background */}
-        <div className="relative h-10 rounded-full overflow-visible mt-10" style={{ 
+        <div className="relative h-8 sm:h-9 md:h-10 rounded-full overflow-visible mt-6 sm:mt-8 md:mt-10" style={{ 
           borderRadius: '9999px',
           background: 'rgba(255, 255, 255, 0.4)',
           backdropFilter: 'blur(10px)',
@@ -53,7 +53,7 @@ const ProgressCard = () => {
             }}
           >
             <motion.svg 
-              className="w-8 h-8 text-yellow-400" 
+              className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-yellow-400" 
               fill="currentColor" 
               viewBox="0 0 20 20" 
               style={{ filter: 'drop-shadow(0 0 12px rgba(251, 191, 36, 0.9))' }}
@@ -85,10 +85,8 @@ const ProgressCard = () => {
             <img 
               src="/images/progresschariot.png" 
               alt="Progress chariot" 
-              className="object-contain"
+              className="object-contain w-12 h-12 sm:w-16 sm:h-16 md:w-[100px] md:h-[100px]"
               style={{ 
-                width: '100px', 
-                height: '100px',
                 filter: 'drop-shadow(0 0 15px rgba(255, 140, 0, 0.6))' 
               }}
             />
@@ -105,10 +103,8 @@ const ProgressCard = () => {
             <img 
               src="/images/progressendtemple.png" 
               alt="Temple" 
-              className="object-contain"
+              className="object-contain w-10 h-10 sm:w-14 sm:h-14 md:w-[90px] md:h-[90px]"
               style={{ 
-                width: '90px', 
-                height: '90px',
                 filter: 'drop-shadow(0 0 12px rgba(139, 69, 19, 0.5))' 
               }}
             />
@@ -117,8 +113,8 @@ const ProgressCard = () => {
         
         {/* Progress Text - Centered */}
         <div className="flex items-center justify-center whitespace-nowrap">
-          <span className="text-sm md:text-lg font-bold text-gray-900">Dharma Path : </span>
-          <span className="text-sm md:text-lg font-bold text-blue-600">24/96 Classes Completed</span>
+          <span className="text-xs sm:text-sm md:text-lg font-bold text-gray-900">Dharma Path : </span>
+          <span className="text-xs sm:text-sm md:text-lg font-bold text-blue-600">24/96 Classes Completed</span>
         </div>
       </div>
     </div>

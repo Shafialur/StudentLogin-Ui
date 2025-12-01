@@ -92,30 +92,30 @@ const AssignmentCard = () => {
   }
 
   return (
-    <div className="assignment-card-exact rounded-2xl p-4 sm:p-5 md:p-6 card-shadow relative" style={{ height: '100%', width: '100%' }}>
-      <div className="flex items-center gap-2 mb-4">
+    <div className="assignment-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow relative" style={{ height: '100%', width: '100%' }}>
+      <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3 md:mb-4">
         {/* Treasure Chest/Box Icon */}
         <img 
           src="/images/box.png" 
           alt="Box" 
-          className="w-10 h-10 object-contain"
+          className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 object-contain"
           style={{ filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.7))' }}
         />
-                    <h3 className="text-xl sm:text-xl md:text-2xl font-bold text-gray-900">Assignment</h3>
+                    <h3 className="text-base sm:text-lg md:text-2xl font-bold text-gray-900">Assignment</h3>
       </div>
       
-      <div className="space-y-4">
+      <div className="space-y-2 sm:space-y-3 md:space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <p className="font-semibold text-gray-900 text-lg">Gita Verse</p>
-            <p className="font-semibold text-gray-900 text-lg">Practice</p>
+            <p className="font-semibold text-gray-900 text-sm sm:text-base md:text-lg">Gita Verse</p>
+            <p className="font-semibold text-gray-900 text-sm sm:text-base md:text-lg">Practice</p>
           </div>
           {/* Scroll with Quill Image */}
           <div>
             <img 
               src="/images/gitaverse.png" 
               alt="Gita Verse Scroll" 
-              className="w-20 h-20 object-contain"
+              className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain"
               style={{ filter: 'drop-shadow(0 0 12px rgba(139, 69, 19, 0.6))' }}
             />
           </div>
@@ -124,7 +124,7 @@ const AssignmentCard = () => {
         {/* Upload Button - More Yellow Gradient */}
         <button 
           onClick={() => setShowModal(true)}
-          className="assignment-button-exact w-full text-white font-bold py-3 px-4 rounded-full transition-colors duration-200 flex items-center justify-between shadow-md"
+          className="assignment-button-exact w-full text-white font-bold py-2 sm:py-2.5 md:py-3 px-3 sm:px-3.5 md:px-4 rounded-full transition-colors duration-200 flex items-center justify-between shadow-md text-xs sm:text-sm md:text-base"
         >
           <span>Upload Your work</span>
           <svg 

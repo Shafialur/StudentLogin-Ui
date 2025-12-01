@@ -2,38 +2,38 @@ import React from 'react'
 
 const QuizCard = () => {
   return (
-    <div className="quiz-card-exact rounded-2xl p-4 sm:p-5 md:p-6 card-shadow" style={{ height: '100%', width: '100%' }}>
-      <div className="flex items-center gap-2 mb-3 md:mb-4">
+    <div className="quiz-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow" style={{ height: '100%', width: '100%' }}>
+      <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3 md:mb-4">
         {/* Graduation Cap Icon */}
         <img 
           src="/images/quizcap.png" 
           alt="Graduation cap" 
-          className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 object-contain"
+          className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 object-contain"
           style={{ filter: 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.7))' }}
         />
-        <h3 className="text-xl sm:text-xl md:text-2xl font-bold text-gray-900">Class Quiz</h3>
+        <h3 className="text-base sm:text-lg md:text-2xl font-bold text-gray-900">Class Quiz</h3>
       </div>
       
-      <div className="space-y-4">
+      <div className="space-y-2 sm:space-y-3 md:space-y-4">
         <div className="flex items-center justify-between">
-          <p className="font-semibold text-gray-900 text-lg text-center flex-1">Gyan (Knowledge) Scroll</p>
+          <p className="font-semibold text-gray-900 text-xs sm:text-sm md:text-lg text-center flex-1">Gyan (Knowledge) Scroll</p>
           {/* Scroll with Teal Emblem Image */}
           <div className="flex-shrink-0">
             <img 
               src="/images/quizpaper.png" 
               alt="Quiz paper scroll" 
-              className="w-20 h-20 object-contain"
+              className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain"
               style={{ filter: 'drop-shadow(0 0 12px rgba(95, 158, 160, 0.6))' }}
             />
           </div>
         </div>
         
         {/* Start Quiz Button - Light Blue to Darker Blue Gradient */}
-        <button className="quiz-button-exact w-full text-white font-bold py-3 px-4 rounded-full transition-colors duration-200 flex items-center justify-center gap-2 shadow-md">
+        <button className="quiz-button-exact w-full text-white font-bold py-2 sm:py-2.5 md:py-3 px-3 sm:px-3.5 md:px-4 rounded-full transition-colors duration-200 flex items-center justify-center gap-1.5 sm:gap-2 shadow-md text-xs sm:text-sm md:text-base">
           <span>Start Quiz</span>
-          <div className="w-6 h-6 bg-blue-300 rounded-full flex items-center justify-center" style={{ filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.8))' }}>
+          <div className="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 bg-blue-300 rounded-full flex items-center justify-center" style={{ filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.8))' }}>
             <svg 
-              className="w-4 h-4 text-white" 
+              className="w-3 h-3 sm:w-3 sm:h-3 md:w-4 md:h-4 text-white" 
               fill="currentColor" 
               viewBox="0 0 20 20"
               style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.9))' }}

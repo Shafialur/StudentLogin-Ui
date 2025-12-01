@@ -50,14 +50,14 @@ const GitaPage = () => {
       >
         {/* Responsive Container - Makes UI appear exactly the same on all laptop screens */}
         <div 
-          className="ui-responsive-container sm:min-h-screen md:min-h-screen w-full md:flex md:flex-col"
+          className="ui-responsive-container sm:min-h-screen md:min-h-screen w-full md:flex md:flex-col md:pb-4"
           style={{
             width: '100%',
             maxWidth: '100%',
             marginLeft: '0',
             marginRight: '0',
             position: 'relative',
-            paddingBottom: '16px'
+            paddingBottom: '3px'
           }}
         >
         {/* Hero Section */}
@@ -66,14 +66,13 @@ const GitaPage = () => {
         </div>
 
         {/* Dashboard Cards Section - Fixed gaps that never change */}
-      <div className="max-w-full mx-auto px-4 sm:px-5 md:px-0 sm:scale-90 md:scale-100 md:flex-1 md:flex md:flex-col relative z-10 md:mt-[10px]" style={{ paddingLeft: '60px', paddingRight: '60px', marginBottom: '16px' }}>
+      <div className="max-w-full mx-auto px-3 sm:px-4 md:px-[60px] scale-75 sm:scale-80 md:scale-100 md:flex-1 md:flex md:flex-col relative z-10 md:mt-[10px] md:mb-4" style={{ marginTop: '3px' }}>
         {/* Mobile/Tablet: Stacked Layout | Desktop: Grid Layout */}
-        <div className="flex flex-col md:grid md:pt-[10px] pl-0 pt-4 pr-0 md:w-full md:h-full" 
+        <div className="flex flex-col md:grid md:pt-[10px] pl-0 pt-0 pr-0 md:w-full md:h-full gap-3 md:gap-4" 
           style={{ 
             gridTemplateColumns: 'repeat(10, 1fr)', 
             gridTemplateRows: '1fr 1fr',
-            alignItems: 'stretch',
-            gap: '16px'
+            alignItems: 'stretch'
           }}>
           {/* Column 1-4: Course Card - Full height spanning 2 rows (40% width) */}
           <motion.div 

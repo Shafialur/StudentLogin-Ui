@@ -3,11 +3,11 @@ import { motion } from 'framer-motion'
 
 const TeacherNoteCard = () => {
   return (
-    <div className="teacher-note-card-exact rounded-2xl p-4 sm:p-5 md:p-6 card-shadow relative" style={{ height: '100%', width: '100%' }}>
+    <div className="teacher-note-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow relative" style={{ height: '100%', width: '100%' }}>
       {/* Sparkle stars in top right corner */}
-      <div className="absolute top-3 right-3 sm:top-4 sm:right-4 flex gap-2 z-10">
+      <div className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 flex gap-1 sm:gap-2 z-10">
         <motion.svg 
-          className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" 
+          className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-purple-400" 
           fill="currentColor" 
           viewBox="0 0 20 20"
           style={{ filter: 'drop-shadow(0 0 8px rgba(196, 181, 253, 0.8))' }}
@@ -46,13 +46,13 @@ const TeacherNoteCard = () => {
         </motion.svg>
       </div>
 
-      <h3 className="text-xl sm:text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">A Note from Your Teacher</h3>
+      <h3 className="text-base sm:text-lg md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">A Note from Your Teacher</h3>
       
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-2 sm:gap-3 md:gap-4">
         {/* Teacher Avatar */}
         <div className="flex-shrink-0 flex flex-col items-center">
           <div 
-            className="w-20 h-20 bg-yellow-300 rounded-full flex items-center justify-center border-4 border-white shadow-md overflow-hidden"
+            className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-yellow-300 rounded-full flex items-center justify-center border-2 sm:border-3 md:border-4 border-white shadow-md overflow-hidden"
             style={{ filter: 'drop-shadow(0 0 15px rgba(251, 191, 36, 0.7))' }}
           >
             <img 
@@ -61,13 +61,13 @@ const TeacherNoteCard = () => {
               className="w-full h-full object-cover"
             />
           </div>
-          <h4 className="font-bold text-gray-900 text-base mt-2">Ms. Guru</h4>
+          <h4 className="font-bold text-gray-900 text-xs sm:text-sm md:text-base mt-1 sm:mt-1.5 md:mt-2">Ms. Guru</h4>
         </div>
         
         {/* Message Box */}
         <div className="flex-1">
-          <div className="bg-gray-100 rounded-lg p-4">
-            <p className="text-gray-900 text-base md:text-lg leading-relaxed">
+          <div className="bg-gray-100 rounded-lg p-2 sm:p-3 md:p-4">
+            <p className="text-gray-900 text-xs sm:text-sm md:text-lg leading-relaxed">
               Great focus during last class!<br />
               Keep practicing the breathing<br />
               exercises. you're doing<br />
