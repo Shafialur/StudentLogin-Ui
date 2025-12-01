@@ -117,8 +117,8 @@ const ProgressCard = () => {
         
         {/* Progress Text - Centered */}
         <div className="flex items-center justify-center whitespace-nowrap">
-          <span className="text-lg font-bold text-gray-900">Dharma Path : </span>
-          <span className="text-lg font-bold text-blue-600">24/96 Classes Completed</span>
+          <span className="text-sm md:text-lg font-bold text-gray-900">Dharma Path : </span>
+          <span className="text-sm md:text-lg font-bold text-blue-600">24/96 Classes Completed</span>
         </div>
       </div>
     </div>
