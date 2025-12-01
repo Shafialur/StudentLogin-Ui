@@ -56,7 +56,8 @@ const GitaPage = () => {
             maxWidth: '100%',
             marginLeft: '0',
             marginRight: '0',
-            position: 'relative'
+            position: 'relative',
+            paddingBottom: '16px'
           }}
         >
         {/* Hero Section */}
@@ -64,13 +65,13 @@ const GitaPage = () => {
           <HeroSection />
         </div>
 
-        {/* Dashboard Cards Section - 10px gap after hero, consistent bottom gap */}
-      <div className="max-w-full mx-auto px-4 sm:px-5 md:px-6 sm:scale-90 md:scale-100 relative z-10 md:mt-[10px]" style={{ marginBottom: '30px' }}>
+        {/* Dashboard Cards Section - Fixed gaps that never change */}
+      <div className="max-w-full mx-auto px-4 sm:px-5 md:px-0 sm:scale-90 md:scale-100 md:flex-1 md:flex md:flex-col relative z-10 md:mt-[10px]" style={{ paddingLeft: '60px', paddingRight: '60px', marginBottom: '16px' }}>
         {/* Mobile/Tablet: Stacked Layout | Desktop: Grid Layout */}
-        <div className="flex flex-col md:grid md:pl-[40px] md:pt-[10px] md:pr-[40px] pl-0 pt-4 pr-0 md:w-full" 
+        <div className="flex flex-col md:grid md:pt-[10px] pl-0 pt-4 pr-0 md:w-full md:h-full" 
           style={{ 
             gridTemplateColumns: 'repeat(10, 1fr)', 
-            gridTemplateRows: 'minmax(200px, auto) minmax(200px, auto)',
+            gridTemplateRows: '1fr 1fr',
             alignItems: 'stretch',
             gap: '16px'
           }}>

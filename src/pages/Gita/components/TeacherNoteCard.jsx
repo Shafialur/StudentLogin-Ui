@@ -67,7 +67,7 @@ const TeacherNoteCard = () => {
         {/* Message Box */}
         <div className="flex-1">
           <div className="bg-gray-100 rounded-lg p-4">
-            <p className="text-gray-900 text-sm leading-relaxed">
+            <p className="text-gray-900 text-base md:text-lg leading-relaxed">
               Great focus during last class!<br />
               Keep practicing the breathing<br />
               exercises. you're doing<br />
