@@ -2,7 +2,7 @@ import React from 'react'
 
 const SystemCheckCard = () => {
   return (
-    <div className="system-check-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow" style={{ height: '100%', width: '100%' }}>
+    <div className="system-check-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow flex flex-col" style={{ height: '100%', width: '100%' }}>
       <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3 md:mb-4">
         {/* System Check Robot Icon */}
         <img 
@@ -14,9 +14,9 @@ const SystemCheckCard = () => {
         <h3 className="text-base sm:text-lg md:text-2xl font-bold text-gray-900">System Check</h3>
       </div>
       
-      <div className="space-y-2 sm:space-y-3 md:space-y-4">
+      <div className="flex-1 flex flex-col">
         {/* Status Indicators - Horizontal Layout with Labels Below */}
-        <div className="flex items-center justify-around">
+        <div className="flex items-center justify-around mb-3 sm:mb-4 md:mb-5">
           {/* Video */}
           <div className="flex flex-col items-center gap-1 sm:gap-1.5 md:gap-2">
             <img 
@@ -51,18 +51,20 @@ const SystemCheckCard = () => {
           </div>
         </div>
         
-        {/* Test Connection Button - Light Green to Darker Green Gradient */}
-        <button className="system-check-button-exact w-full text-white font-bold py-2 sm:py-2.5 md:py-3 px-3 sm:px-3.5 md:px-4 rounded-full transition-colors duration-200 flex items-center justify-center gap-1.5 sm:gap-2 shadow-md mt-2 sm:mt-3 md:mt-4 text-xs sm:text-sm md:text-base">
-          <span>Test Connection</span>
-          <svg 
-            className="w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5" 
-            fill="currentColor" 
-            viewBox="0 0 20 20"
-            style={{ filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))' }}
-          >
-            <path fillRule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.076 13.308-5.076 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
-          </svg>
-        </button>
+        {/* Test Connection Button - Light Green to Darker Green Gradient - At Bottom */}
+        <div className="mt-auto">
+          <button className="system-check-button-exact w-full text-white font-bold py-2 sm:py-2.5 md:py-3 px-3 sm:px-3.5 md:px-4 rounded-full transition-colors duration-200 flex items-center justify-center gap-1.5 sm:gap-2 shadow-md text-xs sm:text-sm md:text-base">
+            <span>Test Connection</span>
+            <svg 
+              className="w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5" 
+              fill="currentColor" 
+              viewBox="0 0 20 20"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))' }}
+            >
+              <path fillRule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.076 13.308-5.076 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   )

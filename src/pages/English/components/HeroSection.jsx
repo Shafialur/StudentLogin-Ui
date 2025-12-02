@@ -80,26 +80,26 @@ const HeroSection = () => {
   return (
     <div className="relative w-full hero-section-container overflow-x-hidden -mx-0 md:-mx-0" style={{ marginLeft: 0, marginRight: 0, paddingLeft: 0, paddingRight: 0 }}>
       {/* Hero Section Background with Gradient */}
-      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[38vh] hero-gradient-exact overflow-hidden hero-bottom-rounded md:!min-h-[340px] md:!max-h-[360px]">
+      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[38vh] hero-gradient-english overflow-hidden hero-bottom-rounded md:!min-h-[340px] md:!max-h-[360px]">
 
         {/* Mobile View - Unchanged */}
-        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-center py-2 sm:py-3 scale-85 sm:scale-90" style={{ zIndex: 10, paddingLeft: '8px', paddingRight: '8px' }}>
+        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-start py-2 sm:py-3 scale-85 sm:scale-90" style={{ zIndex: 10, paddingLeft: '8px', paddingRight: '8px', overflow: 'hidden' }}>
           {/* Single Blur Rectangle for All Content - Mobile Only */}
           <div className="hero-unified-blur-background-mobile"></div>
           
           
           {/* Mobile Content */}
-          <div className="relative w-full flex flex-col items-center gap-2 sm:gap-3 py-2 sm:py-3" style={{ zIndex: 15, paddingLeft: '8px', paddingRight: '8px' }}>
+          <div className="relative w-full flex flex-col items-center gap-2 sm:gap-3" style={{ zIndex: 15, paddingLeft: '8px', paddingRight: '8px', paddingTop: '16px' }}>
             
-            
-            {/* Left Side - Text Content */}
+            {/* Left Side - Text Content - At Top */}
             <motion.div 
-              className="flex-1 pl-0 w-full md:w-auto md:!-ml-8 flex flex-col items-center md:items-start"
+              className="flex-1 pl-0 w-full md:w-auto md:!-ml-8 flex flex-col items-center md:items-start relative"
+              style={{ zIndex: 25 }}
               variants={textVariants}
               initial="hidden"
               animate="visible"
             >
-              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left px-4 md:px-0">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-2 sm:mb-3 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left px-4 md:px-0">
                 Hi, Krishna! <br className="hidden md:block" />
                Ready for English Journey - <br className="hidden md:block" />Master Mind?
               </h1>
@@ -141,7 +141,6 @@ const HeroSection = () => {
                 </div>
               </motion.div>
             </motion.div>
-
             {/* Right Side - Chariot */}
             <motion.div 
               className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto md:!mr-[-60px] -mt-2 md:mt-0" 
@@ -154,6 +153,39 @@ const HeroSection = () => {
               </div>
             </motion.div>
           </div>
+          
+          {/* Highlight Image - Separate in Hero Section - Mobile Only */}
+          <motion.div 
+            className="pointer-events-none md:hidden absolute" 
+            style={{ 
+              zIndex: 20,
+              bottom: '-95px',
+              left: '60%',
+              transform: 'translateX(-50%)',
+              overflow: 'hidden'
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.div
+              className="w-[350px] h-[350px] sm:w-[400px] sm:h-[400px]"
+              animate={{ 
+                y: [0, 5, 0],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <img 
+                src="/images/eng-highlight.png" 
+                alt="English highlight" 
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Tablet and Desktop View - Container-based blur rectangle */}
@@ -243,7 +275,7 @@ const HeroSection = () => {
           <img 
             src="/images/eng-cat.png" 
             alt="English cat" 
-            className="w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain"
+            className="w-20 h-20 sm:w-24 sm:h-24 md:w-48 md:h-48 object-contain"
           />
         </motion.div>
 
@@ -262,7 +294,7 @@ const HeroSection = () => {
           <motion.img 
             src="/images/eng-cloud.png" 
             alt="English cloud" 
-            className="absolute w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 object-contain opacity-80"
+            className="absolute w-16 h-16 sm:w-20 sm:h-20 md:w-64 md:h-64 object-contain opacity-80"
             style={{ 
               left: 'calc(50% - 250px)',
               bottom: '0px'
@@ -283,7 +315,7 @@ const HeroSection = () => {
           <motion.img 
             src="/images/eng-cloud.png" 
             alt="English cloud" 
-            className="absolute w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 object-contain opacity-90"
+            className="absolute w-20 h-20 sm:w-24 sm:h-24 md:w-72 md:h-72 object-contain opacity-90"
             style={{ 
               left: '50%',
               bottom: '20px',
@@ -299,11 +331,11 @@ const HeroSection = () => {
               y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
             }}
           />
-          {/* Owl - Front of Center Cloud */}
+          {/* Owl - Front of Center Cloud - Hidden on Mobile */}
           <motion.img 
             src="/images/eng-owl.png" 
             alt="English owl" 
-            className="absolute object-contain"
+            className="hidden md:block absolute object-contain"
             style={{ 
               left: '50%',
               bottom: '150px',
@@ -326,7 +358,7 @@ const HeroSection = () => {
           <motion.img 
             src="/images/eng-cloud.png" 
             alt="English cloud" 
-            className="absolute w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 object-contain opacity-80"
+            className="absolute w-16 h-16 sm:w-20 sm:h-20 md:w-64 md:h-64 object-contain opacity-80"
             style={{ 
               left: 'calc(50% + 250px)',
               bottom: '0px'
@@ -345,9 +377,9 @@ const HeroSection = () => {
           />
         </div>
 
-        {/* English Highlight - Center (Inside overflow-hidden container) */}
+        {/* English Highlight - Center (Inside overflow-hidden container) - Hidden on Mobile */}
         <motion.div 
-          className="pointer-events-none" 
+          className="hidden md:block pointer-events-none" 
           style={{ 
             position: 'absolute',
             top: '53%',

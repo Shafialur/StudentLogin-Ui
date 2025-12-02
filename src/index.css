@@ -144,6 +144,23 @@
     position: relative;
   }
 
+  /* English Page - Gloomy Gradient (Muted Colors) */
+  .hero-gradient-english {
+    background: linear-gradient(90deg, 
+      #5B7FA0 0%, 
+      #6B8FB0 10%, 
+      #7B9FC0 20%, 
+      #8BAFD0 30%, 
+      #C9A584 45%, 
+      #D9B594 55%, 
+      #E9C5A4 70%, 
+      #D9A5A5 85%, 
+      #C995B5 95%, 
+      #B985C5 100%
+    );
+    position: relative;
+  }
+
   /* More rounded bottom corners for hero section - matches blur rectangle outer edge */
   /* Blur rectangle: inner radius 24px + border 2px = outer radius 26px */
   .hero-bottom-rounded {
