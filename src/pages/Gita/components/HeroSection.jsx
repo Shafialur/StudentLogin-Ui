@@ -78,7 +78,7 @@ const HeroSection = () => {
   }
 
   return (
-    <div className="relative w-full hero-section-container overflow-x-hidden -mx-0 md:-mx-0">
+    <div className="relative w-full hero-section-container overflow-x-hidden -mx-0 md:-mx-0" style={{ marginLeft: 0, marginRight: 0, paddingLeft: 0, paddingRight: 0 }}>
       {/* Hero Section Background with Gradient */}
       <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[38vh] hero-gradient-exact overflow-hidden hero-bottom-rounded md:!min-h-[340px] md:!max-h-[360px]">
         {/* Background Design Symbols - Left and Right Top Corners */}
@@ -216,12 +216,12 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Mobile View - Unchanged */}
-        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-auto px-4 sm:px-6 flex flex-col items-center justify-center py-4 sm:py-5 scale-85 sm:scale-90" style={{ zIndex: 10 }}>
+        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-center py-2 sm:py-3 scale-85 sm:scale-90" style={{ zIndex: 10, paddingLeft: '8px', paddingRight: '8px' }}>
           {/* Single Blur Rectangle for All Content - Mobile Only */}
           <div className="hero-unified-blur-background-mobile"></div>
           
           {/* Clipping Container for Mobile Cloud - Matches blur rectangle bounds with overflow to show 90% */}
-          <div className="absolute top-1/2 left-[40px] right-[40px] transform -translate-y-1/2 pointer-events-none overflow-hidden" style={{ zIndex: 24, height: '320px', maxHeight: '320px', borderRadius: '24px' }}>
+          <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 pointer-events-none overflow-hidden" style={{ zIndex: 24, height: '320px', maxHeight: '320px', borderRadius: '24px', marginLeft: '8px', marginRight: '8px' }}>
             {/* Mobile Main Cloud - Right bottom, 90% inside, small portion outside */}
             <div className="absolute pointer-events-none" style={{ right: '-30px', bottom: '-20px' }}>
               <img 
@@ -234,7 +234,7 @@ const HeroSection = () => {
           </div>
           
           {/* Mobile Content */}
-          <div className="relative w-full flex flex-col items-center gap-3 sm:gap-4 py-4 sm:py-5" style={{ zIndex: 15 }}>
+          <div className="relative w-full flex flex-col items-center gap-2 sm:gap-3 py-2 sm:py-3" style={{ zIndex: 15, paddingLeft: '8px', paddingRight: '8px' }}>
             
             {/* Small Clouds Behind Chariot - Mobile and Tablet */}
             {/* Left Small Cloud */}

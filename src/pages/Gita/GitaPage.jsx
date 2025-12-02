@@ -25,9 +25,10 @@ const GitaPage = () => {
   }
 
   return (
-    <div className="w-full h-screen overflow-y-auto overflow-x-hidden">
+    <div className="w-full h-screen overflow-y-auto overflow-x-hidden" style={{ margin: 0, padding: 0, width: '100%', maxWidth: '100%' }}>
       <div 
         className="h-screen overflow-y-auto md:overflow-y-auto overflow-x-hidden relative"
+        style={{ margin: 0, padding: 0, width: '100%', maxWidth: '100%' }}
         style={{
           background: `
             linear-gradient(135deg, 
@@ -50,12 +51,14 @@ const GitaPage = () => {
       >
         {/* Responsive Container - Makes UI appear exactly the same on all laptop screens */}
         <div 
-          className="ui-responsive-container sm:min-h-screen md:min-h-screen w-full md:flex md:flex-col md:pb-4"
+          className="ui-responsive-container sm:min-h-screen md:min-h-screen w-full md:flex md:flex-col md:pb-[20px]"
           style={{
             width: '100%',
             maxWidth: '100%',
             marginLeft: '0',
             marginRight: '0',
+            paddingLeft: '0',
+            paddingRight: '0',
             position: 'relative',
             paddingBottom: '3px'
           }}
@@ -66,9 +69,9 @@ const GitaPage = () => {
         </div>
 
         {/* Dashboard Cards Section - Fixed gaps that never change */}
-      <div className="max-w-full mx-auto px-3 sm:px-4 md:px-[60px] scale-75 sm:scale-80 md:scale-100 md:flex-1 md:flex md:flex-col relative z-10 md:mt-[10px] md:mb-4" style={{ marginTop: '3px' }}>
+      <div className="max-w-full mx-auto px-0 sm:px-0 md:px-[60px] scale-100 sm:scale-100 md:scale-100 md:flex-1 md:flex md:flex-col relative z-10 md:mt-[20px] md:mb-[20px]" style={{ paddingTop: '0', paddingBottom: '0' }}>
         {/* Mobile/Tablet: Stacked Layout | Desktop: Grid Layout */}
-        <div className="flex flex-col md:grid md:pt-[10px] pl-0 pt-0 pr-0 md:w-full md:h-full gap-3 md:gap-4" 
+        <div className="flex flex-col md:grid md:pt-[10px] pl-0 pt-0 pr-0 md:w-full md:h-full gap-0 sm:gap-0 md:gap-4" 
           style={{ 
             gridTemplateColumns: 'repeat(10, 1fr)', 
             gridTemplateRows: '1fr 1fr',

@@ -178,6 +178,13 @@
     z-index: 10;
   }
   
+  /* Mobile: Reduce padding for hero panel */
+  @media (max-width: 767px) {
+    .hero-panel-inner {
+      padding: 24px 16px;
+    }
+  }
+  
   /* Countdown Timer Box - Clean Layout */
   .countdown-timer-box-exact {
     display: flex;
@@ -368,8 +375,8 @@
   .hero-unified-blur-background-mobile {
     position: absolute;
     top: 50%;
-    left: 40px;
-    right: 40px;
+    left: 0;
+    right: 0;
     transform: translateY(-50%);
     height: 320px;
     max-height: 320px;
@@ -394,6 +401,8 @@
     z-index: 1;
     pointer-events: none;
     overflow: hidden;
+    width: 100%;
+    margin: 0;
   }
   
   /* Tablet blur background - OLD, keeping for backward compatibility but not used */
@@ -406,6 +415,163 @@
     .hero-unified-blur-background-mobile {
       height: 340px;
       max-height: 340px;
+    }
+  }
+  
+  /* Mobile: Remove all unwanted spacing and ensure elements fit screen */
+  @media (max-width: 767px) {
+    /* Remove body margins and padding on mobile */
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
+    }
+    
+    /* Ensure root container has no extra spacing */
+    #root {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    
+    /* Hero section container - no margins */
+    .hero-section-container {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100%;
+      max-width: 100%;
+    }
+    
+    /* Add small equal margin to mobile blur background on all 4 sides */
+    .hero-unified-blur-background-mobile {
+      top: 12px !important;
+      left: 12px !important;
+      right: 12px !important;
+      bottom: 12px !important;
+      width: auto !important;
+      height: calc(100% - 24px) !important;
+      max-height: calc(100% - 24px) !important;
+      transform: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    /* Constrain parent container to prevent extra bottom space */
+    .hero-section-container > div.relative.h-full {
+      height: calc(320px + 24px) !important;
+      min-height: calc(320px + 24px) !important;
+      max-height: calc(320px + 24px) !important;
+    }
+    
+    /* Ensure UI responsive container has no extra spacing */
+    .ui-responsive-container {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    
+    /* Override inline styles for mobile - ensure bottom gap */
+    .ui-responsive-container[style*="paddingBottom"] {
+      padding-bottom: 12px !important;
+    }
+    
+    /* Remove all gaps between cards in mobile */
+    .flex.flex-col.gap-0,
+    .flex.flex-col.gap-2,
+    .flex.flex-col.gap-3,
+    .flex.flex-col.gap-4 {
+      gap: 0 !important;
+    }
+    
+    /* Add same gap as hero section blur rectangle (12px) to cards container */
+    .max-w-full.mx-auto {
+      padding-left: 12px !important;
+      padding-right: 12px !important;
+      padding-top: 12px !important;
+      padding-bottom: 12px !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    
+    /* Remove spacing from cards wrapper */
+    .ui-responsive-container > div.max-w-full {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    
+    /* Reduce padding from cards themselves in mobile */
+    .rounded-2xl.p-3,
+    .rounded-2xl.p-4,
+    .rounded-2xl.p-6,
+    .system-check-card-exact,
+    .teacher-note-card-exact,
+    .assignment-card-exact,
+    .quiz-card-exact,
+    .progress-card-exact {
+      padding: 0.75rem !important;
+    }
+    
+    /* Add same gap as hero section blur rectangle (12px) around cards */
+    .dashboard-grid-item-1,
+    .dashboard-grid-item-2,
+    .dashboard-grid-item-3,
+    .dashboard-grid-item-4,
+    .dashboard-grid-item-5,
+    .dashboard-grid-item-6 {
+      margin: 12px !important;
+      padding: 0 !important;
+    }
+    
+    /* Ensure cards fit screen width with margins */
+    .dashboard-grid-item-1 > *,
+    .dashboard-grid-item-2 > *,
+    .dashboard-grid-item-3 > *,
+    .dashboard-grid-item-4 > *,
+    .dashboard-grid-item-5 > *,
+    .dashboard-grid-item-6 > * {
+      width: 100% !important;
+      margin: 0 !important;
+    }
+    
+    /* Remove spacing between hero and cards section */
+    .ui-responsive-container > div.relative.z-20 {
+      margin-bottom: 0 !important;
+    }
+    
+    .ui-responsive-container > div.max-w-full {
+      margin-top: 0 !important;
+    }
+    
+    /* Ensure all containers fit screen width */
+    * {
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    
+    /* Remove any horizontal overflow */
+    .overflow-x-hidden {
+      overflow-x: hidden !important;
+    }
+    
+    /* Ensure hero content fits */
+    .hero-section-container > * {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
     }
   }
   
@@ -895,6 +1061,25 @@
     margin: 0;
     margin-left: 0;
     margin-right: auto;
+  }
+  
+  /* Desktop: Ensure equal top and bottom spacing */
+  @media (min-width: 768px) {
+    /* Ensure cards container has bottom gap in desktop - override inline styles */
+    div.max-w-full.mx-auto[style*="paddingBottom"] {
+      padding-bottom: 0 !important;
+      margin-bottom: 20px !important;
+    }
+    
+    /* Ensure responsive container has bottom padding */
+    .ui-responsive-container {
+      padding-bottom: 20px !important;
+    }
+    
+    /* Ensure top spacing between hero and cards - override inline styles */
+    div.max-w-full.mx-auto[style*="marginTop"] {
+      margin-top: 20px !important;
+    }
   }
 }
 
