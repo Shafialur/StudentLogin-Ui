@@ -28,8 +28,11 @@ const GitaPage = () => {
     <div className="w-full h-screen overflow-y-auto overflow-x-hidden" style={{ margin: 0, padding: 0, width: '100%', maxWidth: '100%' }}>
       <div 
         className="h-screen overflow-y-auto md:overflow-y-auto overflow-x-hidden relative"
-        style={{ margin: 0, padding: 0, width: '100%', maxWidth: '100%' }}
         style={{
+          margin: 0,
+          padding: 0,
+          width: '100%',
+          maxWidth: '100%',
           background: `
             linear-gradient(135deg, 
               rgba(135, 206, 235, 0.2) 0%, 
