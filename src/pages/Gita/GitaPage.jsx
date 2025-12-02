@@ -70,16 +70,16 @@ const GitaPage = () => {
 
         {/* Dashboard Cards Section - Fixed gaps that never change */}
       <div className="max-w-full mx-auto px-0 sm:px-0 md:px-[60px] scale-100 sm:scale-100 md:scale-100 md:flex-1 md:flex md:flex-col relative z-10 md:mt-[20px] md:mb-[20px]" style={{ paddingTop: '0', paddingBottom: '0' }}>
-        {/* Mobile/Tablet: Stacked Layout | Desktop: Grid Layout */}
+        {/* Mobile: Custom 2-column layout | Desktop: Grid Layout */}
         <div className="flex flex-col md:grid md:pt-[10px] pl-0 pt-0 pr-0 md:w-full md:h-full gap-0 sm:gap-0 md:gap-4" 
           style={{ 
             gridTemplateColumns: 'repeat(10, 1fr)', 
             gridTemplateRows: '1fr 1fr',
             alignItems: 'stretch'
           }}>
-          {/* Column 1-4: Course Card - Full height spanning 2 rows (40% width) */}
+          {/* Mobile: Course Card - Full width */}
           <motion.div 
-            className="dashboard-grid-item-1"
+            className="dashboard-grid-item-1 w-full md:w-auto"
             variants={cardVariants}
             initial="hidden"
             animate="visible"
@@ -89,9 +89,9 @@ const GitaPage = () => {
             <CourseCard />
           </motion.div>
 
-          {/* Column 5-7: Progress Card (top) - 30% width */}
+          {/* Mobile: Progress Card - Full width */}
           <motion.div 
-            className="dashboard-grid-item-2"
+            className="dashboard-grid-item-2 w-full md:w-auto"
             variants={cardVariants}
             initial="hidden"
             animate="visible"
@@ -101,9 +101,57 @@ const GitaPage = () => {
             <ProgressCard />
           </motion.div>
 
-          {/* Column 8-10: Teacher Note Card (top) - 30% width */}
+          {/* Mobile: Teacher Note and Assignment Cards - 2 per row */}
+          <div className="flex flex-row gap-0 md:hidden">
+            <motion.div 
+              className="dashboard-grid-item-3 flex-1"
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              custom={2}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            >
+              <TeacherNoteCard />
+            </motion.div>
+            <motion.div 
+              className="dashboard-grid-item-4 flex-1"
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              custom={3}
+              whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+            >
+              <AssignmentCard />
+            </motion.div>
+          </div>
+
+          {/* Mobile: Quiz and System Check Cards - 2 per row */}
+          <div className="flex flex-row gap-0 md:hidden">
+            <motion.div 
+              className="dashboard-grid-item-5 flex-1"
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              custom={4}
+              whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+            >
+              <QuizCard />
+            </motion.div>
+            <motion.div 
+              className="dashboard-grid-item-6 flex-1"
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              custom={5}
+              whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+            >
+              <SystemCheckCard />
+            </motion.div>
+          </div>
+
+          {/* Desktop: Original grid layout */}
           <motion.div 
-            className="dashboard-grid-item-3"
+            className="dashboard-grid-item-3 hidden md:block"
             variants={cardVariants}
             initial="hidden"
             animate="visible"
@@ -112,10 +160,8 @@ const GitaPage = () => {
           >
             <TeacherNoteCard />
           </motion.div>
-
-          {/* Bottom Row: Three cards in 60% space (20% each = 2 columns each) */}
           <motion.div 
-            className="dashboard-grid-item-4"
+            className="dashboard-grid-item-4 hidden md:block"
             variants={cardVariants}
             initial="hidden"
             animate="visible"
@@ -125,7 +171,7 @@ const GitaPage = () => {
             <AssignmentCard />
           </motion.div>
           <motion.div 
-            className="dashboard-grid-item-5"
+            className="dashboard-grid-item-5 hidden md:block"
             variants={cardVariants}
             initial="hidden"
             animate="visible"
@@ -135,7 +181,7 @@ const GitaPage = () => {
             <QuizCard />
           </motion.div>
           <motion.div 
-            className="dashboard-grid-item-6"
+            className="dashboard-grid-item-6 hidden md:block"
             variants={cardVariants}
             initial="hidden"
             animate="visible"
