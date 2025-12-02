@@ -9,7 +9,7 @@ import QuizCard from './components/QuizCard'
 import SystemCheckCard from './components/SystemCheckCard'
 import BottomNavigation from '../../components/BottomNavigation'
 
-const GitaPage = () => {
+const MathsPage = () => {
   // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -203,5 +203,5 @@ const GitaPage = () => {
   )
 }
 
-export default GitaPage
+export default MathsPage
 
