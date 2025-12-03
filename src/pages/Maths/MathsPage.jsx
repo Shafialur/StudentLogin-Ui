@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import HeroSection from './components/HeroSection'
 import CourseCard from './components/CourseCard'
@@ -10,6 +10,68 @@ import SystemCheckCard from './components/SystemCheckCard'
 import BottomNavigation from '../../components/BottomNavigation'
 
 const MathsPage = () => {
+  const scrollContainerRef = useRef(null)
+  
+  // Fix mobile browser address bar behavior
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+    
+    // Set dynamic viewport height for mobile
+    const setViewportHeight = () => {
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    }
+    
+    setViewportHeight()
+    
+    // Update on resize and orientation change
+    const handleResize = () => {
+      setViewportHeight()
+      // Re-trigger scroll after resize
+      if (window.innerWidth <= 768 && container) {
+        setTimeout(() => {
+          container.scrollTop = 1
+          setTimeout(() => {
+            container.scrollTop = 0
+          }, 100)
+        }, 100)
+      }
+    }
+    
+    window.addEventListener('resize', handleResize)
+    window.addEventListener('orientationchange', handleResize)
+    
+    // Trigger browser address bar hiding on mount
+    const triggerScroll = () => {
+      if (window.innerWidth <= 768 && container) {
+        // Force a scroll to trigger address bar hiding
+        // Scroll down slightly, then back up
+        requestAnimationFrame(() => {
+          container.scrollTop = 2
+          requestAnimationFrame(() => {
+            container.scrollTop = 0
+            // One more trigger after a brief delay
+            setTimeout(() => {
+              container.scrollTop = 1
+              setTimeout(() => {
+                container.scrollTop = 0
+              }, 50)
+            }, 200)
+          })
+        })
+      }
+    }
+    
+    // Delay to ensure DOM is ready
+    setTimeout(triggerScroll, 150)
+    
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('orientationchange', handleResize)
+    }
+  }, [])
+  
   // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -26,9 +88,19 @@ const MathsPage = () => {
   }
 
   return (
-    <div className="w-full h-screen overflow-y-auto overflow-x-hidden" style={{ margin: 0, padding: 0, width: '100%', maxWidth: '100%', scrollSnapType: 'y proximity' }}>
+    <div 
+      ref={scrollContainerRef}
+      className="w-full overflow-y-auto overflow-x-hidden mobile-viewport-fix" 
+      style={{ 
+        margin: 0, 
+        padding: 0, 
+        width: '100%', 
+        maxWidth: '100%', 
+        scrollSnapType: 'y proximity'
+      }}
+    >
       <div 
-        className="h-screen overflow-y-auto md:overflow-y-auto overflow-x-hidden relative"
+        className="overflow-y-auto md:overflow-y-auto overflow-x-hidden relative mobile-content-fix"
         style={{
           margin: 0,
           padding: 0,

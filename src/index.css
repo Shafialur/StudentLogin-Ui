@@ -38,6 +38,41 @@
   #root {
     position: relative;
     min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+  
+  /* Mobile viewport height fix */
+  @media (max-width: 768px) {
+    html {
+      height: -webkit-fill-available;
+    }
+    
+    body {
+      min-height: -webkit-fill-available;
+      min-height: calc(var(--vh, 1vh) * 100);
+    }
+    
+    #root {
+      min-height: -webkit-fill-available;
+      min-height: calc(var(--vh, 1vh) * 100);
+    }
+    
+    .mobile-viewport-fix {
+      height: calc(var(--vh, 1vh) * 100);
+      min-height: calc(var(--vh, 1vh) * 100);
+    }
+    
+    .mobile-content-fix {
+      min-height: calc(var(--vh, 1vh) * 105);
+      padding-bottom: calc(var(--vh, 1vh) * 5);
+    }
+  }
+  
+  @media (min-width: 769px) {
+    .mobile-viewport-fix {
+      height: 100vh;
+      min-height: 100vh;
+    }
   }
   
   /* Animated subtle glow overlay */
