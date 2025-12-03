@@ -12,8 +12,8 @@ const CourseCard = () => {
       }}
     >
       <img 
-        src="/images/Krishna&arnjuna-cardimage.png" 
-        alt="Krishna and Arjuna" 
+        src="/images/english-coursecard.png" 
+        alt="Maths course card" 
         className="course-card-image"
         style={{ width: '100%', height: '100%', objectFit: 'cover', maxWidth: '100%' }}
       />
@@ -22,4 +22,3 @@ const CourseCard = () => {
 }
 
 export default CourseCard
-

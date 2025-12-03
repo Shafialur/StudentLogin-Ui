@@ -80,192 +80,28 @@ const HeroSection = () => {
   return (
     <div className="relative w-full hero-section-container overflow-x-hidden -mx-0 md:-mx-0" style={{ marginLeft: 0, marginRight: 0, paddingLeft: 0, paddingRight: 0 }}>
       {/* Hero Section Background with Gradient */}
-      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[38vh] hero-gradient-exact overflow-hidden hero-bottom-rounded md:!min-h-[340px] md:!max-h-[360px]">
-        {/* Background Design Symbols - Left and Right Top Corners */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
-          <motion.div
-            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -left-[60px] sm:-left-[80px] md:-left-[120px]"
-            style={{ translateY: '-50%' }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          >
-            <img 
-              src="/images/background-design-symbol.png" 
-              alt="Background design" 
-              className="w-full h-full opacity-85 object-contain object-top max-w-full"
-            />
-          </motion.div>
-          <motion.div
-            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -right-[60px] sm:-right-[80px] md:-right-[120px]"
-            style={{ translateY: '-50%', scaleX: -1 }}
-            animate={{ rotate: -360 }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          >
-            <img 
-              src="/images/background-design-symbol.png" 
-              alt="Background design" 
-              className="w-full h-full opacity-85 object-contain object-top max-w-full"
-            />
-          </motion.div>
-        </div>
-
-        {/* Background Clouds - Subtle White Cloud Shapes */}
-        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
-         
-          <img 
-            src="/images/cloud2.png" 
-            alt="Background cloud" 
-            className="absolute top-24 left-1/3 opacity-100 w-28 h-20 object-contain"
-          />
-          <img 
-            src="/images/cloud2.png" 
-            alt="Background cloud" 
-            className="absolute bottom-20 right-24 opacity-100 w-36 h-28 object-contain"
-          />
-        </div>
-
-        {/* Main Cloud - Desktop: Bottom Right (unchanged) */}
-        <div className="absolute right-0 pointer-events-none hidden md:block" style={{ zIndex: 18, bottom: '-80px' }}>
-          <img 
-            src="/images/main-cloud.png" 
-            alt="Main cloud desktop" 
-            className="object-contain max-w-full h-auto"
-            style={{ width: '900px', height: 'auto', maxHeight: '450px' }}
-          />
-        </div>
-
-        {/* Cloud at Bottom of Hero Section - Behind Chariot */}
-        <div className="absolute bottom-0 pointer-events-none hidden md:block" style={{ zIndex: 8, left: '55%', transform: 'translateX(-50%)' }}>
-          <img 
-            src="/images/cloud2.png" 
-            alt="Cloud at bottom" 
-            className="object-contain opacity-80 max-w-full h-auto"
-            style={{ width: '600px', height: 'auto' }}
-          />
-        </div>
-
-        {/* Leaf - Behind Lotus Bottom Left */}
-        <div className="absolute pointer-events-none hidden md:block" style={{ zIndex: 14, bottom: '-70px', left: '10px' }}>
-          <img 
-            src="/images/leaf.png" 
-            alt="Leaf" 
-            className="w-32 h-32 object-contain opacity-90 max-w-full h-auto"
-          />
-        </div>
-
-        {/* Pink Lotus Flower - Bottom Left */}
-        <motion.div 
-          className="absolute bottom-0 left-0 pointer-events-none hidden md:block" 
-          style={{ zIndex: 15 }}
-          animate={{ 
-            scale: [1, 1.05, 1],
-            filter: [
-              'drop-shadow(0 0 10px rgba(255, 182, 193, 0.6))',
-              'drop-shadow(0 0 25px rgba(255, 105, 180, 0.9))',
-              'drop-shadow(0 0 10px rgba(255, 182, 193, 0.6))'
-            ]
-          }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <img 
-            src="/images/lotus.png" 
-            alt="Lotus flower" 
-            className="w-44 h-44 object-contain opacity-100 max-w-full h-auto"
-          />
-        </motion.div>
-
-        <motion.div 
-          className="absolute bottom-[-10px] left-0 pointer-events-none hidden md:block" 
-          style={{ zIndex: 15, left: '45%' }}
-          animate={{ 
-            scale: [1, 1.08, 1],
-            filter: [
-              'drop-shadow(0 0 8px rgba(255, 182, 193, 0.5))',
-              'drop-shadow(0 0 20px rgba(255, 105, 180, 0.8))',
-              'drop-shadow(0 0 8px rgba(255, 182, 193, 0.5))'
-            ]
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        >
-          <img 
-            src="/images/lotus.png" 
-            alt="Lotus flower" 
-            className="w-32 h-32 object-contain opacity-80 max-w-full h-auto"
-          />
-        </motion.div>
-
-        {/* Lotus1 - Bottom Center */}
-        <motion.div 
-          className="absolute bottom-0 pointer-events-none hidden md:block" 
-          style={{ zIndex: 15, left: '7%' }}
-          animate={{ 
-            scale: [1, 1.06, 1],
-            filter: [
-              'drop-shadow(0 0 10px rgba(255, 200, 200, 0.6))',
-              'drop-shadow(0 0 25px rgba(255, 150, 180, 0.9))',
-              'drop-shadow(0 0 10px rgba(255, 200, 200, 0.6))'
-            ]
-          }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        >
-          <img 
-            src="/images/lotus1.png" 
-            alt="Lotus flower" 
-            className="w-14 h-14 object-contain opacity-100 max-w-full h-auto"
-          />
-        </motion.div>
+      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[38vh] hero-gradient-english overflow-hidden hero-bottom-rounded md:!min-h-[340px] md:!max-h-[360px]">
 
         {/* Mobile View - Unchanged */}
-        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-center py-2 sm:py-3 scale-85 sm:scale-90" style={{ zIndex: 10, paddingLeft: '8px', paddingRight: '8px' }}>
+        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-start py-2 sm:py-3 scale-85 sm:scale-90" style={{ zIndex: 10, paddingLeft: '8px', paddingRight: '8px', overflow: 'hidden' }}>
           {/* Single Blur Rectangle for All Content - Mobile Only */}
           <div className="hero-unified-blur-background-mobile"></div>
           
-          {/* Clipping Container for Mobile Cloud - Matches blur rectangle bounds with overflow to show 90% */}
-          <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 pointer-events-none overflow-hidden" style={{ zIndex: 24, height: '320px', maxHeight: '320px', borderRadius: '24px', marginLeft: '8px', marginRight: '8px' }}>
-            {/* Mobile Main Cloud - Right bottom, 90% inside, small portion outside */}
-            <div className="absolute pointer-events-none" style={{ right: '-30px', bottom: '-20px' }}>
-              <img 
-                src="/images/main-cloud.png" 
-                alt="Main cloud mobile" 
-                className="object-contain"
-                style={{ width: '380px', height: 'auto', maxHeight: '190px' }}
-              />
-            </div>
-          </div>
           
           {/* Mobile Content */}
-          <div className="relative w-full flex flex-col items-center gap-2 sm:gap-3 py-2 sm:py-3" style={{ zIndex: 15, paddingLeft: '8px', paddingRight: '8px' }}>
+          <div className="relative w-full flex flex-col items-center gap-2 sm:gap-3" style={{ zIndex: 15, paddingLeft: '8px', paddingRight: '8px', paddingTop: '16px' }}>
             
-            {/* Small Clouds Behind Chariot - Mobile and Tablet */}
-            {/* Left Small Cloud */}
-            <div className="absolute pointer-events-none block lg:hidden" style={{ zIndex: 12, left: '10%', top: '65%', transform: 'translateY(-50%)' }}>
-              <img 
-                src="/images/cloud2.png" 
-                alt="Small cloud left" 
-                className="object-contain opacity-80"
-                style={{ width: '80px', height: 'auto' }}
-              />
-            </div>
-            {/* Right Small Cloud */}
-            <div className="absolute pointer-events-none block lg:hidden" style={{ zIndex: 12, right: '15%', top: '65%', transform: 'translateY(-50%)' }}>
-              <img 
-                src="/images/cloud2.png" 
-                alt="Small cloud right" 
-                className="object-contain opacity-80"
-                style={{ width: '80px', height: 'auto' }}
-              />
-            </div>
-            
-            {/* Left Side - Text Content */}
+            {/* Left Side - Text Content - At Top */}
             <motion.div 
-              className="flex-1 pl-0 w-full md:w-auto md:!-ml-8 flex flex-col items-center md:items-start"
+              className="flex-1 pl-0 w-full md:w-auto md:!-ml-8 flex flex-col items-center md:items-start relative"
+              style={{ zIndex: 25 }}
               variants={textVariants}
               initial="hidden"
               animate="visible"
             >
-              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left">
-                Namaste, Krishna! <br className="hidden md:block" />
-               Ready for Gita Wisdom - <br className="hidden md:block" />Inner Peace?
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-2 sm:mb-3 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left px-4 md:px-0">
+                Hi, Krishna! <br className="hidden md:block" />
+               Ready for Maths Journey - <br className="hidden md:block" />Master Mind?
               </h1>
               
               {/* Countdown Timer */}
@@ -278,9 +114,9 @@ const HeroSection = () => {
                 <div className="countdown-timer-box-exact sm:scale-90 md:scale-100">
                   {/* Om Symbol */}
                   <motion.img 
-                    src="/images/om-symbol.png" 
-                    alt="Om symbol" 
-                    className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain flex-shrink-0"
+                    src="/images/eng-clock.png" 
+                    alt="Maths clock" 
+                    className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain flex-shrink-0 opacity-80"
                     animate={{ rotate: [0, 5, -5, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   />
@@ -305,7 +141,6 @@ const HeroSection = () => {
                 </div>
               </motion.div>
             </motion.div>
-
             {/* Right Side - Chariot */}
             <motion.div 
               className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto md:!mr-[-60px] -mt-2 md:mt-0" 
@@ -315,60 +150,42 @@ const HeroSection = () => {
               animate="visible"
             >
               <div className="flex flex-col items-center justify-center relative translate-y-0 md:!-translate-y-[30px]">
-                {/* Sun Behind Chariot */}
-                <motion.div 
-                  className="absolute block -top-[8%] md:top-[0%]" 
-                  style={{ zIndex: 16, left: '10%', transform: 'translate(-50%, -50%)' }}
-                  animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <div className="sun-glow"></div>
-                </motion.div>
-                
-                {/* Small Cloud 1 - Near Chariot */}
-                <motion.div 
-                  className="absolute hidden md:block" 
-                  style={{ zIndex: 8, top: '20%', right: '70%' }}
-                  animate={cloudAnimation}
-                >
-                  <img 
-                    src="/images/cloud2.png" 
-                    alt="Small cloud near chariot" 
-                    className="object-contain opacity-100 max-w-full h-auto"
-                    style={{ width: '150px', height: 'auto' }}
-                  />
-                </motion.div>
-                
-                {/* Small Cloud 2 - Near Chariot */}
-                <motion.div 
-                  className="absolute hidden md:block" 
-                  style={{ zIndex: 8, top: '40%', right: '-60px' }}
-                  animate={{ x: [0, -15, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <img 
-                    src="/images/cloud2.png" 
-                    alt="Small cloud near chariot" 
-                    className="object-contain opacity-100 max-w-full h-auto"
-                    style={{ width: '180px', height: 'auto' }}
-                  />
-                </motion.div>
-                
-                {/* Chariot - Main Illustration */}
-                <motion.div 
-                  className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-[380px] md:!w-[520px] md:!h-[320px] md:!mt-[45px] h-auto scale-75 sm:scale-75 md:scale-100"
-                  style={{ zIndex: 20, position: 'relative' }}
-                  animate={floatAnimation}
-                >
-                  <img 
-                    src="/images/chariot.png.png" 
-                    alt="Krishna and Arjuna in chariot" 
-                    className="w-full h-full object-contain max-w-full"
-                  />
-                </motion.div>
               </div>
             </motion.div>
           </div>
+          
+          {/* Highlight Image - Separate in Hero Section - Mobile Only */}
+          <motion.div 
+            className="pointer-events-none md:hidden absolute" 
+            style={{ 
+              zIndex: 20,
+              bottom: '-95px',
+              left: '60%',
+              transform: 'translateX(-50%)',
+              overflow: 'hidden'
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.div
+              className="w-[350px] h-[350px] sm:w-[400px] sm:h-[400px]"
+              animate={{ 
+                y: [0, 5, 0],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <img 
+                src="/images/eng-highlight.png" 
+                alt="Maths highlight" 
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Tablet and Desktop View - Container-based blur rectangle */}
@@ -380,25 +197,6 @@ const HeroSection = () => {
               {/* Content inside blur rectangle with internal padding */}
               <div className="w-full flex flex-col md:flex-row items-center gap-4 md:gap-8 lg:gap-12 px-6 md:px-8">
                 
-                {/* Small Clouds Behind Chariot - Tablet Only */}
-                {/* Left Small Cloud */}
-                <div className="absolute pointer-events-none hidden md:block lg:hidden" style={{ zIndex: 12, left: '10%', top: '65%', transform: 'translateY(-50%)' }}>
-                  <img 
-                    src="/images/cloud2.png" 
-                    alt="Small cloud left" 
-                    className="object-contain opacity-80"
-                    style={{ width: '80px', height: 'auto' }}
-                  />
-                </div>
-                {/* Right Small Cloud */}
-                <div className="absolute pointer-events-none hidden md:block lg:hidden" style={{ zIndex: 12, right: '15%', top: '65%', transform: 'translateY(-50%)' }}>
-                  <img 
-                    src="/images/cloud2.png" 
-                    alt="Small cloud right" 
-                    className="object-contain opacity-80"
-                    style={{ width: '80px', height: 'auto' }}
-                  />
-                </div>
                 
                 {/* Left Side - Text Content */}
                 <motion.div 
@@ -408,8 +206,8 @@ const HeroSection = () => {
                   animate="visible"
                 >
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left">
-                    Namaste, Krishna! <br className="hidden md:block" />
-                   Ready for Gita Wisdom - <br className="hidden md:block" />Inner Peace?
+                    Hi, Krishna! <br className="hidden md:block" />
+                   Ready for Maths Journey - <br className="hidden md:block" />Master Mind?
                   </h1>
                   
                   {/* Countdown Timer */}
@@ -422,9 +220,9 @@ const HeroSection = () => {
                     <div className="countdown-timer-box-exact">
                       {/* Om Symbol */}
                       <motion.img 
-                        src="/images/om-symbol.png" 
-                        alt="Om symbol" 
-                        className="w-12 md:w-14 object-contain flex-shrink-0"
+                        src="/images/eng-clock.png" 
+                        alt="Maths clock" 
+                        className="w-14 md:w-16 object-contain flex-shrink-0 opacity-80"
                         animate={{ rotate: [0, 5, -5, 0] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                       />
@@ -459,63 +257,160 @@ const HeroSection = () => {
                   animate="visible"
                 >
                   <div className="flex flex-col items-center justify-center relative md:-translate-y-[30px]">
-                    {/* Sun Behind Chariot */}
-                    <motion.div 
-                      className="absolute block" 
-                      style={{ zIndex: 16, top: '0%', left: '10%', transform: 'translate(-50%, -50%)' }}
-                      animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <div className="sun-glow"></div>
-                    </motion.div>
-                    
-                    {/* Small Cloud 1 - Near Chariot */}
-                    <motion.div 
-                      className="absolute hidden md:block" 
-                      style={{ zIndex: 8, top: '20%', right: '70%' }}
-                      animate={cloudAnimation}
-                    >
-                      <img 
-                        src="/images/cloud2.png" 
-                        alt="Small cloud near chariot" 
-                        className="object-contain opacity-100 max-w-full h-auto"
-                        style={{ width: '150px', height: 'auto' }}
-                      />
-                    </motion.div>
-                    
-                    {/* Small Cloud 2 - Near Chariot */}
-                    <motion.div 
-                      className="absolute hidden md:block" 
-                      style={{ zIndex: 8, top: '40%', right: '-60px' }}
-                      animate={{ x: [0, -15, 0] }}
-                      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <img 
-                        src="/images/cloud2.png" 
-                        alt="Small cloud near chariot" 
-                        className="object-contain opacity-100 max-w-full h-auto"
-                        style={{ width: '180px', height: 'auto' }}
-                      />
-                    </motion.div>
-                    
-                    {/* Chariot - Main Illustration */}
-                    <motion.div 
-                      className="w-full max-w-[380px] md:!w-[520px] md:!h-[320px] md:!mt-[45px] h-auto"
-                      style={{ zIndex: 20, position: 'relative' }}
-                      animate={floatAnimation}
-                    >
-                      <img 
-                        src="/images/chariot.png.png" 
-                        alt="Krishna and Arjuna in chariot" 
-                        className="w-full h-full object-contain max-w-full"
-                      />
-                    </motion.div>
                   </div>
                 </motion.div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* English Cat - Left Bottom Corner */}
+        <motion.div 
+          className="absolute bottom-0 left-0 pointer-events-none" 
+          style={{ zIndex: 25 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <img 
+            src="/images/eng-cat.png" 
+            alt="Maths cat" 
+            className="w-20 h-20 sm:w-24 sm:h-24 md:w-48 md:h-48 object-contain"
+          />
+        </motion.div>
+
+        {/* English Clouds - Behind Highlight Image */}
+        <div 
+          className="absolute left-1/2 pointer-events-none" 
+          style={{ 
+            zIndex: 15,
+            bottom: '50px',
+            transform: 'translateX(-40%)',
+            width: '100%',
+            height: '200px'
+          }}
+        >
+          {/* Cloud 1 - Left */}
+          <motion.img 
+            src="/images/eng-cloud.png" 
+            alt="Maths cloud" 
+            className="absolute w-16 h-16 sm:w-20 sm:h-20 md:w-64 md:h-64 object-contain opacity-80"
+            style={{ 
+              left: 'calc(50% - 250px)',
+              bottom: '0px'
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: 0.8,
+              y: [0, -15, 0],
+              x: [0, -10, 0]
+            }}
+            transition={{
+              opacity: { duration: 0.8, delay: 0.2 },
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 },
+              x: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }
+            }}
+          />
+          {/* Cloud 2 - Center */}
+          <motion.img 
+            src="/images/eng-cloud.png" 
+            alt="Maths cloud" 
+            className="absolute w-20 h-20 sm:w-24 sm:h-24 md:w-72 md:h-72 object-contain opacity-90"
+            style={{ 
+              left: '50%',
+              bottom: '20px',
+              transform: 'translateX(-50%)'
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: 0.9,
+              y: [0, -20, 0],
+            }}
+            transition={{
+              opacity: { duration: 0.8, delay: 0.2 },
+              y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
+            }}
+          />
+          {/* Owl - Front of Center Cloud - Hidden on Mobile */}
+          <motion.img 
+            src="/images/eng-owl.png" 
+            alt="Maths owl" 
+            className="hidden md:block absolute object-contain"
+            style={{ 
+              left: '50%',
+              bottom: '150px',
+              transform: 'translateX(-50%)',
+              width: '120px',
+              height: '120px',
+              zIndex: 16
+            }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ 
+              opacity: 1,
+              y: [0, -10, 0],
+            }}
+            transition={{
+              opacity: { duration: 0.8, delay: 0.4 },
+              y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.8 }
+            }}
+          />
+          {/* Cloud 3 - Right */}
+          <motion.img 
+            src="/images/eng-cloud.png" 
+            alt="Maths cloud" 
+            className="absolute w-16 h-16 sm:w-20 sm:h-20 md:w-64 md:h-64 object-contain opacity-80"
+            style={{ 
+              left: 'calc(50% + 250px)',
+              bottom: '0px'
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: 0.8,
+              y: [0, -15, 0],
+              x: [0, 10, 0]
+            }}
+            transition={{
+              opacity: { duration: 0.8, delay: 0.2 },
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 },
+              x: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }
+            }}
+          />
+        </div>
+
+        {/* English Highlight - Center (Inside overflow-hidden container) - Hidden on Mobile */}
+        <motion.div 
+          className="hidden md:block pointer-events-none" 
+          style={{ 
+            position: 'absolute',
+            top: '53%',
+            left: '80%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 20,
+            bottom: 'auto',
+            right: 'auto'
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <motion.div
+            className="w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] md:w-[700px] md:h-[700px]"
+            animate={{ 
+              y: [0, 5, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <img 
+              src="/images/eng-highlight.png" 
+              alt="Maths highlight" 
+              className="w-full h-full object-contain"
+            />
+          </motion.div>
+        </motion.div>
 
         {/* Join Now Button - Right Side of Hero Section - Smaller on Mobile */}
         <motion.div 
@@ -546,4 +441,3 @@ const HeroSection = () => {
 }
 
 export default HeroSection
-

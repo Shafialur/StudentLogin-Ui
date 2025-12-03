@@ -155,7 +155,7 @@ const MathsPage = () => {
 
           {/* Desktop: Original grid layout */}
           <motion.div 
-            className="dashboard-grid-item-3 hidden md:block"
+            className="dashboard-grid-item-3 hidden md:block md:h-full"
             variants={cardVariants}
             initial="hidden"
             animate="visible"
@@ -165,7 +165,7 @@ const MathsPage = () => {
             <TeacherNoteCard />
           </motion.div>
           <motion.div 
-            className="dashboard-grid-item-4 hidden md:block"
+            className="dashboard-grid-item-4 hidden md:block md:h-full"
             variants={cardVariants}
             initial="hidden"
             animate="visible"
@@ -175,7 +175,7 @@ const MathsPage = () => {
             <AssignmentCard />
           </motion.div>
           <motion.div 
-            className="dashboard-grid-item-5 hidden md:block"
+            className="dashboard-grid-item-5 hidden md:block md:h-full"
             variants={cardVariants}
             initial="hidden"
             animate="visible"
@@ -185,7 +185,7 @@ const MathsPage = () => {
             <QuizCard />
           </motion.div>
           <motion.div 
-            className="dashboard-grid-item-6 hidden md:block"
+            className="dashboard-grid-item-6 hidden md:block md:h-full"
             variants={cardVariants}
             initial="hidden"
             animate="visible"
