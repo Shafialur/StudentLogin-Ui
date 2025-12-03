@@ -12,7 +12,7 @@ const CourseCard = () => {
       }}
     >
       <img 
-        src="/images/english-coursecard.png" 
+        src="/images/maths-coursecard.png" 
         alt="Maths course card" 
         className="course-card-image"
         style={{ width: '100%', height: '100%', objectFit: 'cover', maxWidth: '100%' }}

@@ -100,8 +100,9 @@ const HeroSection = () => {
               animate="visible"
             >
               <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-2 sm:mb-3 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left px-4 md:px-0">
-                Hi, Krishna! <br className="hidden md:block" />
-               Ready for Maths Journey - <br className="hidden md:block" />Master Mind?
+                Hi, Math Magician! <br className="hidden md:block" />
+               Ready for Number <br className="hidden md:block" />
+               Magic - fun & sums ?
               </h1>
               
               {/* Countdown Timer */}
@@ -153,39 +154,6 @@ const HeroSection = () => {
               </div>
             </motion.div>
           </div>
-          
-          {/* Highlight Image - Separate in Hero Section - Mobile Only */}
-          <motion.div 
-            className="pointer-events-none md:hidden absolute" 
-            style={{ 
-              zIndex: 20,
-              bottom: '-95px',
-              left: '60%',
-              transform: 'translateX(-50%)',
-              overflow: 'hidden'
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <motion.div
-              className="w-[350px] h-[350px] sm:w-[400px] sm:h-[400px]"
-              animate={{ 
-                y: [0, 5, 0],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <img 
-                src="/images/eng-highlight.png" 
-                alt="Maths highlight" 
-                className="w-full h-full object-contain"
-              />
-            </motion.div>
-          </motion.div>
         </div>
 
         {/* Tablet and Desktop View - Container-based blur rectangle */}
@@ -206,8 +174,9 @@ const HeroSection = () => {
                   animate="visible"
                 >
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left">
-                    Hi, Krishna! <br className="hidden md:block" />
-                   Ready for Maths Journey - <br className="hidden md:block" />Master Mind?
+                    Hi, Math Magician! <br className="hidden md:block" />
+                   Ready for Number <br className="hidden md:block" />
+                   Magic - fun & sums ?
                   </h1>
                   
                   {/* Countdown Timer */}
@@ -264,137 +233,22 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* English Cat - Left Bottom Corner */}
+        {/* Maths Highlight - Center of Hero Section - In Front of Rectangle */}
         <motion.div 
-          className="absolute bottom-0 left-0 pointer-events-none" 
-          style={{ zIndex: 25 }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          <img 
-            src="/images/eng-cat.png" 
-            alt="Maths cat" 
-            className="w-20 h-20 sm:w-24 sm:h-24 md:w-48 md:h-48 object-contain"
-          />
-        </motion.div>
-
-        {/* English Clouds - Behind Highlight Image */}
-        <div 
-          className="absolute left-1/2 pointer-events-none" 
-          style={{ 
-            zIndex: 15,
-            bottom: '50px',
-            transform: 'translateX(-40%)',
-            width: '100%',
-            height: '200px'
-          }}
-        >
-          {/* Cloud 1 - Left */}
-          <motion.img 
-            src="/images/eng-cloud.png" 
-            alt="Maths cloud" 
-            className="absolute w-16 h-16 sm:w-20 sm:h-20 md:w-64 md:h-64 object-contain opacity-80"
-            style={{ 
-              left: 'calc(50% - 250px)',
-              bottom: '0px'
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: 0.8,
-              y: [0, -15, 0],
-              x: [0, -10, 0]
-            }}
-            transition={{
-              opacity: { duration: 0.8, delay: 0.2 },
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 },
-              x: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }
-            }}
-          />
-          {/* Cloud 2 - Center */}
-          <motion.img 
-            src="/images/eng-cloud.png" 
-            alt="Maths cloud" 
-            className="absolute w-20 h-20 sm:w-24 sm:h-24 md:w-72 md:h-72 object-contain opacity-90"
-            style={{ 
-              left: '50%',
-              bottom: '20px',
-              transform: 'translateX(-50%)'
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: 0.9,
-              y: [0, -20, 0],
-            }}
-            transition={{
-              opacity: { duration: 0.8, delay: 0.2 },
-              y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
-            }}
-          />
-          {/* Owl - Front of Center Cloud - Hidden on Mobile */}
-          <motion.img 
-            src="/images/eng-owl.png" 
-            alt="Maths owl" 
-            className="hidden md:block absolute object-contain"
-            style={{ 
-              left: '50%',
-              bottom: '150px',
-              transform: 'translateX(-50%)',
-              width: '120px',
-              height: '120px',
-              zIndex: 16
-            }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ 
-              opacity: 1,
-              y: [0, -10, 0],
-            }}
-            transition={{
-              opacity: { duration: 0.8, delay: 0.4 },
-              y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.8 }
-            }}
-          />
-          {/* Cloud 3 - Right */}
-          <motion.img 
-            src="/images/eng-cloud.png" 
-            alt="Maths cloud" 
-            className="absolute w-16 h-16 sm:w-20 sm:h-20 md:w-64 md:h-64 object-contain opacity-80"
-            style={{ 
-              left: 'calc(50% + 250px)',
-              bottom: '0px'
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: 0.8,
-              y: [0, -15, 0],
-              x: [0, 10, 0]
-            }}
-            transition={{
-              opacity: { duration: 0.8, delay: 0.2 },
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 },
-              x: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }
-            }}
-          />
-        </div>
-
-        {/* English Highlight - Center (Inside overflow-hidden container) - Hidden on Mobile */}
-        <motion.div 
-          className="hidden md:block pointer-events-none" 
+          className="absolute pointer-events-none" 
           style={{ 
             position: 'absolute',
-            top: '53%',
-            left: '80%',
+            top: '50%',
+            left: '70%',
             transform: 'translate(-50%, -50%)',
-            zIndex: 20,
-            bottom: 'auto',
-            right: 'auto'
+            zIndex: 12
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <motion.div
-            className="w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] md:w-[700px] md:h-[700px]"
+            className="w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[750px] md:h-[750px]"
             animate={{ 
               y: [0, 5, 0],
             }}
@@ -405,9 +259,9 @@ const HeroSection = () => {
             }}
           >
             <img 
-              src="/images/eng-highlight.png" 
+              src="/images/maths-highlite.png" 
               alt="Maths highlight" 
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain opacity-100"
             />
           </motion.div>
         </motion.div>

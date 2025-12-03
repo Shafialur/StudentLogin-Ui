@@ -15,12 +15,16 @@ const QuizCard = () => {
       </div>
       
       <div className="flex-1 flex flex-col">
-        {/* Description Section */}
-        <div className="mb-3 sm:mb-4 md:mb-5">
+        {/* Description Section with Image */}
+        <div className="mb-3 sm:mb-4 md:mb-5 flex items-center justify-between">
           <p className="font-normal text-gray-900 text-sm sm:text-base md:text-lg leading-relaxed">
-            Test Your Knowledge<br />
-            5 Questions
+            Number Quiz Time
           </p>
+          <img 
+            src="/images/math-quiz.png" 
+            alt="Quiz brain" 
+            className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain flex-shrink-0"
+          />
         </div>
         
         {/* Start Quiz Button - Light Blue to Darker Blue Gradient - At Bottom */}

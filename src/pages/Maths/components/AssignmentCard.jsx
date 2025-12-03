@@ -111,13 +111,16 @@ const AssignmentCard = () => {
       </div>
       
       <div className="flex-1 flex flex-col">
-        {/* Instructions Text */}
-        <div className="mb-3 sm:mb-4 md:mb-5">
+        {/* Instructions Text with Image */}
+        <div className="mb-3 sm:mb-4 md:mb-5 flex items-center justify-between">
           <p className="font-normal text-gray-900 text-sm sm:text-base md:text-lg leading-relaxed">
-            Practice what we<br />
-            learned Last Class and<br />
-            Upload homework
+            Weekly Math Challenge
           </p>
+          <img 
+            src="/images/math-assignment.png" 
+            alt="Assignment document" 
+            className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain flex-shrink-0"
+          />
         </div>
         
         {/* Upload Button - Yellow to Green to Blue Gradient - At Bottom */}

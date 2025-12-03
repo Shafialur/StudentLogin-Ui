@@ -82,7 +82,7 @@ const TeacherNoteCard = () => {
             style={{ filter: 'drop-shadow(0 0 15px rgba(251, 191, 36, 0.7))' }}
           >
             <img 
-              src="/images/eng-teacher.png" 
+              src="/images/math-teacher.png" 
               alt="Ms. Sarah" 
               className="w-full h-full object-cover"
             />
