@@ -26,7 +26,7 @@ const EnglishPage = () => {
   }
 
   return (
-    <div className="w-full h-screen overflow-y-auto overflow-x-hidden" style={{ margin: 0, padding: 0, width: '100%', maxWidth: '100%' }}>
+    <div className="w-full h-screen overflow-y-auto overflow-x-hidden" style={{ margin: 0, padding: 0, width: '100%', maxWidth: '100%', scrollSnapType: 'y proximity' }}>
       <div 
         className="h-screen overflow-y-auto md:overflow-y-auto overflow-x-hidden relative"
         style={{

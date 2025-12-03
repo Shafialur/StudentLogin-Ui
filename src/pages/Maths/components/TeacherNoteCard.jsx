@@ -8,7 +8,13 @@ const TeacherNoteCard = () => {
       style={{ 
         height: '100%', 
         width: '100%',
-        background: 'linear-gradient(90deg, #FFE5F1 0%, #E8F4F8 50%, #F0F8FF 100%)'
+        background: 'linear-gradient(135deg, rgba(250, 200, 230, 0.25) 0%, rgba(240, 200, 250, 0.2) 25%, rgba(220, 200, 255, 0.25) 50%, rgba(200, 220, 255, 0.3) 75%, rgba(180, 230, 255, 0.35) 100%)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        border: '1px solid rgba(255, 255, 255, 0.5)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.8)',
+        borderLeft: '1px solid rgba(255, 255, 255, 0.6)',
+        boxShadow: '0 20px 40px -8px rgba(0, 0, 0, 0.2), 0 12px 24px -6px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 0 30px rgba(250, 200, 230, 0.4), inset 0 0 60px rgba(200, 180, 255, 0.3), inset 0 -20px 40px rgba(180, 230, 255, 0.25)'
       }}
     >
       {/* Sparkle stars in top right corner */}

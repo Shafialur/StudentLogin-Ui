@@ -18,11 +18,14 @@ const BottomNavigation = () => {
           <button
             key={page.path}
             onClick={() => navigate(page.path)}
-            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+            className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-200 ease-in-out ${
               location.pathname === page.path
-                ? 'bg-blue-500 text-white shadow-md'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-blue-500 text-white shadow-md scale-105'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105'
             }`}
+            style={{
+              transform: location.pathname === page.path ? 'scale(1.05)' : 'scale(1)',
+            }}
           >
             {page.label}
           </button>

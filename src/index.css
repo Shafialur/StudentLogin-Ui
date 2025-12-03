@@ -7,6 +7,11 @@
     @apply box-border;
   }
   
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
   body {
     @apply m-0 p-0 font-sans antialiased;
     background: 
@@ -26,6 +31,8 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
   
   #root {
@@ -1244,6 +1251,134 @@
       margin-top: 20px !important;
     }
   }
-}
 
+  /* ============================================
+     UX ENHANCEMENTS - Smooth Scrolling & Performance
+     ============================================ */
+  
+  /* Custom Scrollbar Styling for Better UX */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 92, 246, 0.3) rgba(255, 255, 255, 0.1);
+  }
+  
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, 
+      rgba(139, 92, 246, 0.4) 0%, 
+      rgba(168, 85, 247, 0.5) 50%,
+      rgba(196, 181, 253, 0.4) 100%
+    );
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.3s ease;
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, 
+      rgba(139, 92, 246, 0.6) 0%, 
+      rgba(168, 85, 247, 0.7) 50%,
+      rgba(196, 181, 253, 0.6) 100%
+    );
+  }
+  
+  /* Smooth Scroll Performance Optimization */
+  .overflow-y-auto,
+  .overflow-x-hidden,
+  [style*="overflow-y-auto"],
+  [style*="overflow-x-hidden"] {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    will-change: scroll-position;
+  }
+  
+  /* Optimize Animation Performance */
+  [class*="motion-"],
+  [class*="animate-"],
+  .hero-section-container,
+  .hero-scale-wrapper,
+  .hero-scale-container {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  /* Focus States for Accessibility */
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible {
+    outline: 2px solid rgba(139, 92, 246, 0.8);
+    outline-offset: 2px;
+    border-radius: 4px;
+    transition: outline-offset 0.2s ease;
+  }
+  
+  button:focus-visible:active,
+  a:focus-visible:active,
+  [role="button"]:focus-visible:active {
+    outline-offset: 1px;
+  }
+  
+  /* Reduce Motion for Users Who Prefer It */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* Touch Device Optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    button,
+    a,
+    [role="button"] {
+      -webkit-tap-highlight-color: rgba(139, 92, 246, 0.2);
+      touch-action: manipulation;
+    }
+  }
+  
+  /* Smooth Page Transitions */
+  .ui-responsive-container {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  /* Prevent Layout Shift on Image Load */
+  img {
+    content-visibility: auto;
+  }
+  
+  /* Optimize Card Hover States */
+  .card-shadow,
+  [class*="card"] {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Smooth Background Attachment for Better Performance */
+  @media (prefers-reduced-motion: no-preference) {
+    body {
+      background-attachment: fixed;
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      background-attachment: scroll;
+    }
+  }
+}
 
