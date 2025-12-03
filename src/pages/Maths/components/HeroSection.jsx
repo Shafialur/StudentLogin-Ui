@@ -154,6 +154,39 @@ const HeroSection = () => {
               </div>
             </motion.div>
           </div>
+          
+          {/* Maths Highlight - Mobile Only - Positioned Lower */}
+          <motion.div 
+            className="md:hidden absolute pointer-events-none" 
+            style={{ 
+              position: 'absolute',
+              top: '75%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 12
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.div
+              className="w-[350px] h-[350px] sm:w-[400px] sm:h-[400px]"
+              animate={{ 
+                y: [0, 5, 0],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <img 
+                src="/images/maths-highlite.png" 
+                alt="Maths highlight" 
+                className="w-full h-full object-contain opacity-100"
+              />
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Tablet and Desktop View - Container-based blur rectangle */}
@@ -233,9 +266,9 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Maths Highlight - Center of Hero Section - In Front of Rectangle */}
+        {/* Maths Highlight - Desktop Only - In Front of Rectangle */}
         <motion.div 
-          className="absolute pointer-events-none" 
+          className="hidden md:block absolute pointer-events-none" 
           style={{ 
             position: 'absolute',
             top: '50%',
