@@ -80,133 +80,91 @@ const HeroSection = () => {
   return (
     <div className="relative w-full overflow-x-hidden m-0 p-0">
       {/* Hero Section Background with Gradient */}
-      <div className="relative w-full min-h-80 sm:min-h-96 md:h-[38vh] bg-english-gradient overflow-hidden rounded-b-hero-bottom-mobile md:rounded-b-hero-bottom-desktop md:min-h-80 md:max-h-96">
+      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[36vh] bg-english-gradient overflow-hidden rounded-b-hero-bottom-mobile md:rounded-b-hero-bottom-desktop md:min-h-[320px] md:max-h-[340px]">
 
-        {/* Mobile View - Unchanged */}
-        <div className="relative h-full min-h-80 sm:min-h-96 md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-start py-2 sm:py-3 scale-85 sm:scale-90 px-2 overflow-hidden" style={{ zIndex: 10 }}>
+        {/* Mobile View - Responsive */}
+        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-center py-3 sm:py-4 px-3 sm:px-4" style={{ zIndex: 10 }}>
           {/* Single Blur Rectangle for All Content - Mobile Only */}
-          <div className="hero-unified-blur-background-mobile"></div>
+          <div className="absolute top-1/2 left-3 right-3 -translate-y-1/2 h-[280px] sm:h-[320px] max-h-[340px] w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] bg-blur-glass backdrop-blur-sm backdrop-saturate-100 rounded-3xl border border-white/15 z-[1] pointer-events-none overflow-visible"></div>
           
-          
-          {/* Mobile Content */}
-          <div className="relative w-full flex flex-col items-center gap-2 sm:gap-3 px-2 pt-4" style={{ zIndex: 15 }}>
+          {/* Mobile Content - Optimized Layout */}
+          <div className="relative w-full flex flex-col items-center justify-between h-full py-3 sm:py-4 px-2 sm:px-3 overflow-hidden" style={{ zIndex: 15, minHeight: '280px', maxHeight: '100%' }}>
             
-            {/* Left Side - Text Content - At Top */}
+            {/* Top Section - Text Content */}
             <motion.div 
-              className="flex-1 pl-0 w-full md:w-auto md:!-ml-8 flex flex-col items-center md:items-start relative"
-              style={{ zIndex: 25 }}
+              className="w-full flex flex-col items-center text-center flex-shrink-0 min-w-0"
               variants={textVariants}
               initial="hidden"
               animate="visible"
+              style={{ maxWidth: '100%', maxHeight: '100%', overflow: 'hidden' }}
             >
-              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-2 sm:mb-3 md:mb-6 leading-tight text-white text-center md:text-left px-4 md:px-0 font-sans font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] [text-shadow:0_0_2px_rgba(255,127,80,0.6),0_0_4px_rgba(255,140,105,0.5),0_2px_6px_rgba(255,99,71,0.4),0_4px_8px_rgba(255,182,193,0.3)] [-webkit-text-stroke:1px_rgba(255,127,80,0.6)] tracking-tight">
-                Hi, Math Magician! <br className="hidden md:block" />
-               Ready for Number <br className="hidden md:block" />
-               Magic - fun & sums ?
+              <h1 className="text-xl sm:text-2xl font-black mb-1.5 sm:mb-2 leading-tight text-white font-rounded tracking-tight px-1 w-full" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900, wordWrap: 'break-word', overflowWrap: 'break-word', lineHeight: '1.1', fontSize: 'clamp(1.5rem, 4vw + 0.75rem, 2.25rem)' }}>
+                Hi, Math Magician!<br />
+                Ready for Number<br />
+                Magic - fun & sums ?
               </h1>
               
               {/* Countdown Timer */}
               <motion.div
-                className="w-full flex justify-center md:justify-start"
+                className="w-full flex justify-center mt-1 sm:mt-1.5"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
+                style={{ maxWidth: '100%', overflow: 'hidden' }}
               >
-                <div className="flex items-center w-fit sm:scale-90 md:scale-100">
+                <div className="flex items-center flex-wrap justify-center gap-1.5 sm:gap-2 max-w-full" style={{ fontSize: 'clamp(0.75rem, 2vw + 0.25rem, 0.875rem)' }}>
                   {/* Om Symbol */}
                   <motion.img 
-                    src="/images/eng-clock.png" 
-                    alt="Maths clock" 
-                    className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain flex-shrink-0 opacity-80"
+                    src="/images/om-symbol.png" 
+                    alt="Om symbol" 
+                    className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0"
                     animate={{ rotate: [0, 5, -5, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    style={{ maxWidth: '100%', height: 'auto', width: 'clamp(2rem, 4vw + 0.5rem, 2.5rem)' }}
                   />
                   
                   {/* Live In Text */}
-                  <span className="text-base sm:text-lg md:text-xl font-bold text-white ml-2 sm:ml-3 md:ml-4" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
+                  <span className="font-extrabold text-white flex-shrink-0" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
                   
                   {/* Time Boxes with Spacing */}
-                  <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 ml-2 sm:ml-3 md:ml-4 sm:flex-wrap">
-                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                  <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.hours)}
                     </span>
-                    <span className="text-white text-lg sm:text-xl md:text-2xl font-bold">:</span>
-                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                    <span className="text-white font-extrabold">:</span>
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.minutes)}
                     </span>
-                    <span className="text-white text-lg sm:text-xl md:text-2xl font-bold">:</span>
-                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                    <span className="text-white font-extrabold">:</span>
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.seconds)}
                     </span>
                   </div>
                 </div>
               </motion.div>
             </motion.div>
-            {/* Right Side - Chariot */}
-            <motion.div 
-              className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto md:!mr-[-60px] -mt-2 md:mt-0" 
-              style={{ zIndex: 20 }}
-              variants={chariotVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <div className="flex flex-col items-center justify-center relative translate-y-0 md:!-translate-y-[30px]">
-              </div>
-            </motion.div>
+
           </div>
-          
-          {/* Maths Highlight - Mobile Only - Positioned Lower */}
-          <motion.div 
-            className="md:hidden absolute pointer-events-none" 
-            style={{ 
-              position: 'absolute',
-              top: '75%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              zIndex: 12
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <motion.div
-              className="w-96 sm:w-96 h-96 sm:h-96"
-              animate={{ 
-                y: [0, 5, 0],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <img 
-                src="/images/maths-highlite.png" 
-                alt="Maths highlight" 
-                className="w-full h-full object-contain opacity-100"
-              />
-            </motion.div>
-          </motion.div>
         </div>
 
         {/* Tablet and Desktop View - Container-based blur rectangle */}
-        <div className="relative h-full min-h-0 hidden md:block w-full py-6 md:py-8" style={{ zIndex: 10 }}>
+        <div className="relative h-full min-h-0 hidden md:block w-full py-6 md:py-4" style={{ zIndex: 10 }}>
           {/* Container wrapper with fixed padding that never changes - Full width */}
-          <div className="w-full h-full flex items-center justify-center px-16 md:px-16">
+          <div className="w-full h-full flex items-center justify-center" style={{ paddingLeft: '60px', paddingRight: '60px' }}>
             {/* Blur Rectangle - Relative, no absolute positioning */}
-            <div className="hero-unified-blur-background-tablet-desktop relative w-full flex items-center justify-center h-72 max-h-72 min-h-72 md:h-80 md:max-h-80 md:min-h-80">
+            <div className="relative w-full flex items-center justify-center h-64 max-h-64 min-h-64 md:h-64 md:max-h-64 md:min-h-64 bg-blur-glass backdrop-blur-sm backdrop-saturate-100 rounded-3xl border border-white/15 overflow-visible">
               {/* Content inside blur rectangle with internal padding */}
-              <div className="w-full flex flex-col md:flex-row items-center gap-4 md:gap-8 lg:gap-12 px-6 md:px-8">
-                
+              <div className="w-full flex flex-col md:flex-row items-center gap-3 md:gap-6 lg:gap-8 px-4 md:px-6 h-full overflow-visible">
                 
                 {/* Left Side - Text Content */}
                 <motion.div 
-                  className="flex-1 w-full md:w-auto flex flex-col items-center md:items-start ml-20 md:ml-24 lg:ml-28"
+                  className="flex-1 w-full md:w-auto flex flex-col items-center md:items-start justify-center ml-16 md:ml-20 lg:ml-24 shrink min-w-0"
                   variants={textVariants}
                   initial="hidden"
                   animate="visible"
+                  style={{ maxWidth: '100%', maxHeight: '100%', overflow: 'hidden' }}
                 >
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white text-center md:text-left font-sans font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] [text-shadow:0_0_2px_rgba(255,127,80,0.6),0_0_4px_rgba(255,140,105,0.5),0_2px_6px_rgba(255,99,71,0.4),0_4px_8px_rgba(255,182,193,0.3)] [-webkit-text-stroke:1px_rgba(255,127,80,0.6)] tracking-tight">
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black mb-2 md:mb-3 lg:mb-4 leading-tight text-white text-center md:text-left font-rounded tracking-tight w-full" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900, wordWrap: 'break-word', overflowWrap: 'break-word', lineHeight: '1.1', fontSize: 'clamp(1.75rem, 2vw + 1rem, 4rem)' }}>
                     Hi, Math Magician! <br className="hidden md:block" />
                    Ready for Number <br className="hidden md:block" />
                    Magic - fun & sums ?
@@ -214,35 +172,37 @@ const HeroSection = () => {
                   
                   {/* Countdown Timer */}
                   <motion.div
-                    className="w-full flex justify-center md:justify-start"
+                    className="w-full flex justify-center md:justify-start flex-shrink-0"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.6 }}
+                    style={{ maxWidth: '100%', overflow: 'hidden' }}
                   >
-                    <div className="flex items-center w-fit">
+                    <div className="flex items-center w-fit flex-wrap max-w-full" style={{ fontSize: 'clamp(0.875rem, 1.5vw + 0.25rem, 1.5rem)' }}>
                       {/* Om Symbol */}
                       <motion.img 
-                        src="/images/eng-clock.png" 
-                        alt="Maths clock" 
-                        className="w-14 md:w-16 object-contain flex-shrink-0 opacity-80"
+                        src="/images/om-symbol.png" 
+                        alt="Om symbol" 
+                        className="w-12 md:w-14 lg:w-16 object-contain flex-shrink-0"
                         animate={{ rotate: [0, 5, -5, 0] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        style={{ maxWidth: '100%', height: 'auto', width: 'clamp(3rem, 3vw + 0.75rem, 4rem)' }}
                       />
                       
                       {/* Live In Text */}
-                      <span className="text-lg md:text-xl font-bold text-white ml-3 md:ml-4" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
+                      <span className="font-extrabold text-white ml-2 md:ml-3 lg:ml-4 flex-shrink-0" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
                       
                       {/* Time Boxes with Spacing */}
-                      <div className="flex items-center gap-2.5 md:gap-3 ml-3 md:ml-4">
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                      <div className="flex items-center gap-2 md:gap-2.5 lg:gap-3 ml-2 md:ml-3 lg:ml-4 flex-shrink-0">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 font-extrabold font-mono text-white min-w-10 md:min-w-12 lg:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.hours)}
                         </span>
-                        <span className="text-white text-xl md:text-2xl font-bold">:</span>
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                        <span className="text-white font-extrabold">:</span>
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 font-extrabold font-mono text-white min-w-10 md:min-w-12 lg:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.minutes)}
                         </span>
-                        <span className="text-white text-xl md:text-2xl font-bold">:</span>
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                        <span className="text-white font-extrabold">:</span>
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 font-extrabold font-mono text-white min-w-10 md:min-w-12 lg:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.seconds)}
                         </span>
                       </div>
@@ -250,58 +210,14 @@ const HeroSection = () => {
                   </motion.div>
                 </motion.div>
 
-                {/* Right Side - Chariot */}
-                <motion.div 
-                  className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto mr-28 md:mr-32 lg:mr-36" 
-                  style={{ zIndex: 20 }}
-                  variants={chariotVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <div className="flex flex-col items-center justify-center relative md:-translate-y-[30px]">
-                  </div>
-                </motion.div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Maths Highlight - Desktop Only - In Front of Rectangle */}
-        <motion.div 
-          className="hidden md:block absolute pointer-events-none" 
-          style={{ 
-            position: 'absolute',
-            top: '50%',
-            left: '70%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 12
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <motion.div
-            className="w-[450px] h-[450px] sm:w-[550px] sm:h-[550px] md:w-[750px] md:h-[750px]"
-            animate={{ 
-              y: [0, 5, 0],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <img 
-              src="/images/maths-highlite.png" 
-              alt="Maths highlight" 
-              className="w-full h-full object-contain opacity-100"
-            />
-          </motion.div>
-        </motion.div>
-
         {/* Join Now Button - Right Side of Hero Section - Smaller on Mobile */}
-        <motion.div 
-          className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 md:bottom-8 md:right-8 scale-[0.45] sm:scale-60 md:scale-100" 
+          <motion.div
+          className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 md:bottom-8 md:right-8" 
           style={{ zIndex: 50 }}
           variants={buttonVariants}
           initial="hidden"
@@ -309,9 +225,9 @@ const HeroSection = () => {
           whileHover="hover"
           whileTap={{ scale: 0.95 }}
         >
-          <button className="bg-join-button border-4 border-yogi-yellow rounded-2xl px-10 py-4 md:px-10 md:py-4 flex items-center gap-2 md:gap-3 shadow-join-button hover:shadow-join-button-hover hover:-translate-y-0.5 transition-all duration-200 relative z-50 cursor-pointer text-xs sm:text-sm md:text-lg text-white font-bold">
+          <button className="bg-join-button border-2 sm:border-3 md:border-4 border-yogi-yellow rounded-xl sm:rounded-2xl px-4 py-2 sm:px-6 sm:py-3 md:px-10 md:py-4 flex items-center gap-1 sm:gap-2 md:gap-3 shadow-join-button hover:shadow-join-button-hover hover:-translate-y-0.5 transition-all duration-200 relative z-50 cursor-pointer text-[10px] sm:text-xs md:text-lg text-white font-extrabold">
             <motion.svg 
-              className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 text-yellow-300" 
+              className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-6 md:h-6 text-yellow-300" 
               fill="currentColor" 
               viewBox="0 0 20 20"
               animate={{ rotate: [0, 10, -10, 0] }}
@@ -319,7 +235,7 @@ const HeroSection = () => {
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </motion.svg>
-            <span className="text-white font-bold text-xs sm:text-sm md:text-xl ml-0.5 sm:ml-1 md:ml-2">Join Now</span>
+            <span className="text-white font-extrabold text-[10px] sm:text-xs md:text-xl">Join Now</span>
           </button>
         </motion.div>
       </div>

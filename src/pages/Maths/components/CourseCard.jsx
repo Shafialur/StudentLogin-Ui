@@ -3,7 +3,7 @@ import React from 'react'
 const CourseCard = () => {
   return (
     <div 
-      className="w-full h-full" 
+      className="w-full h-full bg-white rounded-2xl border-2 border-gray-300 p-2" 
       style={{ 
         textAlign: 'left', 
         display: 'block',
@@ -14,8 +14,8 @@ const CourseCard = () => {
       <img 
         src="/images/maths-coursecard.png" 
         alt="Maths course card" 
-        className="course-card-image"
-        style={{ width: '100%', height: '100%', objectFit: 'cover', maxWidth: '100%' }}
+        className="course-card-image w-full h-full rounded-xl"
+        style={{ objectFit: 'cover', maxWidth: '100%' }}
       />
     </div>
   )

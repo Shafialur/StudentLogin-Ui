@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import HeroSection from './components/HeroSection'
 import CourseCard from './components/CourseCard'
@@ -10,68 +10,6 @@ import SystemCheckCard from './components/SystemCheckCard'
 import BottomNavigation from '../../components/BottomNavigation'
 
 const MathsPage = () => {
-  const scrollContainerRef = useRef(null)
-  
-  // Fix mobile browser address bar behavior
-  useEffect(() => {
-    const container = scrollContainerRef.current
-    if (!container) return
-    
-    // Set dynamic viewport height for mobile
-    const setViewportHeight = () => {
-      const vh = window.innerHeight * 0.01
-      document.documentElement.style.setProperty('--vh', `${vh}px`)
-    }
-    
-    setViewportHeight()
-    
-    // Update on resize and orientation change
-    const handleResize = () => {
-      setViewportHeight()
-      // Re-trigger scroll after resize
-      if (window.innerWidth <= 768 && container) {
-        setTimeout(() => {
-          container.scrollTop = 1
-          setTimeout(() => {
-            container.scrollTop = 0
-          }, 100)
-        }, 100)
-      }
-    }
-    
-    window.addEventListener('resize', handleResize)
-    window.addEventListener('orientationchange', handleResize)
-    
-    // Trigger browser address bar hiding on mount
-    const triggerScroll = () => {
-      if (window.innerWidth <= 768 && container) {
-        // Force a scroll to trigger address bar hiding
-        // Scroll down slightly, then back up
-        requestAnimationFrame(() => {
-          container.scrollTop = 2
-          requestAnimationFrame(() => {
-            container.scrollTop = 0
-            // One more trigger after a brief delay
-            setTimeout(() => {
-              container.scrollTop = 1
-              setTimeout(() => {
-                container.scrollTop = 0
-              }, 50)
-            }, 200)
-          })
-        })
-      }
-    }
-    
-    // Delay to ensure DOM is ready
-    setTimeout(triggerScroll, 150)
-    
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      window.removeEventListener('orientationchange', handleResize)
-    }
-  }, [])
-  
   // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -89,53 +27,101 @@ const MathsPage = () => {
 
   return (
     <div 
-      ref={scrollContainerRef}
-      className="m-0 p-0 w-full max-w-full overflow-y-auto md:overflow-y-auto overflow-x-hidden relative mobile-content-fix bg-page-overlay bg-cover bg-center bg-no-repeat bg-fixed flex justify-center items-start scroll-smooth"
-      style={{ backgroundImage: 'url(/images/backgorund.png)', scrollSnapType: 'y proximity' }}
+      className="w-full min-h-screen sm:h-screen overflow-y-auto overflow-x-hidden relative bg-cover bg-center bg-no-repeat bg-fixed"
+      style={{ backgroundImage: 'url(/images/backgorund.png)' }}
     >
-      {/* Responsive Container - Makes UI appear exactly the same on all laptop screens */}
+      {/* Responsive Container */}
       <div 
-        className="ui-responsive-container sm:min-h-screen md:min-h-screen w-full max-w-full m-0 md:flex md:flex-col md:pb-5 relative pb-0.5"
+        className="w-full min-h-screen sm:h-full flex flex-col relative"
       >
         {/* Hero Section */}
-        <HeroSection />
+        <div className="flex-shrink-0">
+          <HeroSection />
+        </div>
 
-        {/* Dashboard Cards Section - Fixed gaps that never change */}
-      <div className="max-w-full mx-auto px-0 sm:px-0 md:px-[60px] scale-100 sm:scale-100 md:scale-100 md:flex-1 md:flex md:flex-col relative z-10 md:mt-5 md:mb-5 pt-0 pb-0">
-        {/* Mobile: Custom 2-column layout | Desktop: Grid Layout */}
-        <div className="flex flex-col md:grid md:pt-2.5 pl-0 pt-0 pr-0 md:w-full md:h-full gap-0 sm:gap-0 md:gap-4 items-stretch" 
-          style={{ 
-            gridTemplateColumns: 'repeat(10, 1fr)', 
-            gridTemplateRows: '1fr 1fr'
-          }}>
-          {/* Mobile: Course Card - Full width */}
-          <motion.div 
-            className="dashboard-grid-item-1 w-full md:w-auto"
-            variants={cardVariants}
-            initial="hidden"
-            animate="visible"
-            custom={0}
-            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-          >
-            <CourseCard />
-          </motion.div>
-
-          {/* Mobile: Progress Card - Full width */}
-          <motion.div 
-            className="dashboard-grid-item-2 w-full md:w-auto"
-            variants={cardVariants}
-            initial="hidden"
-            animate="visible"
-            custom={1}
-            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-          >
-            <ProgressCard />
-          </motion.div>
-
-          {/* Mobile: Teacher Note and Assignment Cards - 2 per row */}
-          <div className="flex flex-row gap-0 md:hidden">
+        {/* Dashboard Cards Section */}
+        <div className="w-full mx-auto px-3 sm:px-4 md:px-8 flex-1 md:flex md:flex-col relative z-10 min-h-0 md:mt-4 md:mb-4 pb-4 sm:pb-6 pt-3 sm:pt-4">
+          {/* Mobile: Custom layout | Desktop: Grid Layout */}
+          <div className="flex flex-col md:grid md:w-full md:h-full gap-3 sm:gap-4 md:gap-4 items-stretch" 
+            style={{ 
+              gridTemplateColumns: 'repeat(10, 1fr)', 
+              gridTemplateRows: '1fr 1fr'
+            }}>
+            {/* Mobile: Course Card - Full width */}
             <motion.div 
-              className="dashboard-grid-item-3 flex-1"
+              className="dashboard-grid-item-1 w-full md:w-auto"
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              custom={0}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            >
+              <CourseCard />
+            </motion.div>
+
+            {/* Mobile: Progress Card - Full width */}
+            <motion.div 
+              className="dashboard-grid-item-2 w-full md:w-auto"
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              custom={1}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            >
+              <ProgressCard />
+            </motion.div>
+
+            {/* Mobile: Teacher Note Card - Full width */}
+            <motion.div 
+              className="dashboard-grid-item-3 w-full md:w-auto md:hidden"
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              custom={2}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            >
+              <TeacherNoteCard />
+            </motion.div>
+
+            {/* Mobile: Assignment Card - Full width */}
+            <motion.div 
+              className="dashboard-grid-item-4 w-full md:w-auto md:hidden"
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              custom={3}
+              whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+            >
+              <AssignmentCard />
+            </motion.div>
+
+            {/* Mobile: Quiz and System Check Cards - 2 per row */}
+            <div className="flex flex-row gap-3 sm:gap-4 md:hidden">
+              <motion.div 
+                className="dashboard-grid-item-5 flex-1 min-w-0"
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                custom={4}
+                whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+              >
+                <QuizCard />
+              </motion.div>
+              <motion.div 
+                className="dashboard-grid-item-6 flex-1 min-w-0"
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                custom={5}
+                whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+              >
+                <SystemCheckCard />
+              </motion.div>
+            </div>
+
+            {/* Desktop: Original grid layout */}
+            <motion.div 
+              className="dashboard-grid-item-3 hidden md:block md:h-full"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -145,7 +131,7 @@ const MathsPage = () => {
               <TeacherNoteCard />
             </motion.div>
             <motion.div 
-              className="dashboard-grid-item-4 flex-1"
+              className="dashboard-grid-item-4 hidden md:block md:h-full"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -154,12 +140,8 @@ const MathsPage = () => {
             >
               <AssignmentCard />
             </motion.div>
-          </div>
-
-          {/* Mobile: Quiz and System Check Cards - 2 per row */}
-          <div className="flex flex-row gap-0 md:hidden">
             <motion.div 
-              className="dashboard-grid-item-5 flex-1"
+              className="dashboard-grid-item-5 hidden md:block md:h-full"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -169,7 +151,7 @@ const MathsPage = () => {
               <QuizCard />
             </motion.div>
             <motion.div 
-              className="dashboard-grid-item-6 flex-1"
+              className="dashboard-grid-item-6 hidden md:block md:h-full"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -179,50 +161,7 @@ const MathsPage = () => {
               <SystemCheckCard />
             </motion.div>
           </div>
-
-          {/* Desktop: Original grid layout */}
-          <motion.div 
-            className="dashboard-grid-item-3 hidden md:block md:h-full"
-            variants={cardVariants}
-            initial="hidden"
-            animate="visible"
-            custom={2}
-            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-          >
-            <TeacherNoteCard />
-          </motion.div>
-          <motion.div 
-            className="dashboard-grid-item-4 hidden md:block md:h-full"
-            variants={cardVariants}
-            initial="hidden"
-            animate="visible"
-            custom={3}
-            whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
-          >
-            <AssignmentCard />
-          </motion.div>
-          <motion.div 
-            className="dashboard-grid-item-5 hidden md:block md:h-full"
-            variants={cardVariants}
-            initial="hidden"
-            animate="visible"
-            custom={4}
-            whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
-          >
-            <QuizCard />
-          </motion.div>
-          <motion.div 
-            className="dashboard-grid-item-6 hidden md:block md:h-full"
-            variants={cardVariants}
-            initial="hidden"
-            animate="visible"
-            custom={5}
-            whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
-          >
-            <SystemCheckCard />
-          </motion.div>
         </div>
-      </div>
       </div>
       <BottomNavigation />
     </div>

@@ -17,7 +17,7 @@ export default {
         'yogi-yellow': '#FBBF24',
       },
       backgroundImage: {
-        'gita-gradient': 'linear-gradient(90deg, #6BB6FF 0%, #7FC8E8 10%, #87CEEB 20%, #B0E0E6 30%, #FFE4B5 45%, #FFDAB9 55%, #FFA07A 70%, #FFB6C1 85%, #DDA0DD 95%, #EE82EE 100%)',
+        'gita-gradient': 'linear-gradient(90deg, #60A4E6 0%, #72B4D1 10%, #7AB9D4 20%, #9ECACF 30%, #E6CDA3 45%, #E6C4A7 55%, #E6906E 70%, #E6A4AE 85%, #C790C7 95%, #D675D6 100%)',
         'english-gradient': 'linear-gradient(90deg, #5B7FA0 0%, #6B8FB0 10%, #7B9FC0 20%, #8BAFD0 30%, #C9A584 45%, #D9B594 55%, #E9C5A4 70%, #D9A5A5 85%, #C995B5 95%, #B985C5 100%)',
         'page-overlay': 'linear-gradient(135deg, rgba(135, 206, 235, 0.2) 0%, rgba(176, 224, 230, 0.18) 20%, rgba(255, 228, 181, 0.15) 50%, rgba(255, 182, 193, 0.18) 80%, rgba(221, 160, 221, 0.15) 100%)',
         'blur-glass': 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0.08) 100%)',

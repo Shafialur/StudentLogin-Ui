@@ -14,62 +14,85 @@ const ProgressCard = () => {
   }, [progress])
   
   return (
-    <div className="bg-progress-card backdrop-blur-lg md:backdrop-blur-xl backdrop-saturate-[180%] border border-white/60 border-t-white/90 border-l-white/70 rounded-2xl p-3 sm:p-4 md:p-6 shadow-card relative h-full w-full">
-      <h3 className="text-base sm:text-lg md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">Your Progress</h3>
+    <div className="bg-progress-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 h-full w-full">
+      <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 md:mb-1.5">Your Progress</h3>
       
-      <div className="space-y-4 sm:space-y-5 md:space-y-7">
-        {/* Progress Bar - Similar to Gita */}
-        <div className="relative h-8 sm:h-9 md:h-10 rounded-full overflow-visible mt-6 sm:mt-8 md:mt-10" style={{ 
+      <div className="space-y-3 sm:space-y-4 md:space-y-2">
+        {/* Progress Bar - Glass background */}
+        <div className="relative h-7 sm:h-8 md:h-7 rounded-full overflow-visible mt-4 sm:mt-6 md:mt-3" style={{ 
           borderRadius: '9999px',
-          background: '#E5E5E5',
-          position: 'relative'
+          background: 'rgba(255, 255, 255, 0.4)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255, 255, 255, 0.5)',
+          boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 -2px 8px rgba(255, 255, 255, 0.3)'
         }}>
-          {/* Progress fill - Rainbow gradient */}
+          {/* Progress fill - Orange with rounded caps */}
           <motion.div 
-            className="absolute left-0 top-0 h-full" 
+            className="absolute left-0 top-0 h-full bg-progress-bar backdrop-blur-sm" 
             initial={{ width: 0 }}
             animate={{ width: `${animatedProgress}%` }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             style={{ 
               borderRadius: '9999px',
-              background: 'linear-gradient(90deg, #FF0000 0%, #FF8C00 15%, #FFD700 30%, #32CD32 50%, #1E90FF 70%, #9370DB 100%)',
               borderTopRightRadius: animatedProgress < 100 ? '0' : '9999px',
               borderBottomRightRadius: animatedProgress < 100 ? '0' : '9999px'
             }}
           >
           </motion.div>
           
-          {/* Rocket at the end of progress - positioned like chariot */}
+          {/* Star at the end of progress - behind chariot */}
           <motion.div 
-            className="absolute z-20 pointer-events-none" 
+            className="absolute z-10" 
+            initial={{ left: 'calc(0% - 20px)' }}
+            animate={{ left: `calc(${animatedProgress}% - 20px)` }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            style={{ 
+              top: '50%',
+              transform: 'translateY(-50%)'
+            }}
+          >
+            <motion.svg 
+              className="w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6 text-yellow-400" 
+              fill="currentColor" 
+              viewBox="0 0 20 20" 
+              style={{ filter: 'drop-shadow(0 0 12px rgba(251, 191, 36, 0.9))' }}
+              animate={{ 
+                rotate: [0, 180, 360],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </motion.svg>
+          </motion.div>
+          
+          {/* Chariot at the end of progress - in front of star */}
+          <motion.div 
+            className="absolute z-20" 
             initial={{ left: 'calc(0% - 10px)' }}
             animate={{ left: `calc(${animatedProgress}% - 10px)` }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             style={{ 
               top: '50%',
-              transform: 'translateY(-70%)',
-              width: 'auto',
-              height: 'auto'
+              transform: 'translateY(-70%)'
             }}
           >
             <img 
-              src="/images/rocket.png" 
-              alt="Rocket" 
-              className="object-contain w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20"
+              src="/images/progresschariot.png" 
+              alt="Progress chariot" 
+              className="object-contain w-12 h-12 sm:w-16 sm:h-16 md:w-16 md:h-16 lg:w-18 lg:h-18"
               style={{ 
-                filter: 'drop-shadow(0 0 15px rgba(255, 140, 0, 0.6))',
-                display: 'block',
-                maxWidth: '100%',
-                height: 'auto'
-              }}
-              onError={(e) => {
-                console.error('Rocket image failed to load:', e);
-                e.target.style.display = 'none';
+                filter: 'drop-shadow(0 0 15px rgba(255, 140, 0, 0.6))' 
               }}
             />
           </motion.div>
           
-          {/* Treasure Chest at end (100%) - positioned like temple */}
+          {/* Temple at end (100%) */}
           <div 
             className="absolute right-0 z-20" 
             style={{ 
@@ -78,9 +101,9 @@ const ProgressCard = () => {
             }}
           >
             <img 
-              src="/images/math-tressure.png" 
-              alt="Treasure chest" 
-              className="object-contain w-14 h-14 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-32 lg:h-32"
+              src="/images/progressendtemple.png" 
+              alt="Temple" 
+              className="object-contain w-10 h-10 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16"
               style={{ 
                 filter: 'drop-shadow(0 0 12px rgba(139, 69, 19, 0.5))' 
               }}
@@ -88,13 +111,10 @@ const ProgressCard = () => {
           </div>
         </div>
         
-        {/* Progress Text */}
-        <div className="flex flex-col gap-1 sm:gap-2">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">Math Adventure :</span>
-            <span className="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">24/96</span>
-          </div>
-          <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">Classes Completed</span>
+        {/* Progress Text - Full Width */}
+        <div className="flex items-center justify-between w-full flex-wrap gap-1">
+          <span className="text-[10px] sm:text-xs md:text-sm font-extrabold text-gray-900">Dharma Path : </span>
+          <span className="text-[10px] sm:text-xs md:text-sm font-extrabold text-blue-600">24/96 Classes Completed</span>
         </div>
       </div>
     </div>
