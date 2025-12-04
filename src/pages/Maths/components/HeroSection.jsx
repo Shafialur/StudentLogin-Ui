@@ -89,7 +89,7 @@ const HeroSection = () => {
           
           {/* Mobile Content - Optimized Layout */}
           <div className="relative w-full flex flex-col items-center justify-between h-full py-3 sm:py-4 px-2 sm:px-3 overflow-hidden" style={{ zIndex: 15, minHeight: '280px', maxHeight: '100%' }}>
-            
+          
             {/* Top Section - Text Content */}
             <motion.div 
               className="w-full flex flex-col items-center text-center flex-shrink-0 min-w-0"
@@ -101,7 +101,7 @@ const HeroSection = () => {
               <h1 className="text-xl sm:text-2xl font-black mb-1.5 sm:mb-2 leading-tight text-white font-rounded tracking-tight px-1 w-full" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900, wordWrap: 'break-word', overflowWrap: 'break-word', lineHeight: '1.1', fontSize: 'clamp(1.5rem, 4vw + 0.75rem, 2.25rem)' }}>
                 Hi, Math Magician!<br />
                 Ready for Number<br />
-                Magic - fun & sums ?
+               Magic - fun & sums ?
               </h1>
               
               {/* Countdown Timer */}
@@ -216,7 +216,7 @@ const HeroSection = () => {
         </div>
 
         {/* Join Now Button - Right Side of Hero Section - Smaller on Mobile */}
-          <motion.div
+        <motion.div 
           className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 md:bottom-8 md:right-8" 
           style={{ zIndex: 50 }}
           variants={buttonVariants}

@@ -245,4 +245,43 @@
       zoom: 1 !important;
     }
   }
+  
+  /* Sun Glow Effect with Blur */
+  .sun-glow {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+      rgba(255, 255, 100, 1) 0%,
+      rgba(255, 240, 80, 0.95) 15%,
+      rgba(255, 220, 60, 0.9) 30%,
+      rgba(255, 200, 40, 0.7) 50%,
+      rgba(255, 180, 30, 0.5) 70%,
+      rgba(255, 160, 20, 0.3) 85%,
+      transparent 100%
+    );
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
+    box-shadow: 
+      0 0 35px rgba(255, 255, 100, 1),
+      0 0 50px rgba(255, 240, 80, 0.9),
+      0 0 70px rgba(255, 220, 60, 0.7),
+      0 0 90px rgba(255, 200, 40, 0.5),
+      inset 0 0 25px rgba(255, 255, 255, 0.5);
+  }
+  
+  @media (max-width: 768px) {
+    .sun-glow {
+      width: 60px;
+      height: 60px;
+      filter: blur(12px);
+      -webkit-filter: blur(12px);
+      box-shadow: 
+        0 0 25px rgba(255, 255, 100, 1),
+        0 0 40px rgba(255, 240, 80, 0.9),
+        0 0 55px rgba(255, 220, 60, 0.7),
+        0 0 70px rgba(255, 200, 40, 0.5),
+        inset 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+  }
 }

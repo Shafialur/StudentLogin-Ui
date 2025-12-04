@@ -309,8 +309,8 @@ const HeroSection = () => {
               <div className="flex flex-col items-center justify-center relative">
                 {/* Sun Behind Chariot */}
                 <motion.div 
-                  className="absolute block -top-[8%] md:top-[0%]" 
-                  style={{ zIndex: 16, left: '10%', transform: 'translate(-50%, -50%)' }}
+                  className="absolute block top-[15%] md:top-[20%]" 
+                  style={{ zIndex: 16, left: '50%', transform: 'translate(-50%, -50%)' }}
                   animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -457,7 +457,7 @@ const HeroSection = () => {
                     {/* Sun Behind Chariot */}
                     <motion.div 
                       className="absolute block" 
-                      style={{ zIndex: 16, top: '0%', left: '10%', transform: 'translate(-50%, -50%)' }}
+                      style={{ zIndex: 16, top: '30%', left: '50%', transform: 'translate(-50%, -50%)' }}
                       animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     >
