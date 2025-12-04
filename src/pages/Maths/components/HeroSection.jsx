@@ -78,18 +78,18 @@ const HeroSection = () => {
   }
 
   return (
-    <div className="relative w-full hero-section-container overflow-x-hidden -mx-0 md:-mx-0" style={{ marginLeft: 0, marginRight: 0, paddingLeft: 0, paddingRight: 0 }}>
+    <div className="relative w-full overflow-x-hidden m-0 p-0">
       {/* Hero Section Background with Gradient */}
-      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[38vh] hero-gradient-english overflow-hidden hero-bottom-rounded md:!min-h-[340px] md:!max-h-[360px]">
+      <div className="relative w-full min-h-80 sm:min-h-96 md:h-[38vh] bg-english-gradient overflow-hidden rounded-b-hero-bottom-mobile md:rounded-b-hero-bottom-desktop md:min-h-80 md:max-h-96">
 
         {/* Mobile View - Unchanged */}
-        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-start py-2 sm:py-3 scale-85 sm:scale-90" style={{ zIndex: 10, paddingLeft: '8px', paddingRight: '8px', overflow: 'hidden' }}>
+        <div className="relative h-full min-h-80 sm:min-h-96 md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-start py-2 sm:py-3 scale-85 sm:scale-90 px-2 overflow-hidden" style={{ zIndex: 10 }}>
           {/* Single Blur Rectangle for All Content - Mobile Only */}
           <div className="hero-unified-blur-background-mobile"></div>
           
           
           {/* Mobile Content */}
-          <div className="relative w-full flex flex-col items-center gap-2 sm:gap-3" style={{ zIndex: 15, paddingLeft: '8px', paddingRight: '8px', paddingTop: '16px' }}>
+          <div className="relative w-full flex flex-col items-center gap-2 sm:gap-3 px-2 pt-4" style={{ zIndex: 15 }}>
             
             {/* Left Side - Text Content - At Top */}
             <motion.div 
@@ -99,7 +99,7 @@ const HeroSection = () => {
               initial="hidden"
               animate="visible"
             >
-              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-2 sm:mb-3 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left px-4 md:px-0">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-2 sm:mb-3 md:mb-6 leading-tight text-white text-center md:text-left px-4 md:px-0 font-sans font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] [text-shadow:0_0_2px_rgba(255,127,80,0.6),0_0_4px_rgba(255,140,105,0.5),0_2px_6px_rgba(255,99,71,0.4),0_4px_8px_rgba(255,182,193,0.3)] [-webkit-text-stroke:1px_rgba(255,127,80,0.6)] tracking-tight">
                 Hi, Math Magician! <br className="hidden md:block" />
                Ready for Number <br className="hidden md:block" />
                Magic - fun & sums ?
@@ -112,7 +112,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                <div className="countdown-timer-box-exact sm:scale-90 md:scale-100">
+                <div className="flex items-center w-fit sm:scale-90 md:scale-100">
                   {/* Om Symbol */}
                   <motion.img 
                     src="/images/eng-clock.png" 
@@ -127,15 +127,15 @@ const HeroSection = () => {
                   
                   {/* Time Boxes with Spacing */}
                   <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 ml-2 sm:ml-3 md:ml-4 sm:flex-wrap">
-                    <span className="countdown-time-box text-lg sm:text-xl md:text-2xl">
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.hours)}
                     </span>
                     <span className="text-white text-lg sm:text-xl md:text-2xl font-bold">:</span>
-                    <span className="countdown-time-box text-lg sm:text-xl md:text-2xl">
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.minutes)}
                     </span>
                     <span className="text-white text-lg sm:text-xl md:text-2xl font-bold">:</span>
-                    <span className="countdown-time-box text-lg sm:text-xl md:text-2xl">
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.seconds)}
                     </span>
                   </div>
@@ -170,7 +170,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <motion.div
-              className="w-[350px] h-[350px] sm:w-[400px] sm:h-[400px]"
+              className="w-96 sm:w-96 h-96 sm:h-96"
               animate={{ 
                 y: [0, 5, 0],
               }}
@@ -192,9 +192,9 @@ const HeroSection = () => {
         {/* Tablet and Desktop View - Container-based blur rectangle */}
         <div className="relative h-full min-h-0 hidden md:block w-full py-6 md:py-8" style={{ zIndex: 10 }}>
           {/* Container wrapper with fixed padding that never changes - Full width */}
-          <div className="w-full h-full flex items-center justify-center" style={{ paddingLeft: '60px', paddingRight: '60px' }}>
+          <div className="w-full h-full flex items-center justify-center px-16 md:px-16">
             {/* Blur Rectangle - Relative, no absolute positioning */}
-            <div className="hero-unified-blur-background-tablet-desktop relative w-full flex items-center justify-center" style={{ height: '280px', maxHeight: '280px', minHeight: '280px' }}>
+            <div className="hero-unified-blur-background-tablet-desktop relative w-full flex items-center justify-center h-72 max-h-72 min-h-72 md:h-80 md:max-h-80 md:min-h-80">
               {/* Content inside blur rectangle with internal padding */}
               <div className="w-full flex flex-col md:flex-row items-center gap-4 md:gap-8 lg:gap-12 px-6 md:px-8">
                 
@@ -206,7 +206,7 @@ const HeroSection = () => {
                   initial="hidden"
                   animate="visible"
                 >
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white text-center md:text-left font-sans font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] [text-shadow:0_0_2px_rgba(255,127,80,0.6),0_0_4px_rgba(255,140,105,0.5),0_2px_6px_rgba(255,99,71,0.4),0_4px_8px_rgba(255,182,193,0.3)] [-webkit-text-stroke:1px_rgba(255,127,80,0.6)] tracking-tight">
                     Hi, Math Magician! <br className="hidden md:block" />
                    Ready for Number <br className="hidden md:block" />
                    Magic - fun & sums ?
@@ -219,7 +219,7 @@ const HeroSection = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.6 }}
                   >
-                    <div className="countdown-timer-box-exact">
+                    <div className="flex items-center w-fit">
                       {/* Om Symbol */}
                       <motion.img 
                         src="/images/eng-clock.png" 
@@ -234,15 +234,15 @@ const HeroSection = () => {
                       
                       {/* Time Boxes with Spacing */}
                       <div className="flex items-center gap-2.5 md:gap-3 ml-3 md:ml-4">
-                        <span className="countdown-time-box text-xl md:text-2xl">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.hours)}
                         </span>
                         <span className="text-white text-xl md:text-2xl font-bold">:</span>
-                        <span className="countdown-time-box text-xl md:text-2xl">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.minutes)}
                         </span>
                         <span className="text-white text-xl md:text-2xl font-bold">:</span>
-                        <span className="countdown-time-box text-xl md:text-2xl">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.seconds)}
                         </span>
                       </div>
@@ -309,7 +309,7 @@ const HeroSection = () => {
           whileHover="hover"
           whileTap={{ scale: 0.95 }}
         >
-          <button className="join-now-button-exact-large text-xs sm:text-sm md:text-lg">
+          <button className="bg-join-button border-4 border-yogi-yellow rounded-2xl px-10 py-4 md:px-10 md:py-4 flex items-center gap-2 md:gap-3 shadow-join-button hover:shadow-join-button-hover hover:-translate-y-0.5 transition-all duration-200 relative z-50 cursor-pointer text-xs sm:text-sm md:text-lg text-white font-bold">
             <motion.svg 
               className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 text-yellow-300" 
               fill="currentColor" 

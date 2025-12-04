@@ -90,54 +90,16 @@ const EnglishPage = () => {
   return (
     <div 
       ref={scrollContainerRef}
-      className="w-full overflow-y-auto overflow-x-hidden mobile-viewport-fix" 
-      style={{ 
-        margin: 0, 
-        padding: 0, 
-        width: '100%', 
-        maxWidth: '100%', 
-        scrollSnapType: 'y proximity'
-      }}
+      className="w-full m-0 p-0 max-w-full overflow-y-auto overflow-x-hidden mobile-viewport-fix scroll-smooth"
+      style={{ scrollSnapType: 'y proximity' }}
     >
       <div 
-        className="overflow-y-auto md:overflow-y-auto overflow-x-hidden relative mobile-content-fix"
-        style={{
-          margin: 0,
-          padding: 0,
-          width: '100%',
-          maxWidth: '100%',
-          background: `
-            linear-gradient(135deg, 
-              rgba(135, 206, 235, 0.2) 0%, 
-              rgba(176, 224, 230, 0.18) 20%,
-              rgba(255, 228, 181, 0.15) 50%,
-              rgba(255, 182, 193, 0.18) 80%,
-              rgba(221, 160, 221, 0.15) 100%
-            ),
-            url(/images/backgorund.png)
-          `,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-start'
-        }}
+        className="m-0 p-0 w-full max-w-full overflow-y-auto md:overflow-y-auto overflow-x-hidden relative mobile-content-fix bg-page-overlay bg-cover bg-center bg-no-repeat bg-fixed flex justify-center items-start"
+        style={{ backgroundImage: 'url(/images/backgorund.png)' }}
       >
         {/* Responsive Container - Makes UI appear exactly the same on all laptop screens */}
         <div 
-          className="ui-responsive-container sm:min-h-screen md:min-h-screen w-full md:flex md:flex-col md:pb-[20px]"
-          style={{
-            width: '100%',
-            maxWidth: '100%',
-            marginLeft: '0',
-            marginRight: '0',
-            paddingLeft: '0',
-            paddingRight: '0',
-            position: 'relative',
-            paddingBottom: '3px'
-          }}
+          className="ui-responsive-container sm:min-h-screen md:min-h-screen w-full max-w-full m-0 md:flex md:flex-col md:pb-5 relative pb-0.5"
         >
         {/* Hero Section */}
         <div className="md:flex-shrink-0 relative z-20">
@@ -145,13 +107,12 @@ const EnglishPage = () => {
         </div>
 
         {/* Dashboard Cards Section - Fixed gaps that never change */}
-      <div className="max-w-full mx-auto px-0 sm:px-0 md:px-[60px] scale-100 sm:scale-100 md:scale-100 md:flex-1 md:flex md:flex-col relative z-10 md:mt-[20px] md:mb-[20px]" style={{ paddingTop: '0', paddingBottom: '0' }}>
+      <div className="max-w-full mx-auto px-0 sm:px-0 md:px-[60px] scale-100 sm:scale-100 md:scale-100 md:flex-1 md:flex md:flex-col relative z-10 md:mt-5 md:mb-5 pt-0 pb-0">
         {/* Mobile: Custom 2-column layout | Desktop: Grid Layout */}
-        <div className="flex flex-col md:grid md:pt-[10px] pl-0 pt-0 pr-0 md:w-full md:h-full gap-0 sm:gap-0 md:gap-4" 
+        <div className="flex flex-col md:grid md:pt-2.5 pl-0 pt-0 pr-0 md:w-full md:h-full gap-0 sm:gap-0 md:gap-4 items-stretch" 
           style={{ 
             gridTemplateColumns: 'repeat(10, 1fr)', 
-            gridTemplateRows: '1fr 1fr',
-            alignItems: 'stretch'
+            gridTemplateRows: '1fr 1fr'
           }}>
           {/* Mobile: Course Card - Full width */}
           <motion.div 

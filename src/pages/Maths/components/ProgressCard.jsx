@@ -14,7 +14,7 @@ const ProgressCard = () => {
   }, [progress])
   
   return (
-    <div className="progress-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow relative" style={{ height: '100%', width: '100%' }}>
+    <div className="bg-progress-card backdrop-blur-lg md:backdrop-blur-xl backdrop-saturate-[180%] border border-white/60 border-t-white/90 border-l-white/70 rounded-2xl p-3 sm:p-4 md:p-6 shadow-card relative h-full w-full">
       <h3 className="text-base sm:text-lg md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">Your Progress</h3>
       
       <div className="space-y-4 sm:space-y-5 md:space-y-7">
@@ -55,7 +55,7 @@ const ProgressCard = () => {
             <img 
               src="/images/rocket.png" 
               alt="Rocket" 
-              className="object-contain w-8 h-8 sm:w-12 sm:h-12 md:w-[70px] md:h-[70px]"
+              className="object-contain w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20"
               style={{ 
                 filter: 'drop-shadow(0 0 15px rgba(255, 140, 0, 0.6))',
                 display: 'block',
@@ -80,7 +80,7 @@ const ProgressCard = () => {
             <img 
               src="/images/math-tressure.png" 
               alt="Treasure chest" 
-              className="object-contain w-14 h-14 sm:w-20 sm:h-20 md:w-[120px] md:h-[120px]"
+              className="object-contain w-14 h-14 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-32 lg:h-32"
               style={{ 
                 filter: 'drop-shadow(0 0 12px rgba(139, 69, 19, 0.5))' 
               }}

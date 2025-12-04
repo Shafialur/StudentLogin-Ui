@@ -2,7 +2,7 @@ import React from 'react'
 
 const QuizCard = () => {
   return (
-    <div className="quiz-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow flex flex-col" style={{ height: '100%', width: '100%' }}>
+    <div className="bg-quiz-card backdrop-blur-lg md:backdrop-blur-xl backdrop-saturate-[180%] border border-white/50 border-t-white/80 border-l-white/60 rounded-2xl p-3 sm:p-4 md:p-6 shadow-card-glass flex flex-col h-full w-full">
       <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3 md:mb-4">
         {/* Graduation Cap Icon */}
         <img 
@@ -30,7 +30,7 @@ const QuizCard = () => {
         
         {/* Start Quiz Button - Light Blue to Darker Blue Gradient - At Bottom */}
         <div className="mt-auto">
-          <button className="quiz-button-exact w-full text-white font-bold py-2 sm:py-2.5 md:py-3 px-3 sm:px-3.5 md:px-4 rounded-full transition-colors duration-200 flex items-center justify-center gap-1.5 sm:gap-2 shadow-md text-xs sm:text-sm md:text-base">
+          <button className="bg-quiz-button backdrop-blur-md md:backdrop-blur-lg border border-white/50 rounded-full w-full text-white font-bold py-2 sm:py-2.5 md:py-3 px-3 sm:px-3.5 md:px-4 transition-all duration-200 flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_4px_15px_rgba(70,130,180,0.3),inset_0_2px_4px_rgba(255,255,255,0.5),inset_0_-2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(70,130,180,0.4),inset_0_2px_4px_rgba(255,255,255,0.6),inset_0_-2px_4px_rgba(0,0,0,0.1)] text-xs sm:text-sm md:text-base">
             <span>Start Quiz</span>
             <div className="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 bg-blue-300 rounded-full flex items-center justify-center" style={{ filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.8))' }}>
               <svg 

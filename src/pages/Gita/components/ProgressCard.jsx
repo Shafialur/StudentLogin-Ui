@@ -14,7 +14,7 @@ const ProgressCard = () => {
   }, [progress])
   
   return (
-    <div className="progress-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow" style={{ height: '100%', width: '100%' }}>
+    <div className="bg-progress-card backdrop-blur-lg md:backdrop-blur-xl backdrop-saturate-[180%] border border-white/60 border-t-white/90 border-l-white/70 rounded-2xl p-3 sm:p-4 md:p-6 shadow-card h-full w-full">
       <h3 className="text-base sm:text-lg md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">Your Progress</h3>
       
       <div className="space-y-4 sm:space-y-5 md:space-y-7">
@@ -29,7 +29,7 @@ const ProgressCard = () => {
         }}>
           {/* Progress fill - Orange with rounded caps */}
           <motion.div 
-            className="absolute left-0 top-0 h-full progress-gradient-exact" 
+            className="absolute left-0 top-0 h-full bg-progress-bar backdrop-blur sm:backdrop-blur-md shadow-[0_4px_12px_rgba(255,107,53,0.4),inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.1)]" 
             initial={{ width: 0 }}
             animate={{ width: `${animatedProgress}%` }}
             transition={{ duration: 1.5, ease: "easeOut" }}
@@ -85,7 +85,7 @@ const ProgressCard = () => {
             <img 
               src="/images/progresschariot.png" 
               alt="Progress chariot" 
-              className="object-contain w-12 h-12 sm:w-16 sm:h-16 md:w-[100px] md:h-[100px]"
+              className="object-contain w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 lg:w-28 lg:h-28"
               style={{ 
                 filter: 'drop-shadow(0 0 15px rgba(255, 140, 0, 0.6))' 
               }}
@@ -103,7 +103,7 @@ const ProgressCard = () => {
             <img 
               src="/images/progressendtemple.png" 
               alt="Temple" 
-              className="object-contain w-10 h-10 sm:w-14 sm:h-14 md:w-[90px] md:h-[90px]"
+              className="object-contain w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 lg:w-24 lg:h-24"
               style={{ 
                 filter: 'drop-shadow(0 0 12px rgba(139, 69, 19, 0.5))' 
               }}

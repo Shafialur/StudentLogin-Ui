@@ -15,16 +15,11 @@
   body {
     @apply m-0 p-0 font-sans antialiased;
     background: 
-      /* Soft radial glow in center */
       radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 60%),
-      /* Top highlight */
       radial-gradient(ellipse 100% 40% at 50% 0%, rgba(135, 206, 250, 0.2) 0%, transparent 50%),
-      /* Bottom warm glow */
       radial-gradient(ellipse 100% 50% at 50% 100%, rgba(255, 200, 150, 0.15) 0%, transparent 50%),
-      /* Corner accents */
       radial-gradient(circle at 0% 0%, rgba(180, 220, 255, 0.1) 0%, transparent 30%),
       radial-gradient(circle at 100% 100%, rgba(255, 220, 180, 0.1) 0%, transparent 30%),
-      /* Base image */
       url('/images/backgorund.png');
     background-size: cover;
     background-position: center;
@@ -36,7 +31,7 @@
   }
   
   #root {
-    position: relative;
+    @apply relative;
     min-height: 100vh;
     min-height: calc(var(--vh, 1vh) * 100);
   }
@@ -56,38 +51,15 @@
       min-height: -webkit-fill-available;
       min-height: calc(var(--vh, 1vh) * 100);
     }
-    
-    .mobile-viewport-fix {
-      height: calc(var(--vh, 1vh) * 100);
-      min-height: calc(var(--vh, 1vh) * 100);
-    }
-    
-    .mobile-content-fix {
-      min-height: calc(var(--vh, 1vh) * 105);
-      padding-bottom: calc(var(--vh, 1vh) * 5);
-    }
-  }
-  
-  @media (min-width: 769px) {
-    .mobile-viewport-fix {
-      height: 100vh;
-      min-height: 100vh;
-    }
   }
   
   /* Animated subtle glow overlay */
   #root::before {
     content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    @apply fixed top-0 left-0 right-0 bottom-0 pointer-events-none z-0;
     background: 
       radial-gradient(ellipse 60% 40% at 30% 20%, rgba(135, 206, 250, 0.08) 0%, transparent 50%),
       radial-gradient(ellipse 50% 30% at 70% 80%, rgba(255, 180, 150, 0.08) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
     animation: backgroundPulse 8s ease-in-out infinite alternate;
   }
   
@@ -102,1219 +74,29 @@
 }
 
 @layer utilities {
-  /* Hero Section Container */
-  .hero-section-container {
-    position: relative;
-  }
-  
-  /* Scalable Hero Wrapper - Uniform scaling for entire hero section */
-  .hero-scale-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 1920px;
-    margin: 0 auto;
-    transform-origin: top center;
-    will-change: transform;
-  }
-  
-  /* Hero scale container - wraps all hero content */
-  .hero-scale-container {
-    position: relative;
-    width: 100%;
-    transform-origin: top center;
-  }
-  
-  /* Page scale wrapper - scales entire page uniformly */
-  .page-scale-wrapper {
-    position: relative;
-    transform-origin: top center;
-    will-change: transform;
-  }
-  
-  /* Responsive UI Container - Makes UI appear like 67% zoom using CSS zoom */
-  /* This ensures the UI looks exactly the same on all laptop screens */
-  .ui-responsive-container {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-   
-  }
-  
-  /* Ensure consistent appearance on all laptop/desktop screens */
-  @media (min-width: 768px) {
-    .ui-responsive-container {
-      zoom: 0.67;
-      width: 100%;
-      max-width: 100%;
-    }
-  }
-  
-  /* Mobile: No zoom, use responsive design */
-  @media (max-width: 767px) {
-    .ui-responsive-container {
-      zoom: 1 !important;
-      width: 100%;
-      max-width: 100%;
-    }
-  }
-  
-  /* Container to handle scaled content properly */
-  .page-scale-container {
-    overflow: hidden;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-  }
-  
-  /* Exact gradient for hero section - light sky blue → peach/orange → light pink/purple */
-  .hero-gradient-exact {
-    background: linear-gradient(90deg, 
-      #6BB6FF 0%, 
-      #7FC8E8 10%, 
-      #87CEEB 20%, 
-      #B0E0E6 30%, 
-      #FFE4B5 45%, 
-      #FFDAB9 55%, 
-      #FFA07A 70%, 
-      #FFB6C1 85%, 
-      #DDA0DD 95%, 
-      #EE82EE 100%
-    );
-    position: relative;
-  }
-
-  /* English Page - Gloomy Gradient (Muted Colors) */
-  .hero-gradient-english {
-    background: linear-gradient(90deg, 
-      #5B7FA0 0%, 
-      #6B8FB0 10%, 
-      #7B9FC0 20%, 
-      #8BAFD0 30%, 
-      #C9A584 45%, 
-      #D9B594 55%, 
-      #E9C5A4 70%, 
-      #D9A5A5 85%, 
-      #C995B5 95%, 
-      #B985C5 100%
-    );
-    position: relative;
-  }
-
-  /* More rounded bottom corners for hero section - matches blur rectangle outer edge */
-  /* Blur rectangle: inner radius 24px + border 2px = outer radius 26px */
-  .hero-bottom-rounded {
-    border-bottom-left-radius: 26px;
-    border-bottom-right-radius: 26px;
-  }
-  
-  @media (min-width: 1024px) {
-    .hero-bottom-rounded {
-      border-bottom-left-radius: 48px;
-      border-bottom-right-radius: 48px;
-    }
-  }
-  
-  /* Main Hero Panel - Translucent White with Light Blue Border */
-  .hero-panel {
-    position: relative;
-  }
-  
-  .hero-panel-inner {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 2px solid rgba(173, 216, 230, 0.6);
-    border-radius: 24px;
-    padding: 48px 40px;
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.05);
-    position: relative;
-    z-index: 10;
-  }
-  
-  /* Mobile: Reduce padding for hero panel */
-  @media (max-width: 767px) {
-    .hero-panel-inner {
-      padding: 24px 16px;
-    }
-  }
-  
-  /* Countdown Timer Box - Clean Layout */
-  .countdown-timer-box-exact {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-  }
-
-  /* Pink Circular Om Icon */
-  .om-circle-icon {
-    width: 44px;
-    height: 44px;
-    background: #EC4899;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
-    flex-shrink: 0;
-  }
-
-  .om-symbol-text {
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-    line-height: 1;
-  }
-  
-  /* Individual Time Boxes */
-  .countdown-time-box {
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 1.5px solid rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    padding: 8px 12px;
-    font-size: 1.25rem;
-    font-weight: 700;
-    font-family: 'Courier New', monospace;
-    color: white;
-    min-width: 50px;
-    text-align: center;
-    line-height: 1.2;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  }
-  
-  @media (min-width: 768px) {
-    .countdown-time-box {
-      padding: 10px 16px;
-      font-size: 1.75rem;
-      min-width: 60px;
-    }
-  }
-  
-  /* Join Now Button - Clean Design with Yellow Border */
-  .join-now-button-exact {
-    background: linear-gradient(180deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
-    border: 3px solid #FBBF24;
-    border-radius: 16px;
-    padding: 14px 32px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 
-      0 6px 20px rgba(59, 130, 246, 0.5),
-      0 2px 8px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
-    position: relative;
-    z-index: 50 !important;
-    cursor: pointer;
-  }
-
-  .join-now-button-exact:hover {
-    box-shadow: 
-      0 8px 24px rgba(59, 130, 246, 0.6),
-      0 3px 10px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
-  }
-
-  /* Join Now Button - Large Size for Right Side */
-  .join-now-button-exact-large {
-    background: linear-gradient(180deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
-    border: 3px solid #FBBF24;
-    border-radius: 16px;
-    padding: 16px 40px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 
-      0 2px 4px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
-    position: relative;
-    z-index: 50 !important;
-    cursor: pointer;
-  }
-
-  .join-now-button-exact-large:hover {
-    box-shadow: 
-      0 3px 6px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
-  }
-
-  /* Hero Main Text - Rounded White Font */
-  .hero-main-text {
-    font-family: 'Inter', 'Arial Rounded MT Bold', 'Arial', sans-serif;
-    font-weight: 700;
-    color: white;
-    text-shadow: 
-      0 0 2px rgba(255, 127, 80, 0.6),
-      0 0 4px rgba(255, 140, 105, 0.5),
-      0 2px 6px rgba(255, 99, 71, 0.4),
-      0 4px 8px rgba(255, 182, 193, 0.3);
-    -webkit-text-stroke: 1px rgba(255, 127, 80, 0.6);
-    letter-spacing: -0.5px;
-    line-height: 1.3;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  }
-
-  /* Unified Blur Rectangle for All Content - Glassmorphism */
-  /* Desktop blur background - NO positioning, only visual styling */
-  .hero-unified-blur-background {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    width: 100%;
-    transform: translateY(-50%);
-    min-height: 300px;
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.25) 0%,
-      rgba(240, 248, 255, 0.2) 25%,
-      rgba(255, 255, 255, 0.18) 50%,
-      rgba(255, 245, 238, 0.2) 75%,
-      rgba(255, 255, 255, 0.25) 100%
-    );
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
-    border-radius: 24px;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    border-top: 2px solid rgba(255, 255, 255, 0.8);
-    border-left: 2px solid rgba(255, 255, 255, 0.7);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.08),
-      0 4px 16px rgba(255, 255, 255, 0.3);
-    z-index: 1;
-    pointer-events: none;
-    display: none; /* Hidden by default, only used in old structure */
-  }
-  
-  /* Tablet and Desktop blur rectangle - Relative positioning, container-based */
-  .hero-unified-blur-background-tablet-desktop {
-    position: relative;
-    width: 100%;
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(240, 248, 255, 0.18) 25%,
-      rgba(255, 255, 255, 0.15) 50%,
-      rgba(255, 245, 238, 0.18) 75%,
-      rgba(255, 255, 255, 0.2) 100%
-    );
-    backdrop-filter: blur(6px) saturate(180%);
-    -webkit-backdrop-filter: blur(6px) saturate(180%);
-    border-radius: 24px;
-    border: 1.5px solid rgba(255, 255, 255, 0.6);
-    border-top: 1.5px solid rgba(255, 255, 255, 0.75);
-    border-bottom: 1.5px solid rgba(255, 255, 255, 0.75);
-    border-left: 1.5px solid rgba(255, 255, 255, 0.65);
-    border-right: 1.5px solid rgba(255, 255, 255, 0.65);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.3),
-      0 4px 16px rgba(255, 255, 255, 0.2);
-    overflow: visible;
-  }
-  
-  /* Mobile-specific blur background that contains all content including chariot */
-  .hero-unified-blur-background-mobile {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    height: 320px;
-    max-height: 320px;
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.25) 0%,
-      rgba(240, 248, 255, 0.2) 25%,
-      rgba(255, 255, 255, 0.18) 50%,
-      rgba(255, 245, 238, 0.2) 75%,
-      rgba(255, 255, 255, 0.25) 100%
-    );
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
-    border-radius: 24px;
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-top: 2px solid rgba(255, 255, 255, 0.9);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.9);
-    border-left: 2px solid rgba(255, 255, 255, 0.8);
-    border-right: 2px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.08),
-      0 4px 16px rgba(255, 255, 255, 0.3);
-    z-index: 1;
-    pointer-events: none;
-    overflow: hidden;
-    width: 100%;
-    margin: 0;
-  }
-  
-  /* Tablet blur background - OLD, keeping for backward compatibility but not used */
-  .hero-unified-blur-background-tablet {
-    display: none;
-  }
-  
-  /* Match cards container padding: 40px on all breakpoints (matching inline styles) */
-  @media (min-width: 640px) {
-    .hero-unified-blur-background-mobile {
-      height: 340px;
-      max-height: 340px;
-    }
-  }
-  
-  /* Mobile: Remove all unwanted spacing and ensure elements fit screen */
-  @media (max-width: 767px) {
-    /* Remove body margins and padding on mobile */
-    body {
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow-x: hidden;
-      width: 100%;
-      max-width: 100%;
-    }
-    
-    /* Ensure root container has no extra spacing */
-    #root {
-      margin: 0 !important;
-      padding: 0 !important;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-    
-    /* Hero section container - no margins */
-    .hero-section-container {
-      margin: 0 !important;
-      padding: 0 !important;
-      width: 100%;
-      max-width: 100%;
-    }
-    
-    /* Add small equal margin to mobile blur background on all 4 sides */
-    .hero-unified-blur-background-mobile {
-      top: 12px !important;
-      left: 12px !important;
-      right: 12px !important;
-      bottom: 12px !important;
-      width: auto !important;
-      height: calc(100% - 24px) !important;
-      max-height: calc(100% - 24px) !important;
-      transform: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    
-    /* Constrain parent container to prevent extra bottom space */
-    .hero-section-container > div.relative.h-full {
-      height: calc(320px + 24px) !important;
-      min-height: calc(320px + 24px) !important;
-      max-height: calc(320px + 24px) !important;
-    }
-    
-    /* Ensure UI responsive container has no extra spacing */
-    .ui-responsive-container {
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-      margin-top: 0 !important;
-      margin-bottom: 0 !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-      width: 100% !important;
-      max-width: 100% !important;
-    }
-    
-    /* Override inline styles for mobile - ensure bottom gap */
-    .ui-responsive-container[style*="paddingBottom"] {
-      padding-bottom: 12px !important;
-    }
-    
-    /* Remove all gaps between cards in mobile */
-    .flex.flex-col.gap-0,
-    .flex.flex-col.gap-2,
-    .flex.flex-col.gap-3,
-    .flex.flex-col.gap-4 {
-      gap: 0 !important;
-    }
-    
-    /* Add reduced gap (10px) to cards container */
-    .max-w-full.mx-auto {
-      padding-left: 10px !important;
-      padding-right: 10px !important;
-      padding-top: 10px !important;
-      padding-bottom: 10px !important;
-      margin-top: 0 !important;
-      margin-bottom: 0 !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-    }
-    
-    /* Remove spacing from cards wrapper */
-    .ui-responsive-container > div.max-w-full {
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-    
-    /* Reduce padding from cards themselves in mobile for compact design */
-    .rounded-2xl.p-3,
-    .rounded-2xl.p-4,
-    .rounded-2xl.p-6,
-    .system-check-card-exact,
-    .teacher-note-card-exact,
-    .assignment-card-exact,
-    .quiz-card-exact,
-    .progress-card-exact {
-      padding: 0.5rem !important;
-    }
-    
-    /* Make cards in 2-column layout more compact and professional */
-    .flex.flex-row.gap-0 .system-check-card-exact,
-    .flex.flex-row.gap-0 .teacher-note-card-exact,
-    .flex.flex-row.gap-0 .assignment-card-exact,
-    .flex.flex-row.gap-0 .quiz-card-exact {
-      padding: 0.625rem !important;
-      min-height: auto !important;
-      height: auto !important;
-      display: flex !important;
-      flex-direction: column !important;
-    }
-    
-    /* Reduce font sizes in mobile 2-column cards for better fit */
-    .flex.flex-row.gap-0 h3 {
-      font-size: 0.875rem !important;
-      line-height: 1.3 !important;
-      margin-bottom: 0.5rem !important;
-    }
-    
-    .flex.flex-row.gap-0 p,
-    .flex.flex-row.gap-0 span:not(button span) {
-      font-size: 0.75rem !important;
-      line-height: 1.3 !important;
-    }
-    
-    .flex.flex-row.gap-0 button {
-      font-size: 0.75rem !important;
-      padding: 0.5rem 0.75rem !important;
-      margin-top: auto !important;
-    }
-    
-    /* Adjust icon sizes in 2-column cards */
-    .flex.flex-row.gap-0 .flex.items-center.gap-1\.5 img,
-    .flex.flex-row.gap-0 .flex.items-center.gap-2 img {
-      width: 1rem !important;
-      height: 1rem !important;
-    }
-    
-    /* Adjust content images in cards */
-    .flex.flex-row.gap-0 .flex.items-center.justify-between img,
-    .flex.flex-row.gap-0 .space-y-2 img,
-    .flex.flex-row.gap-0 .space-y-3 img {
-      width: 2.5rem !important;
-      height: 2.5rem !important;
-    }
-    
-    /* Reduce spacing in 2-column cards */
-    .flex.flex-row.gap-0 .space-y-2,
-    .flex.flex-row.gap-0 .space-y-3,
-    .flex.flex-row.gap-0 .space-y-4 {
-      gap: 0.5rem !important;
-    }
-    
-    .flex.flex-row.gap-0 .mb-2,
-    .flex.flex-row.gap-0 .mb-3,
-    .flex.flex-row.gap-0 .mb-4 {
-      margin-bottom: 0.5rem !important;
-    }
-    
-    /* Make system check icons smaller in 2-column */
-    .flex.flex-row.gap-0 .flex.items-center.justify-around img {
-      width: 1.75rem !important;
-      height: 1.75rem !important;
-    }
-    
-    .flex.flex-row.gap-0 .flex.items-center.justify-around span {
-      font-size: 0.65rem !important;
-    }
-    
-    /* Reduce Teacher Note Card message text size in mobile */
-    .teacher-note-card-exact .bg-gray-100 p {
-      font-size: 0.7rem !important;
-      line-height: 1.4 !important;
-    }
-    
-    /* Further reduce text size in 2-column layout */
-    .flex.flex-row.gap-0 .teacher-note-card-exact .bg-gray-100 p {
-      font-size: 0.65rem !important;
-      line-height: 1.3 !important;
-    }
-    
-    /* Add reduced gap (10px) around cards, with smaller gap between Course and Progress */
-    .dashboard-grid-item-1 {
-      margin-top: 10px !important;
-      margin-bottom: 6px !important; /* Reduced gap between Course and Progress */
-      margin-left: 10px !important;
-      margin-right: 10px !important;
-      padding: 0 !important;
-    }
-    
-    .dashboard-grid-item-2 {
-      margin-top: 6px !important; /* Reduced gap between Course and Progress */
-      margin-bottom: 10px !important;
-      margin-left: 10px !important;
-      margin-right: 10px !important;
-      padding: 0 !important;
-    }
-    
-    /* Ensure Course and Progress cards don't overflow and show right margin */
-    .dashboard-grid-item-1,
-    .dashboard-grid-item-2 {
-      width: calc(100% - 20px) !important;
-      max-width: calc(100% - 20px) !important;
-      box-sizing: border-box !important;
-    }
-    
-    /* Mobile: 2-column layout for 4 cards - add reduced gap between cards in row */
-    .flex.flex-row.gap-0 {
-      gap: 10px !important;
-      margin-left: 10px !important;
-      margin-right: 10px !important;
-      margin-top: 0 !important;
-      margin-bottom: 10px !important;
-      display: flex !important;
-      align-items: stretch !important;
-    }
-    
-    /* Mobile: Cards in 2-column rows - ensure equal height */
-    .flex.flex-row.gap-0 > .dashboard-grid-item-3,
-    .flex.flex-row.gap-0 > .dashboard-grid-item-4,
-    .flex.flex-row.gap-0 > .dashboard-grid-item-5,
-    .flex.flex-row.gap-0 > .dashboard-grid-item-6 {
-      margin: 0 !important;
-      padding: 0 !important;
-      display: flex !important;
-      flex: 1 !important;
-      min-width: 0 !important;
-    }
-    
-    /* Ensure card content fills the flex container */
-    .flex.flex-row.gap-0 > .dashboard-grid-item-3 > *,
-    .flex.flex-row.gap-0 > .dashboard-grid-item-4 > *,
-    .flex.flex-row.gap-0 > .dashboard-grid-item-5 > *,
-    .flex.flex-row.gap-0 > .dashboard-grid-item-6 > * {
-      height: 100% !important;
-      display: flex !important;
-      flex-direction: column !important;
-    }
-    
-    /* Ensure cards fit screen width with margins */
-    .dashboard-grid-item-1 > *,
-    .dashboard-grid-item-2 > *,
-    .dashboard-grid-item-3 > *,
-    .dashboard-grid-item-4 > *,
-    .dashboard-grid-item-5 > *,
-    .dashboard-grid-item-6 > * {
-      width: 100% !important;
-      margin: 0 !important;
-    }
-    
-    /* Remove spacing between hero and cards section */
-    .ui-responsive-container > div.relative.z-20 {
-      margin-bottom: 0 !important;
-    }
-    
-    .ui-responsive-container > div.max-w-full {
-      margin-top: 0 !important;
-    }
-    
-    /* Ensure all containers fit screen width */
-    * {
-      max-width: 100%;
-      box-sizing: border-box;
-    }
-    
-    /* Remove any horizontal overflow */
-    .overflow-x-hidden {
-      overflow-x: hidden !important;
-    }
-    
-    /* Ensure hero content fits */
-    .hero-section-container > * {
-      width: 100% !important;
-      max-width: 100% !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-    }
-  }
-  
-  @media (min-width: 768px) {
-    .hero-unified-blur-background-tablet {
-      display: block;
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .hero-unified-blur-background-tablet {
-      display: none;
-    }
-  }
-  
-  /* Glossy button effect with enhanced shine */
-  .glossy-button {
-    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 50%, #1D4ED8 100%);
-    box-shadow: 
-      0 4px 15px rgba(59, 130, 246, 0.4), 
-      0 2px 5px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .glossy-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s;
-  }
-  
-  .glossy-button:hover::before {
-    left: 100%;
-  }
-  
-  .glossy-button:hover {
-    box-shadow: 
-      0 6px 20px rgba(59, 130, 246, 0.5), 
-      0 3px 8px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
-  }
-  
-  /* Scroll texture for course card - parchment/scroll effect */
-  .scroll-texture {
-    background-color: #FEF3C7;
-    background-image: 
-      repeating-linear-gradient(
-        0deg,
-        rgba(139, 69, 19, 0.03) 0px,
-        rgba(139, 69, 19, 0.03) 1px,
-        transparent 1px,
-        transparent 2px
-      ),
-      linear-gradient(
-        180deg,
-        rgba(139, 69, 19, 0.05) 0%,
-        transparent 5%,
-        transparent 95%,
-        rgba(139, 69, 19, 0.05) 100%
-      );
-    position: relative;
-  }
-  
-  /* Card shadow - enhanced drop shadow and inner glow */
-  .card-shadow {
-    box-shadow: 
-      /* Drop shadow - enhanced outer shadow */
-      0 20px 40px -8px rgba(0, 0, 0, 0.3), 
-      0 12px 24px -6px rgba(0, 0, 0, 0.25),
-      0 6px 12px -3px rgba(0, 0, 0, 0.2),
-      0 2px 6px -1px rgba(0, 0, 0, 0.15),
-      /* Inner glow - enhanced white glow inside */
-      inset 0 4px 16px rgba(255, 255, 255, 0.7),
-      inset 0 -4px 16px rgba(255, 255, 255, 0.5),
-      inset 0 0 40px rgba(255, 255, 255, 0.4),
-      inset 0 0 60px rgba(255, 255, 255, 0.2);
-  }
-
-  /* Progress and Teacher Note Card - Same gradient and styling */
-  .progress-teacher-card {
-    background: linear-gradient(135deg, 
-      rgba(147, 197, 253, 0.3) 0%, 
-      rgba(191, 219, 254, 0.2) 50%, 
-      rgba(255, 255, 255, 0.9) 100%
-    );
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-  }
-
-  /* Progress Card Exact - Cyan to warm orange gradient */
-  .progress-card-exact {
-    background: linear-gradient(135deg, 
-      rgba(180, 220, 230, 0.85) 0%, 
-      rgba(200, 230, 235, 0.7) 15%, 
-      rgba(220, 235, 240, 0.6) 30%,
-      rgba(255, 235, 210, 0.7) 50%,
-      rgba(255, 220, 180, 0.8) 70%,
-      rgba(255, 210, 160, 0.85) 85%,
-      rgba(255, 200, 140, 0.9) 100%
-    );
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-top: 1px solid rgba(255, 255, 255, 0.9);
-    border-left: 1px solid rgba(255, 255, 255, 0.7);
-    box-shadow: 
-      /* Drop shadow */
-      0 20px 40px -8px rgba(0, 0, 0, 0.15), 
-      0 12px 24px -6px rgba(0, 0, 0, 0.1),
-      /* Glass reflection */
-      inset 0 1px 2px rgba(255, 255, 255, 1),
-      /* Inner glow gradient - cyan to warm orange */
-      inset 0 0 40px rgba(180, 220, 230, 0.3),
-      inset 0 -30px 50px rgba(255, 200, 140, 0.4);
-  }
-
-  /* Teacher Note Card Exact - Glassmorphism with gradient inner glow */
-  .teacher-note-card-exact {
-    background: linear-gradient(135deg, 
-      rgba(250, 200, 230, 0.25) 0%, 
-      rgba(240, 200, 250, 0.2) 25%, 
-      rgba(220, 200, 255, 0.25) 50%,
-      rgba(200, 220, 255, 0.3) 75%,
-      rgba(180, 230, 255, 0.35) 100%
-    );
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-top: 1px solid rgba(255, 255, 255, 0.8);
-    border-left: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 
-      /* Drop shadow */
-      0 20px 40px -8px rgba(0, 0, 0, 0.2), 
-      0 12px 24px -6px rgba(0, 0, 0, 0.15),
-      /* Glass reflection */
-      inset 0 1px 1px rgba(255, 255, 255, 0.9),
-      /* Inner glow gradient - pink to purple to blue */
-      inset 0 0 30px rgba(250, 200, 230, 0.4),
-      inset 0 0 60px rgba(200, 180, 255, 0.3),
-      inset 0 -20px 40px rgba(180, 230, 255, 0.25);
-  }
-
-  /* Assignment Card Exact - Glassmorphism with gradient inner glow */
-  .assignment-card-exact {
-    background: linear-gradient(135deg, 
-      rgba(255, 248, 220, 0.3) 0%, 
-      rgba(255, 245, 200, 0.25) 50%,
-      rgba(250, 240, 190, 0.35) 100%
-    );
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-top: 1px solid rgba(255, 255, 255, 0.8);
-    border-left: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 
-      /* Drop shadow */
-      0 20px 40px -8px rgba(0, 0, 0, 0.2), 
-      0 12px 24px -6px rgba(0, 0, 0, 0.15),
-      /* Glass reflection */
-      inset 0 1px 1px rgba(255, 255, 255, 0.9),
-      /* Inner glow gradient - warm yellow to orange */
-      inset 0 0 30px rgba(255, 248, 220, 0.5),
-      inset 0 0 60px rgba(255, 223, 150, 0.3),
-      inset 0 -20px 40px rgba(255, 200, 100, 0.2);
-  }
-
-  /* Assignment Button - Glassmorphism with yellow-green-blue gradient spread */
-  .assignment-button-exact {
-    background: linear-gradient(90deg, 
-      rgba(255, 215, 0, 0.9) 0%, 
-      rgba(255, 225, 50, 0.85) 20%, 
-      rgba(200, 240, 130, 0.8) 45%, 
-      rgba(144, 238, 180, 0.75) 65%, 
-      rgba(130, 220, 220, 0.8) 85%,
-      rgba(135, 206, 235, 0.85) 100%
-    );
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 
-      0 4px 15px rgba(255, 215, 0, 0.25),
-      0 2px 8px rgba(144, 238, 144, 0.2),
-      inset 0 2px 4px rgba(255, 255, 255, 0.5),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .assignment-button-exact:hover {
-    box-shadow: 
-      0 6px 20px rgba(255, 215, 0, 0.35),
-      0 3px 10px rgba(144, 238, 144, 0.25),
-      inset 0 2px 4px rgba(255, 255, 255, 0.6),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Quiz Card Exact - Glassmorphism with smooth spread blue gradient */
-  .quiz-card-exact {
-    background: linear-gradient(135deg, 
-      rgba(173, 216, 250, 0.6) 0%, 
-      rgba(180, 220, 255, 0.55) 10%,
-      rgba(190, 225, 255, 0.5) 20%,
-      rgba(200, 230, 255, 0.48) 30%,
-      rgba(210, 235, 255, 0.46) 40%,
-      rgba(220, 240, 255, 0.48) 50%,
-      rgba(230, 245, 255, 0.5) 60%,
-      rgba(240, 248, 255, 0.52) 70%,
-      rgba(245, 250, 255, 0.54) 80%,
-      rgba(250, 252, 255, 0.56) 90%,
-      rgba(255, 255, 255, 0.58) 100%
-    );
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-top: 1px solid rgba(255, 255, 255, 0.8);
-    border-left: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 
-      /* Drop shadow */
-      0 20px 40px -8px rgba(0, 0, 0, 0.2), 
-      0 12px 24px -6px rgba(0, 0, 0, 0.15),
-      /* Glass reflection */
-      inset 0 1px 1px rgba(255, 255, 255, 0.9),
-      /* Inner glow gradient - blue tones spread smoothly */
-      inset 0 0 60px rgba(135, 206, 250, 0.3),
-      inset 0 0 100px rgba(176, 224, 230, 0.2),
-      inset 0 -30px 60px rgba(200, 230, 255, 0.15);
-  }
-
-  /* Quiz Button - Glassmorphism with blue gradient */
-  .quiz-button-exact {
-    background: linear-gradient(90deg, 
-      rgba(135, 206, 235, 0.85) 0%, 
-      rgba(95, 158, 160, 0.8) 50%, 
-      rgba(70, 130, 180, 0.85) 100%
-    );
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 
-      0 4px 15px rgba(70, 130, 180, 0.3),
-      inset 0 2px 4px rgba(255, 255, 255, 0.5),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .quiz-button-exact:hover {
-    box-shadow: 
-      0 6px 20px rgba(70, 130, 180, 0.4),
-      inset 0 2px 4px rgba(255, 255, 255, 0.6),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  /* System Check Card Exact - Glassmorphism with smooth spread green gradient */
-  .system-check-card-exact {
-    background: linear-gradient(135deg, 
-      rgba(173, 255, 173, 0.6) 0%, 
-      rgba(180, 255, 180, 0.55) 10%,
-      rgba(190, 255, 190, 0.5) 20%,
-      rgba(200, 255, 200, 0.48) 30%,
-      rgba(210, 255, 210, 0.46) 40%,
-      rgba(220, 255, 220, 0.48) 50%,
-      rgba(230, 255, 230, 0.5) 60%,
-      rgba(240, 255, 240, 0.52) 70%,
-      rgba(245, 255, 245, 0.54) 80%,
-      rgba(250, 255, 250, 0.56) 90%,
-      rgba(255, 255, 255, 0.58) 100%
-    );
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-top: 1px solid rgba(255, 255, 255, 0.8);
-    border-left: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 
-      /* Drop shadow */
-      0 20px 40px -8px rgba(0, 0, 0, 0.2), 
-      0 12px 24px -6px rgba(0, 0, 0, 0.15),
-      /* Glass reflection */
-      inset 0 1px 1px rgba(255, 255, 255, 0.9),
-      /* Inner glow gradient - green tones spread smoothly */
-      inset 0 0 60px rgba(144, 238, 144, 0.3),
-      inset 0 0 100px rgba(152, 251, 152, 0.2),
-      inset 0 -30px 60px rgba(200, 255, 200, 0.15);
-  }
-
-  /* System Check Button - Glassmorphism with green gradient */
-  .system-check-button-exact {
-    background: linear-gradient(90deg, 
-      rgba(144, 238, 144, 0.85) 0%, 
-      rgba(124, 205, 124, 0.8) 50%, 
-      rgba(50, 205, 50, 0.85) 100%
-    );
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 
-      0 4px 15px rgba(50, 205, 50, 0.3),
-      inset 0 2px 4px rgba(255, 255, 255, 0.5),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .system-check-button-exact:hover {
-    box-shadow: 
-      0 6px 20px rgba(50, 205, 50, 0.4),
-      inset 0 2px 4px rgba(255, 255, 255, 0.6),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Progress bar gradient - orange gradient (exact match) */
-  .progress-gradient {
-    background: linear-gradient(90deg, #F97316 0%, #FB923C 50%, #FDBA74 100%);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  /* English Highlight - Force bottom positioning */
-  .eng-highlight-bottom {
-    bottom: 0 !important;
-    top: auto !important;
-    transform: translateX(-50%) !important;
-  }
-
-  /* Progress bar gradient exact - vibrant orange with glassmorphism */
-  .progress-gradient-exact {
-    background: linear-gradient(90deg, 
-      rgba(255, 107, 53, 0.9) 0%, 
-      rgba(255, 140, 66, 0.85) 50%, 
-      rgba(255, 160, 122, 0.8) 100%
-    );
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 
-      0 4px 12px rgba(255, 107, 53, 0.4),
-      inset 0 2px 4px rgba(255, 255, 255, 0.4),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Cloud effect */
-  .cloud {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50px;
-    filter: blur(40px);
-  }
-  
-  /* Lotus flower effect */
-  .lotus {
-    background: rgba(251, 182, 206, 0.3);
-    border-radius: 50%;
-    filter: blur(8px);
-  }
-
-  /* Sun Glow Behind Chariot */
-  .sun-glow {
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(circle, rgba(255, 255, 200, 0.6) 0%, rgba(255, 255, 150, 0.4) 40%, rgba(255, 200, 100, 0.2) 70%, transparent 100%);
-    border-radius: 50%;
-    filter: blur(12px);
-    position: relative;
-  }
-
-  .sun-glow::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle, rgba(255, 255, 180, 0.8) 0%, rgba(255, 255, 120, 0.5) 50%, transparent 100%);
-    border-radius: 50%;
-    filter: blur(10px);
-  }
-
-  @media (min-width: 768px) {
-    .sun-glow {
-      width: 280px;
-      height: 280px;
-      filter: blur(20px);
-    }
-
-    .sun-glow::before {
-      width: 200px;
-      height: 200px;
-      filter: blur(15px);
-    }
-  }
-
-  /* Responsive Grid Classes for Dashboard */
-  @media (min-width: 768px) {
-    .dashboard-grid-item-1 { 
-      grid-column: 1 / 5; 
-      grid-row: 1 / 3; 
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      z-index: 1;
-    }
-    .dashboard-grid-item-2 { 
-      grid-column: 5 / 8; 
-      grid-row: 1; 
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      z-index: 1;
-    }
-    .dashboard-grid-item-3 { 
-      grid-column: 8 / 11; 
-      grid-row: 1; 
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      z-index: 1;
-    }
-    .dashboard-grid-item-4 { 
-      grid-column: 5 / 7; 
-      grid-row: 2; 
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      z-index: 1;
-    }
-    .dashboard-grid-item-5 { 
-      grid-column: 7 / 9; 
-      grid-row: 2; 
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      z-index: 1;
-    }
-    .dashboard-grid-item-6 { 
-      grid-column: 9 / 11; 
-      grid-row: 2; 
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      z-index: 1;
-    }
-  }
-  
-  /* Make cards fill their grid items completely */
-  .dashboard-grid-item-1 > *,
-  .dashboard-grid-item-2 > *,
-  .dashboard-grid-item-3 > *,
-  .dashboard-grid-item-4 > *,
-  .dashboard-grid-item-5 > *,
-  .dashboard-grid-item-6 > * {
-    height: 100%;
-    width: 100%;
-    display: block;
-    box-sizing: border-box;
-  }
-  
-  /* Desktop: Make direct children of grid items flex containers for proper height distribution */
-  @media (min-width: 768px) {
-    .dashboard-grid-item-1 > *,
-    .dashboard-grid-item-2 > *,
-    .dashboard-grid-item-3 > *,
-    .dashboard-grid-item-4 > *,
-    .dashboard-grid-item-5 > *,
-    .dashboard-grid-item-6 > * {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-  
-  /* Ensure grid items allow children to grow */
-  @media (min-width: 768px) {
-    .dashboard-grid-item-1,
-    .dashboard-grid-item-2,
-    .dashboard-grid-item-3,
-    .dashboard-grid-item-4,
-    .dashboard-grid-item-5,
-    .dashboard-grid-item-6 {
-      min-height: 0;
-      overflow: visible;
-      position: relative;
-      align-self: stretch;
-    }
-  }
-
-  /* Course Card Image - Glassmorphism with gradient inner glow */
-  .course-card-image {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-    border: 12px solid rgba(255, 255, 255, 0.7);
-    border-radius: 20px;
-    box-shadow: 
-      /* Drop shadow */
-      0 20px 40px -8px rgba(0, 0, 0, 0.25), 
-      0 12px 24px -6px rgba(0, 0, 0, 0.2),
-      /* Outer glow */
-      0 0 30px rgba(255, 255, 255, 0.3),
-      /* Glass reflection */
-      inset 0 1px 1px rgba(255, 255, 255, 0.9),
-      /* Inner glow gradient */
-      inset 0 0 40px rgba(255, 255, 255, 0.5),
-      inset 0 0 80px rgba(200, 220, 255, 0.3);
-    display: block;
-    margin: 0;
-    margin-left: 0;
-    margin-right: auto;
-  }
-  
-  /* Desktop: Ensure equal top and bottom spacing */
-  @media (min-width: 768px) {
-    /* Ensure cards container has bottom gap in desktop - override inline styles */
-    div.max-w-full.mx-auto[style*="paddingBottom"] {
-      padding-bottom: 0 !important;
-      margin-bottom: 20px !important;
-    }
-    
-    /* Ensure responsive container has bottom padding */
-    .ui-responsive-container {
-      padding-bottom: 20px !important;
-    }
-    
-    /* Ensure top spacing between hero and cards - override inline styles */
-    div.max-w-full.mx-auto[style*="marginTop"] {
-      margin-top: 20px !important;
-    }
-  }
-
-  /* ============================================
-     UX ENHANCEMENTS - Smooth Scrolling & Performance
-     ============================================ */
-  
-  /* Custom Scrollbar Styling for Better UX */
+  /* Custom Scrollbar Styling */
   * {
     scrollbar-width: thin;
     scrollbar-color: rgba(139, 92, 246, 0.3) rgba(255, 255, 255, 0.1);
   }
   
   *::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    @apply w-2.5 h-2.5;
   }
   
   *::-webkit-scrollbar-track {
+    @apply rounded-lg;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
   }
   
   *::-webkit-scrollbar-thumb {
+    @apply rounded-lg border-2;
     background: linear-gradient(135deg, 
       rgba(139, 92, 246, 0.4) 0%, 
       rgba(168, 85, 247, 0.5) 50%,
       rgba(196, 181, 253, 0.4) 100%
     );
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
     transition: background 0.3s ease;
   }
   
@@ -1326,22 +108,17 @@
     );
   }
   
-  /* Smooth Scroll Performance Optimization */
+  /* Smooth Scroll Performance */
   .overflow-y-auto,
-  .overflow-x-hidden,
-  [style*="overflow-y-auto"],
-  [style*="overflow-x-hidden"] {
+  .overflow-x-hidden {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     will-change: scroll-position;
   }
   
-  /* Optimize Animation Performance */
+  /* Animation Performance */
   [class*="motion-"],
-  [class*="animate-"],
-  .hero-section-container,
-  .hero-scale-wrapper,
-  .hero-scale-container {
+  [class*="animate-"] {
     will-change: transform, opacity;
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -1352,19 +129,18 @@
   button:focus-visible,
   a:focus-visible,
   [role="button"]:focus-visible {
-    outline: 2px solid rgba(139, 92, 246, 0.8);
-    outline-offset: 2px;
-    border-radius: 4px;
+    @apply outline-2 outline-offset-2 rounded;
+    outline-color: rgba(139, 92, 246, 0.8);
     transition: outline-offset 0.2s ease;
   }
   
   button:focus-visible:active,
   a:focus-visible:active,
   [role="button"]:focus-visible:active {
-    outline-offset: 1px;
+    @apply outline-offset-1;
   }
   
-  /* Reduce Motion for Users Who Prefer It */
+  /* Reduce Motion */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -1386,34 +162,87 @@
     }
   }
   
-  /* Smooth Page Transitions */
-  .ui-responsive-container {
-    transition: opacity 0.3s ease-in-out;
-  }
-  
   /* Prevent Layout Shift on Image Load */
   img {
     content-visibility: auto;
   }
-  
-  /* Optimize Card Hover States */
-  .card-shadow,
-  [class*="card"] {
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  /* Smooth Background Attachment for Better Performance */
-  @media (prefers-reduced-motion: no-preference) {
-    body {
-      background-attachment: fixed;
+
+  /* Responsive Grid Classes for Dashboard */
+  @media (min-width: 768px) {
+    .dashboard-grid-item-1 { 
+      grid-column: 1 / 5; 
+      grid-row: 1 / 3; 
+      @apply flex flex-col relative z-10;
+    }
+    .dashboard-grid-item-2 { 
+      grid-column: 5 / 8; 
+      grid-row: 1; 
+      @apply flex flex-col relative z-10;
+    }
+    .dashboard-grid-item-3 { 
+      grid-column: 8 / 11; 
+      grid-row: 1; 
+      @apply flex flex-col relative z-10;
+    }
+    .dashboard-grid-item-4 { 
+      grid-column: 5 / 7; 
+      grid-row: 2; 
+      @apply flex flex-col relative z-10;
+    }
+    .dashboard-grid-item-5 { 
+      grid-column: 7 / 9; 
+      grid-row: 2; 
+      @apply flex flex-col relative z-10;
+    }
+    .dashboard-grid-item-6 { 
+      grid-column: 9 / 11; 
+      grid-row: 2; 
+      @apply flex flex-col relative z-10;
     }
   }
   
-  @media (prefers-reduced-motion: reduce) {
-    body {
-      background-attachment: scroll;
+  /* Make cards fill their grid items */
+  @media (min-width: 768px) {
+    .dashboard-grid-item-1 > *,
+    .dashboard-grid-item-2 > *,
+    .dashboard-grid-item-3 > *,
+    .dashboard-grid-item-4 > *,
+    .dashboard-grid-item-5 > *,
+    .dashboard-grid-item-6 > * {
+      @apply h-full w-full flex flex-col;
+      box-sizing: border-box;
+    }
+  }
+  
+  /* Mobile viewport fix classes */
+  @media (max-width: 768px) {
+    .mobile-viewport-fix {
+      height: calc(var(--vh, 1vh) * 100);
+      min-height: calc(var(--vh, 1vh) * 100);
+    }
+    
+    .mobile-content-fix {
+      min-height: calc(var(--vh, 1vh) * 105);
+      padding-bottom: calc(var(--vh, 1vh) * 5);
+    }
+  }
+  
+  @media (min-width: 769px) {
+    .mobile-viewport-fix {
+      @apply h-screen min-h-screen;
+    }
+  }
+  
+  /* UI Responsive Container - Desktop zoom */
+  @media (min-width: 768px) {
+    .ui-responsive-container {
+      zoom: 0.67;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .ui-responsive-container {
+      zoom: 1 !important;
     }
   }
 }
-

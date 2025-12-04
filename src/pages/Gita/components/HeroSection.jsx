@@ -78,13 +78,13 @@ const HeroSection = () => {
   }
 
   return (
-    <div className="relative w-full hero-section-container overflow-x-hidden -mx-0 md:-mx-0" style={{ marginLeft: 0, marginRight: 0, paddingLeft: 0, paddingRight: 0 }}>
+    <div className="relative w-full overflow-x-hidden m-0 p-0">
       {/* Hero Section Background with Gradient */}
-      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[38vh] hero-gradient-exact overflow-hidden hero-bottom-rounded md:!min-h-[340px] md:!max-h-[360px]">
+      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[38vh] bg-gita-gradient overflow-hidden rounded-b-hero-bottom-mobile md:rounded-b-hero-bottom-desktop md:min-h-[340px] md:max-h-[360px]">
         {/* Background Design Symbols - Left and Right Top Corners */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
           <motion.div
-            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -left-[60px] sm:-left-[80px] md:-left-[120px]"
+            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -left-16 sm:-left-20 md:-left-32"
             style={{ translateY: '-50%' }}
             animate={{ rotate: 360 }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -96,7 +96,7 @@ const HeroSection = () => {
             />
           </motion.div>
           <motion.div
-            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -right-[60px] sm:-right-[80px] md:-right-[120px]"
+            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -right-16 sm:-right-20 md:-right-32"
             style={{ translateY: '-50%', scaleX: -1 }}
             animate={{ rotate: -360 }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -110,7 +110,7 @@ const HeroSection = () => {
         </div>
 
         {/* Background Clouds - Subtle White Cloud Shapes */}
-        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
+        <div className="absolute inset-0 pointer-events-none z-[2]">
          
           <img 
             src="/images/cloud2.png" 
@@ -125,7 +125,7 @@ const HeroSection = () => {
         </div>
 
         {/* Main Cloud - Desktop: Bottom Right (unchanged) */}
-        <div className="absolute right-0 pointer-events-none hidden md:block" style={{ zIndex: 18, bottom: '-80px' }}>
+        <div className="absolute right-0 pointer-events-none hidden md:block z-[18] -bottom-20">
           <img 
             src="/images/main-cloud.png" 
             alt="Main cloud desktop" 
@@ -216,43 +216,40 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Mobile View - Unchanged */}
-        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-center py-2 sm:py-3 scale-85 sm:scale-90" style={{ zIndex: 10, paddingLeft: '8px', paddingRight: '8px' }}>
+        <div className="relative h-full min-h-80 sm:min-h-96 md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-center py-2 sm:py-3 scale-85 sm:scale-90 px-2" style={{ zIndex: 10 }}>
           {/* Single Blur Rectangle for All Content - Mobile Only */}
-          <div className="hero-unified-blur-background-mobile"></div>
+          <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-80 max-h-80 w-full bg-blur-glass backdrop-blur-lg backdrop-saturate-[150%] rounded-3xl border-2 border-white/70 border-t-white/90 border-b-white/90 border-l-white/80 border-r-white/80 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_4px_16px_rgba(255,255,255,0.3)] z-[1] pointer-events-none overflow-hidden m-0"></div>
           
           {/* Clipping Container for Mobile Cloud - Matches blur rectangle bounds with overflow to show 90% */}
-          <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 pointer-events-none overflow-hidden" style={{ zIndex: 24, height: '320px', maxHeight: '320px', borderRadius: '24px', marginLeft: '8px', marginRight: '8px' }}>
+          <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 pointer-events-none overflow-hidden h-80 max-h-80 rounded-3xl mx-2" style={{ zIndex: 24 }}>
             {/* Mobile Main Cloud - Right bottom, 90% inside, small portion outside */}
-            <div className="absolute pointer-events-none" style={{ right: '-30px', bottom: '-20px' }}>
+            <div className="absolute pointer-events-none -right-8 -bottom-5">
               <img 
                 src="/images/main-cloud.png" 
                 alt="Main cloud mobile" 
-                className="object-contain"
-                style={{ width: '380px', height: 'auto', maxHeight: '190px' }}
+                className="object-contain w-96 max-h-48"
               />
             </div>
           </div>
           
           {/* Mobile Content */}
-          <div className="relative w-full flex flex-col items-center gap-2 sm:gap-3 py-2 sm:py-3" style={{ zIndex: 15, paddingLeft: '8px', paddingRight: '8px' }}>
+          <div className="relative w-full flex flex-col items-center gap-2 sm:gap-3 py-2 sm:py-3 px-2" style={{ zIndex: 15 }}>
             
             {/* Small Clouds Behind Chariot - Mobile and Tablet */}
             {/* Left Small Cloud */}
-            <div className="absolute pointer-events-none block lg:hidden" style={{ zIndex: 12, left: '10%', top: '65%', transform: 'translateY(-50%)' }}>
+            <div className="absolute pointer-events-none block lg:hidden left-[10%] top-[65%] -translate-y-1/2 z-[12]">
               <img 
                 src="/images/cloud2.png" 
                 alt="Small cloud left" 
-                className="object-contain opacity-80"
-                style={{ width: '80px', height: 'auto' }}
+                className="object-contain opacity-80 w-20 h-auto"
               />
             </div>
             {/* Right Small Cloud */}
-            <div className="absolute pointer-events-none block lg:hidden" style={{ zIndex: 12, right: '15%', top: '65%', transform: 'translateY(-50%)' }}>
+            <div className="absolute pointer-events-none block lg:hidden right-[15%] top-[65%] -translate-y-1/2 z-[12]">
               <img 
                 src="/images/cloud2.png" 
                 alt="Small cloud right" 
-                className="object-contain opacity-80"
-                style={{ width: '80px', height: 'auto' }}
+                className="object-contain opacity-80 w-20 h-auto"
               />
             </div>
             
@@ -263,7 +260,7 @@ const HeroSection = () => {
               initial="hidden"
               animate="visible"
             >
-              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight text-white text-center md:text-left font-sans font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] [text-shadow:0_0_2px_rgba(255,127,80,0.6),0_0_4px_rgba(255,140,105,0.5),0_2px_6px_rgba(255,99,71,0.4),0_4px_8px_rgba(255,182,193,0.3)] [-webkit-text-stroke:1px_rgba(255,127,80,0.6)] tracking-tight">
                 Namaste, Krishna! <br className="hidden md:block" />
                Ready for Gita Wisdom - <br className="hidden md:block" />Inner Peace?
               </h1>
@@ -275,7 +272,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                <div className="countdown-timer-box-exact sm:scale-90 md:scale-100">
+                <div className="flex items-center w-fit sm:scale-90 md:scale-100">
                   {/* Om Symbol */}
                   <motion.img 
                     src="/images/om-symbol.png" 
@@ -290,15 +287,15 @@ const HeroSection = () => {
                   
                   {/* Time Boxes with Spacing */}
                   <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 ml-2 sm:ml-3 md:ml-4 sm:flex-wrap">
-                    <span className="countdown-time-box text-lg sm:text-xl md:text-2xl">
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.hours)}
                     </span>
                     <span className="text-white text-lg sm:text-xl md:text-2xl font-bold">:</span>
-                    <span className="countdown-time-box text-lg sm:text-xl md:text-2xl">
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.minutes)}
                     </span>
                     <span className="text-white text-lg sm:text-xl md:text-2xl font-bold">:</span>
-                    <span className="countdown-time-box text-lg sm:text-xl md:text-2xl">
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.seconds)}
                     </span>
                   </div>
@@ -356,7 +353,7 @@ const HeroSection = () => {
                 
                 {/* Chariot - Main Illustration */}
                 <motion.div 
-                  className="w-full max-w-[220px] sm:max-w-[240px] md:max-w-[380px] md:!w-[520px] md:!h-[320px] md:!mt-[45px] h-auto scale-75 sm:scale-75 md:scale-100"
+                  className="w-full max-w-56 sm:max-w-60 md:max-w-96 md:w-[520px] md:h-80 md:mt-12 h-auto scale-75 sm:scale-75 md:scale-100"
                   style={{ zIndex: 20, position: 'relative' }}
                   animate={floatAnimation}
                 >
@@ -376,7 +373,7 @@ const HeroSection = () => {
           {/* Container wrapper with fixed padding that never changes - Full width */}
           <div className="w-full h-full flex items-center justify-center" style={{ paddingLeft: '60px', paddingRight: '60px' }}>
             {/* Blur Rectangle - Relative, no absolute positioning */}
-            <div className="hero-unified-blur-background-tablet-desktop relative w-full flex items-center justify-center" style={{ height: '280px', maxHeight: '280px', minHeight: '280px' }}>
+            <div className="relative w-full flex items-center justify-center h-72 max-h-72 min-h-72 md:h-80 md:max-h-80 md:min-h-80 bg-blur-glass backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[180%] rounded-3xl border-2 border-white/60 border-t-white/75 border-b-white/75 border-l-white/65 border-r-white/65 shadow-[0_8px_32px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(255,255,255,0.3),0_4px_16px_rgba(255,255,255,0.2)] overflow-visible">
               {/* Content inside blur rectangle with internal padding */}
               <div className="w-full flex flex-col md:flex-row items-center gap-4 md:gap-8 lg:gap-12 px-6 md:px-8">
                 
@@ -407,7 +404,7 @@ const HeroSection = () => {
                   initial="hidden"
                   animate="visible"
                 >
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white hero-main-text text-center md:text-left">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white text-center md:text-left font-sans font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] [text-shadow:0_0_2px_rgba(255,127,80,0.6),0_0_4px_rgba(255,140,105,0.5),0_2px_6px_rgba(255,99,71,0.4),0_4px_8px_rgba(255,182,193,0.3)] [-webkit-text-stroke:1px_rgba(255,127,80,0.6)] tracking-tight">
                     Namaste, Krishna! <br className="hidden md:block" />
                    Ready for Gita Wisdom - <br className="hidden md:block" />Inner Peace?
                   </h1>
@@ -419,7 +416,7 @@ const HeroSection = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.6 }}
                   >
-                    <div className="countdown-timer-box-exact">
+                    <div className="flex items-center w-fit">
                       {/* Om Symbol */}
                       <motion.img 
                         src="/images/om-symbol.png" 
@@ -434,15 +431,15 @@ const HeroSection = () => {
                       
                       {/* Time Boxes with Spacing */}
                       <div className="flex items-center gap-2.5 md:gap-3 ml-3 md:ml-4">
-                        <span className="countdown-time-box text-xl md:text-2xl">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.hours)}
                         </span>
                         <span className="text-white text-xl md:text-2xl font-bold">:</span>
-                        <span className="countdown-time-box text-xl md:text-2xl">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.minutes)}
                         </span>
                         <span className="text-white text-xl md:text-2xl font-bold">:</span>
-                        <span className="countdown-time-box text-xl md:text-2xl">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.seconds)}
                         </span>
                       </div>
@@ -527,7 +524,7 @@ const HeroSection = () => {
           whileHover="hover"
           whileTap={{ scale: 0.95 }}
         >
-          <button className="join-now-button-exact-large text-xs sm:text-sm md:text-lg">
+          <button className="bg-join-button border-4 border-yogi-yellow rounded-2xl px-10 py-4 md:px-10 md:py-4 flex items-center gap-2 md:gap-3 shadow-join-button hover:shadow-join-button-hover hover:-translate-y-0.5 transition-all duration-200 relative z-50 cursor-pointer text-xs sm:text-sm md:text-lg text-white font-bold">
             <motion.svg 
               className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 text-yellow-300" 
               fill="currentColor" 
@@ -546,4 +543,5 @@ const HeroSection = () => {
 }
 
 export default HeroSection
+
 

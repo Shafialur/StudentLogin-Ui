@@ -93,7 +93,7 @@ const AssignmentCard = () => {
 
   return (
     <div 
-      className="assignment-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow relative flex flex-col" 
+      className="bg-assignment-card backdrop-blur-lg md:backdrop-blur-xl backdrop-saturate-[180%] border border-white/50 border-t-white/80 border-l-white/60 rounded-2xl p-3 sm:p-4 md:p-6 shadow-card-glass relative flex flex-col h-full w-full" 
       style={{ 
         height: '100%', 
         width: '100%'

@@ -2,7 +2,7 @@ import React from 'react'
 
 const SystemCheckCard = () => {
   return (
-    <div className="system-check-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow flex flex-col" style={{ height: '100%', width: '100%' }}>
+    <div className="bg-system-card backdrop-blur-lg md:backdrop-blur-xl backdrop-saturate-[180%] border border-white/50 border-t-white/80 border-l-white/60 rounded-2xl p-3 sm:p-4 md:p-6 shadow-card-glass flex flex-col h-full w-full">
       <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3 md:mb-4">
         {/* System Check Robot Icon */}
         <img 
@@ -53,7 +53,7 @@ const SystemCheckCard = () => {
         
         {/* Test Connection Button - Light Green to Darker Green Gradient - At Bottom */}
         <div className="mt-auto">
-          <button className="system-check-button-exact w-full text-white font-bold py-2 sm:py-2.5 md:py-3 px-3 sm:px-3.5 md:px-4 rounded-full transition-colors duration-200 flex items-center justify-center gap-1.5 sm:gap-2 shadow-md text-xs sm:text-sm md:text-base">
+          <button className="bg-system-button backdrop-blur-md md:backdrop-blur-lg border border-white/50 rounded-full w-full text-white font-bold py-2 sm:py-2.5 md:py-3 px-3 sm:px-3.5 md:px-4 transition-all duration-200 flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_4px_15px_rgba(50,205,50,0.3),inset_0_2px_4px_rgba(255,255,255,0.5),inset_0_-2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(50,205,50,0.4),inset_0_2px_4px_rgba(255,255,255,0.6),inset_0_-2px_4px_rgba(0,0,0,0.1)] text-xs sm:text-sm md:text-base">
             <span>Test Connection</span>
             <svg 
               className="w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5" 

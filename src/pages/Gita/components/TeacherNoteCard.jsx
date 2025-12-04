@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 const TeacherNoteCard = () => {
   return (
-    <div className="teacher-note-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow relative" style={{ height: '100%', width: '100%' }}>
+    <div className="bg-teacher-card backdrop-blur-lg md:backdrop-blur-xl backdrop-saturate-[180%] border border-white/50 border-t-white/80 border-l-white/60 rounded-2xl p-3 sm:p-4 md:p-6 shadow-card-glass relative h-full w-full">
       {/* Sparkle stars in top right corner */}
       <div className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 flex gap-1 sm:gap-2 z-10">
         <motion.svg 

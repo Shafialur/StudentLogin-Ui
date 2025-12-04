@@ -4,18 +4,7 @@ import { motion } from 'framer-motion'
 const TeacherNoteCard = () => {
   return (
     <div 
-      className="rounded-2xl p-3 sm:p-4 md:p-6 card-shadow relative overflow-hidden" 
-      style={{ 
-        height: '100%', 
-        width: '100%',
-        background: 'linear-gradient(135deg, rgba(250, 200, 230, 0.25) 0%, rgba(240, 200, 250, 0.2) 25%, rgba(220, 200, 255, 0.25) 50%, rgba(200, 220, 255, 0.3) 75%, rgba(180, 230, 255, 0.35) 100%)',
-        backdropFilter: 'blur(20px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-        border: '1px solid rgba(255, 255, 255, 0.5)',
-        borderTop: '1px solid rgba(255, 255, 255, 0.8)',
-        borderLeft: '1px solid rgba(255, 255, 255, 0.6)',
-        boxShadow: '0 20px 40px -8px rgba(0, 0, 0, 0.2), 0 12px 24px -6px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 0 30px rgba(250, 200, 230, 0.4), inset 0 0 60px rgba(200, 180, 255, 0.3), inset 0 -20px 40px rgba(180, 230, 255, 0.25)'
-      }}
+      className="bg-teacher-card backdrop-blur-lg md:backdrop-blur-xl backdrop-saturate-[180%] border border-white/50 border-t-white/80 border-l-white/60 rounded-2xl p-3 sm:p-4 md:p-6 shadow-card-glass relative overflow-hidden h-full w-full"
     >
       {/* Sparkle stars in top right corner */}
       <div className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 flex gap-1 sm:gap-2 z-10">

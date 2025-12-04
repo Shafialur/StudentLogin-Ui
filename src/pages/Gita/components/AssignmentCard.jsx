@@ -92,7 +92,7 @@ const AssignmentCard = () => {
   }
 
   return (
-    <div className="assignment-card-exact rounded-2xl p-3 sm:p-4 md:p-6 card-shadow relative flex flex-col" style={{ height: '100%', width: '100%' }}>
+    <div className="bg-assignment-card backdrop-blur-lg md:backdrop-blur-xl backdrop-saturate-[180%] border border-white/50 border-t-white/80 border-l-white/60 rounded-2xl p-3 sm:p-4 md:p-6 shadow-card-glass relative flex flex-col h-full w-full">
       <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3 md:mb-4">
         {/* Treasure Chest/Box Icon */}
         <img 
@@ -125,7 +125,7 @@ const AssignmentCard = () => {
         <div className="mt-auto">
           <button 
             onClick={() => setShowModal(true)}
-            className="assignment-button-exact w-full text-white font-bold py-2 sm:py-2.5 md:py-3 px-3 sm:px-3.5 md:px-4 rounded-full transition-colors duration-200 flex items-center justify-between shadow-md text-xs sm:text-sm md:text-base"
+            className="bg-assignment-button backdrop-blur-md md:backdrop-blur-lg border border-white/60 rounded-full w-full text-white font-bold py-2 sm:py-2.5 md:py-3 px-3 sm:px-3.5 md:px-4 transition-all duration-200 flex items-center justify-between shadow-[0_4px_15px_rgba(255,215,0,0.25),0_2px_8px_rgba(144,238,144,0.2),inset_0_2px_4px_rgba(255,255,255,0.5),inset_0_-2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(255,215,0,0.35),0_3px_10px_rgba(144,238,144,0.25),inset_0_2px_4px_rgba(255,255,255,0.6),inset_0_-2px_4px_rgba(0,0,0,0.1)] text-xs sm:text-sm md:text-base"
           >
             <span>Upload Your work</span>
             <svg 
