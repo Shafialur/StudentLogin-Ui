@@ -8,7 +8,7 @@ const SystemCheckCard = () => {
         <img 
           src="/images/systemcheck.png" 
           alt="System Check" 
-          className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 object-contain"
+          className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 object-contain"
           style={{ filter: 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.7))' }}
         />
         <h3 className="text-base sm:text-lg md:text-2xl font-bold text-gray-900">System Check</h3>
