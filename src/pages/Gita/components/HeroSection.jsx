@@ -149,7 +149,7 @@ const HeroSection = () => {
           <img 
             src="/images/leaf.png" 
             alt="Leaf" 
-            className="w-32 h-32 object-contain opacity-90 max-w-full h-auto"
+            className="w-32 h-auto object-contain opacity-90 max-w-full"
           />
         </div>
 
@@ -170,7 +170,7 @@ const HeroSection = () => {
           <img 
             src="/images/lotus.png" 
             alt="Lotus flower" 
-            className="w-44 h-44 object-contain opacity-100 max-w-full h-auto"
+            className="w-44 h-auto object-contain opacity-100 max-w-full"
           />
         </motion.div>
 
@@ -190,7 +190,7 @@ const HeroSection = () => {
           <img 
             src="/images/lotus.png" 
             alt="Lotus flower" 
-            className="w-32 h-32 object-contain opacity-80 max-w-full h-auto"
+            className="w-32 h-auto object-contain opacity-80 max-w-full"
           />
         </motion.div>
 
@@ -211,7 +211,7 @@ const HeroSection = () => {
           <img 
             src="/images/lotus1.png" 
             alt="Lotus flower" 
-            className="w-14 h-14 object-contain opacity-100 max-w-full h-auto"
+            className="w-14 h-auto object-contain opacity-100 max-w-full"
           />
         </motion.div>
 
