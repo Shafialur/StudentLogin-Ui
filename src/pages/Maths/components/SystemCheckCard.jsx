@@ -50,9 +50,7 @@ const SystemCheckCard = () => {
         
         {/* Test Connection Button - Green Gradient - At Bottom */}
         <div className="mt-auto">
-          <button className="w-full text-white font-bold py-2.5 sm:py-3 md:py-3.5 px-4 sm:px-5 md:px-6 rounded-full transition-all duration-200 flex items-center justify-center gap-2 sm:gap-2.5 shadow-md text-xs sm:text-sm md:text-base" style={{
-            background: 'linear-gradient(180deg, #90EE90 0%, #32CD32 50%, #228B22 100%)'
-          }}>
+          <button className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 sm:py-3 md:py-3.5 px-4 sm:px-5 md:px-6 rounded-full transition-all duration-200 flex items-center justify-center gap-2 sm:gap-2.5 shadow-md text-xs sm:text-sm md:text-base">
             <span>Test Connection</span>
             <svg 
               className="w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5" 

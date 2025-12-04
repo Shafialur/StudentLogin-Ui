@@ -125,7 +125,7 @@ const AssignmentCard = () => {
         <div className="mt-auto">
           <button 
             onClick={() => setShowModal(true)}
-            className="bg-assignment-button backdrop-blur-sm md:backdrop-blur-md border border-white/60 rounded-full w-full text-white font-extrabold py-1.5 sm:py-2 md:py-2 px-2 sm:px-3 md:px-3 transition-all duration-200 flex items-center justify-between text-[10px] sm:text-xs md:text-xs"
+            className="bg-orange-600 hover:bg-orange-700 backdrop-blur-sm md:backdrop-blur-md border border-white/60 rounded-full w-full text-white font-extrabold py-1.5 sm:py-2 md:py-2 px-2 sm:px-3 md:px-3 transition-all duration-200 flex items-center justify-between text-[10px] sm:text-xs md:text-xs"
           >
             <span>Upload Your work</span>
             <svg 
@@ -233,7 +233,7 @@ const AssignmentCard = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <div 
-                className="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full"
+                className="bg-white rounded-xl p-3 shadow-2xl max-w-xs w-full"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255, 248, 220, 0.95) 0%, rgba(255, 245, 200, 0.95) 100%)',
                   backdropFilter: 'blur(20px)',
@@ -241,17 +241,17 @@ const AssignmentCard = () => {
                   border: '2px solid rgba(255, 255, 255, 0.6)'
                 }}
               >
-                <h3 className="text-2xl font-extrabold text-gray-900 mb-6 text-center">Upload Your Work</h3>
+                <h3 className="text-sm font-extrabold text-gray-900 mb-3 text-center">Upload Your Work</h3>
                 
-                <div className="space-y-4">
+                <div className="space-y-2">
                   {/* Capture Image Option */}
                   <motion.button
                     onClick={handleCaptureImage}
-                    className="w-full p-4 rounded-xl bg-gradient-to-r from-yellow-400 to-orange-400 text-white font-extrabold text-lg flex items-center justify-center gap-3 shadow-lg"
+                    className="w-full p-2 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg hover:bg-blue-700"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
                     </svg>
                     Capture Image
@@ -260,11 +260,11 @@ const AssignmentCard = () => {
                   {/* Upload from Device Option */}
                   <motion.button
                     onClick={handleUploadFromDevice}
-                    className="w-full p-4 rounded-xl bg-gradient-to-r from-green-400 to-blue-400 text-white font-extrabold text-lg flex items-center justify-center gap-3 shadow-lg"
+                    className="w-full p-2 rounded-lg bg-green-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg hover:bg-green-700"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                     </svg>
                     Upload from Device
@@ -273,7 +273,7 @@ const AssignmentCard = () => {
                   {/* Cancel Button */}
                   <motion.button
                     onClick={() => setShowModal(false)}
-                    className="w-full p-3 rounded-xl bg-gray-200 text-gray-700 font-bold hover:bg-gray-300 transition-colors"
+                    className="w-full p-2 rounded-lg bg-gray-600 text-white font-bold text-xs hover:bg-gray-700 transition-colors"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >

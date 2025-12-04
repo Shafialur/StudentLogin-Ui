@@ -127,10 +127,7 @@ const AssignmentCard = () => {
         <div className="mt-auto">
           <button 
             onClick={() => setShowModal(true)}
-            className="w-full text-white font-bold py-2.5 sm:py-3 md:py-3.5 px-4 sm:px-5 md:px-6 rounded-full transition-all duration-200 flex items-center justify-between shadow-md text-xs sm:text-sm md:text-base"
-            style={{
-              background: 'linear-gradient(90deg, #FFD700 0%, #90EE90 50%, #4169E1 100%)'
-            }}
+            className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-2.5 sm:py-3 md:py-3.5 px-4 sm:px-5 md:px-6 rounded-full transition-all duration-200 flex items-center justify-between shadow-md text-xs sm:text-sm md:text-base"
           >
             <span>Upload Your work</span>
             <svg 

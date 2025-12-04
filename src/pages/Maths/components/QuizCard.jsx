@@ -29,9 +29,7 @@ const QuizCard = () => {
         
         {/* Start Quiz Button - Light Blue to Darker Blue Gradient - At Bottom */}
         <div className="mt-auto">
-          <button className="w-full text-white font-bold py-2.5 sm:py-3 md:py-3.5 px-4 sm:px-5 md:px-6 rounded-full transition-all duration-200 flex items-center justify-center gap-2 sm:gap-2.5 shadow-md text-xs sm:text-sm md:text-base" style={{
-            background: 'linear-gradient(90deg, #87CEEB 0%, #4169E1 100%)'
-          }}>
+          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 sm:py-3 md:py-3.5 px-4 sm:px-5 md:px-6 rounded-full transition-all duration-200 flex items-center justify-center gap-2 sm:gap-2.5 shadow-md text-xs sm:text-sm md:text-base">
             <span>Start Quiz</span>
             <div className="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 bg-blue-300 rounded-full flex items-center justify-center" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.8))' }}>
               <svg 
