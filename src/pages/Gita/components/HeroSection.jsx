@@ -144,19 +144,10 @@ const HeroSection = () => {
           />
         </div>
 
-        {/* Leaf - Behind Lotus Bottom Left */}
-        <div className="absolute pointer-events-none hidden md:block" style={{ zIndex: 14, bottom: '-70px', left: '10px' }}>
-          <img 
-            src="/images/leaf.png" 
-            alt="Leaf" 
-            className="w-32 h-auto object-contain opacity-90 max-w-full"
-          />
-        </div>
-
         {/* Pink Lotus Flower - Bottom Left */}
         <motion.div 
-          className="absolute bottom-0 left-0 pointer-events-none hidden md:block" 
-          style={{ zIndex: 15 }}
+          className="absolute pointer-events-none hidden md:block" 
+          style={{ zIndex: 15, bottom: '-20px', left: '-20px' }}
           animate={{ 
             scale: [1, 1.05, 1],
             filter: [
@@ -176,7 +167,7 @@ const HeroSection = () => {
 
         <motion.div 
           className="absolute bottom-[-10px] left-0 pointer-events-none hidden md:block" 
-          style={{ zIndex: 15, left: '45%' }}
+          style={{ zIndex: 15, left: '45%', bottom: '-20px'}}
           animate={{ 
             scale: [1, 1.08, 1],
             filter: [
@@ -218,7 +209,7 @@ const HeroSection = () => {
         {/* Mobile View - Responsive */}
         <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-center py-3 sm:py-4 px-3 sm:px-4" style={{ zIndex: 10 }}>
           {/* Single Blur Rectangle for All Content - Mobile Only */}
-          <div className="absolute top-1/2 left-3 right-3 -translate-y-1/2 h-[280px] sm:h-[320px] max-h-[340px] w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] bg-blur-glass backdrop-blur-sm backdrop-saturate-100 rounded-3xl border border-white/15 z-[1] pointer-events-none overflow-hidden"></div>
+          <div className="absolute top-1/2 left-3 right-3 -translate-y-1/2 h-[280px] sm:h-[320px] max-h-[340px] w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] bg-blur-glass backdrop-blur-sm backdrop-saturate-100 rounded-3xl border border-white/15 z-[1] pointer-events-none overflow-visible"></div>
           
           {/* Clipping Container for Mobile Cloud - Matches blur rectangle bounds with overflow to show 90% */}
           <div className="absolute top-1/2 left-3 right-3 transform -translate-y-1/2 pointer-events-none overflow-hidden h-[280px] sm:h-[320px] max-h-[340px] rounded-3xl" style={{ zIndex: 24 }}>
@@ -233,7 +224,7 @@ const HeroSection = () => {
           </div>
           
           {/* Mobile Content - Optimized Layout */}
-          <div className="relative w-full flex flex-col items-center justify-between h-full py-4 sm:py-5 px-2 sm:px-3" style={{ zIndex: 15, minHeight: '280px' }}>
+          <div className="relative w-full flex flex-col items-center justify-between h-full py-3 sm:py-4 px-2 sm:px-3 overflow-hidden" style={{ zIndex: 15, minHeight: '280px', maxHeight: '100%' }}>
             
             {/* Small Clouds Behind Chariot - Mobile and Tablet */}
             {/* Left Small Cloud */}
@@ -255,12 +246,13 @@ const HeroSection = () => {
             
             {/* Top Section - Text Content */}
             <motion.div 
-              className="w-full flex flex-col items-center text-center flex-shrink-0"
+              className="w-full flex flex-col items-center text-center flex-shrink-0 min-w-0"
               variants={textVariants}
               initial="hidden"
               animate="visible"
+              style={{ maxWidth: '100%', maxHeight: '100%', overflow: 'hidden' }}
             >
-              <h1 className="text-xl sm:text-2xl font-black mb-2 sm:mb-2.5 leading-tight text-white font-rounded tracking-tight px-1" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900 }}>
+              <h1 className="text-xl sm:text-2xl font-black mb-1.5 sm:mb-2 leading-tight text-white font-rounded tracking-tight px-1 w-full" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900, wordWrap: 'break-word', overflowWrap: 'break-word', lineHeight: '1.1', fontSize: 'clamp(1.5rem, 4vw + 0.75rem, 2.25rem)' }}>
                 Namaste, Krishna!<br />
                 Ready for Gita Wisdom -<br />
                 Inner Peace?
@@ -272,31 +264,33 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
+                style={{ maxWidth: '100%', overflow: 'hidden' }}
               >
-                <div className="flex items-center flex-wrap justify-center gap-1.5 sm:gap-2">
+                <div className="flex items-center flex-wrap justify-center gap-1.5 sm:gap-2 max-w-full" style={{ fontSize: 'clamp(0.75rem, 2vw + 0.25rem, 0.875rem)' }}>
                   {/* Om Symbol */}
                   <motion.img 
                     src="/images/om-symbol.png" 
                     alt="Om symbol" 
-                    className="w-7 h-7 sm:w-9 sm:h-9 object-contain flex-shrink-0"
+                    className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0"
                     animate={{ rotate: [0, 5, -5, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    style={{ maxWidth: '100%', height: 'auto', width: 'clamp(2rem, 4vw + 0.5rem, 2.5rem)' }}
                   />
                   
                   {/* Live In Text */}
-                  <span className="text-xs sm:text-sm font-extrabold text-white" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
+                  <span className="font-extrabold text-white flex-shrink-0" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
                   
                   {/* Time Boxes with Spacing */}
-                  <div className="flex items-center gap-1 sm:gap-1.5">
-                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 text-xs sm:text-sm font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                  <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.hours)}
                     </span>
-                    <span className="text-white text-xs sm:text-sm font-extrabold">:</span>
-                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 text-xs sm:text-sm font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                    <span className="text-white font-extrabold">:</span>
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.minutes)}
                     </span>
-                    <span className="text-white text-xs sm:text-sm font-extrabold">:</span>
-                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 text-xs sm:text-sm font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                    <span className="text-white font-extrabold">:</span>
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.seconds)}
                     </span>
                   </div>
@@ -376,7 +370,7 @@ const HeroSection = () => {
             {/* Blur Rectangle - Relative, no absolute positioning */}
             <div className="relative w-full flex items-center justify-center h-64 max-h-64 min-h-64 md:h-64 md:max-h-64 md:min-h-64 bg-blur-glass backdrop-blur-sm backdrop-saturate-100 rounded-3xl border border-white/15 overflow-visible">
               {/* Content inside blur rectangle with internal padding */}
-              <div className="w-full flex flex-col md:flex-row items-center gap-4 md:gap-8 lg:gap-12 px-6 md:px-8">
+              <div className="w-full flex flex-col md:flex-row items-center gap-3 md:gap-6 lg:gap-8 px-4 md:px-6 h-full overflow-visible">
                 
                 {/* Small Clouds Behind Chariot - Tablet Only */}
                 {/* Left Small Cloud */}
@@ -400,47 +394,50 @@ const HeroSection = () => {
                 
                 {/* Left Side - Text Content */}
                 <motion.div 
-                  className="flex-1 w-full md:w-auto flex flex-col items-center md:items-start ml-20 md:ml-24 lg:ml-28"
+                  className="flex-1 w-full md:w-auto flex flex-col items-center md:items-start justify-center ml-16 md:ml-20 lg:ml-24 shrink min-w-0"
                   variants={textVariants}
                   initial="hidden"
                   animate="visible"
+                  style={{ maxWidth: '100%', maxHeight: '100%', overflow: 'hidden' }}
                 >
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 leading-tight text-white text-center md:text-left font-rounded tracking-tight" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900 }}>
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black mb-2 md:mb-3 lg:mb-4 leading-tight text-white text-center md:text-left font-rounded tracking-tight w-full" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900, wordWrap: 'break-word', overflowWrap: 'break-word', lineHeight: '1.1', fontSize: 'clamp(1.75rem, 2vw + 1rem, 4rem)' }}>
                     Namaste, Krishna! <br className="hidden md:block" />
                    Ready for Gita Wisdom - <br className="hidden md:block" />Inner Peace?
                   </h1>
                   
                   {/* Countdown Timer */}
                   <motion.div
-                    className="w-full flex justify-center md:justify-start"
+                    className="w-full flex justify-center md:justify-start flex-shrink-0"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.6 }}
+                    style={{ maxWidth: '100%', overflow: 'hidden' }}
                   >
-                    <div className="flex items-center w-fit">
+                    <div className="flex items-center w-fit flex-wrap max-w-full" style={{ fontSize: 'clamp(0.875rem, 1.5vw + 0.25rem, 1.5rem)' }}>
                       {/* Om Symbol */}
                       <motion.img 
                         src="/images/om-symbol.png" 
                         alt="Om symbol" 
-                        className="w-12 md:w-14 object-contain flex-shrink-0"
+                        className="w-12 md:w-14 lg:w-16 object-contain flex-shrink-0"
                         animate={{ rotate: [0, 5, -5, 0] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        style={{ maxWidth: '100%', height: 'auto', width: 'clamp(3rem, 3vw + 0.75rem, 4rem)' }}
                       />
                       
                       {/* Live In Text */}
-                      <span className="text-lg md:text-xl font-extrabold text-white ml-3 md:ml-4" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
+                      <span className="font-extrabold text-white ml-2 md:ml-3 lg:ml-4 flex-shrink-0" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
                       
                       {/* Time Boxes with Spacing */}
-                      <div className="flex items-center gap-2.5 md:gap-3 ml-3 md:ml-4">
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-extrabold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                      <div className="flex items-center gap-2 md:gap-2.5 lg:gap-3 ml-2 md:ml-3 lg:ml-4 flex-shrink-0">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 font-extrabold font-mono text-white min-w-10 md:min-w-12 lg:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.hours)}
                         </span>
-                        <span className="text-white text-xl md:text-2xl font-extrabold">:</span>
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-extrabold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                        <span className="text-white font-extrabold">:</span>
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 font-extrabold font-mono text-white min-w-10 md:min-w-12 lg:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.minutes)}
                         </span>
-                        <span className="text-white text-xl md:text-2xl font-extrabold">:</span>
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-extrabold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                        <span className="text-white font-extrabold">:</span>
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 font-extrabold font-mono text-white min-w-10 md:min-w-12 lg:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.seconds)}
                         </span>
                       </div>
