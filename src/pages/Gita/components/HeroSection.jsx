@@ -135,12 +135,12 @@ const HeroSection = () => {
         </div>
 
         {/* Cloud at Bottom of Hero Section - Behind Chariot */}
-        <div className="absolute bottom-0 pointer-events-none hidden md:block" style={{ zIndex: 8, left: '55%', transform: 'translateX(-50%)' }}>
+        <div className="absolute bottom-[-20px] pointer-events-none hidden md:block" style={{ zIndex: 8, left: '55%', transform: 'translateX(-50%)' }}>
           <img 
             src="/images/cloud2.png" 
             alt="Cloud at bottom" 
             className="object-contain opacity-80 max-w-full h-auto"
-            style={{ width: '600px', height: 'auto' }}
+            style={{ width: '650px', height: 'auto' }}
           />
         </div>
 
@@ -327,7 +327,7 @@ const HeroSection = () => {
                     src="/images/cloud2.png" 
                     alt="Small cloud near chariot" 
                     className="object-contain opacity-100 max-w-full h-auto"
-                    style={{ width: '150px', height: 'auto' }}
+                    style={{ width: '200px', height: 'auto' }}
                   />
                 </motion.div>
                 
@@ -474,7 +474,7 @@ const HeroSection = () => {
                         src="/images/cloud2.png" 
                         alt="Small cloud near chariot" 
                         className="object-contain opacity-100 max-w-full h-auto"
-                        style={{ width: '150px', height: 'auto' }}
+                        style={{ width: '200px', height: 'auto' }}
                       />
                     </motion.div>
                     
