@@ -80,7 +80,7 @@ const HeroSection = () => {
   return (
     <div className="relative w-full overflow-x-hidden m-0 p-0">
       {/* Hero Section Background with Gradient */}
-      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[38vh] bg-gita-gradient overflow-hidden rounded-b-hero-bottom-mobile md:rounded-b-hero-bottom-desktop md:min-h-[340px] md:max-h-[360px]">
+      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[36vh] bg-gita-gradient overflow-hidden rounded-b-hero-bottom-mobile md:rounded-b-hero-bottom-desktop md:min-h-[320px] md:max-h-[340px]">
         {/* Background Design Symbols - Left and Right Top Corners */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
           <motion.div
@@ -215,87 +215,88 @@ const HeroSection = () => {
           />
         </motion.div>
 
-        {/* Mobile View - Unchanged */}
-        <div className="relative h-full min-h-80 sm:min-h-96 md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-center py-2 sm:py-3 scale-85 sm:scale-90 px-2" style={{ zIndex: 10 }}>
+        {/* Mobile View - Responsive */}
+        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-center py-3 sm:py-4 px-3 sm:px-4" style={{ zIndex: 10 }}>
           {/* Single Blur Rectangle for All Content - Mobile Only */}
-          <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-80 max-h-80 w-full bg-blur-glass backdrop-blur-lg backdrop-saturate-[150%] rounded-3xl border-2 border-white/70 border-t-white/90 border-b-white/90 border-l-white/80 border-r-white/80 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_4px_16px_rgba(255,255,255,0.3)] z-[1] pointer-events-none overflow-hidden m-0"></div>
+          <div className="absolute top-1/2 left-3 right-3 -translate-y-1/2 h-[280px] sm:h-[320px] max-h-[340px] w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] bg-blur-glass backdrop-blur-sm backdrop-saturate-100 rounded-3xl border border-white/15 z-[1] pointer-events-none overflow-hidden"></div>
           
           {/* Clipping Container for Mobile Cloud - Matches blur rectangle bounds with overflow to show 90% */}
-          <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 pointer-events-none overflow-hidden h-80 max-h-80 rounded-3xl mx-2" style={{ zIndex: 24 }}>
+          <div className="absolute top-1/2 left-3 right-3 transform -translate-y-1/2 pointer-events-none overflow-hidden h-[280px] sm:h-[320px] max-h-[340px] rounded-3xl" style={{ zIndex: 24 }}>
             {/* Mobile Main Cloud - Right bottom, 90% inside, small portion outside */}
-            <div className="absolute pointer-events-none -right-8 -bottom-5">
+            <div className="absolute pointer-events-none -right-4 sm:-right-6 -bottom-3 sm:-bottom-4">
               <img 
                 src="/images/main-cloud.png" 
                 alt="Main cloud mobile" 
-                className="object-contain w-96 max-h-48"
+                className="object-contain w-64 h-auto sm:w-80 sm:max-h-40"
               />
             </div>
           </div>
           
-          {/* Mobile Content */}
-          <div className="relative w-full flex flex-col items-center gap-2 sm:gap-3 py-2 sm:py-3 px-2" style={{ zIndex: 15 }}>
+          {/* Mobile Content - Optimized Layout */}
+          <div className="relative w-full flex flex-col items-center justify-between h-full py-4 sm:py-5 px-2 sm:px-3" style={{ zIndex: 15, minHeight: '280px' }}>
             
             {/* Small Clouds Behind Chariot - Mobile and Tablet */}
             {/* Left Small Cloud */}
-            <div className="absolute pointer-events-none block lg:hidden left-[10%] top-[65%] -translate-y-1/2 z-[12]">
+            <div className="absolute pointer-events-none block lg:hidden left-[3%] sm:left-[8%] top-[55%] sm:top-[60%] -translate-y-1/2 z-[12]">
               <img 
                 src="/images/cloud2.png" 
                 alt="Small cloud left" 
-                className="object-contain opacity-80 w-20 h-auto"
+                className="object-contain opacity-80 w-14 h-auto sm:w-18"
               />
             </div>
             {/* Right Small Cloud */}
-            <div className="absolute pointer-events-none block lg:hidden right-[15%] top-[65%] -translate-y-1/2 z-[12]">
+            <div className="absolute pointer-events-none block lg:hidden right-[3%] sm:right-[12%] top-[55%] sm:top-[60%] -translate-y-1/2 z-[12]">
               <img 
                 src="/images/cloud2.png" 
                 alt="Small cloud right" 
-                className="object-contain opacity-80 w-20 h-auto"
+                className="object-contain opacity-80 w-14 h-auto sm:w-18"
               />
             </div>
             
-            {/* Left Side - Text Content */}
+            {/* Top Section - Text Content */}
             <motion.div 
-              className="flex-1 pl-0 w-full md:w-auto md:!-ml-8 flex flex-col items-center md:items-start"
+              className="w-full flex flex-col items-center text-center flex-shrink-0"
               variants={textVariants}
               initial="hidden"
               animate="visible"
             >
-              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight text-white text-center md:text-left font-sans font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] [text-shadow:0_0_2px_rgba(255,127,80,0.6),0_0_4px_rgba(255,140,105,0.5),0_2px_6px_rgba(255,99,71,0.4),0_4px_8px_rgba(255,182,193,0.3)] [-webkit-text-stroke:1px_rgba(255,127,80,0.6)] tracking-tight">
-                Namaste, Krishna! <br className="hidden md:block" />
-               Ready for Gita Wisdom - <br className="hidden md:block" />Inner Peace?
+              <h1 className="text-xl sm:text-2xl font-black mb-2 sm:mb-2.5 leading-tight text-white font-rounded tracking-tight px-1" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900 }}>
+                Namaste, Krishna!<br />
+                Ready for Gita Wisdom -<br />
+                Inner Peace?
               </h1>
               
               {/* Countdown Timer */}
               <motion.div
-                className="w-full flex justify-center md:justify-start"
+                className="w-full flex justify-center mt-1 sm:mt-1.5"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                <div className="flex items-center w-fit sm:scale-90 md:scale-100">
+                <div className="flex items-center flex-wrap justify-center gap-1.5 sm:gap-2">
                   {/* Om Symbol */}
                   <motion.img 
                     src="/images/om-symbol.png" 
                     alt="Om symbol" 
-                    className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain flex-shrink-0"
+                    className="w-7 h-7 sm:w-9 sm:h-9 object-contain flex-shrink-0"
                     animate={{ rotate: [0, 5, -5, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   />
                   
                   {/* Live In Text */}
-                  <span className="text-base sm:text-lg md:text-xl font-bold text-white ml-2 sm:ml-3 md:ml-4" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
+                  <span className="text-xs sm:text-sm font-extrabold text-white" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
                   
                   {/* Time Boxes with Spacing */}
-                  <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 ml-2 sm:ml-3 md:ml-4 sm:flex-wrap">
-                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                  <div className="flex items-center gap-1 sm:gap-1.5">
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 text-xs sm:text-sm font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.hours)}
                     </span>
-                    <span className="text-white text-lg sm:text-xl md:text-2xl font-bold">:</span>
-                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                    <span className="text-white text-xs sm:text-sm font-extrabold">:</span>
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 text-xs sm:text-sm font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.minutes)}
                     </span>
-                    <span className="text-white text-lg sm:text-xl md:text-2xl font-bold">:</span>
-                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-lg sm:text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                    <span className="text-white text-xs sm:text-sm font-extrabold">:</span>
+                    <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 text-xs sm:text-sm font-extrabold font-mono text-white min-w-[2.25rem] sm:min-w-10 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                       {formatTime(timeLeft.seconds)}
                     </span>
                   </div>
@@ -303,15 +304,15 @@ const HeroSection = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right Side - Chariot */}
+            {/* Bottom Section - Chariot */}
             <motion.div 
-              className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto md:!mr-[-60px] -mt-2 md:mt-0" 
+              className="flex-shrink-0 flex justify-center w-full mt-auto" 
               style={{ zIndex: 20 }}
               variants={chariotVariants}
               initial="hidden"
               animate="visible"
             >
-              <div className="flex flex-col items-center justify-center relative translate-y-0 md:!-translate-y-[30px]">
+              <div className="flex flex-col items-center justify-center relative">
                 {/* Sun Behind Chariot */}
                 <motion.div 
                   className="absolute block -top-[8%] md:top-[0%]" 
@@ -353,7 +354,7 @@ const HeroSection = () => {
                 
                 {/* Chariot - Main Illustration */}
                 <motion.div 
-                  className="w-full max-w-56 sm:max-w-60 md:max-w-96 md:w-[520px] md:h-80 md:mt-12 h-auto scale-75 sm:scale-75 md:scale-100"
+                  className="w-full max-w-[160px] sm:max-w-[200px] md:max-w-96 md:w-[520px] md:h-80 md:mt-12 h-auto"
                   style={{ zIndex: 20, position: 'relative' }}
                   animate={floatAnimation}
                 >
@@ -369,11 +370,11 @@ const HeroSection = () => {
         </div>
 
         {/* Tablet and Desktop View - Container-based blur rectangle */}
-        <div className="relative h-full min-h-0 hidden md:block w-full py-6 md:py-8" style={{ zIndex: 10 }}>
+        <div className="relative h-full min-h-0 hidden md:block w-full py-6 md:py-4" style={{ zIndex: 10 }}>
           {/* Container wrapper with fixed padding that never changes - Full width */}
           <div className="w-full h-full flex items-center justify-center" style={{ paddingLeft: '60px', paddingRight: '60px' }}>
             {/* Blur Rectangle - Relative, no absolute positioning */}
-            <div className="relative w-full flex items-center justify-center h-72 max-h-72 min-h-72 md:h-80 md:max-h-80 md:min-h-80 bg-blur-glass backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[180%] rounded-3xl border-2 border-white/60 border-t-white/75 border-b-white/75 border-l-white/65 border-r-white/65 shadow-[0_8px_32px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(255,255,255,0.3),0_4px_16px_rgba(255,255,255,0.2)] overflow-visible">
+            <div className="relative w-full flex items-center justify-center h-64 max-h-64 min-h-64 md:h-64 md:max-h-64 md:min-h-64 bg-blur-glass backdrop-blur-sm backdrop-saturate-100 rounded-3xl border border-white/15 overflow-visible">
               {/* Content inside blur rectangle with internal padding */}
               <div className="w-full flex flex-col md:flex-row items-center gap-4 md:gap-8 lg:gap-12 px-6 md:px-8">
                 
@@ -404,7 +405,7 @@ const HeroSection = () => {
                   initial="hidden"
                   animate="visible"
                 >
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight text-white text-center md:text-left font-sans font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] [text-shadow:0_0_2px_rgba(255,127,80,0.6),0_0_4px_rgba(255,140,105,0.5),0_2px_6px_rgba(255,99,71,0.4),0_4px_8px_rgba(255,182,193,0.3)] [-webkit-text-stroke:1px_rgba(255,127,80,0.6)] tracking-tight">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 leading-tight text-white text-center md:text-left font-rounded tracking-tight" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900 }}>
                     Namaste, Krishna! <br className="hidden md:block" />
                    Ready for Gita Wisdom - <br className="hidden md:block" />Inner Peace?
                   </h1>
@@ -427,19 +428,19 @@ const HeroSection = () => {
                       />
                       
                       {/* Live In Text */}
-                      <span className="text-lg md:text-xl font-bold text-white ml-3 md:ml-4" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
+                      <span className="text-lg md:text-xl font-extrabold text-white ml-3 md:ml-4" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
                       
                       {/* Time Boxes with Spacing */}
                       <div className="flex items-center gap-2.5 md:gap-3 ml-3 md:ml-4">
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-extrabold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.hours)}
                         </span>
-                        <span className="text-white text-xl md:text-2xl font-bold">:</span>
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                        <span className="text-white text-xl md:text-2xl font-extrabold">:</span>
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-extrabold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.minutes)}
                         </span>
-                        <span className="text-white text-xl md:text-2xl font-bold">:</span>
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-bold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                        <span className="text-white text-xl md:text-2xl font-extrabold">:</span>
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xl md:text-2xl font-extrabold font-mono text-white min-w-12 md:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.seconds)}
                         </span>
                       </div>
@@ -515,8 +516,8 @@ const HeroSection = () => {
         </div>
 
         {/* Join Now Button - Right Side of Hero Section - Smaller on Mobile */}
-        <motion.div 
-          className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 md:bottom-8 md:right-8 scale-[0.45] sm:scale-60 md:scale-100" 
+          <motion.div
+          className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 md:bottom-8 md:right-8" 
           style={{ zIndex: 50 }}
           variants={buttonVariants}
           initial="hidden"
@@ -524,9 +525,9 @@ const HeroSection = () => {
           whileHover="hover"
           whileTap={{ scale: 0.95 }}
         >
-          <button className="bg-join-button border-4 border-yogi-yellow rounded-2xl px-10 py-4 md:px-10 md:py-4 flex items-center gap-2 md:gap-3 shadow-join-button hover:shadow-join-button-hover hover:-translate-y-0.5 transition-all duration-200 relative z-50 cursor-pointer text-xs sm:text-sm md:text-lg text-white font-bold">
+          <button className="bg-join-button border-2 sm:border-3 md:border-4 border-yogi-yellow rounded-xl sm:rounded-2xl px-4 py-2 sm:px-6 sm:py-3 md:px-10 md:py-4 flex items-center gap-1 sm:gap-2 md:gap-3 shadow-join-button hover:shadow-join-button-hover hover:-translate-y-0.5 transition-all duration-200 relative z-50 cursor-pointer text-[10px] sm:text-xs md:text-lg text-white font-extrabold">
             <motion.svg 
-              className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 text-yellow-300" 
+              className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-6 md:h-6 text-yellow-300" 
               fill="currentColor" 
               viewBox="0 0 20 20"
               animate={{ rotate: [0, 10, -10, 0] }}
@@ -534,7 +535,7 @@ const HeroSection = () => {
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </motion.svg>
-            <span className="text-white font-bold text-xs sm:text-sm md:text-xl ml-0.5 sm:ml-1 md:ml-2">Join Now</span>
+            <span className="text-white font-extrabold text-[10px] sm:text-xs md:text-xl">Join Now</span>
           </button>
         </motion.div>
       </div>

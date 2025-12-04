@@ -14,12 +14,12 @@ const ProgressCard = () => {
   }, [progress])
   
   return (
-    <div className="bg-progress-card backdrop-blur-lg md:backdrop-blur-xl backdrop-saturate-[180%] border border-white/60 border-t-white/90 border-l-white/70 rounded-2xl p-3 sm:p-4 md:p-6 shadow-card h-full w-full">
-      <h3 className="text-base sm:text-lg md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">Your Progress</h3>
+    <div className="bg-progress-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 h-full w-full">
+      <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 md:mb-1.5">Your Progress</h3>
       
-      <div className="space-y-4 sm:space-y-5 md:space-y-7">
+      <div className="space-y-3 sm:space-y-4 md:space-y-2">
         {/* Progress Bar - Glass background */}
-        <div className="relative h-8 sm:h-9 md:h-10 rounded-full overflow-visible mt-6 sm:mt-8 md:mt-10" style={{ 
+        <div className="relative h-7 sm:h-8 md:h-7 rounded-full overflow-visible mt-4 sm:mt-6 md:mt-3" style={{ 
           borderRadius: '9999px',
           background: 'rgba(255, 255, 255, 0.4)',
           backdropFilter: 'blur(10px)',
@@ -29,7 +29,7 @@ const ProgressCard = () => {
         }}>
           {/* Progress fill - Orange with rounded caps */}
           <motion.div 
-            className="absolute left-0 top-0 h-full bg-progress-bar backdrop-blur sm:backdrop-blur-md shadow-[0_4px_12px_rgba(255,107,53,0.4),inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-2px_4px_rgba(0,0,0,0.1)]" 
+            className="absolute left-0 top-0 h-full bg-progress-bar backdrop-blur-sm" 
             initial={{ width: 0 }}
             animate={{ width: `${animatedProgress}%` }}
             transition={{ duration: 1.5, ease: "easeOut" }}
@@ -53,7 +53,7 @@ const ProgressCard = () => {
             }}
           >
             <motion.svg 
-              className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-yellow-400" 
+              className="w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6 text-yellow-400" 
               fill="currentColor" 
               viewBox="0 0 20 20" 
               style={{ filter: 'drop-shadow(0 0 12px rgba(251, 191, 36, 0.9))' }}
@@ -85,7 +85,7 @@ const ProgressCard = () => {
             <img 
               src="/images/progresschariot.png" 
               alt="Progress chariot" 
-              className="object-contain w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 lg:w-28 lg:h-28"
+              className="object-contain w-12 h-12 sm:w-16 sm:h-16 md:w-16 md:h-16 lg:w-18 lg:h-18"
               style={{ 
                 filter: 'drop-shadow(0 0 15px rgba(255, 140, 0, 0.6))' 
               }}
@@ -103,7 +103,7 @@ const ProgressCard = () => {
             <img 
               src="/images/progressendtemple.png" 
               alt="Temple" 
-              className="object-contain w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 lg:w-24 lg:h-24"
+              className="object-contain w-10 h-10 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16"
               style={{ 
                 filter: 'drop-shadow(0 0 12px rgba(139, 69, 19, 0.5))' 
               }}
@@ -111,10 +111,10 @@ const ProgressCard = () => {
           </div>
         </div>
         
-        {/* Progress Text - Centered */}
-        <div className="flex items-center justify-center whitespace-nowrap">
-          <span className="text-xs sm:text-sm md:text-lg font-bold text-gray-900">Dharma Path : </span>
-          <span className="text-xs sm:text-sm md:text-lg font-bold text-blue-600">24/96 Classes Completed</span>
+        {/* Progress Text - Full Width */}
+        <div className="flex items-center justify-between w-full flex-wrap gap-1">
+          <span className="text-[10px] sm:text-xs md:text-sm font-extrabold text-gray-900">Dharma Path : </span>
+          <span className="text-[10px] sm:text-xs md:text-sm font-extrabold text-blue-600">24/96 Classes Completed</span>
         </div>
       </div>
     </div>

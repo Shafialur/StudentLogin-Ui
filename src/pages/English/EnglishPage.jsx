@@ -90,21 +90,15 @@ const EnglishPage = () => {
   return (
     <div 
       ref={scrollContainerRef}
-      className="w-full m-0 p-0 max-w-full overflow-y-auto overflow-x-hidden mobile-viewport-fix scroll-smooth"
-      style={{ scrollSnapType: 'y proximity' }}
+      className="m-0 p-0 w-full max-w-full overflow-y-auto md:overflow-y-auto overflow-x-hidden relative mobile-content-fix bg-page-overlay bg-cover bg-center bg-no-repeat bg-fixed flex justify-center items-start scroll-smooth"
+      style={{ backgroundImage: 'url(/images/backgorund.png)', scrollSnapType: 'y proximity' }}
     >
+      {/* Responsive Container - Makes UI appear exactly the same on all laptop screens */}
       <div 
-        className="m-0 p-0 w-full max-w-full overflow-y-auto md:overflow-y-auto overflow-x-hidden relative mobile-content-fix bg-page-overlay bg-cover bg-center bg-no-repeat bg-fixed flex justify-center items-start"
-        style={{ backgroundImage: 'url(/images/backgorund.png)' }}
+        className="ui-responsive-container sm:min-h-screen md:min-h-screen w-full max-w-full m-0 md:flex md:flex-col md:pb-5 relative pb-0.5"
       >
-        {/* Responsive Container - Makes UI appear exactly the same on all laptop screens */}
-        <div 
-          className="ui-responsive-container sm:min-h-screen md:min-h-screen w-full max-w-full m-0 md:flex md:flex-col md:pb-5 relative pb-0.5"
-        >
         {/* Hero Section */}
-        <div className="md:flex-shrink-0 relative z-20">
-          <HeroSection />
-        </div>
+        <HeroSection />
 
         {/* Dashboard Cards Section - Fixed gaps that never change */}
       <div className="max-w-full mx-auto px-0 sm:px-0 md:px-[60px] scale-100 sm:scale-100 md:scale-100 md:flex-1 md:flex md:flex-col relative z-10 md:mt-5 md:mb-5 pt-0 pb-0">
@@ -231,7 +225,6 @@ const EnglishPage = () => {
       </div>
       </div>
       <BottomNavigation />
-    </div>
     </div>
   )
 }

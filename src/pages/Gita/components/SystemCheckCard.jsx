@@ -2,58 +2,58 @@ import React from 'react'
 
 const SystemCheckCard = () => {
   return (
-    <div className="bg-system-card backdrop-blur-lg md:backdrop-blur-xl backdrop-saturate-[180%] border border-white/50 border-t-white/80 border-l-white/60 rounded-2xl p-3 sm:p-4 md:p-6 shadow-card-glass flex flex-col h-full w-full">
-      <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3 md:mb-4">
+    <div className="bg-system-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 flex flex-col h-full w-full">
+      <div className="flex items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2 md:mb-1.5">
         {/* System Check Robot Icon */}
         <img 
           src="/images/systemcheck.png" 
           alt="System Check" 
-          className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 object-contain"
+          className="w-4 h-4 sm:w-5 sm:h-5 md:w-5 md:h-5 object-contain"
           style={{ filter: 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.7))' }}
         />
-        <h3 className="text-base sm:text-lg md:text-2xl font-bold text-gray-900">System Check</h3>
+        <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900">System Check</h3>
       </div>
       
       <div className="flex-1 flex flex-col">
         {/* Status Indicators - Horizontal Layout with Labels Below */}
-        <div className="flex items-center justify-around mb-3 sm:mb-4 md:mb-5">
+        <div className="flex items-center justify-around mb-2 sm:mb-3 md:mb-2">
           {/* Video */}
-          <div className="flex flex-col items-center gap-1 sm:gap-1.5 md:gap-2">
+          <div className="flex flex-col items-center gap-0.5 sm:gap-1 md:gap-0.5">
             <img 
               src="/images/video.png" 
               alt="Video" 
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 object-contain"
               style={{ filter: 'drop-shadow(0 0 12px rgba(59, 130, 246, 0.8))' }}
             />
-            <span className="font-bold text-gray-900 text-xs sm:text-sm md:text-lg">Video</span>
+            <span className="font-extrabold text-gray-900 text-[10px] sm:text-xs md:text-xs">Video</span>
           </div>
           
           {/* Audio */}
-          <div className="flex flex-col items-center gap-1 sm:gap-1.5 md:gap-2">
+          <div className="flex flex-col items-center gap-0.5 sm:gap-1 md:gap-0.5">
             <img 
               src="/images/audio.png" 
               alt="Audio" 
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 object-contain"
               style={{ filter: 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.8))' }}
             />
-            <span className="font-bold text-gray-900 text-xs sm:text-sm md:text-lg">Audio</span>
+            <span className="font-extrabold text-gray-900 text-[10px] sm:text-xs md:text-xs">Audio</span>
           </div>
           
           {/* Network */}
-          <div className="flex flex-col items-center gap-1 sm:gap-1.5 md:gap-2">
+          <div className="flex flex-col items-center gap-0.5 sm:gap-1 md:gap-0.5">
             <img 
               src="/images/network.png" 
               alt="Network" 
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 object-contain"
               style={{ filter: 'drop-shadow(0 0 12px rgba(249, 115, 22, 0.8))' }}
             />
-            <span className="font-bold text-gray-900 text-xs sm:text-sm md:text-lg">Network</span>
+            <span className="font-extrabold text-gray-900 text-[10px] sm:text-xs md:text-xs">Network</span>
           </div>
         </div>
         
         {/* Test Connection Button - Light Green to Darker Green Gradient - At Bottom */}
         <div className="mt-auto">
-          <button className="bg-system-button backdrop-blur-md md:backdrop-blur-lg border border-white/50 rounded-full w-full text-white font-bold py-2 sm:py-2.5 md:py-3 px-3 sm:px-3.5 md:px-4 transition-all duration-200 flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_4px_15px_rgba(50,205,50,0.3),inset_0_2px_4px_rgba(255,255,255,0.5),inset_0_-2px_4px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(50,205,50,0.4),inset_0_2px_4px_rgba(255,255,255,0.6),inset_0_-2px_4px_rgba(0,0,0,0.1)] text-xs sm:text-sm md:text-base">
+          <button className="bg-system-button backdrop-blur-sm md:backdrop-blur-md border border-white/50 rounded-full w-full text-white font-extrabold py-1.5 sm:py-2 md:py-2 px-2 sm:px-3 md:px-3 transition-all duration-200 flex items-center justify-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs md:text-xs">
             <span>Test Connection</span>
             <svg 
               className="w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5" 
