@@ -113,10 +113,10 @@ const HeroSection = () => {
                 style={{ maxWidth: '100%', overflow: 'hidden' }}
               >
                 <div className="flex items-center flex-wrap justify-center gap-1.5 sm:gap-2 max-w-full" style={{ fontSize: 'clamp(0.75rem, 2vw + 0.25rem, 0.875rem)' }}>
-                  {/* Om Symbol */}
+                  {/* English Clock */}
                   <motion.img 
-                    src="/images/om-symbol.png" 
-                    alt="Om symbol" 
+                    src="/images/eng-clock.png" 
+                    alt="English clock" 
                     className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0"
                     animate={{ rotate: [0, 5, -5, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -146,6 +146,31 @@ const HeroSection = () => {
 
           </div>
         </div>
+
+
+        {/* eng-highlight.png - Center Horizontal, Bottom Vertical - Mobile */}
+        <motion.img 
+          src="/images/eng-highlight.png" 
+          alt="English highlight" 
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-auto object-contain opacity-100 pointer-events-none md:hidden"
+          style={{ zIndex: 20 }}
+          animate={{ 
+            y: [0, -5, 0]
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* eng-cat.png - Left Bottom Corner - Mobile */}
+        <motion.img 
+          src="/images/eng-cat.png" 
+          alt="English cat" 
+          className="absolute bottom-0 left-0 w-24 h-auto object-contain opacity-100 pointer-events-none md:hidden"
+          style={{ zIndex: 21 }}
+          animate={{ 
+            y: [0, -5, 0]
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        />
 
         {/* Tablet and Desktop View - Container-based blur rectangle */}
         <div className="relative h-full min-h-0 hidden md:block w-full py-6 md:py-4" style={{ zIndex: 10 }}>
@@ -178,10 +203,10 @@ const HeroSection = () => {
                     style={{ maxWidth: '100%', overflow: 'hidden' }}
                   >
                     <div className="flex items-center w-fit flex-wrap max-w-full" style={{ fontSize: 'clamp(0.875rem, 1.5vw + 0.25rem, 1.5rem)' }}>
-                      {/* Om Symbol */}
+                      {/* English Clock */}
                       <motion.img 
-                        src="/images/om-symbol.png" 
-                        alt="Om symbol" 
+                        src="/images/eng-clock.png" 
+                        alt="English clock" 
                         className="w-12 md:w-14 lg:w-16 object-contain flex-shrink-0"
                         animate={{ rotate: [0, 5, -5, 0] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -213,6 +238,82 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+
+        {/* Cloud 1 - Center of Hero - Desktop */}
+        <motion.img 
+          src="/images/eng-cloud.png" 
+          alt="English cloud" 
+          className="absolute top-8 left-1/2 -translate-x-1/2 w-28 lg:w-32 xl:w-36 h-auto object-contain opacity-80 pointer-events-none hidden md:block"
+          style={{ zIndex: 18 }}
+          animate={{ 
+            x: [0, 15, 0],
+            y: [0, 5, 0]
+          }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* eng-owl.png - Near Cloud 1 - Desktop */}
+        <motion.img 
+          src="/images/eng-owl.png" 
+          alt="English owl" 
+          className="absolute top-8 left-[45%] w-20 lg:w-24 xl:w-28 h-auto object-contain opacity-100 pointer-events-none hidden md:block"
+          style={{ zIndex: 19 }}
+          animate={{ 
+            y: [0, -5, 0],
+            rotate: [0, 2, -2, 0]
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Cloud 2 - Center Between Other Two - Desktop */}
+        <motion.img 
+          src="/images/eng-cloud.png" 
+          alt="English cloud" 
+          className="absolute top-8 right-[30%] w-24 lg:w-28 xl:w-32 h-auto object-contain opacity-75 pointer-events-none hidden md:block"
+          style={{ zIndex: 18 }}
+          animate={{ 
+            x: [0, -15, 0],
+            y: [0, 8, 0]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        />
+
+        {/* Cloud 3 - Right Side - Desktop */}
+        <motion.img 
+          src="/images/eng-cloud.png" 
+          alt="English cloud" 
+          className="absolute top-8 right-0 w-[120px] lg:w-36 xl:w-40 h-auto object-contain opacity-80 pointer-events-none hidden md:block"
+          style={{ zIndex: 18 }}
+          animate={{ 
+            x: [0, 20, 0],
+            y: [0, 5, 0]
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+
+        {/* eng-highlight.png - Bottom - Desktop */}
+        <motion.img 
+          src="/images/eng-highlight.png" 
+          alt="English highlight" 
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] lg:w-[600px] xl:w-[700px] h-auto object-contain opacity-100 pointer-events-none hidden md:block"
+          style={{ zIndex: 20 }}
+          animate={{ 
+            y: [0, -5, 0]
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* eng-cat.png - Left Bottom Corner - Desktop */}
+        <motion.img 
+          src="/images/eng-cat.png" 
+          alt="English cat" 
+          className="absolute bottom-0 left-0 w-32 lg:w-40 xl:w-48 h-auto object-contain opacity-100 pointer-events-none hidden md:block"
+          style={{ zIndex: 21 }}
+          animate={{ 
+            y: [0, -5, 0]
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        />
 
         {/* Join Now Button - Right Side of Hero Section - Smaller on Mobile */}
           <motion.div

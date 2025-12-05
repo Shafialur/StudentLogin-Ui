@@ -23,7 +23,7 @@ const SystemCheckCard = () => {
               src="/images/eng-system.png" 
               alt="Video" 
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 object-contain"
-              style={{ filter: 'drop-shadow(0 0 12px rgba(59, 130, 246, 0.8))' }}
+              style={{ filter: 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.8))' }}
             />
             <span className="font-extrabold text-gray-900 text-[10px] sm:text-xs md:text-xs">Video</span>
           </div>
@@ -45,7 +45,7 @@ const SystemCheckCard = () => {
               src="/images/eng-system.png" 
               alt="Network" 
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 object-contain"
-              style={{ filter: 'drop-shadow(0 0 12px rgba(249, 115, 22, 0.8))' }}
+              style={{ filter: 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.8))' }}
             />
             <span className="font-extrabold text-gray-900 text-[10px] sm:text-xs md:text-xs">Network</span>
           </div>
