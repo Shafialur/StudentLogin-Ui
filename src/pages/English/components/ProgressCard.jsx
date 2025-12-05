@@ -1,23 +1,34 @@
 import React, { useEffect, useState, memo } from 'react'
 import { motion } from 'framer-motion'
+import { useProgressData } from '../../../hooks/useProgressData'
 
 const ProgressCard = memo(() => {
-  const progress = 25; // Progress percentage
+  const { progressPercentage, totalClasses, pastClasses, loading } = useProgressData()
   const [animatedProgress, setAnimatedProgress] = useState(0)
   
   useEffect(() => {
-    // Animate progress bar fill on mount
     const timer = setTimeout(() => {
-      setAnimatedProgress(progress)
+      setAnimatedProgress(progressPercentage)
     }, 300)
     return () => clearTimeout(timer)
-  }, [progress])
+  }, [progressPercentage])
+  
+  if (loading) {
+    return (
+      <div className="bg-progress-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 h-full w-full">
+        <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 md:mb-1.5">Your Progress</h3>
+        <div className="flex items-center justify-center h-20">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        </div>
+      </div>
+    )
+  }
   
   return (
-    <div className="bg-progress-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 h-full w-full">
-      <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 md:mb-1.5">Your Progress</h3>
+    <div className="bg-progress-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 h-full w-full md:max-h-[250px] flex flex-col">
+      <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 md:mb-1.5 flex-shrink-0">Your Progress</h3>
       
-      <div className="space-y-3 sm:space-y-4 md:space-y-2">
+      <div className="space-y-3 sm:space-y-4 md:space-y-2 flex-1 flex flex-col justify-between min-h-0">
         {/* Progress Bar - Glass background */}
         <div className="relative h-7 sm:h-8 md:h-7 rounded-full overflow-visible mt-4 sm:mt-6 md:mt-3" style={{ 
           borderRadius: '9999px',
@@ -74,13 +85,13 @@ const ProgressCard = memo(() => {
           
           {/* Percentage on the right */}
           <div className="absolute right-2 top-1/2 -translate-y-1/2">
-            <span className="text-sm sm:text-base md:text-base font-extrabold text-blue-600">{progress}%</span>
+            <span className="text-sm sm:text-base md:text-base font-extrabold text-blue-600">{progressPercentage}%</span>
           </div>
           
           {/* Small faint stars on unfilled portion */}
           <motion.div 
             className="absolute z-5" 
-            initial={{ left: `${progress + 8}%` }}
+            initial={{ left: `${progressPercentage + 8}%` }}
             animate={{ left: `${animatedProgress + 8}%` }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             style={{ 
@@ -99,7 +110,7 @@ const ProgressCard = memo(() => {
           
           <motion.div 
             className="absolute z-5" 
-            initial={{ left: `${progress + 25}%` }}
+            initial={{ left: `${progressPercentage + 25}%` }}
             animate={{ left: `${animatedProgress + 25}%` }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             style={{ 
@@ -117,9 +128,9 @@ const ProgressCard = memo(() => {
           </motion.div>
         </div>
         
-        {/* Progress Text - Full Width */}
+        {/* Progress Text - Dynamic from API */}
         <div className="flex items-center justify-between w-full flex-wrap gap-1">
-          <span className="text-[10px] sm:text-xs md:text-sm font-extrabold text-blue-600">24/96</span>
+          <span className="text-[10px] sm:text-xs md:text-sm font-extrabold text-blue-600">{pastClasses}/{totalClasses}</span>
           <span className="text-[10px] sm:text-xs md:text-sm font-extrabold text-gray-900">Classes Completed</span>
         </div>
       </div>

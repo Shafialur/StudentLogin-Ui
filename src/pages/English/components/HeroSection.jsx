@@ -164,11 +164,11 @@ const HeroSection = memo(() => {
         </div>
 
 
-        {/* eng-highlight.png - Center Horizontal, Bottom Vertical - Mobile */}
+        {/* eng-highlight.png - Left Side - Mobile */}
         <motion.img 
           src="/images/eng-highlight.png" 
           alt="English highlight" 
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-auto object-contain opacity-100 pointer-events-none md:hidden"
+          className="absolute bottom-0 left-24 w-80 h-auto object-contain opacity-100 pointer-events-none md:hidden"
           style={{ zIndex: 20 }}
           animate={{ 
             y: [0, -5, 0]

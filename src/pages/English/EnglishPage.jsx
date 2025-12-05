@@ -45,7 +45,8 @@ const EnglishPage = () => {
           <div className="flex flex-col md:grid md:w-full md:h-full gap-3 sm:gap-4 md:gap-4 items-stretch" 
             style={{ 
               gridTemplateColumns: 'repeat(10, 1fr)', 
-              gridTemplateRows: '1fr 1fr'
+              gridTemplateRows: '1fr 1fr',
+              gridAutoRows: 'minmax(0, 1fr)'
             }}>
             {/* Mobile: Course Card - Full width */}
             <motion.div 

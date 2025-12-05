@@ -2,7 +2,7 @@ import React from 'react'
 
 const QuizCard = () => {
   return (
-    <div className="bg-quiz-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 flex flex-col h-full w-full">
+    <div className="bg-quiz-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 flex flex-col h-full w-full md:max-h-[250px]">
       <div className="flex items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2 md:mb-1.5">
         {/* Graduation Cap Icon */}
         <img 
