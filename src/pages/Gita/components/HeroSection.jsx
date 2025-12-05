@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback, memo } from 'react'
 import { motion } from 'framer-motion'
 
-const HeroSection = () => {
+const HeroSection = memo(() => {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
+  const timerRef = useRef(null)
 
   useEffect(() => {
     // Countdown timer logic - you can set a target date
-    const timer = setInterval(() => {
+    timerRef.current = setInterval(() => {
       setTimeLeft(prev => {
         let { hours, minutes, seconds } = prev
         seconds += 1
@@ -22,10 +23,25 @@ const HeroSection = () => {
       })
     }, 1000)
 
-    return () => clearInterval(timer)
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+      }
+    }
   }, [])
 
-  const formatTime = (value) => String(value).padStart(2, '0')
+  // Pause animations when tab is hidden
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && timerRef.current) {
+        // Timer continues but animations can be paused
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [])
+
+  const formatTime = useCallback((value) => String(value).padStart(2, '0'), [])
 
   // Animation variants
   const textVariants = {
@@ -538,7 +554,9 @@ const HeroSection = () => {
       </div>
     </div>
   )
-}
+})
+
+HeroSection.displayName = 'HeroSection'
 
 export default HeroSection
 

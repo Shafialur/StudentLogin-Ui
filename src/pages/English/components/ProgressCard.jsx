@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import { motion } from 'framer-motion'
 
-const ProgressCard = () => {
+const ProgressCard = memo(() => {
   const progress = 25; // Progress percentage
   const [animatedProgress, setAnimatedProgress] = useState(0)
   
@@ -125,6 +125,8 @@ const ProgressCard = () => {
       </div>
     </div>
   )
-}
+})
+
+ProgressCard.displayName = 'ProgressCard'
 
 export default ProgressCard

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { memo } from 'react'
 
-const CourseCard = () => {
+const CourseCard = memo(() => {
   return (
     <div 
       className="w-full h-full bg-white rounded-2xl border-2 border-gray-300 p-2" 
@@ -15,11 +15,15 @@ const CourseCard = () => {
         src="/images/Krishna&arnjuna-cardimage.png" 
         alt="Krishna and Arjuna" 
         className="course-card-image w-full h-full rounded-xl"
+        loading="lazy"
+        decoding="async"
         style={{ objectFit: 'cover', maxWidth: '100%' }}
       />
     </div>
   )
-}
+})
+
+CourseCard.displayName = 'CourseCard'
 
 export default CourseCard
 

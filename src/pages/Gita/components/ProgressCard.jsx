@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo, useMemo } from 'react'
 import { motion } from 'framer-motion'
 
-const ProgressCard = () => {
+const ProgressCard = memo(() => {
   const progress = 25; // Progress percentage
   const [animatedProgress, setAnimatedProgress] = useState(0)
   
@@ -86,6 +86,8 @@ const ProgressCard = () => {
               src="/images/progresschariot.png" 
               alt="Progress chariot" 
               className="object-contain w-12 h-12 sm:w-16 sm:h-16 md:w-16 md:h-16 lg:w-18 lg:h-18"
+              loading="lazy"
+              decoding="async"
               style={{ 
                 filter: 'drop-shadow(0 0 15px rgba(255, 140, 0, 0.6))' 
               }}
@@ -104,6 +106,8 @@ const ProgressCard = () => {
               src="/images/progressendtemple.png" 
               alt="Temple" 
               className="object-contain w-10 h-10 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16"
+              loading="lazy"
+              decoding="async"
               style={{ 
                 filter: 'drop-shadow(0 0 12px rgba(139, 69, 19, 0.5))' 
               }}
@@ -119,7 +123,9 @@ const ProgressCard = () => {
       </div>
     </div>
   )
-}
+})
+
+ProgressCard.displayName = 'ProgressCard'
 
 export default ProgressCard
 
