@@ -147,6 +147,18 @@ const HeroSection = () => {
           </div>
         </div>
 
+        {/* maths-highlite.png - Bottom Left - Mobile */}
+        <motion.img 
+          src="/images/maths-highlite.png" 
+          alt="Math highlight" 
+          className="absolute bottom-0 left-[35%] -translate-x-1/2 w-72 h-auto object-contain opacity-100 pointer-events-none md:hidden"
+          style={{ zIndex: 20 }}
+          animate={{ 
+            y: [0, -5, 0]
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        />
+
         {/* Tablet and Desktop View - Container-based blur rectangle */}
         <div className="relative h-full min-h-0 hidden md:block w-full py-6 md:py-4" style={{ zIndex: 10 }}>
           {/* Container wrapper with fixed padding that never changes - Full width */}
@@ -208,6 +220,25 @@ const HeroSection = () => {
                       </div>
                     </div>
                   </motion.div>
+                </motion.div>
+
+                {/* Top - maths-highlite.png Image */}
+                <motion.div 
+                  className="absolute top-[-20] left-1/2 -translate-x-1/2 hidden md:block"
+                  style={{ zIndex: 20 }}
+                  variants={chariotVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <motion.img 
+                    src="/images/maths-highlite.png" 
+                    alt="Math highlight" 
+                    className="w-[500px] lg:w-[600px] xl:w-[700px] h-auto object-contain opacity-100 pointer-events-none"
+                    animate={{ 
+                      y: [0, -5, 0]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  />
                 </motion.div>
 
               </div>
