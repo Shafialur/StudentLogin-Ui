@@ -19,8 +19,8 @@ export const useProgressData = () => {
         // Set default values on error
         setProgressData({
           progress_overview: {
-            total_classes: 50,
-            past_classes: 100,
+            total_classes: 100,
+            past_classes: 50,
             streak: 0,
             coins: 0,
             rank: null
