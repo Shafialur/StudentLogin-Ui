@@ -53,7 +53,10 @@ const SystemCheckCard = () => {
         
         {/* Test Connection Button - Light Green to Darker Green Gradient - At Bottom */}
         <div className="mt-auto">
-          <button className="bg-green-600 hover:bg-green-700 backdrop-blur-sm md:backdrop-blur-md border border-white/50 rounded-full w-full text-white font-extrabold py-1.5 sm:py-2 md:py-2 px-2 sm:px-3 md:px-3 transition-all duration-200 flex items-center justify-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs md:text-xs">
+          <button 
+            onClick={() => window.open('https://zoom.us/test', '_blank')}
+            className="bg-green-600 hover:bg-green-700 backdrop-blur-sm md:backdrop-blur-md border border-white/50 rounded-full w-full text-white font-extrabold py-1.5 sm:py-2 md:py-2 px-2 sm:px-3 md:px-3 transition-all duration-200 flex items-center justify-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs md:text-xs"
+          >
             <span>Test Connection</span>
             <svg 
               className="w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5" 
