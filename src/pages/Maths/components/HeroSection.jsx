@@ -129,10 +129,10 @@ const HeroSection = memo(() => {
                 style={{ maxWidth: '100%', overflow: 'hidden' }}
               >
                 <div className="flex items-center flex-wrap justify-center gap-1.5 sm:gap-2 max-w-full" style={{ fontSize: 'clamp(0.75rem, 2vw + 0.25rem, 0.875rem)' }}>
-                  {/* Om Symbol */}
+                  {/* Clock */}
                   <motion.img 
-                    src="/images/om-symbol.png" 
-                    alt="Om symbol" 
+                    src="/images/eng-clock.png" 
+                    alt="Clock" 
                     className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0"
                     animate={{ rotate: [0, 5, -5, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -207,10 +207,10 @@ const HeroSection = memo(() => {
                     style={{ maxWidth: '100%', overflow: 'hidden' }}
                   >
                     <div className="flex items-center w-fit flex-wrap max-w-full" style={{ fontSize: 'clamp(0.875rem, 1.5vw + 0.25rem, 1.5rem)' }}>
-                      {/* Om Symbol */}
+                      {/* Clock */}
                       <motion.img 
-                        src="/images/om-symbol.png" 
-                        alt="Om symbol" 
+                        src="/images/eng-clock.png" 
+                        alt="Clock" 
                         className="w-12 md:w-14 lg:w-16 object-contain flex-shrink-0"
                         animate={{ rotate: [0, 5, -5, 0] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
