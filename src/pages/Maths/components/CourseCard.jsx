@@ -17,6 +17,8 @@ const CourseCard = memo(() => {
         className="course-card-image w-full h-full rounded-xl"
         loading="lazy"
         decoding="async"
+        width="800"
+        height="600"
         style={{ objectFit: 'cover', maxWidth: '100%' }}
       />
     </div>

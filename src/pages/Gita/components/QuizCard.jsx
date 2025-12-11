@@ -10,6 +10,10 @@ const QuizCard = () => {
           alt="Graduation cap" 
           className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 object-contain"
           style={{ filter: 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.7))' }}
+          loading="lazy"
+          decoding="async"
+          width="40"
+          height="40"
         />
         <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900">Class Quiz</h3>
       </div>
@@ -24,6 +28,10 @@ const QuizCard = () => {
               alt="Quiz paper scroll" 
               className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
               style={{ filter: 'drop-shadow(0 0 12px rgba(95, 158, 160, 0.6))' }}
+            loading="lazy"
+            decoding="async"
+            width="56"
+            height="56"
             />
           </div>
         </div>

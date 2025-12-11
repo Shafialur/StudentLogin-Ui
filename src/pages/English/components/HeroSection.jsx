@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 const HeroSection = memo(() => {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
   const timerRef = useRef(null)
+  const [decorReady, setDecorReady] = useState(false)
 
   useEffect(() => {
     // Countdown timer logic - you can set a target date
@@ -39,6 +40,23 @@ const HeroSection = memo(() => {
     }
     document.addEventListener('visibilitychange', handleVisibilityChange)
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [])
+
+  // Defer heavy decorative layers until idle to speed first paint
+  useEffect(() => {
+    const idleCb = window.requestIdleCallback
+    const handle = idleCb
+      ? idleCb(() => setDecorReady(true), { timeout: 300 })
+      : setTimeout(() => setDecorReady(true), 120)
+
+    return () => {
+      if (idleCb && handle) {
+        window.cancelIdleCallback(handle)
+      }
+      if (!idleCb && handle) {
+        clearTimeout(handle)
+      }
+    }
   }, [])
 
   const formatTime = useCallback((value) => String(value).padStart(2, '0'), [])
@@ -137,6 +155,10 @@ const HeroSection = memo(() => {
                     animate={{ rotate: [0, 5, -5, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                     style={{ maxWidth: '100%', height: 'auto', width: 'clamp(2rem, 4vw + 0.5rem, 2.5rem)' }}
+                    loading="lazy"
+                    decoding="async"
+                    width="40"
+                    height="40"
                   />
                   
                   {/* Live In Text */}
@@ -165,28 +187,40 @@ const HeroSection = memo(() => {
 
 
         {/* eng-highlight.png - Left Side - Mobile */}
-        <motion.img 
-          src="/images/eng-highlight.png" 
-          alt="English highlight" 
-          className="absolute bottom-0 left-24 w-80 h-auto object-contain opacity-100 pointer-events-none md:hidden"
-          style={{ zIndex: 20 }}
-          animate={{ 
-            y: [0, -5, 0]
-          }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
+        {decorReady && (
+          <motion.img 
+            src="/images/eng-highlight.png" 
+            alt="English highlight" 
+            className="absolute bottom-0 left-24 w-80 h-auto object-contain opacity-100 pointer-events-none md:hidden"
+            style={{ zIndex: 20 }}
+            animate={{ 
+              y: [0, -5, 0]
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            loading="lazy"
+            decoding="async"
+            width="320"
+            height="200"
+          />
+        )}
 
         {/* eng-cat.png - Left Bottom Corner - Mobile */}
-        <motion.img 
-          src="/images/eng-cat.png" 
-          alt="English cat" 
-          className="absolute bottom-0 left-0 w-24 h-auto object-contain opacity-100 pointer-events-none md:hidden"
-          style={{ zIndex: 21 }}
-          animate={{ 
-            y: [0, -5, 0]
-          }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        />
+        {decorReady && (
+          <motion.img 
+            src="/images/eng-cat.png" 
+            alt="English cat" 
+            className="absolute bottom-0 left-0 w-24 h-auto object-contain opacity-100 pointer-events-none md:hidden"
+            style={{ zIndex: 21 }}
+            animate={{ 
+              y: [0, -5, 0]
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            loading="lazy"
+            decoding="async"
+            width="96"
+            height="96"
+          />
+        )}
 
         {/* Tablet and Desktop View - Container-based blur rectangle */}
         <div className="relative h-full min-h-0 hidden md:block w-full py-6 md:py-4" style={{ zIndex: 10 }}>
@@ -227,6 +261,10 @@ const HeroSection = memo(() => {
                         animate={{ rotate: [0, 5, -5, 0] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                         style={{ maxWidth: '100%', height: 'auto', width: 'clamp(3rem, 3vw + 0.75rem, 4rem)' }}
+                    loading="lazy"
+                    decoding="async"
+                    width="64"
+                    height="64"
                       />
                       
                       {/* Live In Text */}
@@ -256,80 +294,116 @@ const HeroSection = memo(() => {
         </div>
 
         {/* Cloud 1 - Center of Hero - Desktop */}
-        <motion.img 
-          src="/images/eng-cloud.png" 
-          alt="English cloud" 
-          className="absolute top-8 left-1/2 -translate-x-1/2 w-28 lg:w-32 xl:w-36 h-auto object-contain opacity-80 pointer-events-none hidden md:block"
-          style={{ zIndex: 18 }}
-          animate={{ 
-            x: [0, 15, 0],
-            y: [0, 5, 0]
-          }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        />
+        {decorReady && (
+          <motion.img 
+            src="/images/eng-cloud.png" 
+            alt="English cloud" 
+            className="absolute top-8 left-1/2 -translate-x-1/2 w-28 lg:w-32 xl:w-36 h-auto object-contain opacity-80 pointer-events-none hidden md:block"
+            style={{ zIndex: 18 }}
+            animate={{ 
+              x: [0, 15, 0],
+              y: [0, 5, 0]
+            }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            loading="lazy"
+            decoding="async"
+            width="144"
+            height="90"
+          />
+        )}
 
         {/* eng-owl.png - Near Cloud 1 - Desktop */}
-        <motion.img 
-          src="/images/eng-owl.png" 
-          alt="English owl" 
-          className="absolute top-8 left-[45%] w-20 lg:w-24 xl:w-28 h-auto object-contain opacity-100 pointer-events-none hidden md:block"
-          style={{ zIndex: 19 }}
-          animate={{ 
-            y: [0, -5, 0],
-            rotate: [0, 2, -2, 0]
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        />
+        {decorReady && (
+          <motion.img 
+            src="/images/eng-owl.png" 
+            alt="English owl" 
+            className="absolute top-8 left-[45%] w-20 lg:w-24 xl:w-28 h-auto object-contain opacity-100 pointer-events-none hidden md:block"
+            style={{ zIndex: 19 }}
+            animate={{ 
+              y: [0, -5, 0],
+              rotate: [0, 2, -2, 0]
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            loading="lazy"
+            decoding="async"
+            width="112"
+            height="112"
+          />
+        )}
 
         {/* Cloud 2 - Center Between Other Two - Desktop */}
-        <motion.img 
-          src="/images/eng-cloud.png" 
-          alt="English cloud" 
-          className="absolute top-8 right-[30%] w-24 lg:w-28 xl:w-32 h-auto object-contain opacity-75 pointer-events-none hidden md:block"
-          style={{ zIndex: 18 }}
-          animate={{ 
-            x: [0, -15, 0],
-            y: [0, 8, 0]
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        />
+        {decorReady && (
+          <motion.img 
+            src="/images/eng-cloud.png" 
+            alt="English cloud" 
+            className="absolute top-8 right-[30%] w-24 lg:w-28 xl:w-32 h-auto object-contain opacity-75 pointer-events-none hidden md:block"
+            style={{ zIndex: 18 }}
+            animate={{ 
+              x: [0, -15, 0],
+              y: [0, 8, 0]
+            }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            loading="lazy"
+            decoding="async"
+            width="128"
+            height="90"
+          />
+        )}
 
         {/* Cloud 3 - Right Side - Desktop */}
-        <motion.img 
-          src="/images/eng-cloud.png" 
-          alt="English cloud" 
-          className="absolute top-8 right-0 w-[120px] lg:w-36 xl:w-40 h-auto object-contain opacity-80 pointer-events-none hidden md:block"
-          style={{ zIndex: 18 }}
-          animate={{ 
-            x: [0, 20, 0],
-            y: [0, 5, 0]
-          }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
+        {decorReady && (
+          <motion.img 
+            src="/images/eng-cloud.png" 
+            alt="English cloud" 
+            className="absolute top-8 right-0 w-[120px] lg:w-36 xl:w-40 h-auto object-contain opacity-80 pointer-events-none hidden md:block"
+            style={{ zIndex: 18 }}
+            animate={{ 
+              x: [0, 20, 0],
+              y: [0, 5, 0]
+            }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            loading="lazy"
+            decoding="async"
+            width="160"
+            height="100"
+          />
+        )}
 
         {/* eng-highlight.png - Bottom - Desktop */}
-        <motion.img 
-          src="/images/eng-highlight.png" 
-          alt="English highlight" 
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] lg:w-[600px] xl:w-[700px] h-auto object-contain opacity-100 pointer-events-none hidden md:block"
-          style={{ zIndex: 20 }}
-          animate={{ 
-            y: [0, -5, 0]
-          }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
+        {decorReady && (
+          <motion.img 
+            src="/images/eng-highlight.png" 
+            alt="English highlight" 
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] lg:w-[600px] xl:w-[700px] h-auto object-contain opacity-100 pointer-events-none hidden md:block"
+            style={{ zIndex: 20 }}
+            animate={{ 
+              y: [0, -5, 0]
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            loading="lazy"
+            decoding="async"
+            width="700"
+            height="350"
+          />
+        )}
 
         {/* eng-cat.png - Left Bottom Corner - Desktop */}
-        <motion.img 
-          src="/images/eng-cat.png" 
-          alt="English cat" 
-          className="absolute bottom-0 left-0 w-32 lg:w-40 xl:w-48 h-auto object-contain opacity-100 pointer-events-none hidden md:block"
-          style={{ zIndex: 21 }}
-          animate={{ 
-            y: [0, -5, 0]
-          }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        />
+        {decorReady && (
+          <motion.img 
+            src="/images/eng-cat.png" 
+            alt="English cat" 
+            className="absolute bottom-0 left-0 w-32 lg:w-40 xl:w-48 h-auto object-contain opacity-100 pointer-events-none hidden md:block"
+            style={{ zIndex: 21 }}
+            animate={{ 
+              y: [0, -5, 0]
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            loading="lazy"
+            decoding="async"
+            width="192"
+            height="192"
+          />
+        )}
 
         {/* Join Now Button - Right Side of Hero Section - Smaller on Mobile */}
           <motion.div

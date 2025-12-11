@@ -10,6 +10,10 @@ const SystemCheckCard = () => {
           alt="System Check" 
           className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 object-contain"
           style={{ filter: 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.7))' }}
+          loading="lazy"
+          decoding="async"
+          width="40"
+          height="40"
         />
         <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900">System Check</h3>
       </div>
@@ -24,6 +28,10 @@ const SystemCheckCard = () => {
               alt="Video" 
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 object-contain"
               style={{ filter: 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.8))' }}
+              loading="lazy"
+              decoding="async"
+              width="40"
+              height="40"
             />
             <span className="font-extrabold text-gray-900 text-[10px] sm:text-xs md:text-xs">Video</span>
           </div>
@@ -35,6 +43,10 @@ const SystemCheckCard = () => {
               alt="Audio" 
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 object-contain"
               style={{ filter: 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.8))' }}
+              loading="lazy"
+              decoding="async"
+              width="40"
+              height="40"
             />
             <span className="font-extrabold text-gray-900 text-[10px] sm:text-xs md:text-xs">Audio</span>
           </div>
@@ -46,6 +58,10 @@ const SystemCheckCard = () => {
               alt="Network" 
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 object-contain"
               style={{ filter: 'drop-shadow(0 0 12px rgba(34, 197, 94, 0.8))' }}
+              loading="lazy"
+              decoding="async"
+              width="40"
+              height="40"
             />
             <span className="font-extrabold text-gray-900 text-[10px] sm:text-xs md:text-xs">Network</span>
           </div>

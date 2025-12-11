@@ -59,6 +59,10 @@ const TeacherNoteCard = () => {
               src="/images/eng-teacher.png"
               alt="Ms. Sarah"
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+              width="56"
+              height="56"
             />
           </div>
           <h4 className="font-extrabold text-gray-900 text-[10px] sm:text-xs md:text-xs mt-0.5 sm:mt-1 md:mt-0.5">Ms. Sarah</h4>

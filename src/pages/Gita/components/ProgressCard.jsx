@@ -104,6 +104,8 @@ const ProgressCard = memo(() => {
               style={{ 
                 filter: 'drop-shadow(0 0 15px rgba(255, 140, 0, 0.6))' 
               }}
+              width="64"
+              height="64"
             />
           </motion.div>
           
@@ -124,6 +126,8 @@ const ProgressCard = memo(() => {
               style={{ 
                 filter: 'drop-shadow(0 0 12px rgba(139, 69, 19, 0.5))' 
               }}
+              width="64"
+              height="64"
             />
           </div>
         </div>

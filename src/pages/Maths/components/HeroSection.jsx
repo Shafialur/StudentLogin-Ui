@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 const HeroSection = memo(() => {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
   const timerRef = useRef(null)
+  const [decorReady, setDecorReady] = useState(false)
 
   useEffect(() => {
     // Countdown timer logic - you can set a target date
@@ -39,6 +40,23 @@ const HeroSection = memo(() => {
     }
     document.addEventListener('visibilitychange', handleVisibilityChange)
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [])
+
+  // Defer heavy decorative layers until idle to speed first paint
+  useEffect(() => {
+    const idleCb = window.requestIdleCallback
+    const handle = idleCb
+      ? idleCb(() => setDecorReady(true), { timeout: 300 })
+      : setTimeout(() => setDecorReady(true), 120)
+
+    return () => {
+      if (idleCb && handle) {
+        window.cancelIdleCallback(handle)
+      }
+      if (!idleCb && handle) {
+        clearTimeout(handle)
+      }
+    }
   }, [])
 
   const formatTime = useCallback((value) => String(value).padStart(2, '0'), [])
@@ -164,16 +182,22 @@ const HeroSection = memo(() => {
         </div>
 
         {/* maths-highlite.png - Bottom Left - Mobile */}
-        <motion.img 
-          src="/images/maths-highlite.png" 
-          alt="Math highlight" 
-          className="absolute bottom-0 left-[35%] -translate-x-1/2 w-72 h-auto object-contain opacity-100 pointer-events-none md:hidden"
-          style={{ zIndex: 20 }}
-          animate={{ 
-            y: [0, -5, 0]
-          }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
+        {decorReady && (
+          <motion.img 
+            src="/images/maths-highlite.png" 
+            alt="Math highlight" 
+            className="absolute bottom-0 left-[35%] -translate-x-1/2 w-72 h-auto object-contain opacity-100 pointer-events-none md:hidden"
+            style={{ zIndex: 20 }}
+            animate={{ 
+              y: [0, -5, 0]
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            loading="lazy"
+            decoding="async"
+            width="288"
+            height="180"
+          />
+        )}
 
         {/* Tablet and Desktop View - Container-based blur rectangle */}
         <div className="relative h-full min-h-0 hidden md:block w-full py-6 md:py-4" style={{ zIndex: 10 }}>
@@ -215,6 +239,10 @@ const HeroSection = memo(() => {
                         animate={{ rotate: [0, 5, -5, 0] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                         style={{ maxWidth: '100%', height: 'auto', width: 'clamp(3rem, 3vw + 0.75rem, 4rem)' }}
+                    loading="lazy"
+                    decoding="async"
+                    width="64"
+                    height="64"
                       />
                       
                       {/* Live In Text */}
@@ -239,23 +267,29 @@ const HeroSection = memo(() => {
                 </motion.div>
 
                 {/* Top - maths-highlite.png Image */}
-                <motion.div 
-                  className="absolute top-[-20] left-1/2 -translate-x-1/2 hidden md:block"
-                  style={{ zIndex: 20 }}
-                  variants={chariotVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <motion.img 
-                    src="/images/maths-highlite.png" 
-                    alt="Math highlight" 
-                    className="w-[500px] lg:w-[600px] xl:w-[700px] h-auto object-contain opacity-100 pointer-events-none"
-                    animate={{ 
-                      y: [0, -5, 0]
-                    }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                </motion.div>
+                {decorReady && (
+                  <motion.div 
+                    className="absolute top-[-20] left-1/2 -translate-x-1/2 hidden md:block"
+                    style={{ zIndex: 20 }}
+                    variants={chariotVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <motion.img 
+                      src="/images/maths-highlite.png" 
+                      alt="Math highlight" 
+                      className="w-[500px] lg:w-[600px] xl:w-[700px] h-auto object-contain opacity-100 pointer-events-none"
+                      animate={{ 
+                        y: [0, -5, 0]
+                      }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      loading="lazy"
+                      decoding="async"
+                      width="700"
+                      height="350"
+                    />
+                  </motion.div>
+                )}
 
               </div>
             </div>
