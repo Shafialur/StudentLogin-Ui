@@ -1,5 +1,6 @@
-import React, { lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams, Outlet } from 'react-router-dom'
+import { API_BASE_URL } from './utils/api'
 
 // Lazy load pages for code splitting
 const GitaPage = lazy(() => import('./pages/Gita/GitaPage'))
@@ -16,15 +17,142 @@ const LoadingFallback = () => (
   </div>
 )
 
+const FriendlyError = ({ title, message }) => (
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-white to-blue-50 px-4">
+    <div className="max-w-md w-full bg-white/90 backdrop-blur-md border border-orange-100 rounded-2xl shadow-xl p-8 text-center">
+      <div className="text-5xl mb-4">🧩</div>
+      <h2 className="text-2xl font-bold text-gray-800 mb-3">{title}</h2>
+      <p className="text-gray-600 leading-relaxed">{message}</p>
+    </div>
+  </div>
+)
+
+const CodeGate = () => {
+  const { code } = useParams()
+  const [status, setStatus] = useState('checking') // checking | ok | error
+  const [errorMsg, setErrorMsg] = useState('')
+  const [classInfo, setClassInfo] = useState(null)
+  const [classType, setClassType] = useState(null)
+  const [childName, setChildName] = useState('')
+
+  const resolveClassType = (name = '') => {
+    const lc = name.toLowerCase()
+    if (lc.includes('gita')) return 'gita'
+    if (lc.includes('math')) return 'maths'
+    if (lc.includes('english')) return 'english'
+    return 'maths'
+  }
+
+  useEffect(() => {
+    const verify = async () => {
+      if (!code || !/^[a-z0-9]{6}$/i.test(code)) {
+        setStatus('error')
+        setErrorMsg('We need a 6-letter/number code to open your class space.')
+        return
+      }
+
+      setStatus('checking')
+      try {
+        const response = await fetch(`${API_BASE_URL}/parent-panel/verify-join-code`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code })
+        })
+
+        const data = await response.json()
+        const success = data?.success && data?.code && typeof data?.message === 'string'
+        const verifiedMsg = data?.message?.toLowerCase().includes('code verified')
+
+        if (success && verifiedMsg) {
+          // Fetch class info using the verified code
+          const infoRes = await fetch(`${API_BASE_URL}/parent-panel/get-join-class-info/${code}`)
+          const infoData = await infoRes.json()
+
+          if (infoData?.success && infoData?.nextclass) {
+            const type = resolveClassType(infoData.nextclass.class_name)
+            if (type) {
+              setClassInfo(infoData)
+              setClassType(type)
+              setChildName(infoData.nextclass.child_name || '')
+              setStatus('ok')
+              return
+            }
+            setErrorMsg('We could not match this class to Gita, Maths, or English.')
+            setStatus('error')
+            return
+          }
+
+          const infoMsg =
+            infoData?.message ||
+            'We could not load your class details. Please try again.'
+          setErrorMsg(infoMsg)
+          setStatus('error')
+          return
+        }
+
+        const msg =
+          data?.message ||
+          "That code didn't work. Double-check the 6 characters and try again."
+        setErrorMsg(msg)
+        setStatus('error')
+      } catch (err) {
+        setErrorMsg('We could not check your code right now. Please try again in a moment.')
+        setStatus('error')
+      }
+    }
+
+    verify()
+  }, [code])
+
+  if (status === 'checking') {
+    return <LoadingFallback />
+  }
+
+  if (status === 'error') {
+    return (
+      <FriendlyError
+        title="Code is not valid"
+        message={errorMsg}
+      />
+    )
+  }
+
+  // Verified: render the relevant subject page
+  const child = childName?.trim() || ''
+
+  if (classType === 'gita') return <GitaPage childName={child} classDetails={classInfo?.nextclass} />
+  if (classType === 'english') return <EnglishPage childName={child} classDetails={classInfo?.nextclass} />
+  if (classType === 'maths') return <MathsPage childName={child} classDetails={classInfo?.nextclass} />
+
+  return (
+    <FriendlyError
+      title="Class unavailable"
+      message="We couldn’t find the right class page for this code."
+    />
+  )
+}
+
 function App() {
   return (
     <Router>
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
-          <Route path="/" element={<Navigate to="/gita" replace />} />
-          <Route path="/gita" element={<GitaPage />} />
-          <Route path="/english" element={<EnglishPage />} />
-          <Route path="/maths" element={<MathsPage />} />
+          <Route path="/:code" element={<CodeGate />}>
+            <Route index element={<Navigate to="gita" replace />} />
+            <Route path="gita" element={<GitaPage />} />
+            <Route path="english" element={<EnglishPage />} />
+            <Route path="maths" element={<MathsPage />} />
+            <Route path="*" element={<Navigate to="gita" replace />} />
+          </Route>
+          <Route
+            path="*"
+            element={
+              <FriendlyError
+                title="Code needed"
+                message="Please use your 6-character class code link to enter."
+              />
+            }
+          />
         </Routes>
       </Suspense>
     </Router>

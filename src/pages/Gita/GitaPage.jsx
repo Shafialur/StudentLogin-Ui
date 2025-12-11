@@ -7,9 +7,8 @@ import TeacherNoteCard from './components/TeacherNoteCard'
 import AssignmentCard from './components/AssignmentCard'
 import QuizCard from './components/QuizCard'
 import SystemCheckCard from './components/SystemCheckCard'
-import BottomNavigation from '../../components/BottomNavigation'
 
-const GitaPage = () => {
+const GitaPage = ({ childName = '', classDetails }) => {
   // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -36,7 +35,7 @@ const GitaPage = () => {
       >
         {/* Hero Section */}
         <div className="flex-shrink-0">
-          <HeroSection />
+          <HeroSection childName={childName} classDetails={classDetails} />
         </div>
 
         {/* Dashboard Cards Section */}
@@ -164,7 +163,6 @@ const GitaPage = () => {
           </div>
         </div>
       </div>
-      <BottomNavigation />
     </div>
   )
 }

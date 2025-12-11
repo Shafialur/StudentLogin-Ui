@@ -1,5 +1,11 @@
 // src/utils/api.js
-const API_BASE_URL = 'https://bambinos.live/api'
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
+
+if (!apiBaseUrl) {
+  throw new Error('VITE_API_BASE_URL is not set in the environment.')
+}
+
+export const API_BASE_URL = apiBaseUrl
 
 /**
  * Get bearer token from environment variable

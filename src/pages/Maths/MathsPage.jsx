@@ -7,9 +7,8 @@ import TeacherNoteCard from './components/TeacherNoteCard'
 import AssignmentCard from './components/AssignmentCard'
 import QuizCard from './components/QuizCard'
 import SystemCheckCard from './components/SystemCheckCard'
-import BottomNavigation from '../../components/BottomNavigation'
 
-const MathsPage = () => {
+const MathsPage = ({ childName = '', classDetails }) => {
   // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -36,7 +35,7 @@ const MathsPage = () => {
       >
         {/* Hero Section */}
         <div className="flex-shrink-0">
-          <HeroSection />
+          <HeroSection childName={childName} classDetails={classDetails} />
         </div>
 
         {/* Dashboard Cards Section */}
@@ -164,7 +163,6 @@ const MathsPage = () => {
           </div>
         </div>
       </div>
-      <BottomNavigation />
     </div>
   )
 }

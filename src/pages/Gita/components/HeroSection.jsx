@@ -1,10 +1,39 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react'
 import { motion } from 'framer-motion'
 
-const HeroSection = memo(() => {
+const HeroSection = memo(({ childName = 'Krishna', classDetails }) => {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
   const timerRef = useRef(null)
   const [decorReady, setDecorReady] = useState(false)
+
+  const toISTDate = useCallback((dateStr, timeStr) => {
+    if (!dateStr || !timeStr) return null
+    const t = timeStr.length === 5 ? `${timeStr}:00` : timeStr
+    const iso = `${dateStr}T${t}+05:30`
+    const d = new Date(iso)
+    return isNaN(d.getTime()) ? null : d
+  }, [])
+
+  useEffect(() => {
+    const start = toISTDate(classDetails?.class_date, classDetails?.start_time)
+    if (!start) {
+      setTimeLeft({ hours: 0, minutes: 0, seconds: 0 })
+      return
+    }
+
+    const tick = () => {
+      const now = new Date()
+      const diffSecs = Math.max(0, Math.floor((start.getTime() - now.getTime()) / 1000))
+      const hours = Math.floor(diffSecs / 3600)
+      const minutes = Math.floor((diffSecs % 3600) / 60)
+      const seconds = diffSecs % 60
+      setTimeLeft({ hours, minutes, seconds })
+    }
+
+    tick()
+    const id = setInterval(tick, 1000)
+    return () => clearInterval(id)
+  }, [classDetails?.class_date, classDetails?.start_time, toISTDate])
 
   useEffect(() => {
     // Countdown timer logic - you can set a target date
@@ -348,7 +377,7 @@ const HeroSection = memo(() => {
               style={{ maxWidth: '100%', maxHeight: '100%', overflow: 'hidden' }}
             >
               <h1 className="text-xl sm:text-2xl font-black mb-1.5 sm:mb-2 leading-tight text-white font-rounded tracking-tight px-1 w-full" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900, wordWrap: 'break-word', overflowWrap: 'break-word', lineHeight: '1.1', fontSize: 'clamp(1.5rem, 4vw + 0.75rem, 2.25rem)' }}>
-                Namaste, Krishna!<br />
+                Namaste, {childName || 'Krishna'}!<br />
                 Ready for Gita Wisdom -<br />
                 Inner Peace?
               </h1>
@@ -528,7 +557,7 @@ const HeroSection = memo(() => {
                   style={{ maxWidth: '100%', maxHeight: '100%', overflow: 'hidden' }}
                 >
                   <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black mb-2 md:mb-3 lg:mb-4 leading-tight text-white text-center md:text-left font-rounded tracking-tight w-full" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900, wordWrap: 'break-word', overflowWrap: 'break-word', lineHeight: '1.1', fontSize: 'clamp(1.75rem, 2vw + 1rem, 4rem)' }}>
-                    Namaste, Krishna! <br className="hidden md:block" />
+                    Namaste, {childName || 'Krishna'}! <br className="hidden md:block" />
                    Ready for Gita Wisdom - <br className="hidden md:block" />Inner Peace?
                   </h1>
                   
