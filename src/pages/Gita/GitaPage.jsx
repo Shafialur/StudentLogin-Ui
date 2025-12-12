@@ -8,7 +8,7 @@ import AssignmentCard from './components/AssignmentCard'
 import QuizCard from './components/QuizCard'
 import SystemCheckCard from './components/SystemCheckCard'
 
-const GitaPage = ({ childName = '', classDetails }) => {
+const GitaPage = ({ childName = '', classDetails, code }) => {
   // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -35,7 +35,7 @@ const GitaPage = ({ childName = '', classDetails }) => {
       >
         {/* Hero Section */}
         <div className="flex-shrink-0">
-          <HeroSection childName={childName} classDetails={classDetails} />
+          <HeroSection childName={childName} classDetails={classDetails} code={code} />
         </div>
 
         {/* Dashboard Cards Section */}

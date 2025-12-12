@@ -120,9 +120,9 @@ const CodeGate = () => {
   // Verified: render the relevant subject page
   const child = childName?.trim() || ''
 
-  if (classType === 'gita') return <GitaPage childName={child} classDetails={classInfo?.nextclass} />
-  if (classType === 'english') return <EnglishPage childName={child} classDetails={classInfo?.nextclass} />
-  if (classType === 'maths') return <MathsPage childName={child} classDetails={classInfo?.nextclass} />
+  if (classType === 'gita') return <GitaPage childName={child} classDetails={classInfo?.nextclass} code={code} />
+  if (classType === 'english') return <EnglishPage childName={child} classDetails={classInfo?.nextclass} code={code} />
+  if (classType === 'maths') return <MathsPage childName={child} classDetails={classInfo?.nextclass} code={code} />
 
   return (
     <FriendlyError
