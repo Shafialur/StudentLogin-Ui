@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, memo } from 'react'
 import { motion } from 'framer-motion'
 import { addChildToJoinQueue, checkIfClassStarted } from '../../../utils/api'
 import JoinSuccessToast from '../../../components/JoinSuccessToast'
+import OptimizedImage from '../../../components/OptimizedImage'
 
 const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
@@ -233,20 +234,21 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
 
         {/* eng-highlight.png - Left Side - Mobile */}
         {decorReady && (
-          <motion.img 
-            src="/images/eng-highlight.png" 
-            alt="English highlight" 
+          <motion.div
             className="absolute bottom-0 left-24 w-80 h-auto object-contain opacity-100 pointer-events-none md:hidden"
             style={{ zIndex: 20 }}
             animate={{ 
               y: [0, -5, 0]
             }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            loading="lazy"
-            decoding="async"
-            width="320"
-            height="200"
-          />
+          >
+            <OptimizedImage
+              src="/images/eng-highlight.png"
+              alt="English highlight"
+              className="w-full h-auto object-contain"
+              width={320}
+              height={200}
+            />
         )}
 
         {/* eng-cat.png - Left Bottom Corner - Mobile */}
@@ -359,9 +361,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
 
         {/* eng-owl.png - Near Cloud 1 - Desktop */}
         {decorReady && (
-          <motion.img 
-            src="/images/eng-owl.png" 
-            alt="English owl" 
+          <motion.div
             className="absolute top-8 left-[45%] w-20 lg:w-24 xl:w-28 h-auto object-contain opacity-100 pointer-events-none hidden md:block"
             style={{ zIndex: 19 }}
             animate={{ 
@@ -369,11 +369,15 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
               rotate: [0, 2, -2, 0]
             }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            loading="lazy"
-            decoding="async"
-            width="112"
-            height="112"
-          />
+          >
+            <OptimizedImage
+              src="/images/eng-owl.png"
+              alt="English owl"
+              className="w-full h-full object-contain"
+              width={112}
+              height={112}
+            />
+          </motion.div>
         )}
 
         {/* Cloud 2 - Center Between Other Two - Desktop */}
@@ -416,20 +420,22 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
 
         {/* eng-highlight.png - Bottom - Desktop */}
         {decorReady && (
-          <motion.img 
-            src="/images/eng-highlight.png" 
-            alt="English highlight" 
+          <motion.div
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] lg:w-[600px] xl:w-[700px] h-auto object-contain opacity-100 pointer-events-none hidden md:block"
             style={{ zIndex: 20 }}
             animate={{ 
               y: [0, -5, 0]
             }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            loading="lazy"
-            decoding="async"
-            width="700"
-            height="350"
-          />
+          >
+            <OptimizedImage
+              src="/images/eng-highlight.png"
+              alt="English highlight"
+              className="w-full h-auto object-contain"
+              width={700}
+              height={350}
+            />
+          </motion.div>
         )}
 
         {/* eng-cat.png - Left Bottom Corner - Desktop */}

@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import OptimizedImage from '../../../components/OptimizedImage'
 
 const CourseCard = memo(() => {
   return (
@@ -11,14 +12,13 @@ const CourseCard = memo(() => {
         height: '100%'
       }}
     >
-      <img 
-        src="/images/maths-coursecard.png" 
-        alt="Maths course card" 
+      <OptimizedImage
+        src="/images/maths-coursecard.png"
+        alt="Maths course card"
         className="course-card-image w-full h-full rounded-xl"
-        loading="lazy"
-        decoding="async"
-        width="800"
-        height="600"
+        width={800}
+        height={600}
+        priority={true}
         style={{ objectFit: 'cover', maxWidth: '100%' }}
       />
     </div>

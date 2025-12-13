@@ -27,7 +27,7 @@ const GitaPage = ({ childName = '', classDetails, code }) => {
   return (
     <div 
       className="w-full min-h-screen sm:h-screen overflow-y-auto overflow-x-hidden relative bg-cover bg-center bg-no-repeat bg-fixed"
-      style={{ backgroundImage: 'url(/images/backgorund.png)' }}
+      style={{ backgroundImage: 'url(/images/backgorund.webp), url(/images/backgorund.png)' }}
     >
       {/* Responsive Container */}
       <div 

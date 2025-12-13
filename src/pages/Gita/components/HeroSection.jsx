@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, memo } from 'react'
 import { motion } from 'framer-motion'
 import { addChildToJoinQueue, checkIfClassStarted } from '../../../utils/api'
 import JoinSuccessToast from '../../../components/JoinSuccessToast'
+import OptimizedImage from '../../../components/OptimizedImage'
 
 const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
@@ -262,15 +263,13 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
         {/* Main Cloud - Desktop: Bottom Right (unchanged) */}
         {decorReady && (
           <div className="absolute right-0 pointer-events-none hidden md:block z-[18] -bottom-20">
-            <img 
-              src="/images/main-cloud.png" 
-              alt="Main cloud desktop" 
+            <OptimizedImage
+              src="/images/main-cloud.png"
+              alt="Main cloud desktop"
               className="object-contain max-w-full h-auto"
               style={{ width: '900px', height: 'auto', maxHeight: '450px' }}
-              loading="lazy"
-              decoding="async"
-              width="900"
-              height="450"
+              width={900}
+              height={450}
             />
           </div>
         )}
@@ -545,14 +544,13 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                   style={{ zIndex: 20, position: 'relative' }}
                   animate={floatAnimation}
                 >
-                  <img 
-                    src="/images/chariot.png.png" 
-                    alt="Krishna and Arjuna in chariot" 
+                  <OptimizedImage
+                    src="/images/chariot.png.png"
+                    alt="Krishna and Arjuna in chariot"
                     className="w-full h-full object-contain max-w-full"
-                    loading="eager"
-                    decoding="async"
-                    width="520"
-                    height="320"
+                    width={520}
+                    height={320}
+                    priority={true}
                   />
                 </motion.div>
               </div>
@@ -724,14 +722,13 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                       style={{ zIndex: 20, position: 'relative' }}
                       animate={floatAnimation}
                     >
-                      <img 
-                        src="/images/chariot.png.png" 
-                        alt="Krishna and Arjuna in chariot" 
+                      <OptimizedImage
+                        src="/images/chariot.png.png"
+                        alt="Krishna and Arjuna in chariot"
                         className="w-full h-full object-contain max-w-full"
-                        loading="eager"
-                        decoding="async"
-                        width="520"
-                        height="320"
+                        width={520}
+                        height={320}
+                        priority={true}
                       />
                     </motion.div>
                   </div>

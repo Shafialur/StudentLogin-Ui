@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, memo } from 'react'
 import { motion } from 'framer-motion'
 import { addChildToJoinQueue, checkIfClassStarted } from '../../../utils/api'
 import JoinSuccessToast from '../../../components/JoinSuccessToast'
+import OptimizedImage from '../../../components/OptimizedImage'
 
 const HeroSection = memo(({ childName = 'Math Magician', classDetails, code }) => {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
@@ -228,20 +229,22 @@ const HeroSection = memo(({ childName = 'Math Magician', classDetails, code }) =
 
         {/* maths-highlite.png - Bottom Left - Mobile */}
         {decorReady && (
-          <motion.img 
-            src="/images/maths-highlite.png" 
-            alt="Math highlight" 
+          <motion.div
             className="absolute bottom-0 left-[35%] -translate-x-1/2 w-72 h-auto object-contain opacity-100 pointer-events-none md:hidden"
             style={{ zIndex: 20 }}
             animate={{ 
               y: [0, -5, 0]
             }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            loading="lazy"
-            decoding="async"
-            width="288"
-            height="180"
-          />
+          >
+            <OptimizedImage
+              src="/images/maths-highlite.png"
+              alt="Math highlight"
+              className="w-full h-auto object-contain"
+              width={288}
+              height={180}
+            />
+          </motion.div>
         )}
 
         {/* Tablet and Desktop View - Container-based blur rectangle */}
@@ -320,19 +323,21 @@ const HeroSection = memo(({ childName = 'Math Magician', classDetails, code }) =
                     initial="hidden"
                     animate="visible"
                   >
-                    <motion.img 
-                      src="/images/maths-highlite.png" 
-                      alt="Math highlight" 
+                    <motion.div
                       className="w-[500px] lg:w-[600px] xl:w-[700px] h-auto object-contain opacity-100 pointer-events-none"
                       animate={{ 
                         y: [0, -5, 0]
                       }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                      loading="lazy"
-                      decoding="async"
-                      width="700"
-                      height="350"
-                    />
+                    >
+                      <OptimizedImage
+                        src="/images/maths-highlite.png"
+                        alt="Math highlight"
+                        className="w-full h-auto object-contain"
+                        width={700}
+                        height={350}
+                      />
+                    </motion.div>
                   </motion.div>
                 )}
 
