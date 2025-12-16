@@ -200,174 +200,174 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
       <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[36vh] bg-gita-gradient overflow-hidden rounded-b-hero-bottom-mobile md:rounded-b-hero-bottom-desktop md:min-h-[320px] md:max-h-[340px]">
         {/* Background Design Symbols - Left and Right Top Corners */}
         {decorReady && (
-          <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
-            <motion.div
-              className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -left-16 sm:-left-20 md:-left-32"
-              style={{ translateY: '-50%' }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            >
-              <img 
-                src="/images/background-design-symbol.png" 
-                alt="Background design" 
-                className="w-full h-full opacity-85 object-contain object-top max-w-full"
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
+          <motion.div
+            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -left-16 sm:-left-20 md:-left-32"
+            style={{ translateY: '-50%' }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          >
+            <img 
+              src="/images/background-design-symbol.png" 
+              alt="Background design" 
+              className="w-full h-full opacity-85 object-contain object-top max-w-full"
                 loading="lazy"
                 decoding="async"
                 width="384"
                 height="384"
-              />
-            </motion.div>
-            <motion.div
-              className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -right-16 sm:-right-20 md:-right-32"
-              style={{ translateY: '-50%', scaleX: -1 }}
-              animate={{ rotate: -360 }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            >
-              <img 
-                src="/images/background-design-symbol.png" 
-                alt="Background design" 
-                className="w-full h-full opacity-85 object-contain object-top max-w-full"
+            />
+          </motion.div>
+          <motion.div
+            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -right-16 sm:-right-20 md:-right-32"
+            style={{ translateY: '-50%', scaleX: -1 }}
+            animate={{ rotate: -360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          >
+            <img 
+              src="/images/background-design-symbol.png" 
+              alt="Background design" 
+              className="w-full h-full opacity-85 object-contain object-top max-w-full"
                 loading="lazy"
                 decoding="async"
                 width="384"
                 height="384"
-              />
-            </motion.div>
-          </div>
+            />
+          </motion.div>
+        </div>
         )}
 
         {/* Background Clouds - Subtle White Cloud Shapes */}
         {decorReady && (
-          <div className="absolute inset-0 pointer-events-none z-[2]">
-            <img 
-              src="/images/cloud2.png" 
-              alt="Background cloud" 
-              className="absolute top-24 left-1/3 opacity-100 w-28 h-20 object-contain"
+        <div className="absolute inset-0 pointer-events-none z-[2]">
+          <img 
+            src="/images/cloud2.png" 
+            alt="Background cloud" 
+            className="absolute top-24 left-1/3 opacity-100 w-28 h-20 object-contain"
               loading="lazy"
               decoding="async"
               width="112"
               height="80"
-            />
-            <img 
-              src="/images/cloud2.png" 
-              alt="Background cloud" 
-              className="absolute bottom-20 right-24 opacity-100 w-36 h-28 object-contain"
+          />
+          <img 
+            src="/images/cloud2.png" 
+            alt="Background cloud" 
+            className="absolute bottom-20 right-24 opacity-100 w-36 h-28 object-contain"
               loading="lazy"
               decoding="async"
               width="144"
               height="112"
-            />
-          </div>
+          />
+        </div>
         )}
 
         {/* Main Cloud - Desktop: Bottom Right (unchanged) */}
         {decorReady && (
-          <div className="absolute right-0 pointer-events-none hidden md:block z-[18] -bottom-20">
+        <div className="absolute right-0 pointer-events-none hidden md:block z-[18] -bottom-20">
             <OptimizedImage
-              src="/images/main-cloud.png"
-              alt="Main cloud desktop"
-              className="object-contain max-w-full h-auto"
-              style={{ width: '900px', height: 'auto', maxHeight: '450px' }}
+            src="/images/main-cloud.png" 
+            alt="Main cloud desktop" 
+            className="object-contain max-w-full h-auto"
+            style={{ width: '900px', height: 'auto', maxHeight: '450px' }}
               width={900}
               height={450}
-            />
-          </div>
+          />
+        </div>
         )}
 
         {/* Cloud at Bottom of Hero Section - Behind Chariot */}
         {decorReady && (
-          <div className="absolute bottom-[-20px] pointer-events-none hidden md:block" style={{ zIndex: 8, left: '55%', transform: 'translateX(-50%)' }}>
-            <img 
-              src="/images/cloud2.png" 
-              alt="Cloud at bottom" 
-              className="object-contain opacity-80 max-w-full h-auto"
-              style={{ width: '650px', height: 'auto' }}
+        <div className="absolute bottom-[-20px] pointer-events-none hidden md:block" style={{ zIndex: 8, left: '55%', transform: 'translateX(-50%)' }}>
+          <img 
+            src="/images/cloud2.png" 
+            alt="Cloud at bottom" 
+            className="object-contain opacity-80 max-w-full h-auto"
+            style={{ width: '650px', height: 'auto' }}
               loading="lazy"
               decoding="async"
               width="650"
               height="300"
-            />
-          </div>
+          />
+        </div>
         )}
 
         {/* Pink Lotus Flower - Bottom Left */}
         {decorReady && (
-          <motion.div 
-            className="absolute pointer-events-none hidden md:block" 
-            style={{ zIndex: 15, bottom: '-20px', left: '-20px' }}
-            animate={{ 
-              scale: [1, 1.05, 1],
-              filter: [
-                'drop-shadow(0 0 10px rgba(255, 182, 193, 0.6))',
-                'drop-shadow(0 0 25px rgba(255, 105, 180, 0.9))',
-                'drop-shadow(0 0 10px rgba(255, 182, 193, 0.6))'
-              ]
-            }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <img 
-              src="/images/lotus.png" 
-              alt="Lotus flower" 
-              className="w-44 h-auto object-contain opacity-100 max-w-full"
+        <motion.div 
+          className="absolute pointer-events-none hidden md:block" 
+          style={{ zIndex: 15, bottom: '-20px', left: '-20px' }}
+          animate={{ 
+            scale: [1, 1.05, 1],
+            filter: [
+              'drop-shadow(0 0 10px rgba(255, 182, 193, 0.6))',
+              'drop-shadow(0 0 25px rgba(255, 105, 180, 0.9))',
+              'drop-shadow(0 0 10px rgba(255, 182, 193, 0.6))'
+            ]
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <img 
+            src="/images/lotus.png" 
+            alt="Lotus flower" 
+            className="w-44 h-auto object-contain opacity-100 max-w-full"
               loading="lazy"
               decoding="async"
               width="176"
               height="176"
-            />
-          </motion.div>
+          />
+        </motion.div>
         )}
 
         {decorReady && (
-          <motion.div 
-            className="absolute bottom-[-10px] left-0 pointer-events-none hidden md:block" 
-            style={{ zIndex: 15, left: '45%', bottom: '-20px'}}
-            animate={{ 
-              scale: [1, 1.08, 1],
-              filter: [
-                'drop-shadow(0 0 8px rgba(255, 182, 193, 0.5))',
-                'drop-shadow(0 0 20px rgba(255, 105, 180, 0.8))',
-                'drop-shadow(0 0 8px rgba(255, 182, 193, 0.5))'
-              ]
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          >
-            <img 
-              src="/images/lotus.png" 
-              alt="Lotus flower" 
-              className="w-32 h-auto object-contain opacity-80 max-w-full"
+        <motion.div 
+          className="absolute bottom-[-10px] left-0 pointer-events-none hidden md:block" 
+          style={{ zIndex: 15, left: '45%', bottom: '-20px'}}
+          animate={{ 
+            scale: [1, 1.08, 1],
+            filter: [
+              'drop-shadow(0 0 8px rgba(255, 182, 193, 0.5))',
+              'drop-shadow(0 0 20px rgba(255, 105, 180, 0.8))',
+              'drop-shadow(0 0 8px rgba(255, 182, 193, 0.5))'
+            ]
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        >
+          <img 
+            src="/images/lotus.png" 
+            alt="Lotus flower" 
+            className="w-32 h-auto object-contain opacity-80 max-w-full"
               loading="lazy"
               decoding="async"
               width="128"
               height="128"
-            />
-          </motion.div>
+          />
+        </motion.div>
         )}
 
         {/* Lotus1 - Bottom Center */}
         {decorReady && (
-          <motion.div 
-            className="absolute bottom-0 pointer-events-none hidden md:block" 
-            style={{ zIndex: 15, left: '7%' }}
-            animate={{ 
-              scale: [1, 1.06, 1],
-              filter: [
-                'drop-shadow(0 0 10px rgba(255, 200, 200, 0.6))',
-                'drop-shadow(0 0 25px rgba(255, 150, 180, 0.9))',
-                'drop-shadow(0 0 10px rgba(255, 200, 200, 0.6))'
-              ]
-            }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-          >
-            <img 
-              src="/images/lotus1.png" 
-              alt="Lotus flower" 
-              className="w-14 h-auto object-contain opacity-100 max-w-full"
+        <motion.div 
+          className="absolute bottom-0 pointer-events-none hidden md:block" 
+          style={{ zIndex: 15, left: '7%' }}
+          animate={{ 
+            scale: [1, 1.06, 1],
+            filter: [
+              'drop-shadow(0 0 10px rgba(255, 200, 200, 0.6))',
+              'drop-shadow(0 0 25px rgba(255, 150, 180, 0.9))',
+              'drop-shadow(0 0 10px rgba(255, 200, 200, 0.6))'
+            ]
+          }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        >
+          <img 
+            src="/images/lotus1.png" 
+            alt="Lotus flower" 
+            className="w-14 h-auto object-contain opacity-100 max-w-full"
               loading="lazy"
               decoding="async"
               width="56"
               height="56"
-            />
-          </motion.div>
+          />
+        </motion.div>
         )}
 
         {/* Mobile View - Responsive */}
@@ -393,31 +393,31 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
             {/* Small Clouds Behind Chariot - Mobile and Tablet */}
             {/* Left Small Cloud */}
             {decorReady && (
-              <div className="absolute pointer-events-none block lg:hidden left-[3%] sm:left-[8%] top-[55%] sm:top-[60%] -translate-y-1/2 z-[12]">
-                <img 
-                  src="/images/cloud2.png" 
-                  alt="Small cloud left" 
-                  className="object-contain opacity-80 w-14 h-auto sm:w-18"
+            <div className="absolute pointer-events-none block lg:hidden left-[3%] sm:left-[8%] top-[55%] sm:top-[60%] -translate-y-1/2 z-[12]">
+              <img 
+                src="/images/cloud2.png" 
+                alt="Small cloud left" 
+                className="object-contain opacity-80 w-14 h-auto sm:w-18"
                   loading="lazy"
                   decoding="async"
                   width="72"
                   height="56"
-                />
-              </div>
+              />
+            </div>
             )}
             {/* Right Small Cloud */}
             {decorReady && (
-              <div className="absolute pointer-events-none block lg:hidden right-[3%] sm:right-[12%] top-[55%] sm:top-[60%] -translate-y-1/2 z-[12]">
-                <img 
-                  src="/images/cloud2.png" 
-                  alt="Small cloud right" 
-                  className="object-contain opacity-80 w-14 h-auto sm:w-18"
+            <div className="absolute pointer-events-none block lg:hidden right-[3%] sm:right-[12%] top-[55%] sm:top-[60%] -translate-y-1/2 z-[12]">
+              <img 
+                src="/images/cloud2.png" 
+                alt="Small cloud right" 
+                className="object-contain opacity-80 w-14 h-auto sm:w-18"
                   loading="lazy"
                   decoding="async"
                   width="72"
                   height="56"
-                />
-              </div>
+              />
+            </div>
             )}
             
             {/* Top Section - Text Content */}
@@ -499,43 +499,43 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                 
                 {/* Small Cloud 1 - Near Chariot */}
                 {decorReady && (
-                  <motion.div 
-                    className="absolute hidden md:block" 
-                    style={{ zIndex: 8, top: '20%', right: '70%' }}
-                    animate={cloudAnimation}
-                  >
-                    <img 
-                      src="/images/cloud2.png" 
-                      alt="Small cloud near chariot" 
-                      className="object-contain opacity-100 max-w-full h-auto"
-                      style={{ width: '200px', height: 'auto' }}
+                <motion.div 
+                  className="absolute hidden md:block" 
+                  style={{ zIndex: 8, top: '20%', right: '70%' }}
+                  animate={cloudAnimation}
+                >
+                  <img 
+                    src="/images/cloud2.png" 
+                    alt="Small cloud near chariot" 
+                    className="object-contain opacity-100 max-w-full h-auto"
+                    style={{ width: '200px', height: 'auto' }}
                       loading="lazy"
                       decoding="async"
                       width="200"
                       height="120"
-                    />
-                  </motion.div>
+                  />
+                </motion.div>
                 )}
                 
                 {/* Small Cloud 2 - Near Chariot */}
                 {decorReady && (
-                  <motion.div 
-                    className="absolute hidden md:block" 
-                    style={{ zIndex: 8, top: '40%', right: '-60px' }}
-                    animate={{ x: [0, -15, 0] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <img 
-                      src="/images/cloud2.png" 
-                      alt="Small cloud near chariot" 
-                      className="object-contain opacity-100 max-w-full h-auto"
-                      style={{ width: '180px', height: 'auto' }}
+                <motion.div 
+                  className="absolute hidden md:block" 
+                  style={{ zIndex: 8, top: '40%', right: '-60px' }}
+                  animate={{ x: [0, -15, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <img 
+                    src="/images/cloud2.png" 
+                    alt="Small cloud near chariot" 
+                    className="object-contain opacity-100 max-w-full h-auto"
+                    style={{ width: '180px', height: 'auto' }}
                       loading="lazy"
                       decoding="async"
                       width="180"
                       height="110"
-                    />
-                  </motion.div>
+                  />
+                </motion.div>
                 )}
                 
                 {/* Chariot - Main Illustration */}
@@ -545,8 +545,8 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                   animate={floatAnimation}
                 >
                   <OptimizedImage
-                    src="/images/chariot.png.png"
-                    alt="Krishna and Arjuna in chariot"
+                    src="/images/chariot.png.png" 
+                    alt="Krishna and Arjuna in chariot" 
                     className="w-full h-full object-contain max-w-full"
                     width={520}
                     height={320}
@@ -570,33 +570,33 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                 {/* Small Clouds Behind Chariot - Tablet Only */}
                 {/* Left Small Cloud */}
                 {decorReady && (
-                  <div className="absolute pointer-events-none hidden md:block lg:hidden" style={{ zIndex: 12, left: '10%', top: '65%', transform: 'translateY(-50%)' }}>
-                    <img 
-                      src="/images/cloud2.png" 
-                      alt="Small cloud left" 
-                      className="object-contain opacity-80"
-                      style={{ width: '80px', height: 'auto' }}
+                <div className="absolute pointer-events-none hidden md:block lg:hidden" style={{ zIndex: 12, left: '10%', top: '65%', transform: 'translateY(-50%)' }}>
+                  <img 
+                    src="/images/cloud2.png" 
+                    alt="Small cloud left" 
+                    className="object-contain opacity-80"
+                    style={{ width: '80px', height: 'auto' }}
                       loading="lazy"
                       decoding="async"
                       width="80"
                       height="50"
-                    />
-                  </div>
+                  />
+                </div>
                 )}
                 {/* Right Small Cloud */}
                 {decorReady && (
-                  <div className="absolute pointer-events-none hidden md:block lg:hidden" style={{ zIndex: 12, right: '15%', top: '65%', transform: 'translateY(-50%)' }}>
-                    <img 
-                      src="/images/cloud2.png" 
-                      alt="Small cloud right" 
-                      className="object-contain opacity-80"
-                      style={{ width: '80px', height: 'auto' }}
+                <div className="absolute pointer-events-none hidden md:block lg:hidden" style={{ zIndex: 12, right: '15%', top: '65%', transform: 'translateY(-50%)' }}>
+                  <img 
+                    src="/images/cloud2.png" 
+                    alt="Small cloud right" 
+                    className="object-contain opacity-80"
+                    style={{ width: '80px', height: 'auto' }}
                       loading="lazy"
                       decoding="async"
                       width="80"
                       height="50"
-                    />
-                  </div>
+                  />
+                </div>
                 )}
                 
                 {/* Left Side - Text Content */}
@@ -677,43 +677,43 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                     
                     {/* Small Cloud 1 - Near Chariot */}
                     {decorReady && (
-                      <motion.div 
-                        className="absolute hidden md:block" 
-                        style={{ zIndex: 8, top: '20%', right: '70%' }}
-                        animate={cloudAnimation}
-                      >
-                        <img 
-                          src="/images/cloud2.png" 
-                          alt="Small cloud near chariot" 
-                          className="object-contain opacity-100 max-w-full h-auto"
-                          style={{ width: '200px', height: 'auto' }}
+                    <motion.div 
+                      className="absolute hidden md:block" 
+                      style={{ zIndex: 8, top: '20%', right: '70%' }}
+                      animate={cloudAnimation}
+                    >
+                      <img 
+                        src="/images/cloud2.png" 
+                        alt="Small cloud near chariot" 
+                        className="object-contain opacity-100 max-w-full h-auto"
+                        style={{ width: '200px', height: 'auto' }}
                           loading="lazy"
                           decoding="async"
                           width="200"
                           height="120"
-                        />
-                      </motion.div>
+                      />
+                    </motion.div>
                     )}
                     
                     {/* Small Cloud 2 - Near Chariot */}
                     {decorReady && (
-                      <motion.div 
-                        className="absolute hidden md:block" 
-                        style={{ zIndex: 8, top: '40%', right: '-60px' }}
-                        animate={{ x: [0, -15, 0] }}
-                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                      >
-                        <img 
-                          src="/images/cloud2.png" 
-                          alt="Small cloud near chariot" 
-                          className="object-contain opacity-100 max-w-full h-auto"
-                          style={{ width: '180px', height: 'auto' }}
+                    <motion.div 
+                      className="absolute hidden md:block" 
+                      style={{ zIndex: 8, top: '40%', right: '-60px' }}
+                      animate={{ x: [0, -15, 0] }}
+                      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <img 
+                        src="/images/cloud2.png" 
+                        alt="Small cloud near chariot" 
+                        className="object-contain opacity-100 max-w-full h-auto"
+                        style={{ width: '180px', height: 'auto' }}
                           loading="lazy"
                           decoding="async"
                           width="180"
                           height="110"
-                        />
-                      </motion.div>
+                      />
+                    </motion.div>
                     )}
                     
                     {/* Chariot - Main Illustration */}
@@ -723,8 +723,8 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                       animate={floatAnimation}
                     >
                       <OptimizedImage
-                        src="/images/chariot.png.png"
-                        alt="Krishna and Arjuna in chariot"
+                        src="/images/chariot.png.png" 
+                        alt="Krishna and Arjuna in chariot" 
                         className="w-full h-full object-contain max-w-full"
                         width={520}
                         height={320}

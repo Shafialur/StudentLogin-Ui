@@ -53,9 +53,15 @@ const CodeGate = () => {
 
       setStatus('checking')
       try {
+        // Get token from localStorage or environment variable
+        const token = localStorage.getItem('auth_token') || import.meta.env.VITE_TOKEN
+        
         const response = await fetch(`${API_BASE_URL}/parent-panel/verify-join-code`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            ...(token && { 'Authorization': `Bearer ${token}` })
+          },
           body: JSON.stringify({ code })
         })
 
@@ -65,7 +71,11 @@ const CodeGate = () => {
 
         if (success && verifiedMsg) {
           // Fetch class info using the verified code
-          const infoRes = await fetch(`${API_BASE_URL}/parent-panel/get-join-class-info/${code}`)
+          const infoRes = await fetch(`${API_BASE_URL}/parent-panel/get-join-class-info/${code}`, {
+            headers: {
+              ...(token && { 'Authorization': `Bearer ${token}` })
+            }
+          })
           const infoData = await infoRes.json()
 
           if (infoData?.success && infoData?.nextclass) {
@@ -133,6 +143,22 @@ const CodeGate = () => {
 }
 
 function App() {
+  // Extract token from URL and save to localStorage
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const token = urlParams.get('token')
+    
+    if (token) {
+      // Save token to localStorage
+      localStorage.setItem('auth_token', token)
+      
+      // Remove token from URL to keep it clean
+      urlParams.delete('token')
+      const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '') + window.location.hash
+      window.history.replaceState({}, '', newUrl)
+    }
+  }, [])
+
   return (
     <Router>
       <Suspense fallback={<LoadingFallback />}>

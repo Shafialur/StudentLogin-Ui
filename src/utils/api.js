@@ -8,9 +8,16 @@ if (!apiBaseUrl) {
 export const API_BASE_URL = apiBaseUrl
 
 /**
- * Get bearer token from environment variable
+ * Get bearer token from localStorage first, then fallback to environment variable
  */
 const getAuthToken = () => {
+  // First check localStorage
+  const storedToken = localStorage.getItem('auth_token')
+  if (storedToken) {
+    return storedToken
+  }
+  
+  // Fallback to environment variable
   return import.meta.env.VITE_TOKEN
 }
 
@@ -123,6 +130,47 @@ export const checkIfClassStarted = async (code) => {
     return data
   } catch (error) {
     console.error('Error checking class status:', error)
+    throw error
+  }
+}
+
+/**
+ * Fetch last session details
+ */
+export const fetchLastSessionDetails = async (code) => {
+  try {
+    const token = getAuthToken()
+    
+    if (!token) {
+      throw new Error('No authentication token found in environment variables')
+    }
+
+    if (!code || !/^[a-z0-9]{6}$/i.test(code)) {
+      throw new Error('Invalid 6-digit code')
+    }
+
+    const response = await fetch(`${API_BASE_URL}/parent-panel/last_session_details?code=${code}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}))
+      throw new Error(errorData.message || `API Error: ${response.status} ${response.statusText}`)
+    }
+
+    const data = await response.json()
+    
+    if (data.success && data.data) {
+      return data.data
+    } else {
+      throw new Error(data.message || 'Failed to fetch last session details')
+    }
+  } catch (error) {
+    console.error('Error fetching last session details:', error)
     throw error
   }
 }

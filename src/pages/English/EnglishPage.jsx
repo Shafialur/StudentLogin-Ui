@@ -56,7 +56,7 @@ const EnglishPage = ({ childName = '', classDetails, code }) => {
               custom={0}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              <CourseCard />
+              <CourseCard code={code} />
             </motion.div>
 
             {/* Mobile: Progress Card - Full width */}

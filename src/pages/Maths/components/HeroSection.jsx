@@ -230,12 +230,12 @@ const HeroSection = memo(({ childName = 'Math Magician', classDetails, code }) =
         {/* maths-highlite.png - Bottom Left - Mobile */}
         {decorReady && (
           <motion.div
-            className="absolute bottom-0 left-[35%] -translate-x-1/2 w-72 h-auto object-contain opacity-100 pointer-events-none md:hidden"
-            style={{ zIndex: 20 }}
-            animate={{ 
-              y: [0, -5, 0]
-            }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-0 left-[35%] -translate-x-1/2 w-72 h-auto object-contain opacity-100 pointer-events-none md:hidden"
+          style={{ zIndex: 20 }}
+          animate={{ 
+            y: [0, -5, 0]
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
             <OptimizedImage
               src="/images/maths-highlite.png"
@@ -316,19 +316,19 @@ const HeroSection = memo(({ childName = 'Math Magician', classDetails, code }) =
 
                 {/* Top - maths-highlite.png Image */}
                 {decorReady && (
-                  <motion.div 
-                    className="absolute top-[-20] left-1/2 -translate-x-1/2 hidden md:block"
-                    style={{ zIndex: 20 }}
-                    variants={chariotVariants}
-                    initial="hidden"
-                    animate="visible"
-                  >
+                <motion.div 
+                  className="absolute top-[-20] left-1/2 -translate-x-1/2 hidden md:block"
+                  style={{ zIndex: 20 }}
+                  variants={chariotVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
                     <motion.div
-                      className="w-[500px] lg:w-[600px] xl:w-[700px] h-auto object-contain opacity-100 pointer-events-none"
-                      animate={{ 
-                        y: [0, -5, 0]
-                      }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-[500px] lg:w-[600px] xl:w-[700px] h-auto object-contain opacity-100 pointer-events-none"
+                    animate={{ 
+                      y: [0, -5, 0]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     >
                       <OptimizedImage
                         src="/images/maths-highlite.png"
@@ -336,8 +336,8 @@ const HeroSection = memo(({ childName = 'Math Magician', classDetails, code }) =
                         className="w-full h-auto object-contain"
                         width={700}
                         height={350}
-                      />
-                    </motion.div>
+                  />
+                </motion.div>
                   </motion.div>
                 )}
 

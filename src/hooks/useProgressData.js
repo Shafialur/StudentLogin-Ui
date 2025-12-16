@@ -22,7 +22,11 @@ export const useProgressData = () => {
 
     const loadProgressData = async () => {
       try {
-        const tokenPresent = Boolean(import.meta.env.VITE_TOKEN)
+        // Check localStorage first, then environment variable
+        const storedToken = localStorage.getItem('auth_token')
+        const envToken = import.meta.env.VITE_TOKEN
+        const tokenPresent = Boolean(storedToken || envToken)
+        
         if (!tokenPresent) {
           // Skip network if no token; keep defaults for instant render
           return

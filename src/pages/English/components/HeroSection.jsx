@@ -249,6 +249,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
               width={320}
               height={200}
             />
+          </motion.div>
         )}
 
         {/* eng-cat.png - Left Bottom Corner - Mobile */}
