@@ -4,15 +4,34 @@ import { addChildToJoinQueue, checkIfClassStarted } from '../../../utils/api'
 import JoinSuccessToast from '../../../components/JoinSuccessToast'
 import OptimizedImage from '../../../components/OptimizedImage'
 
-const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
-  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
-  const timerRef = useRef(null)
-  const [decorReady, setDecorReady] = useState(false)
-  const [showToast, setShowToast] = useState(false)
-  const [isJoining, setIsJoining] = useState(false)
-  const [pollingId, setPollingId] = useState(null)
+interface ClassDetails {
+  class_name?: string
+  child_name?: string
+  class_date?: string
+  start_time?: string
+}
 
-  const toISTDate = useCallback((dateStr, timeStr) => {
+interface HeroSectionProps {
+  childName?: string
+  classDetails?: ClassDetails
+  code?: string
+}
+
+interface TimeLeft {
+  hours: number
+  minutes: number
+  seconds: number
+}
+
+const HeroSection: React.FC<HeroSectionProps> = memo(({ childName = 'Krishna', classDetails, code }) => {
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ hours: 0, minutes: 0, seconds: 0 })
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const [decorReady, setDecorReady] = useState<boolean>(false)
+  const [showToast, setShowToast] = useState<boolean>(false)
+  const [isJoining, setIsJoining] = useState<boolean>(false)
+  const [pollingId, setPollingId] = useState<NodeJS.Timeout | null>(null)
+
+  const toISTDate = useCallback((dateStr: string | undefined, timeStr: string | undefined): Date | null => {
     if (!dateStr || !timeStr) return null
     const t = timeStr.length === 5 ? `${timeStr}:00` : timeStr
     const iso = `${dateStr}T${t}+05:30`
@@ -27,7 +46,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
       return
     }
 
-    const tick = () => {
+    const tick = (): void => {
       const now = new Date()
       const diffSecs = Math.max(0, Math.floor((start.getTime() - now.getTime()) / 1000))
       const hours = Math.floor(diffSecs / 3600)
@@ -69,23 +88,26 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
   // Defer heavy decorative layers until idle to speed first paint
   useEffect(() => {
     const idleCb = window.requestIdleCallback
-    const handle = idleCb
-      ? idleCb(() => setDecorReady(true), { timeout: 300 })
-      : setTimeout(() => setDecorReady(true), 120)
+    let handle: number | ReturnType<typeof window.requestIdleCallback> | undefined
+    
+    if (typeof idleCb === 'function') {
+      handle = idleCb(() => setDecorReady(true), { timeout: 300 })
+    } else {
+      handle = setTimeout(() => setDecorReady(true), 120) as unknown as number
+    }
 
     return () => {
-      if (idleCb && handle) {
-        window.cancelIdleCallback(handle)
-      }
-      if (!idleCb && handle) {
-        clearTimeout(handle)
+      if (typeof idleCb === 'function' && handle) {
+        window.cancelIdleCallback(handle as ReturnType<typeof window.requestIdleCallback>)
+      } else if (handle) {
+        clearTimeout(handle as unknown as number)
       }
     }
   }, [])
 
   // Pause animations when tab is hidden
   useEffect(() => {
-    const handleVisibilityChange = () => {
+    const handleVisibilityChange = (): void => {
       if (document.hidden && timerRef.current) {
         // Timer continues but animations can be paused
       }
@@ -94,10 +116,10 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
   }, [])
 
-  const formatTime = useCallback((value) => String(value).padStart(2, '0'), [])
+  const formatTime = useCallback((value: number): string => String(value).padStart(2, '0'), [])
 
   // Handle Join Now button click
-  const handleJoinNow = async () => {
+  const handleJoinNow = async (): Promise<void> => {
     if (!code) {
       alert('Class verification code is not available. Please try again later.')
       return
@@ -123,14 +145,15 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
             setPollingId(null)
             window.location.href = status.join_url
           }
-        } catch (err) {
+        } catch (err: unknown) {
           console.error('Polling error:', err)
         }
       }, 15000)
       setPollingId(id)
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error joining queue:', error)
-      alert(error.message || 'Oops! Something went wrong. Please try again.')
+      const errorMessage = error instanceof Error ? error.message : 'Oops! Something went wrong. Please try again.'
+      alert(errorMessage)
     } finally {
       setIsJoining(false)
     }
@@ -150,7 +173,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
     visible: { 
       opacity: 1, 
       x: 0,
-      transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }
+      transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] as const }
     }
   }
 
@@ -159,7 +182,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
     visible: { 
       opacity: 1, 
       x: 0,
-      transition: { duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }
+      transition: { duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] as const }
     }
   }
 
@@ -168,7 +191,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
     transition: {
       duration: 3,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const
     }
   }
 
@@ -177,7 +200,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
     transition: {
       duration: 8,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const
     }
   }
 
@@ -197,12 +220,12 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
   return (
     <div className="relative w-full overflow-x-hidden m-0 p-0">
       {/* Hero Section Background with Gradient */}
-      <div className="relative w-full min-h-[320px] sm:min-h-[360px] md:h-[36vh] bg-gita-gradient overflow-hidden rounded-b-hero-bottom-mobile md:rounded-b-hero-bottom-desktop md:min-h-[320px] md:max-h-[340px]">
+      <div className="relative w-full min-h-[320px] sm:min-h-[360px] lg:h-[36vh] bg-gita-gradient overflow-hidden rounded-b-hero-bottom-mobile lg:rounded-b-hero-bottom-desktop lg:min-h-[320px] lg:max-h-[340px]">
         {/* Background Design Symbols - Left and Right Top Corners */}
         {decorReady && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
           <motion.div
-            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -left-16 sm:-left-20 md:-left-32"
+            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 -left-16 sm:-left-20 lg:-left-32"
             style={{ translateY: '-50%' }}
             animate={{ rotate: 360 }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -213,12 +236,12 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
               className="w-full h-full opacity-85 object-contain object-top max-w-full"
                 loading="lazy"
                 decoding="async"
-                width="384"
-                height="384"
+                width={384}
+                height={384}
             />
           </motion.div>
           <motion.div
-            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 -right-16 sm:-right-20 md:-right-32"
+            className="absolute top-0 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 -right-16 sm:-right-20 lg:-right-32"
             style={{ translateY: '-50%', scaleX: -1 }}
             animate={{ rotate: -360 }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -229,8 +252,8 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
               className="w-full h-full opacity-85 object-contain object-top max-w-full"
                 loading="lazy"
                 decoding="async"
-                width="384"
-                height="384"
+                width={384}
+                height={384}
             />
           </motion.div>
         </div>
@@ -245,8 +268,8 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
             className="absolute top-24 left-1/3 opacity-100 w-28 h-20 object-contain"
               loading="lazy"
               decoding="async"
-              width="112"
-              height="80"
+              width={112}
+              height={80}
           />
           <img 
             src="/images/cloud2.png" 
@@ -254,15 +277,15 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
             className="absolute bottom-20 right-24 opacity-100 w-36 h-28 object-contain"
               loading="lazy"
               decoding="async"
-              width="144"
-              height="112"
+              width={144}
+              height={112}
           />
         </div>
         )}
 
         {/* Main Cloud - Desktop: Bottom Right (unchanged) */}
         {decorReady && (
-        <div className="absolute right-0 pointer-events-none hidden md:block z-[18] -bottom-20">
+        <div className="absolute right-0 pointer-events-none hidden lg:block z-[18] -bottom-20">
             <OptimizedImage
             src="/images/main-cloud.png" 
             alt="Main cloud desktop" 
@@ -276,7 +299,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
 
         {/* Cloud at Bottom of Hero Section - Behind Chariot */}
         {decorReady && (
-        <div className="absolute bottom-[-20px] pointer-events-none hidden md:block" style={{ zIndex: 8, left: '55%', transform: 'translateX(-50%)' }}>
+        <div className="absolute bottom-[-20px] pointer-events-none hidden lg:block" style={{ zIndex: 8, left: '55%', transform: 'translateX(-50%)' }}>
           <img 
             src="/images/cloud2.png" 
             alt="Cloud at bottom" 
@@ -284,8 +307,8 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
             style={{ width: '650px', height: 'auto' }}
               loading="lazy"
               decoding="async"
-              width="650"
-              height="300"
+              width={650}
+              height={300}
           />
         </div>
         )}
@@ -293,7 +316,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
         {/* Pink Lotus Flower - Bottom Left */}
         {decorReady && (
         <motion.div 
-          className="absolute pointer-events-none hidden md:block" 
+          className="absolute pointer-events-none hidden lg:block" 
           style={{ zIndex: 15, bottom: '-20px', left: '-20px' }}
           animate={{ 
             scale: [1, 1.05, 1],
@@ -311,15 +334,15 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
             className="w-44 h-auto object-contain opacity-100 max-w-full"
               loading="lazy"
               decoding="async"
-              width="176"
-              height="176"
+              width={176}
+              height={176}
           />
         </motion.div>
         )}
 
         {decorReady && (
         <motion.div 
-          className="absolute bottom-[-10px] left-0 pointer-events-none hidden md:block" 
+          className="absolute bottom-[-10px] left-0 pointer-events-none hidden lg:block" 
           style={{ zIndex: 15, left: '45%', bottom: '-20px'}}
           animate={{ 
             scale: [1, 1.08, 1],
@@ -337,8 +360,8 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
             className="w-32 h-auto object-contain opacity-80 max-w-full"
               loading="lazy"
               decoding="async"
-              width="128"
-              height="128"
+              width={128}
+              height={128}
           />
         </motion.div>
         )}
@@ -346,7 +369,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
         {/* Lotus1 - Bottom Center */}
         {decorReady && (
         <motion.div 
-          className="absolute bottom-0 pointer-events-none hidden md:block" 
+          className="absolute bottom-0 pointer-events-none hidden lg:block" 
           style={{ zIndex: 15, left: '7%' }}
           animate={{ 
             scale: [1, 1.06, 1],
@@ -364,14 +387,14 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
             className="w-14 h-auto object-contain opacity-100 max-w-full"
               loading="lazy"
               decoding="async"
-              width="56"
-              height="56"
+              width={56}
+              height={56}
           />
         </motion.div>
         )}
 
         {/* Mobile View - Responsive */}
-        <div className="relative h-full min-h-[320px] sm:min-h-[360px] md:hidden w-full max-w-full mx-0 flex flex-col items-center justify-center py-3 sm:py-4 px-3 sm:px-4" style={{ zIndex: 10 }}>
+        <div className="relative h-full min-h-[320px] sm:min-h-[360px] lg:hidden w-full max-w-full mx-0 flex flex-col items-center justify-center py-3 sm:py-4 px-3 sm:px-4" style={{ zIndex: 10 }}>
           {/* Single Blur Rectangle for All Content - Mobile Only */}
           <div className="absolute top-1/2 left-3 right-3 -translate-y-1/2 h-[280px] sm:h-[320px] max-h-[340px] w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] bg-blur-glass backdrop-blur-sm backdrop-saturate-100 rounded-3xl border border-white/15 z-[1] pointer-events-none overflow-visible"></div>
           
@@ -400,8 +423,8 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                 className="object-contain opacity-80 w-14 h-auto sm:w-18"
                   loading="lazy"
                   decoding="async"
-                  width="72"
-                  height="56"
+                  width={72}
+                  height={56}
               />
             </div>
             )}
@@ -414,8 +437,8 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                 className="object-contain opacity-80 w-14 h-auto sm:w-18"
                   loading="lazy"
                   decoding="async"
-                  width="72"
-                  height="56"
+                  width={72}
+                  height={56}
               />
             </div>
             )}
@@ -453,8 +476,8 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                     style={{ maxWidth: '100%', height: 'auto', width: 'clamp(2rem, 4vw + 0.5rem, 2.5rem)' }}
                     loading="lazy"
                     decoding="async"
-                    width="40"
-                    height="40"
+                    width={40}
+                    height={40}
                   />
                   
                   {/* Live In Text */}
@@ -489,7 +512,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
               <div className="flex flex-col items-center justify-center relative">
                 {/* Sun Behind Chariot */}
                 <motion.div 
-                  className="absolute block top-[15%] md:top-[20%]" 
+                  className="absolute block top-[15%] lg:top-[20%]" 
                   style={{ zIndex: 16, left: '50%', transform: 'translate(-50%, -50%)' }}
                   animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -500,7 +523,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                 {/* Small Cloud 1 - Near Chariot */}
                 {decorReady && (
                 <motion.div 
-                  className="absolute hidden md:block" 
+                  className="absolute hidden lg:block" 
                   style={{ zIndex: 8, top: '20%', right: '70%' }}
                   animate={cloudAnimation}
                 >
@@ -511,8 +534,8 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                     style={{ width: '200px', height: 'auto' }}
                       loading="lazy"
                       decoding="async"
-                      width="200"
-                      height="120"
+                      width={200}
+                      height={120}
                   />
                 </motion.div>
                 )}
@@ -520,7 +543,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                 {/* Small Cloud 2 - Near Chariot */}
                 {decorReady && (
                 <motion.div 
-                  className="absolute hidden md:block" 
+                  className="absolute hidden lg:block" 
                   style={{ zIndex: 8, top: '40%', right: '-60px' }}
                   animate={{ x: [0, -15, 0] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -532,15 +555,15 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                     style={{ width: '180px', height: 'auto' }}
                       loading="lazy"
                       decoding="async"
-                      width="180"
-                      height="110"
+                      width={180}
+                      height={110}
                   />
                 </motion.div>
                 )}
                 
                 {/* Chariot - Main Illustration */}
                 <motion.div 
-                  className="w-full max-w-[160px] sm:max-w-[200px] md:max-w-96 md:w-[520px] md:h-80 md:mt-12 h-auto"
+                  className="w-full max-w-[160px] sm:max-w-[200px] lg:max-w-96 lg:w-[520px] lg:h-80 lg:mt-12 h-auto"
                   style={{ zIndex: 20, position: 'relative' }}
                   animate={floatAnimation}
                 >
@@ -559,18 +582,18 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
         </div>
 
         {/* Tablet and Desktop View - Container-based blur rectangle */}
-        <div className="relative h-full min-h-0 hidden md:block w-full py-6 md:py-4" style={{ zIndex: 10 }}>
+        <div className="relative h-full min-h-0 hidden lg:block w-full py-6 lg:py-4" style={{ zIndex: 10 }}>
           {/* Container wrapper with fixed padding that never changes - Full width */}
           <div className="w-full h-full flex items-center justify-center" style={{ paddingLeft: '60px', paddingRight: '60px' }}>
             {/* Blur Rectangle - Relative, no absolute positioning */}
-            <div className="relative w-full flex items-center justify-center h-64 max-h-64 min-h-64 md:h-64 md:max-h-64 md:min-h-64 bg-blur-glass backdrop-blur-sm backdrop-saturate-100 rounded-3xl border border-white/15 overflow-visible">
+            <div className="relative w-full flex items-center justify-center h-64 max-h-64 min-h-64 lg:h-64 lg:max-h-64 lg:min-h-64 bg-blur-glass backdrop-blur-sm backdrop-saturate-100 rounded-3xl border border-white/15 overflow-visible">
               {/* Content inside blur rectangle with internal padding */}
-              <div className="w-full flex flex-col md:flex-row items-center gap-3 md:gap-6 lg:gap-8 px-4 md:px-6 h-full overflow-visible">
+              <div className="w-full flex flex-col lg:flex-row items-center gap-3 lg:gap-6 xl:gap-8 px-4 lg:px-6 h-full overflow-visible">
                 
                 {/* Small Clouds Behind Chariot - Tablet Only */}
                 {/* Left Small Cloud */}
                 {decorReady && (
-                <div className="absolute pointer-events-none hidden md:block lg:hidden" style={{ zIndex: 12, left: '10%', top: '65%', transform: 'translateY(-50%)' }}>
+                <div className="absolute pointer-events-none hidden lg:block xl:hidden" style={{ zIndex: 12, left: '10%', top: '65%', transform: 'translateY(-50%)' }}>
                   <img 
                     src="/images/cloud2.png" 
                     alt="Small cloud left" 
@@ -578,14 +601,14 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                     style={{ width: '80px', height: 'auto' }}
                       loading="lazy"
                       decoding="async"
-                      width="80"
-                      height="50"
+                      width={80}
+                      height={50}
                   />
                 </div>
                 )}
                 {/* Right Small Cloud */}
                 {decorReady && (
-                <div className="absolute pointer-events-none hidden md:block lg:hidden" style={{ zIndex: 12, right: '15%', top: '65%', transform: 'translateY(-50%)' }}>
+                <div className="absolute pointer-events-none hidden lg:block xl:hidden" style={{ zIndex: 12, right: '15%', top: '65%', transform: 'translateY(-50%)' }}>
                   <img 
                     src="/images/cloud2.png" 
                     alt="Small cloud right" 
@@ -593,28 +616,28 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                     style={{ width: '80px', height: 'auto' }}
                       loading="lazy"
                       decoding="async"
-                      width="80"
-                      height="50"
+                      width={80}
+                      height={50}
                   />
                 </div>
                 )}
                 
                 {/* Left Side - Text Content */}
                 <motion.div 
-                  className="flex-1 w-full md:w-auto flex flex-col items-center md:items-start justify-center ml-16 md:ml-20 lg:ml-24 shrink min-w-0"
+                  className="flex-1 w-full lg:w-auto flex flex-col items-center lg:items-start justify-center ml-16 lg:ml-20 xl:ml-24 shrink min-w-0"
                   variants={textVariants}
                   initial="hidden"
                   animate="visible"
                   style={{ maxWidth: '100%', maxHeight: '100%', overflow: 'hidden' }}
                 >
-                  <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black mb-2 md:mb-3 lg:mb-4 leading-tight text-white text-center md:text-left font-rounded tracking-tight w-full" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900, wordWrap: 'break-word', overflowWrap: 'break-word', lineHeight: '1.1', fontSize: 'clamp(1.75rem, 2vw + 1rem, 4rem)' }}>
-                    Namaste, {childName || 'Krishna'}! <br className="hidden md:block" />
-                   Ready for Gita Wisdom - <br className="hidden md:block" />Inner Peace?
+                  <h1 className="text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-black mb-2 lg:mb-3 xl:mb-4 leading-tight text-white text-center lg:text-left font-rounded tracking-tight w-full" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontWeight: 900, wordWrap: 'break-word', overflowWrap: 'break-word', lineHeight: '1.1', fontSize: 'clamp(1.75rem, 2vw + 1rem, 4rem)' }}>
+                    Namaste, {childName || 'Krishna'}! <br className="hidden lg:block" />
+                   Ready for Gita Wisdom - <br className="hidden lg:block" />Inner Peace?
                   </h1>
                   
                   {/* Countdown Timer */}
                   <motion.div
-                    className="w-full flex justify-center md:justify-start flex-shrink-0"
+                    className="w-full flex justify-center lg:justify-start flex-shrink-0"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.6 }}
@@ -625,30 +648,30 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                       <motion.img 
                         src="/images/om-symbol.png" 
                         alt="Om symbol" 
-                        className="w-12 md:w-14 lg:w-16 object-contain flex-shrink-0"
+                        className="w-12 lg:w-14 xl:w-16 object-contain flex-shrink-0"
                         animate={{ rotate: [0, 5, -5, 0] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                         style={{ maxWidth: '100%', height: 'auto', width: 'clamp(3rem, 3vw + 0.75rem, 4rem)' }}
                         loading="lazy"
                         decoding="async"
-                        width="64"
-                        height="64"
+                        width={64}
+                        height={64}
                       />
                       
                       {/* Live In Text */}
-                      <span className="font-extrabold text-white ml-2 md:ml-3 lg:ml-4 flex-shrink-0" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
+                      <span className="font-extrabold text-white ml-2 lg:ml-3 xl:ml-4 flex-shrink-0" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>Live In:</span>
                       
                       {/* Time Boxes with Spacing */}
-                      <div className="flex items-center gap-2 md:gap-2.5 lg:gap-3 ml-2 md:ml-3 lg:ml-4 flex-shrink-0">
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 font-extrabold font-mono text-white min-w-10 md:min-w-12 lg:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                      <div className="flex items-center gap-2 lg:gap-2.5 xl:gap-3 ml-2 lg:ml-3 xl:ml-4 flex-shrink-0">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 lg:px-3 lg:py-2 xl:px-4 xl:py-2.5 font-extrabold font-mono text-white min-w-10 lg:min-w-12 xl:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.hours)}
                         </span>
                         <span className="text-white font-extrabold">:</span>
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 font-extrabold font-mono text-white min-w-10 md:min-w-12 lg:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 lg:px-3 lg:py-2 xl:px-4 xl:py-2.5 font-extrabold font-mono text-white min-w-10 lg:min-w-12 xl:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.minutes)}
                         </span>
                         <span className="text-white font-extrabold">:</span>
-                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 font-extrabold font-mono text-white min-w-10 md:min-w-12 lg:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
+                        <span className="bg-white/35 backdrop-blur-sm border-2 border-white/50 rounded-lg px-2.5 py-1.5 lg:px-3 lg:py-2 xl:px-4 xl:py-2.5 font-extrabold font-mono text-white min-w-10 lg:min-w-12 xl:min-w-16 text-center leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.4)] shadow-[0_2px_4px_rgba(0,0,0,0.15)]">
                           {formatTime(timeLeft.seconds)}
                         </span>
                       </div>
@@ -658,13 +681,13 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
 
                 {/* Right Side - Chariot */}
                 <motion.div 
-                  className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto mr-28 md:mr-32 lg:mr-36" 
+                  className="flex-shrink-0 flex justify-center lg:justify-end w-full lg:w-auto mr-28 lg:mr-32 xl:mr-36" 
                   style={{ zIndex: 20 }}
                   variants={chariotVariants}
                   initial="hidden"
                   animate="visible"
                 >
-                  <div className="flex flex-col items-center justify-center relative md:-translate-y-[30px]">
+                  <div className="flex flex-col items-center justify-center relative lg:-translate-y-[30px]">
                     {/* Sun Behind Chariot */}
                     <motion.div 
                       className="absolute block" 
@@ -678,7 +701,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                     {/* Small Cloud 1 - Near Chariot */}
                     {decorReady && (
                     <motion.div 
-                      className="absolute hidden md:block" 
+                      className="absolute hidden lg:block" 
                       style={{ zIndex: 8, top: '20%', right: '70%' }}
                       animate={cloudAnimation}
                     >
@@ -689,8 +712,8 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                         style={{ width: '200px', height: 'auto' }}
                           loading="lazy"
                           decoding="async"
-                          width="200"
-                          height="120"
+                          width={200}
+                          height={120}
                       />
                     </motion.div>
                     )}
@@ -698,7 +721,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                     {/* Small Cloud 2 - Near Chariot */}
                     {decorReady && (
                     <motion.div 
-                      className="absolute hidden md:block" 
+                      className="absolute hidden lg:block" 
                       style={{ zIndex: 8, top: '40%', right: '-60px' }}
                       animate={{ x: [0, -15, 0] }}
                       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -710,15 +733,15 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
                         style={{ width: '180px', height: 'auto' }}
                           loading="lazy"
                           decoding="async"
-                          width="180"
-                          height="110"
+                          width={180}
+                          height={110}
                       />
                     </motion.div>
                     )}
                     
                     {/* Chariot - Main Illustration */}
                     <motion.div 
-                      className="w-full max-w-[380px] md:!w-[520px] md:!h-[320px] md:!mt-[45px] h-auto"
+                      className="w-full max-w-[380px] lg:!w-[520px] lg:!h-[320px] lg:!mt-[45px] h-auto"
                       style={{ zIndex: 20, position: 'relative' }}
                       animate={floatAnimation}
                     >
@@ -740,7 +763,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
 
         {/* Join Now Button - Right Side of Hero Section - Smaller on Mobile */}
           <motion.div
-          className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 md:bottom-8 md:right-8" 
+          className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 lg:bottom-8 lg:right-8" 
           style={{ zIndex: 50 }}
           variants={buttonVariants}
           initial="hidden"
@@ -751,10 +774,10 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
           <button 
             onClick={handleJoinNow}
             disabled={isJoining}
-            className="bg-join-button border-2 sm:border-3 md:border-4 border-yogi-yellow rounded-xl sm:rounded-2xl px-4 py-2 sm:px-6 sm:py-3 md:px-10 md:py-4 flex items-center gap-1 sm:gap-2 md:gap-3 shadow-join-button hover:shadow-join-button-hover hover:-translate-y-0.5 transition-all duration-200 relative z-50 cursor-pointer text-[10px] sm:text-xs md:text-lg text-white font-extrabold disabled:opacity-70 disabled:cursor-not-allowed"
+            className="bg-join-button border-2 sm:border-3 lg:border-4 border-yogi-yellow rounded-xl sm:rounded-2xl px-4 py-2 sm:px-6 sm:py-3 lg:px-10 lg:py-4 flex items-center gap-1 sm:gap-2 lg:gap-3 shadow-join-button hover:shadow-join-button-hover hover:-translate-y-0.5 transition-all duration-200 relative z-50 cursor-pointer text-[10px] sm:text-xs lg:text-lg text-white font-extrabold disabled:opacity-70 disabled:cursor-not-allowed"
           >
             <motion.svg 
-              className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-6 md:h-6 text-yellow-300" 
+              className="w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-6 lg:h-6 text-yellow-300" 
               fill="currentColor" 
               viewBox="0 0 20 20"
               animate={{ rotate: [0, 10, -10, 0] }}
@@ -762,7 +785,7 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </motion.svg>
-            <span className="text-white font-extrabold text-[10px] sm:text-xs md:text-xl">
+            <span className="text-white font-extrabold text-[10px] sm:text-xs lg:text-xl">
               {isJoining ? 'Joining...' : 'Join Now'}
             </span>
           </button>
@@ -782,5 +805,4 @@ const HeroSection = memo(({ childName = 'Krishna', classDetails, code }) => {
 HeroSection.displayName = 'HeroSection'
 
 export default HeroSection
-
 

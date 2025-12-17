@@ -4,7 +4,7 @@ import { useProgressData } from '../../../hooks/useProgressData'
 
 const ProgressCard = memo(() => {
   const { progressPercentage, totalClasses, pastClasses, loading } = useProgressData()
-  const [animatedProgress, setAnimatedProgress] = useState(0)
+  const [animatedProgress, setAnimatedProgress] = useState<number>(0)
   
   useEffect(() => {
     // Animate progress bar fill on mount or when progress changes
@@ -147,4 +147,6 @@ const ProgressCard = memo(() => {
 ProgressCard.displayName = 'ProgressCard'
 
 export default ProgressCard
+
+
 

@@ -2,9 +2,9 @@ import React, { useEffect, useState, memo } from 'react'
 import { motion } from 'framer-motion'
 import { useProgressData } from '../../../hooks/useProgressData'
 
-const ProgressCard = memo(() => {
+interface ProgressCardProps { childName?: string; classDetails?: { class_name?: string; child_name?: string; class_date?: string; start_time?: string }; code?: string } interface TimeLeft { hours: number; minutes: number; seconds: number } const ProgressCard: React.FC<ProgressCardProps> = memo(() => {
   const { progressPercentage, totalClasses, pastClasses, loading } = useProgressData()
-  const [animatedProgress, setAnimatedProgress] = useState(0)
+  const [animatedProgress, setAnimatedProgress] = useState<0)
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -15,8 +15,8 @@ const ProgressCard = memo(() => {
   
   if (loading) {
     return (
-      <div className="bg-progress-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 h-full w-full">
-        <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 md:mb-1.5">Your Progress</h3>
+      <div className="bg-progress-card backdrop-blur-sm lg:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 lg:p-3 h-full w-full">
+        <h3 className="text-sm sm:text-base lg:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 lg:mb-1.5">Your Progress</h3>
         <div className="flex items-center justify-center h-20">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
         </div>
@@ -25,8 +25,8 @@ const ProgressCard = memo(() => {
   }
   
   return (
-    <div className="bg-progress-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 h-full w-full md:max-h-[250px] flex flex-col">
-      <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 md:mb-1.5 flex-shrink-0">Your Progress</h3>
+    <div className="bg-progress-card backdrop-blur-sm lg:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 lg:p-3 h-full w-full md:max-h-[250px] flex flex-col">
+      <h3 className="text-sm sm:text-base lg:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 lg:mb-1.5 flex-shrink-0">Your Progress</h3>
       
       <div className="space-y-3 sm:space-y-4 md:space-y-2 flex-1 flex flex-col justify-between min-h-0">
         {/* Progress Bar - Glass background */}
@@ -65,7 +65,7 @@ const ProgressCard = memo(() => {
             }}
           >
             <motion.svg 
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-10 md:h-10 text-yellow-400" 
+              className="w-8 h-8 sm:w-10 sm:h-10 lg:w-10 lg:h-10 text-yellow-400" 
               fill="currentColor" 
               viewBox="0 0 20 20" 
               style={{ filter: 'drop-shadow(0 0 12px rgba(251, 191, 36, 0.9))' }}
@@ -100,7 +100,7 @@ const ProgressCard = memo(() => {
             }}
           >
             <svg 
-              className="w-4 h-4 sm:w-5 sm:h-5 md:w-5 md:h-5 text-yellow-300 opacity-50" 
+              className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5 text-yellow-300 opacity-50" 
               fill="currentColor" 
               viewBox="0 0 20 20"
             >
@@ -119,7 +119,7 @@ const ProgressCard = memo(() => {
             }}
           >
             <svg 
-              className="w-4 h-4 sm:w-5 sm:h-5 md:w-5 md:h-5 text-yellow-300 opacity-50" 
+              className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5 text-yellow-300 opacity-50" 
               fill="currentColor" 
               viewBox="0 0 20 20"
             >
@@ -141,3 +141,5 @@ const ProgressCard = memo(() => {
 ProgressCard.displayName = 'ProgressCard'
 
 export default ProgressCard
+
+

@@ -2,12 +2,12 @@ import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const AssignmentCard = () => {
-  const [showModal, setShowModal] = useState(false)
-  const [showCamera, setShowCamera] = useState(false)
-  const [stream, setStream] = useState(null)
-  const fileInputRef = useRef(null)
-  const videoRef = useRef(null)
-  const canvasRef = useRef(null)
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [showCamera, setShowCamera] = useState<boolean>(false)
+  const [stream, setStream] = useState<MediaStream | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   const handleCaptureImage = async () => {
     try {
@@ -22,24 +22,26 @@ const AssignmentCard = () => {
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error accessing camera:', error)
       alert('Unable to access camera. Please check permissions and try again.')
     }
   }
 
-  const capturePhoto = () => {
+  const capturePhoto = (): void => {
     if (videoRef.current && canvasRef.current) {
       const video = videoRef.current
       const canvas = canvasRef.current
       const ctx = canvas.getContext('2d')
+      
+      if (!ctx) return
       
       canvas.width = video.videoWidth
       canvas.height = video.videoHeight
       ctx.drawImage(video, 0, 0)
       
       // Convert to blob
-      canvas.toBlob((blob) => {
+      canvas.toBlob((blob: Blob | null) => {
         if (blob) {
           console.log('Image captured:', blob)
           // Handle the captured image
@@ -50,9 +52,9 @@ const AssignmentCard = () => {
     }
   }
 
-  const stopCamera = () => {
+  const stopCamera = (): void => {
     if (stream) {
-      stream.getTracks().forEach(track => track.stop())
+      stream.getTracks().forEach((track: MediaStreamTrack) => track.stop())
       setStream(null)
     }
     setShowCamera(false)
@@ -62,7 +64,7 @@ const AssignmentCard = () => {
   useEffect(() => {
     if (videoRef.current && stream) {
       videoRef.current.srcObject = stream
-      videoRef.current.play().catch(err => {
+      videoRef.current.play().catch((err: Error) => {
         console.error('Error playing video:', err)
       })
     }
@@ -72,7 +74,7 @@ const AssignmentCard = () => {
   useEffect(() => {
     return () => {
       if (stream) {
-        stream.getTracks().forEach(track => track.stop())
+        stream.getTracks().forEach((track: MediaStreamTrack) => track.stop())
       }
     }
   }, [stream])
@@ -81,7 +83,7 @@ const AssignmentCard = () => {
     fileInputRef.current?.click()
   }
 
-  const handleFileChange = (e) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const file = e.target.files?.[0]
     if (file) {
       console.log('File selected:', file)
@@ -92,34 +94,34 @@ const AssignmentCard = () => {
   }
 
   return (
-    <div className="bg-assignment-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 relative flex flex-col h-full w-full md:max-h-[250px]">
-      <div className="flex items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2 md:mb-1.5">
+    <div className="bg-assignment-card backdrop-blur-sm lg:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 lg:p-3 relative flex flex-col h-full w-full lg:max-h-[250px]">
+      <div className="flex items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2 lg:mb-1.5">
         {/* Treasure Chest/Box Icon */}
         <img 
           src="/images/box.png" 
           alt="Box" 
-          className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 object-contain"
+          className="w-5 h-5 sm:w-6 sm:h-6 lg:w-10 lg:h-10 object-contain"
           style={{ filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.7))' }}
           loading="lazy"
           decoding="async"
           width="40"
           height="40"
         />
-        <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900">Assignment</h3>
+        <h3 className="text-sm sm:text-base lg:text-lg font-extrabold text-gray-900">Assignment</h3>
       </div>
       
       <div className="flex-1 flex flex-col">
-        <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-2">
+        <div className="flex items-center justify-between mb-2 sm:mb-3 lg:mb-2">
           <div>
-            <p className="font-extrabold text-gray-900 text-[10px] sm:text-xs md:text-xs">Gita Verse</p>
-            <p className="font-extrabold text-gray-900 text-[10px] sm:text-xs md:text-xs">Practice</p>
+            <p className="font-extrabold text-gray-900 text-[10px] sm:text-xs lg:text-xs">Gita Verse</p>
+            <p className="font-extrabold text-gray-900 text-[10px] sm:text-xs lg:text-xs">Practice</p>
           </div>
           {/* Scroll with Quill Image */}
           <div>
             <img 
               src="/images/gitaverse.png" 
               alt="Gita Verse Scroll" 
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
+              className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 object-contain"
               style={{ filter: 'drop-shadow(0 0 12px rgba(139, 69, 19, 0.6))' }}
             loading="lazy"
             decoding="async"
@@ -133,7 +135,7 @@ const AssignmentCard = () => {
         <div className="mt-auto">
           <button 
             onClick={() => setShowModal(true)}
-            className="bg-orange-600 hover:bg-orange-700 backdrop-blur-sm md:backdrop-blur-md border border-white/60 rounded-full w-full text-white font-extrabold py-1.5 sm:py-2 md:py-2 px-2 sm:px-3 md:px-3 transition-all duration-200 flex items-center justify-between text-[10px] sm:text-xs md:text-xs"
+            className="bg-orange-600 hover:bg-orange-700 backdrop-blur-sm lg:backdrop-blur-md border border-white/60 rounded-full w-full text-white font-extrabold py-1.5 sm:py-2 lg:py-2 px-2 sm:px-3 lg:px-3 transition-all duration-200 flex items-center justify-between text-[10px] sm:text-xs lg:text-xs"
           >
             <span>Upload Your work</span>
             <svg 
@@ -298,4 +300,6 @@ const AssignmentCard = () => {
 }
 
 export default AssignmentCard
+
+
 

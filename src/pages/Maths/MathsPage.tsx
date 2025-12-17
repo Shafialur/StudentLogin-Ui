@@ -8,11 +8,22 @@ import AssignmentCard from './components/AssignmentCard'
 import QuizCard from './components/QuizCard'
 import SystemCheckCard from './components/SystemCheckCard'
 
-const MathsPage = ({ childName = '', classDetails, code }) => {
+interface ClassDetails {
+  class_name?: string
+  child_name?: string
+}
+
+interface MathsPageProps {
+  childName?: string
+  classDetails?: ClassDetails
+  code?: string
+}
+
+const MathsPage: React.FC<MathsPageProps> = ({ childName = '', classDetails, code }) => {
   // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: (i) => ({
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
       scale: 1,

@@ -17,7 +17,12 @@ const LoadingFallback = () => (
   </div>
 )
 
-const FriendlyError = ({ title, message }) => (
+interface FriendlyErrorProps {
+  title: string
+  message: string
+}
+
+const FriendlyError: React.FC<FriendlyErrorProps> = ({ title, message }) => (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-white to-blue-50 px-4">
     <div className="max-w-md w-full bg-white/90 backdrop-blur-md border border-orange-100 rounded-2xl shadow-xl p-8 text-center">
       <div className="text-5xl mb-4">🧩</div>
@@ -27,15 +32,39 @@ const FriendlyError = ({ title, message }) => (
   </div>
 )
 
-const CodeGate = () => {
-  const { code } = useParams()
-  const [status, setStatus] = useState('checking') // checking | ok | error
-  const [errorMsg, setErrorMsg] = useState('')
-  const [classInfo, setClassInfo] = useState(null)
-  const [classType, setClassType] = useState(null)
-  const [childName, setChildName] = useState('')
+interface ClassInfo {
+  nextclass?: {
+    class_name?: string
+    child_name?: string
+  }
+}
 
-  const resolveClassType = (name = '') => {
+interface VerifyResponse {
+  success?: boolean
+  code?: string
+  message?: string
+}
+
+interface ClassInfoResponse {
+  success?: boolean
+  nextclass?: {
+    class_name?: string
+    child_name?: string
+  }
+  message?: string
+}
+
+type ClassType = 'gita' | 'maths' | 'english' | null
+
+const CodeGate: React.FC = () => {
+  const { code } = useParams<{ code: string }>()
+  const [status, setStatus] = useState<'checking' | 'ok' | 'error'>('checking')
+  const [errorMsg, setErrorMsg] = useState<string>('')
+  const [classInfo, setClassInfo] = useState<ClassInfo | null>(null)
+  const [classType, setClassType] = useState<ClassType>(null)
+  const [childName, setChildName] = useState<string>('')
+
+  const resolveClassType = (name: string = ''): ClassType => {
     const lc = name.toLowerCase()
     if (lc.includes('gita')) return 'gita'
     if (lc.includes('math')) return 'maths'
@@ -65,7 +94,7 @@ const CodeGate = () => {
           body: JSON.stringify({ code })
         })
 
-        const data = await response.json()
+        const data: VerifyResponse = await response.json()
         const success = data?.success && data?.code && typeof data?.message === 'string'
         const verifiedMsg = data?.message?.toLowerCase().includes('code verified')
 
@@ -76,7 +105,7 @@ const CodeGate = () => {
               ...(token && { 'Authorization': `Bearer ${token}` })
             }
           })
-          const infoData = await infoRes.json()
+          const infoData: ClassInfoResponse = await infoRes.json()
 
           if (infoData?.success && infoData?.nextclass) {
             const type = resolveClassType(infoData.nextclass.class_name)
@@ -137,12 +166,12 @@ const CodeGate = () => {
   return (
     <FriendlyError
       title="Class unavailable"
-      message="We couldn’t find the right class page for this code."
+      message="We couldn't find the right class page for this code."
     />
   )
 }
 
-function App() {
+const App: React.FC = () => {
   // Extract token from URL and save to localStorage
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)

@@ -1,15 +1,26 @@
 import React from 'react'
 
-const OptimizedImage = ({ 
-  src,           // Original PNG path (e.g., "/images/chariot.png.png")
-  webpSrc,       // Optional: custom WebP path (auto-generated if not provided)
-  alt,           // Alt text for accessibility
-  width,         // Image width (for layout stability)
-  height,        // Image height (for layout stability)
-  loading = 'lazy',  // 'lazy' or 'eager' (lazy by default)
-  priority = false,  // true for critical images (sets fetchPriority="high")
-  className = '',    // CSS classes
-  ...props       // Any other img attributes
+interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  src: string
+  webpSrc?: string
+  alt: string
+  width?: number
+  height?: number
+  loading?: 'lazy' | 'eager'
+  priority?: boolean
+  className?: string
+}
+
+const OptimizedImage: React.FC<OptimizedImageProps> = ({ 
+  src,
+  webpSrc,
+  alt,
+  width,
+  height,
+  loading = 'lazy',
+  priority = false,
+  className = '',
+  ...props
 }) => {
   // Auto-generate WebP path from PNG path
   // "/images/chariot.png.png" → "/images/chariot.png.webp"

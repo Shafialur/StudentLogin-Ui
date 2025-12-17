@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const JoinSuccessToast = ({ show, onClose, childName = 'Student' }) => {
+interface JoinSuccessToastProps {
+  show: boolean
+  onClose: () => void
+  childName?: string
+}
+
+const JoinSuccessToast: React.FC<JoinSuccessToastProps> = ({ show, onClose, childName = 'Student' }) => {
   useEffect(() => {
     if (show) {
       const timer = setTimeout(() => {
@@ -152,3 +158,4 @@ const JoinSuccessToast = ({ show, onClose, childName = 'Student' }) => {
 }
 
 export default JoinSuccessToast
+

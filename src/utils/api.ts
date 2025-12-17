@@ -1,16 +1,52 @@
-// src/utils/api.js
+// src/utils/api.ts
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
 if (!apiBaseUrl) {
   throw new Error('VITE_API_BASE_URL is not set in the environment.')
 }
 
-export const API_BASE_URL = apiBaseUrl
+export const API_BASE_URL: string = apiBaseUrl
+
+interface ApiResponse<T> {
+  success: boolean
+  data?: T
+  message?: string
+}
+
+interface HeaderData {
+  progress_overview: {
+    total_classes: number
+    past_classes: number
+    streak: number
+    coins: number
+    rank: number | null
+  }
+}
+
+interface JoinQueueResponse {
+  success: boolean
+  message?: string
+}
+
+interface ClassStatusResponse {
+  success: boolean
+  started: boolean
+  join_url: string | null
+  message?: string
+}
+
+interface LastSessionDetails {
+  last_class?: {
+    ppt?: {
+      iframe_src?: string
+    }
+  }
+}
 
 /**
  * Get bearer token from localStorage first, then fallback to environment variable
  */
-const getAuthToken = () => {
+const getAuthToken = (): string | undefined => {
   // First check localStorage
   const storedToken = localStorage.getItem('auth_token')
   if (storedToken) {
@@ -24,7 +60,7 @@ const getAuthToken = () => {
 /**
  * Fetch header data from API
  */
-export const fetchHeaderData = async () => {
+export const fetchHeaderData = async (): Promise<HeaderData> => {
   try {
     const token = getAuthToken()
     
@@ -44,7 +80,7 @@ export const fetchHeaderData = async () => {
       throw new Error(`API Error: ${response.status} ${response.statusText}`)
     }
 
-    const data = await response.json()
+    const data: ApiResponse<HeaderData> = await response.json()
     
     if (data.success && data.data) {
       return data.data
@@ -60,7 +96,7 @@ export const fetchHeaderData = async () => {
 /**
  * Add child to join queue using 6-digit code
  */
-export const addChildToJoinQueue = async (code) => {
+export const addChildToJoinQueue = async (code: string): Promise<JoinQueueResponse> => {
   try {
     const token = getAuthToken()
     
@@ -81,11 +117,11 @@ export const addChildToJoinQueue = async (code) => {
     })
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}))
+      const errorData: ApiResponse<never> = await response.json().catch(() => ({}))
       throw new Error(errorData.message || `API Error: ${response.status} ${response.statusText}`)
     }
 
-    const data = await response.json()
+    const data: JoinQueueResponse = await response.json()
     
     if (data.success) {
       return data
@@ -101,7 +137,7 @@ export const addChildToJoinQueue = async (code) => {
 /**
  * Check if class started
  */
-export const checkIfClassStarted = async (code) => {
+export const checkIfClassStarted = async (code: string): Promise<ClassStatusResponse> => {
   try {
     const token = getAuthToken()
     
@@ -122,11 +158,11 @@ export const checkIfClassStarted = async (code) => {
     })
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}))
+      const errorData: ApiResponse<never> = await response.json().catch(() => ({}))
       throw new Error(errorData.message || `API Error: ${response.status} ${response.statusText}`)
     }
 
-    const data = await response.json()
+    const data: ClassStatusResponse = await response.json()
     return data
   } catch (error) {
     console.error('Error checking class status:', error)
@@ -137,7 +173,7 @@ export const checkIfClassStarted = async (code) => {
 /**
  * Fetch last session details
  */
-export const fetchLastSessionDetails = async (code) => {
+export const fetchLastSessionDetails = async (code: string): Promise<LastSessionDetails> => {
   try {
     const token = getAuthToken()
     
@@ -158,11 +194,11 @@ export const fetchLastSessionDetails = async (code) => {
     })
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}))
+      const errorData: ApiResponse<never> = await response.json().catch(() => ({}))
       throw new Error(errorData.message || `API Error: ${response.status} ${response.statusText}`)
     }
 
-    const data = await response.json()
+    const data: ApiResponse<LastSessionDetails> = await response.json()
     
     if (data.success && data.data) {
       return data.data

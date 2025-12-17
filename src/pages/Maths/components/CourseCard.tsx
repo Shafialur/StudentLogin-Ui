@@ -2,10 +2,14 @@ import React, { memo, useState, useEffect } from 'react'
 import OptimizedImage from '../../../components/OptimizedImage'
 import { fetchLastSessionDetails } from '../../../utils/api'
 
-const CourseCard = memo(({ code }) => {
-  const [iframeSrc, setIframeSrc] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+interface CourseCardProps {
+  code?: string
+}
+
+const CourseCard = memo<CourseCardProps>(({ code }) => {
+  const [iframeSrc, setIframeSrc] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const loadIframe = async () => {
@@ -25,7 +29,7 @@ const CourseCard = memo(({ code }) => {
         }
       } catch (err) {
         console.error('Error fetching last session details:', err)
-        setError(err.message || 'Failed to load last class content.')
+        setError(err instanceof Error ? err.message : 'Failed to load last class content.')
       } finally {
         setLoading(false)
       }
@@ -36,7 +40,7 @@ const CourseCard = memo(({ code }) => {
 
   return (
     <div 
-      className="w-full h-full md:max-h-[500px] bg-white rounded-2xl border-2 border-gray-300 p-2"
+      className="w-full h-full bg-white rounded-2xl border-2 border-gray-300 p-2"
       style={{ 
         textAlign: 'left', 
         display: 'block',
@@ -70,8 +74,8 @@ const CourseCard = memo(({ code }) => {
       ) : (
         <div className="w-full h-full rounded-xl overflow-hidden relative">
           <OptimizedImage
-            src="/images/english-coursecard.png"
-            alt="English course card"
+            src="/images/maths-coursecard.png"
+            alt="Maths course card"
             className="course-card-image w-full h-full rounded-xl"
             width={800}
             height={600}
@@ -100,3 +104,4 @@ const CourseCard = memo(({ code }) => {
 CourseCard.displayName = 'CourseCard'
 
 export default CourseCard
+

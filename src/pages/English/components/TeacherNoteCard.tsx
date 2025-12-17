@@ -3,9 +3,9 @@ import { motion } from 'framer-motion'
 
 const TeacherNoteCard = () => {
   return (
-    <div className="bg-teacher-card backdrop-blur-sm lg:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 lg:p-3 relative h-full w-full lg:max-h-[250px] flex flex-col">
+    <div className="bg-teacher-card backdrop-blur-sm lg:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 lg:p-3 relative h-full w-full md:max-h-[250px] flex flex-col">
       {/* Sparkle stars in top right corner */}
-      <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 lg:top-2 lg:right-2 flex gap-1 sm:gap-2 z-10">
+      <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 md:top-2 md:right-2 flex gap-1 sm:gap-2 z-10">
         <motion.svg
           className="w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-5 lg:h-5 text-purple-400"
           fill="currentColor"
@@ -56,8 +56,8 @@ const TeacherNoteCard = () => {
             style={{ filter: 'drop-shadow(0 0 15px rgba(251, 191, 36, 0.7))' }}
           >
             <img
-              src="/images/teacher.png.png"
-              alt="Ms. Guru"
+              src="/images/eng-teacher.png"
+              alt="Ms. Sarah"
               className="w-full h-full object-cover"
               loading="lazy"
               decoding="async"
@@ -65,7 +65,7 @@ const TeacherNoteCard = () => {
               height="56"
             />
           </div>
-          <h4 className="font-extrabold text-gray-900 text-[10px] sm:text-xs lg:text-xs mt-0.5 sm:mt-1 lg:mt-0.5">Ms. Guru</h4>
+          <h4 className="font-extrabold text-gray-900 text-[10px] sm:text-xs lg:text-xs mt-0.5 sm:mt-1 lg:mt-0.5">Ms. Sarah</h4>
         </div>
 
         {/* Message Box - Full Width */}
@@ -84,4 +84,5 @@ const TeacherNoteCard = () => {
 }
 
 export default TeacherNoteCard
+
 

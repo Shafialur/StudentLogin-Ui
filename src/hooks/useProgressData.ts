@@ -1,8 +1,20 @@
-// src/hooks/useProgressData.js
+// src/hooks/useProgressData.ts
 import { useState, useEffect, useMemo } from 'react'
 import { fetchHeaderData } from '../utils/api'
 
-const DEFAULT_PROGRESS = {
+interface ProgressOverview {
+  total_classes: number
+  past_classes: number
+  streak: number
+  coins: number
+  rank: number | null
+}
+
+interface ProgressData {
+  progress_overview: ProgressOverview
+}
+
+const DEFAULT_PROGRESS: ProgressData = {
   progress_overview: {
     total_classes: 100,
     past_classes: 50,
@@ -13,9 +25,9 @@ const DEFAULT_PROGRESS = {
 }
 
 export const useProgressData = () => {
-  const [progressData, setProgressData] = useState(DEFAULT_PROGRESS)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [progressData, setProgressData] = useState<ProgressData>(DEFAULT_PROGRESS)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     let isCancelled = false
@@ -40,7 +52,7 @@ export const useProgressData = () => {
         }
       } catch (err) {
         if (!isCancelled) {
-          setError(err.message)
+          setError(err instanceof Error ? err.message : 'Unknown error')
           setProgressData(DEFAULT_PROGRESS)
         }
       } finally {

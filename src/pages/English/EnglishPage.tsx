@@ -8,11 +8,22 @@ import AssignmentCard from './components/AssignmentCard'
 import QuizCard from './components/QuizCard'
 import SystemCheckCard from './components/SystemCheckCard'
 
-const GitaPage = ({ childName = '', classDetails, code }) => {
+interface ClassDetails {
+  class_name?: string
+  child_name?: string
+}
+
+interface EnglishPageProps {
+  childName?: string
+  classDetails?: ClassDetails
+  code?: string
+}
+
+const EnglishPage: React.FC<EnglishPageProps> = ({ childName = '', classDetails, code }) => {
   // Animation variants for cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: (i) => ({
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
       scale: 1,
@@ -39,9 +50,9 @@ const GitaPage = ({ childName = '', classDetails, code }) => {
         </div>
 
         {/* Dashboard Cards Section */}
-        <div className="w-full mx-auto px-3 sm:px-4 lg:px-8 flex-1 lg:flex lg:flex-col relative z-10 min-h-0 lg:mt-4 lg:mb-4 pb-4 sm:pb-6 pt-3 sm:pt-4">
+        <div className="w-full mx-auto px-3 sm:px-4 md:px-8 flex-1 lg:flex lg:flex-col relative z-10 min-h-0 lg:mt-4 lg:mb-4 pb-4 sm:pb-6 pt-3 sm:pt-4">
           {/* Mobile/Tablet: Custom layout | Desktop: Grid Layout */}
-          <div className="flex flex-col lg:grid lg:w-full lg:h-full gap-3 lg:gap-4 items-stretch" 
+          <div className="flex flex-col lg:grid lg:w-full lg:h-full gap-3 sm:gap-4 lg:gap-4 items-stretch" 
             style={{ 
               gridTemplateColumns: 'repeat(10, 1fr)', 
               gridTemplateRows: '1fr 1fr',
@@ -96,7 +107,7 @@ const GitaPage = ({ childName = '', classDetails, code }) => {
             </motion.div>
 
             {/* Mobile/Tablet: Quiz and System Check Cards - 2 per row */}
-            <div className="flex flex-row gap-3 lg:hidden">
+            <div className="flex flex-row gap-3 sm:gap-4 lg:hidden">
               <motion.div 
                 className="dashboard-grid-item-5 flex-1 min-w-0"
                 variants={cardVariants}
@@ -167,5 +178,5 @@ const GitaPage = ({ childName = '', classDetails, code }) => {
   )
 }
 
-export default GitaPage
+export default EnglishPage
 
