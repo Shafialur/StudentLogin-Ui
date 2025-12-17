@@ -39,17 +39,17 @@ const MathsPage = ({ childName = '', classDetails, code }) => {
         </div>
 
         {/* Dashboard Cards Section */}
-        <div className="w-full mx-auto px-3 sm:px-4 md:px-8 flex-1 md:flex md:flex-col relative z-10 min-h-0 md:mt-4 md:mb-4 pb-4 sm:pb-6 pt-3 sm:pt-4">
-          {/* Mobile: Custom layout | Desktop: Grid Layout */}
-          <div className="flex flex-col md:grid md:w-full md:h-full gap-3 sm:gap-4 md:gap-4 items-stretch" 
+        <div className="w-full mx-auto px-3 sm:px-4 md:px-8 flex-1 lg:flex lg:flex-col relative z-10 min-h-0 lg:mt-4 lg:mb-4 pb-4 sm:pb-6 pt-3 sm:pt-4">
+          {/* Mobile/Tablet: Custom layout | Desktop: Grid Layout */}
+          <div className="flex flex-col lg:grid lg:w-full lg:h-full gap-3 sm:gap-4 lg:gap-4 items-stretch" 
             style={{ 
               gridTemplateColumns: 'repeat(10, 1fr)', 
               gridTemplateRows: '1fr 1fr',
               gridAutoRows: 'minmax(0, 1fr)'
             }}>
-            {/* Mobile: Course Card - Full width */}
+            {/* Mobile/Tablet: Course Card - Full width */}
             <motion.div 
-              className="dashboard-grid-item-1 w-full md:w-auto"
+              className="dashboard-grid-item-1 w-full lg:w-auto"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -59,9 +59,9 @@ const MathsPage = ({ childName = '', classDetails, code }) => {
               <CourseCard code={code} />
             </motion.div>
 
-            {/* Mobile: Progress Card - Full width */}
+            {/* Mobile/Tablet: Progress Card - Full width */}
             <motion.div 
-              className="dashboard-grid-item-2 w-full md:w-auto"
+              className="dashboard-grid-item-2 w-full lg:w-auto"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -71,9 +71,9 @@ const MathsPage = ({ childName = '', classDetails, code }) => {
               <ProgressCard />
             </motion.div>
 
-            {/* Mobile: Teacher Note Card - Full width */}
+            {/* Mobile/Tablet: Teacher Note Card - Full width */}
             <motion.div 
-              className="dashboard-grid-item-3 w-full md:w-auto md:hidden"
+              className="dashboard-grid-item-3 w-full lg:w-auto lg:hidden"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -83,9 +83,9 @@ const MathsPage = ({ childName = '', classDetails, code }) => {
               <TeacherNoteCard />
             </motion.div>
 
-            {/* Mobile: Assignment Card - Full width */}
+            {/* Mobile/Tablet: Assignment Card - Full width */}
             <motion.div 
-              className="dashboard-grid-item-4 w-full md:w-auto md:hidden"
+              className="dashboard-grid-item-4 w-full lg:w-auto lg:hidden"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -95,8 +95,8 @@ const MathsPage = ({ childName = '', classDetails, code }) => {
               <AssignmentCard />
             </motion.div>
 
-            {/* Mobile: Quiz and System Check Cards - 2 per row */}
-            <div className="flex flex-row gap-3 sm:gap-4 md:hidden">
+            {/* Mobile/Tablet: Quiz and System Check Cards - 2 per row */}
+            <div className="flex flex-row gap-3 sm:gap-4 lg:hidden">
               <motion.div 
                 className="dashboard-grid-item-5 flex-1 min-w-0"
                 variants={cardVariants}
@@ -121,7 +121,7 @@ const MathsPage = ({ childName = '', classDetails, code }) => {
 
             {/* Desktop: Original grid layout */}
             <motion.div 
-              className="dashboard-grid-item-3 hidden md:block md:h-full"
+              className="dashboard-grid-item-3 hidden lg:block lg:h-full"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -131,7 +131,7 @@ const MathsPage = ({ childName = '', classDetails, code }) => {
               <TeacherNoteCard />
             </motion.div>
             <motion.div 
-              className="dashboard-grid-item-4 hidden md:block md:h-full"
+              className="dashboard-grid-item-4 hidden lg:block lg:h-full"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -141,7 +141,7 @@ const MathsPage = ({ childName = '', classDetails, code }) => {
               <AssignmentCard />
             </motion.div>
             <motion.div 
-              className="dashboard-grid-item-5 hidden md:block md:h-full"
+              className="dashboard-grid-item-5 hidden lg:block lg:h-full"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -151,7 +151,7 @@ const MathsPage = ({ childName = '', classDetails, code }) => {
               <QuizCard />
             </motion.div>
             <motion.div 
-              className="dashboard-grid-item-6 hidden md:block md:h-full"
+              className="dashboard-grid-item-6 hidden lg:block lg:h-full"
               variants={cardVariants}
               initial="hidden"
               animate="visible"

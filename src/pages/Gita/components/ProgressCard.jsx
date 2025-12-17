@@ -17,8 +17,8 @@ const ProgressCard = memo(() => {
   // Show loading state
   if (loading) {
     return (
-      <div className="bg-progress-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 h-full w-full max-h-[250px] md:max-h-[250px] flex flex-col">
-        <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 md:mb-1.5 flex-shrink-0">Your Progress</h3>
+      <div className="bg-progress-card backdrop-blur-sm lg:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 lg:p-3 h-full w-full max-h-[250px] lg:max-h-[250px] flex flex-col">
+        <h3 className="text-sm sm:text-base lg:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 lg:mb-1.5 flex-shrink-0">Your Progress</h3>
         <div className="flex items-center justify-center h-20 flex-1">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
         </div>
@@ -27,12 +27,12 @@ const ProgressCard = memo(() => {
   }
   
   return (
-    <div className="bg-progress-card backdrop-blur-sm md:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 md:p-3 h-full w-full md:max-h-[250px] flex flex-col">
-      <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 md:mb-1.5 flex-shrink-0">Your Progress</h3>
+    <div className="bg-progress-card backdrop-blur-sm lg:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 lg:p-3 h-full w-full lg:max-h-[250px] flex flex-col">
+      <h3 className="text-sm sm:text-base lg:text-lg font-extrabold text-gray-900 mb-2 sm:mb-2.5 lg:mb-1.5 flex-shrink-0">Your Progress</h3>
       
-      <div className="space-y-3 sm:space-y-4 md:space-y-2 flex-1 flex flex-col justify-between min-h-0">
+      <div className="space-y-3 sm:space-y-4 lg:space-y-2 flex-1 flex flex-col justify-between min-h-0">
         {/* Progress Bar - Glass background */}
-        <div className="relative h-7 sm:h-8 md:h-7 rounded-full overflow-visible mt-4 sm:mt-6 md:mt-3" style={{ 
+        <div className="relative h-7 sm:h-8 lg:h-7 rounded-full overflow-visible mt-4 sm:mt-6 lg:mt-3" style={{ 
           borderRadius: '9999px',
           background: 'rgba(255, 255, 255, 0.4)',
           backdropFilter: 'blur(10px)',
@@ -66,7 +66,7 @@ const ProgressCard = memo(() => {
             }}
           >
             <motion.svg 
-              className="w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6 text-yellow-400" 
+              className="w-5 h-5 sm:w-6 sm:h-6 lg:w-6 lg:h-6 text-yellow-400" 
               fill="currentColor" 
               viewBox="0 0 20 20" 
               style={{ filter: 'drop-shadow(0 0 12px rgba(251, 191, 36, 0.9))' }}
@@ -98,7 +98,7 @@ const ProgressCard = memo(() => {
             <img 
               src="/images/progresschariot.png" 
               alt="Progress chariot" 
-              className="object-contain w-12 h-12 sm:w-16 sm:h-16 md:w-16 md:h-16 lg:w-18 lg:h-18"
+              className="object-contain w-12 h-12 sm:w-16 sm:h-16 lg:w-18 lg:h-18"
               loading="lazy"
               decoding="async"
               style={{ 
@@ -120,7 +120,7 @@ const ProgressCard = memo(() => {
             <img 
               src="/images/progressendtemple.png" 
               alt="Temple" 
-              className="object-contain w-10 h-10 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16"
+              className="object-contain w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16"
               loading="lazy"
               decoding="async"
               style={{ 
@@ -134,8 +134,8 @@ const ProgressCard = memo(() => {
         
         {/* Progress Text - Dynamic from API */}
         <div className="flex items-center justify-between w-full flex-wrap gap-1">
-          <span className="text-[10px] sm:text-xs md:text-sm font-extrabold text-gray-900">Dharma Path : </span>
-          <span className="text-[10px] sm:text-xs md:text-sm font-extrabold text-blue-600">
+          <span className="text-[10px] sm:text-xs lg:text-sm font-extrabold text-gray-900">Dharma Path : </span>
+          <span className="text-[10px] sm:text-xs lg:text-sm font-extrabold text-blue-600">
             {pastClasses}/{totalClasses} Classes Completed
           </span>
         </div>

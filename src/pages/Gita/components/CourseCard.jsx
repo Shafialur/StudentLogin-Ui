@@ -36,7 +36,7 @@ const CourseCard = memo(({ code }) => {
 
   return (
     <div 
-      className="w-full h-full md:max-h-[500px] bg-white rounded-2xl border-2 border-gray-300 p-2"
+      className="w-full h-full lg:max-h-[500px] bg-white rounded-2xl border-2 border-gray-300 p-2"
       style={{ 
         textAlign: 'left', 
         display: 'block',
