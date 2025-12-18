@@ -103,7 +103,7 @@ const EnglishPage: React.FC<EnglishPageProps> = ({ childName = '', classDetails,
               custom={3}
               whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
             >
-              <AssignmentCard />
+              <AssignmentCard code={code} />
             </motion.div>
 
             {/* Mobile/Tablet: Quiz and System Check Cards - 2 per row */}
@@ -149,7 +149,7 @@ const EnglishPage: React.FC<EnglishPageProps> = ({ childName = '', classDetails,
               custom={3}
               whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
             >
-              <AssignmentCard />
+              <AssignmentCard code={code} />
             </motion.div>
             <motion.div 
               className="dashboard-grid-item-5 hidden lg:block lg:h-full"

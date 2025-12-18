@@ -30,7 +30,7 @@ const MathsPage: React.FC<MathsPageProps> = ({ childName = '', classDetails, cod
       transition: {
         delay: i * 0.1,
         duration: 0.5,
-        ease: [0.25, 0.46, 0.45, 0.94]
+        ease: [0.25, 0.46, 0.45, 0.94] as const
       }
     })
   }
@@ -50,9 +50,9 @@ const MathsPage: React.FC<MathsPageProps> = ({ childName = '', classDetails, cod
         </div>
 
         {/* Dashboard Cards Section */}
-        <div className="w-full mx-auto px-3 sm:px-4 md:px-8 flex-1 lg:flex lg:flex-col relative z-10 min-h-0 lg:mt-4 lg:mb-4 pb-4 sm:pb-6 pt-3 sm:pt-4">
+        <div className="w-full mx-auto px-3 sm:px-4 lg:px-8 flex-1 lg:flex lg:flex-col relative z-10 min-h-0 lg:mt-4 lg:mb-4 pb-4 sm:pb-6 pt-3 sm:pt-4">
           {/* Mobile/Tablet: Custom layout | Desktop: Grid Layout */}
-          <div className="flex flex-col lg:grid lg:w-full lg:h-full gap-3 sm:gap-4 lg:gap-4 items-stretch" 
+          <div className="flex flex-col lg:grid lg:w-full lg:h-full gap-3 lg:gap-4 items-stretch" 
             style={{ 
               gridTemplateColumns: 'repeat(10, 1fr)', 
               gridTemplateRows: '1fr 1fr',
@@ -103,11 +103,11 @@ const MathsPage: React.FC<MathsPageProps> = ({ childName = '', classDetails, cod
               custom={3}
               whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
             >
-              <AssignmentCard />
+              <AssignmentCard code={code} />
             </motion.div>
 
             {/* Mobile/Tablet: Quiz and System Check Cards - 2 per row */}
-            <div className="flex flex-row gap-3 sm:gap-4 lg:hidden">
+            <div className="flex flex-row gap-3 lg:hidden">
               <motion.div 
                 className="dashboard-grid-item-5 flex-1 min-w-0"
                 variants={cardVariants}
@@ -149,7 +149,7 @@ const MathsPage: React.FC<MathsPageProps> = ({ childName = '', classDetails, cod
               custom={3}
               whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
             >
-              <AssignmentCard />
+              <AssignmentCard code={code} />
             </motion.div>
             <motion.div 
               className="dashboard-grid-item-5 hidden lg:block lg:h-full"

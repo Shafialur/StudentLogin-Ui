@@ -1,13 +1,32 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { fetchLastSessionDetails, getFacultyId, submitHomework } from '../../../utils/api'
 
-const AssignmentCard = () => {
+interface AssignmentCardProps {
+  code?: string
+}
+
+interface SelectedFile {
+  file: File
+  id: string
+  preview?: string
+}
+
+const AssignmentCard = ({ code }: AssignmentCardProps) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const [showCamera, setShowCamera] = useState<boolean>(false)
-  const [stream, setStream] = useState<NodeJS.Timeout | null>(null)
-  const fileInputRef = useRef(null)
-  const videoRef = useRef(null)
-  const canvasRef = useRef(null)
+  const [stream, setStream] = useState<MediaStream | null>(null)
+  const [selectedFiles, setSelectedFiles] = useState<SelectedFile[]>([])
+  const [classscheduleBookingId, setClassscheduleBookingId] = useState<number | null>(null)
+  const [classscheduleId, setClassscheduleId] = useState<number | null>(null)
+  const [facultyId, setFacultyId] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [uploadProgress, setUploadProgress] = useState<number>(0)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<boolean>(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   const handleCaptureImage = async () => {
     try {
@@ -28,31 +47,46 @@ const AssignmentCard = () => {
     }
   }
 
-  const capturePhoto = () => {
+  const capturePhoto = (): void => {
     if (videoRef.current && canvasRef.current) {
       const video = videoRef.current
       const canvas = canvasRef.current
       const ctx = canvas.getContext('2d')
       
+      if (!ctx) return
+      
       canvas.width = video.videoWidth
       canvas.height = video.videoHeight
       ctx.drawImage(video, 0, 0)
       
-      // Convert to blob
-      canvas.toBlob((blob) => {
+      // Convert to blob and add to selected files
+      canvas.toBlob((blob: Blob | null) => {
         if (blob) {
-          console.log('Image captured:', blob)
-          // Handle the captured image
-          alert('Image captured successfully!')
+          const file = new File([blob], `captured-image-${Date.now()}.jpg`, { type: 'image/jpeg' })
+          const id = `${Date.now()}-${Math.random()}`
+          const reader = new FileReader()
+          
+          reader.onload = (e) => {
+            setSelectedFiles((prev) => {
+              if (prev.length >= 10) {
+                setError('Maximum 10 files allowed')
+                return prev
+              }
+              return [...prev, { file, id, preview: e.target?.result as string }]
+            })
+          }
+          reader.readAsDataURL(file)
+          
           stopCamera()
+          setShowModal(true)
         }
       }, 'image/jpeg', 0.9)
     }
   }
 
-  const stopCamera = () => {
+  const stopCamera = (): void => {
     if (stream) {
-      stream.getTracks().forEach(track => track.stop())
+      stream.getTracks().forEach((track: MediaStreamTrack) => track.stop())
       setStream(null)
     }
     setShowCamera(false)
@@ -62,7 +96,7 @@ const AssignmentCard = () => {
   useEffect(() => {
     if (videoRef.current && stream) {
       videoRef.current.srcObject = stream
-      videoRef.current.play().catch(err => {
+      videoRef.current.play().catch((err: Error) => {
         console.error('Error playing video:', err)
       })
     }
@@ -72,7 +106,7 @@ const AssignmentCard = () => {
   useEffect(() => {
     return () => {
       if (stream) {
-        stream.getTracks().forEach(track => track.stop())
+        stream.getTracks().forEach((track: MediaStreamTrack) => track.stop())
       }
     }
   }, [stream])
@@ -81,18 +115,135 @@ const AssignmentCard = () => {
     fileInputRef.current?.click()
   }
 
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      console.log('File selected:', file)
-      // Handle the uploaded file
-      alert(`File "${file.name}" selected successfully!`)
-      setShowModal(false)
+  // Fetch session details on mount to get classschedule_booking_id and classschedule_id
+  useEffect(() => {
+    const fetchSessionDetails = async () => {
+      if (!code) return
+
+      try {
+        const data = await fetchLastSessionDetails(code)
+        if (data?.last_class) {
+          setClassscheduleBookingId(data.last_class.classschedule_booking_id || null)
+          setClassscheduleId(data.last_class.classschedule_id || null)
+        }
+      } catch (err) {
+        console.error('Error fetching session details:', err)
+      }
+    }
+
+    fetchSessionDetails()
+  }, [code])
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const files = e.target.files
+    if (!files || files.length === 0) return
+
+    const newFiles: SelectedFile[] = []
+    const currentCount = selectedFiles.length
+
+    // Limit to 10 files total
+    if (currentCount + files.length > 10) {
+      setError(`Maximum 10 files allowed. You already have ${currentCount} file(s) selected.`)
+      return
+    }
+
+    Array.from(files).forEach((file) => {
+      const id = `${Date.now()}-${Math.random()}`
+      const selectedFile: SelectedFile = { file, id }
+
+      // Create preview for images
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          setSelectedFiles((prev) =>
+            prev.map((f) => (f.id === id ? { ...f, preview: e.target?.result as string } : f))
+          )
+        }
+        reader.readAsDataURL(file)
+      }
+
+      newFiles.push(selectedFile)
+    })
+
+    setSelectedFiles((prev) => [...prev, ...newFiles])
+    setError(null)
+    setShowModal(true)
+  }
+
+  const removeFile = (id: string): void => {
+    setSelectedFiles((prev) => prev.filter((f) => f.id !== id))
+    setError(null)
+  }
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes === 0) return '0 Bytes'
+    const k = 1024
+    const sizes = ['Bytes', 'KB', 'MB', 'GB']
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+    return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i]
+  }
+
+  const handleSubmitHomework = async (): Promise<void> => {
+    if (selectedFiles.length === 0) {
+      setError('Please select at least one file')
+      return
+    }
+
+    if (!classscheduleBookingId) {
+      setError('Class schedule booking ID not available. Please refresh the page.')
+      return
+    }
+
+    if (!classscheduleId) {
+      setError('Class schedule ID not available. Please refresh the page.')
+      return
+    }
+
+    setLoading(true)
+    setError(null)
+    setUploadProgress(0)
+
+    try {
+      // Fetch faculty ID if not already fetched
+      let currentFacultyId = facultyId
+      if (!currentFacultyId) {
+        currentFacultyId = await getFacultyId(classscheduleId)
+        setFacultyId(currentFacultyId)
+      }
+
+      // Prepare files array
+      const files = selectedFiles.map((sf) => sf.file)
+
+      // Submit homework with progress tracking
+      await submitHomework(
+        files,
+        classscheduleBookingId,
+        currentFacultyId,
+        (progress) => {
+          setUploadProgress(progress)
+        }
+      )
+
+      setSuccess(true)
+      setSelectedFiles([])
+      setUploadProgress(0)
+      
+      // Reset success message after 3 seconds
+      setTimeout(() => {
+        setSuccess(false)
+        setShowModal(false)
+      }, 3000)
+    } catch (err) {
+      console.error('Error submitting homework:', err)
+      setError(err instanceof Error ? err.message : 'Failed to submit homework. Please try again.')
+      setUploadProgress(0)
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
-    <div className="bg-assignment-card backdrop-blur-sm lg:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 lg:p-3 relative flex flex-col h-full w-full md:max-h-[250px]">
+    <div className="bg-assignment-card backdrop-blur-sm lg:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 lg:p-3 relative flex flex-col h-full w-full lg:max-h-[250px]">
       <div className="flex items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2 lg:mb-1.5">
         {/* Treasure Chest/Box Icon */}
         <img 
@@ -111,9 +262,21 @@ const AssignmentCard = () => {
       <div className="flex-1 flex flex-col">
         <div className="flex items-center justify-between mb-2 sm:mb-3 lg:mb-2">
           <div>
-            <p className="font-extrabold text-gray-900 text-[10px] sm:text-xs lg:text-xs">Practice what we</p>
-            <p className="font-extrabold text-gray-900 text-[10px] sm:text-xs lg:text-xs">learned Last Class and</p>
-            <p className="font-extrabold text-gray-900 text-[10px] sm:text-xs lg:text-xs">Upload homework</p>
+            <p className="font-extrabold text-gray-900 text-[10px] sm:text-xs lg:text-xs">English</p>
+            <p className="font-extrabold text-gray-900 text-[10px] sm:text-xs lg:text-xs">Practice</p>
+          </div>
+          {/* Scroll with Quill Image */}
+          <div>
+            <img 
+              src="/images/gitaverse.png" 
+              alt="English Scroll" 
+              className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 object-contain"
+              style={{ filter: 'drop-shadow(0 0 12px rgba(139, 69, 19, 0.6))' }}
+            loading="lazy"
+            decoding="async"
+            width="56"
+            height="56"
+            />
           </div>
         </div>
         
@@ -136,11 +299,12 @@ const AssignmentCard = () => {
         </div>
       </div>
 
-      {/* Hidden file input */}
+      {/* Hidden file input - multiple files allowed */}
       <input
         ref={fileInputRef}
         type="file"
-        accept="image/*"
+        accept="image/*,application/pdf,.doc,.docx"
+        multiple
         onChange={handleFileChange}
         className="hidden"
       />
@@ -229,7 +393,7 @@ const AssignmentCard = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <div 
-                className="bg-white rounded-xl p-3 shadow-2xl max-w-xs w-full"
+                className="bg-white rounded-xl p-3 sm:p-4 shadow-2xl max-w-sm w-full max-h-[80vh] overflow-y-auto"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255, 248, 220, 0.95) 0%, rgba(255, 245, 200, 0.95) 100%)',
                   backdropFilter: 'blur(20px)',
@@ -237,17 +401,121 @@ const AssignmentCard = () => {
                   border: '2px solid rgba(255, 255, 255, 0.6)'
                 }}
               >
-                <h3 className="text-sm font-extrabold text-gray-900 mb-3 text-center">Upload Your Work</h3>
-                
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm sm:text-base font-extrabold text-gray-900">Upload Your Work</h3>
+                  <button
+                    onClick={() => {
+                      setShowModal(false)
+                      setError(null)
+                      setSuccess(false)
+                    }}
+                    className="text-gray-500 hover:text-gray-700 p-0.5 flex-shrink-0"
+                    aria-label="Close modal"
+                  >
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Success Message */}
+                {success && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-3 p-2 bg-green-100 border border-green-400 text-green-700 rounded-lg text-xs"
+                  >
+                    ✓ Homework submitted successfully!
+                  </motion.div>
+                )}
+
+                {/* Error Message */}
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-3 p-2 bg-red-100 border border-red-400 text-red-700 rounded-lg text-xs"
+                  >
+                    {error}
+                  </motion.div>
+                )}
+
+                {/* Selected Files List */}
+                {selectedFiles.length > 0 && (
+                  <div className="mb-3">
+                    <h4 className="text-xs font-bold text-gray-900 mb-1.5">
+                      Selected Files ({selectedFiles.length}/10)
+                    </h4>
+                    <div className="space-y-1.5 max-h-32 sm:max-h-40 overflow-y-auto">
+                      {selectedFiles.map((selectedFile) => (
+                        <div
+                          key={selectedFile.id}
+                          className="flex items-center gap-1.5 p-1.5 bg-white rounded-lg border border-gray-200"
+                        >
+                          {selectedFile.preview ? (
+                            <img
+                              src={selectedFile.preview}
+                              alt={selectedFile.file.name}
+                              className="w-8 h-8 object-cover rounded flex-shrink-0"
+                            />
+                          ) : (
+                            <div className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[10px] font-medium text-gray-900 truncate">
+                              {selectedFile.file.name}
+                            </p>
+                            <p className="text-[10px] text-gray-500">
+                              {formatFileSize(selectedFile.file.size)}
+                            </p>
+                          </div>
+                          <button
+                            onClick={() => removeFile(selectedFile.id)}
+                            className="text-red-500 hover:text-red-700 p-0.5 flex-shrink-0"
+                            disabled={loading}
+                          >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Upload Progress */}
+                {loading && uploadProgress > 0 && (
+                  <div className="mb-3">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] font-medium text-gray-700">Uploading...</span>
+                      <span className="text-[10px] font-medium text-gray-700">{uploadProgress}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <motion.div
+                        className="bg-orange-600 h-1.5 rounded-full"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${uploadProgress}%` }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </div>
+                  </div>
+                )}
+
                 <div className="space-y-2">
                   {/* Capture Image Option */}
                   <motion.button
                     onClick={handleCaptureImage}
-                    className="w-full p-2 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg hover:bg-blue-700"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    disabled={loading || selectedFiles.length >= 10}
+                    className="w-full p-2 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    whileHover={{ scale: selectedFiles.length >= 10 ? 1 : 1.02 }}
+                    whileTap={{ scale: selectedFiles.length >= 10 ? 1 : 0.98 }}
                   >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
                     </svg>
                     Capture Image
@@ -256,22 +524,53 @@ const AssignmentCard = () => {
                   {/* Upload from Device Option */}
                   <motion.button
                     onClick={handleUploadFromDevice}
-                    className="w-full p-2 rounded-lg bg-green-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg hover:bg-green-700"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    disabled={loading || selectedFiles.length >= 10}
+                    className="w-full p-2 rounded-lg bg-green-600 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    whileHover={{ scale: selectedFiles.length >= 10 ? 1 : 1.02 }}
+                    whileTap={{ scale: selectedFiles.length >= 10 ? 1 : 0.98 }}
                   >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                     </svg>
-                    Upload from Device
+                    {selectedFiles.length >= 10 ? 'Max Files Reached' : 'Select Files (Max 10)'}
                   </motion.button>
+
+                  {/* Submit Button */}
+                  {selectedFiles.length > 0 && (
+                    <motion.button
+                      onClick={handleSubmitHomework}
+                      disabled={loading}
+                      className="w-full p-2 rounded-lg bg-orange-600 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      whileHover={{ scale: loading ? 1 : 1.02 }}
+                      whileTap={{ scale: loading ? 1 : 0.98 }}
+                    >
+                      {loading ? (
+                        <>
+                          <div className="animate-spin rounded-full h-3.5 w-3.5 border-2 border-white border-t-transparent"></div>
+                          <span>Submitting...</span>
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          <span>Submit Homework</span>
+                        </>
+                      )}
+                    </motion.button>
+                  )}
 
                   {/* Cancel Button */}
                   <motion.button
-                    onClick={() => setShowModal(false)}
-                    className="w-full p-2 rounded-lg bg-gray-600 text-white font-bold text-xs hover:bg-gray-700 transition-colors"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setShowModal(false)
+                      setError(null)
+                      setSuccess(false)
+                    }}
+                    disabled={loading}
+                    className="w-full p-2 rounded-lg bg-gray-600 text-white font-bold text-xs hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    whileHover={{ scale: loading ? 1 : 1.02 }}
+                    whileTap={{ scale: loading ? 1 : 0.98 }}
                   >
                     Cancel
                   </motion.button>
@@ -286,5 +585,3 @@ const AssignmentCard = () => {
 }
 
 export default AssignmentCard
-
-

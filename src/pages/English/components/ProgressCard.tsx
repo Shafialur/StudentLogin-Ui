@@ -2,9 +2,9 @@ import React, { useEffect, useState, memo } from 'react'
 import { motion } from 'framer-motion'
 import { useProgressData } from '../../../hooks/useProgressData'
 
-interface ProgressCardProps { childName?: string; classDetails?: { class_name?: string; child_name?: string; class_date?: string; start_time?: string }; code?: string } interface TimeLeft { hours: number; minutes: number; seconds: number } const ProgressCard: React.FC<ProgressCardProps> = memo(() => {
+const ProgressCard = memo(() => {
   const { progressPercentage, totalClasses, pastClasses, loading } = useProgressData()
-  const [animatedProgress, setAnimatedProgress] = useState<0)
+  const [animatedProgress, setAnimatedProgress] = useState<number>(0)
   
   useEffect(() => {
     const timer = setTimeout(() => {
