@@ -310,12 +310,12 @@ export const submitHomework = async (
     
     // Append all files
     files.forEach((file) => {
-      formData.append('files[]', file)
+      formData.append('files', file)
     })
     
-    // Append other fields
-    formData.append('classschedule_booking_id', classscheduleBookingId.toString())
-    formData.append('faculty_id', facultyId)
+    // Append other fields - ensure classschedulebooking_id is a string (no underscore in field name)
+    formData.append('classschedulebooking_id', String(classscheduleBookingId))
+    formData.append('faculty_id', String(facultyId))
 
     // Note: This API uses a different base URL
     const xhr = new XMLHttpRequest()
