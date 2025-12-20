@@ -117,13 +117,21 @@
     will-change: scroll-position;
   }
   
-  /* Animation Performance */
+  /* Animation Performance - Optimized for GPU acceleration */
   [class*="motion-"],
-  [class*="animate-"] {
+  [class*="animate-"],
+  [data-framer-component] {
     will-change: transform, opacity;
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
+    contain: layout style paint;
+  }
+  
+  /* Optimize motion components specifically */
+  [data-framer-name] {
+    will-change: transform, opacity;
+    transform: translateZ(0);
   }
   
   /* Focus States for Accessibility */
