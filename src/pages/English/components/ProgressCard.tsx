@@ -1,4 +1,4 @@
-import   { useEffect, useState, memo } from 'react'
+import { useEffect, useState, memo } from 'react'
 import { motion } from 'framer-motion'
 import { useProgressData } from '../../../hooks/useProgressData'
 

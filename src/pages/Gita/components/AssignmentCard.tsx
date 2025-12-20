@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { fetchLastSessionDetails, getFacultyId, submitHomework } from '../../../utils/api'
 
@@ -209,11 +209,10 @@ const AssignmentCard = ({ code }: AssignmentCardProps) => {
       setSelectedFiles([])
       setUploadProgress(0)
       
-      // Reset success message after 3 seconds
+      // Reload page after showing success message for 1.5 seconds
       setTimeout(() => {
-        setSuccess(false)
-        setShowModal(false)
-      }, 3000)
+        window.location.reload()
+      }, 1500)
     } catch (err) {
       console.error('Error submitting homework:', err)
       setError(err instanceof Error ? err.message : 'Failed to submit homework. Please try again.')

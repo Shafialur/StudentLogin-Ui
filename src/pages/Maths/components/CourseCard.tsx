@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react'
+import { memo, useState, useEffect } from 'react'
 import OptimizedImage from '../../../components/OptimizedImage'
 import { fetchLastSessionDetails } from '../../../utils/api'
 
@@ -25,11 +25,17 @@ const CourseCard = memo<CourseCardProps>(({ code }) => {
         if (data?.last_class?.ppt?.iframe_src) {
           setIframeSrc(data.last_class.ppt.iframe_src)
         } else {
-          setError('No last class content available.')
+          setError("You don't have ppt in the last class")
         }
       } catch (err) {
         console.error('Error fetching last session details:', err)
-        setError(err instanceof Error ? err.message : 'Failed to load last class content.')
+        const errorMessage = err instanceof Error ? err.message : 'Failed to load last class content.'
+        // Replace authorization error message
+        if (errorMessage.toLowerCase().includes('not authorized') || errorMessage.toLowerCase().includes('not authorised')) {
+          setError('You are not authorized to view Presentation')
+        } else {
+          setError(errorMessage)
+        }
       } finally {
         setLoading(false)
       }
@@ -91,8 +97,10 @@ const CourseCard = memo<CourseCardProps>(({ code }) => {
             </div>
           )}
           {error && !loading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/10 rounded-xl">
-              <p className="text-gray-600 text-xs text-center px-2">{error}</p>
+            <div className="absolute inset-0 flex items-center justify-center rounded-xl">
+              <div className="bg-white/90 backdrop-blur-md rounded-lg px-4 py-3 border border-gray-200 shadow-lg">
+                <p className="text-gray-800 text-sm font-medium text-center">{error}</p>
+              </div>
             </div>
           )}
         </div>

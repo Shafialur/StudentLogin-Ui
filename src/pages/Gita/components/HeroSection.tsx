@@ -1,15 +1,9 @@
-import React, { useState, useEffect, useRef, useCallback, memo } from 'react'
+import { useState, useEffect, useRef, useCallback, memo, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { addChildToJoinQueue, checkIfClassStarted } from '../../../utils/api'
 import JoinSuccessToast from '../../../components/JoinSuccessToast'
 import OptimizedImage from '../../../components/OptimizedImage'
-
-interface ClassDetails {
-  class_name?: string
-  child_name?: string
-  class_date?: string
-  start_time?: string
-}
+import type { ClassDetails } from '../../../types/common'
 
 interface HeroSectionProps {
   childName?: string
@@ -23,13 +17,15 @@ interface TimeLeft {
   seconds: number
 }
 
-const HeroSection: React.FC<HeroSectionProps> = memo(({ childName = 'Krishna', classDetails, code }) => {
+const HeroSection = memo(({ childName = 'Krishna', classDetails, code }: HeroSectionProps) => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ hours: 0, minutes: 0, seconds: 0 })
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const [decorReady, setDecorReady] = useState<boolean>(false)
   const [showToast, setShowToast] = useState<boolean>(false)
   const [isJoining, setIsJoining] = useState<boolean>(false)
   const [pollingId, setPollingId] = useState<NodeJS.Timeout | null>(null)
+  const hasCheckedAutoRedirect = useRef<boolean>(false)
+  const hasOpenedLink = useRef<boolean>(false)
 
   const toISTDate = useCallback((dateStr: string | undefined, timeStr: string | undefined): Date | null => {
     if (!dateStr || !timeStr) return null
@@ -39,6 +35,7 @@ const HeroSection: React.FC<HeroSectionProps> = memo(({ childName = 'Krishna', c
     return isNaN(d.getTime()) ? null : d
   }, [])
 
+  // Single optimized timer effect - removed duplicate timer logic
   useEffect(() => {
     const start = toISTDate(classDetails?.class_date, classDetails?.start_time)
     if (!start) {
@@ -55,35 +52,31 @@ const HeroSection: React.FC<HeroSectionProps> = memo(({ childName = 'Krishna', c
       setTimeLeft({ hours, minutes, seconds })
     }
 
+    // Initial tick for immediate update
     tick()
-    const id = setInterval(tick, 1000)
-    return () => clearInterval(id)
-  }, [classDetails?.class_date, classDetails?.start_time, toISTDate])
-
-  useEffect(() => {
-    // Countdown timer logic - you can set a target date
-    timerRef.current = setInterval(() => {
-      setTimeLeft(prev => {
-        let { hours, minutes, seconds } = prev
-        seconds += 1
-        if (seconds >= 60) {
-          seconds = 0
-          minutes += 1
-        }
-        if (minutes >= 60) {
-          minutes = 0
-          hours += 1
-        }
-        return { hours, minutes, seconds }
-      })
-    }, 1000)
-
+    
+    // Use requestAnimationFrame for smoother updates, fallback to setInterval
+    let animationFrameId: number
+    let intervalId: NodeJS.Timeout
+    
+    const scheduleTick = () => {
+      tick()
+      intervalId = setTimeout(() => {
+        animationFrameId = requestAnimationFrame(scheduleTick)
+      }, 1000)
+    }
+    
+    animationFrameId = requestAnimationFrame(scheduleTick)
+    
     return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current)
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId)
+      }
+      if (intervalId) {
+        clearTimeout(intervalId)
       }
     }
-  }, [])
+  }, [classDetails?.class_date, classDetails?.start_time, toISTDate])
 
   // Defer heavy decorative layers until idle to speed first paint
   useEffect(() => {
@@ -118,6 +111,30 @@ const HeroSection: React.FC<HeroSectionProps> = memo(({ childName = 'Krishna', c
 
   const formatTime = useCallback((value: number): string => String(value).padStart(2, '0'), [])
 
+
+  // Auto-redirect when class is started or join_url is available
+  useEffect(() => {
+    if (!code || hasCheckedAutoRedirect.current || hasOpenedLink.current) return
+
+    const checkAndRedirect = async (): Promise<void> => {
+      try {
+        const status = await checkIfClassStarted(code)
+        if (status?.success && (status?.started || status?.join_url)) {
+          hasCheckedAutoRedirect.current = true
+          if (status.join_url && !hasOpenedLink.current) {
+            hasOpenedLink.current = true
+            window.open(status.join_url, '_blank', 'noopener')
+          }
+        }
+      } catch (error: unknown) {
+        // Silently fail - user can still click Join Now button
+        console.error('Auto-redirect check failed:', error)
+      }
+    }
+
+    checkAndRedirect()
+  }, [code])
+
   // Handle Join Now button click
   const handleJoinNow = async (): Promise<void> => {
     if (!code) {
@@ -129,27 +146,45 @@ const HeroSection: React.FC<HeroSectionProps> = memo(({ childName = 'Krishna', c
     try {
       const startedCheck = await checkIfClassStarted(code)
       if (startedCheck?.success && startedCheck?.started && startedCheck?.join_url) {
-        window.location.href = startedCheck.join_url
+        // User clicked button - always open in new tab (user-initiated action works better)
+        window.open(startedCheck.join_url, '_blank', 'noopener')
         return
       }
 
       await addChildToJoinQueue(code)
       setShowToast(true)
 
-      // start polling every 15s to see if class started
-      const id = setInterval(async () => {
-        try {
-          const status = await checkIfClassStarted(code)
-          if (status?.success && status?.started && status?.join_url) {
-            clearInterval(id)
-            setPollingId(null)
-            window.location.href = status.join_url
+      // Optimized polling: start with 5s, then increase to 15s after first check
+      let pollCount = 0
+      let currentPollId: NodeJS.Timeout | null = null
+      
+      const pollInterval = () => {
+        const delay = pollCount === 0 ? 5000 : 15000
+        pollCount++
+        
+        currentPollId = setTimeout(async () => {
+          try {
+            const status = await checkIfClassStarted(code)
+            if (status?.success && status?.started && status?.join_url) {
+              if (currentPollId) clearTimeout(currentPollId)
+              setPollingId(null)
+              if (!hasOpenedLink.current) {
+                hasOpenedLink.current = true
+                window.open(status.join_url, '_blank', 'noopener')
+              }
+            } else {
+              pollInterval() // Continue polling
+            }
+          } catch (err: unknown) {
+            console.error('Polling error:', err)
+            pollInterval() // Retry on error
           }
-        } catch (err: unknown) {
-          console.error('Polling error:', err)
-        }
-      }, 15000)
-      setPollingId(id)
+        }, delay) as unknown as NodeJS.Timeout
+        
+        setPollingId(currentPollId)
+      }
+      
+      pollInterval()
     } catch (error: unknown) {
       console.error('Error joining queue:', error)
       const errorMessage = error instanceof Error ? error.message : 'Oops! Something went wrong. Please try again.'
@@ -159,52 +194,54 @@ const HeroSection: React.FC<HeroSectionProps> = memo(({ childName = 'Krishna', c
     }
   }
 
+  // Cleanup polling on unmount
   useEffect(() => {
     return () => {
       if (pollingId) {
-        clearInterval(pollingId)
+        clearTimeout(pollingId)
+        setPollingId(null)
       }
     }
   }, [pollingId])
 
-  // Animation variants
-  const textVariants = {
+  // Memoized animation variants to prevent recreation
+  const textVariants = useMemo(() => ({
     hidden: { opacity: 0, x: -50 },
     visible: { 
       opacity: 1, 
       x: 0,
       transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] as const }
     }
-  }
+  }), [])
 
-  const chariotVariants = {
+  const chariotVariants = useMemo(() => ({
     hidden: { opacity: 0, x: 100 },
     visible: { 
       opacity: 1, 
       x: 0,
       transition: { duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] as const }
     }
-  }
+  }), [])
 
-  const floatAnimation = {
+  const floatAnimation = useMemo(() => ({
     y: [0, -10, 0],
     transition: {
       duration: 3,
       repeat: Infinity,
       ease: "easeInOut" as const
     }
-  }
+  }), [])
 
-  const cloudAnimation = {
+  const cloudAnimation = useMemo(() => ({
     x: [0, 20, 0],
     transition: {
       duration: 8,
       repeat: Infinity,
       ease: "easeInOut" as const
     }
-  }
+  }), [])
 
-  const buttonVariants = {
+  const buttonVariants = useMemo(() => ({
     hidden: { opacity: 0, scale: 0.8 },
     visible: { 
       opacity: 1, 
@@ -215,7 +252,7 @@ const HeroSection: React.FC<HeroSectionProps> = memo(({ childName = 'Krishna', c
       scale: 1.05,
       boxShadow: "0 10px 30px rgba(59, 130, 246, 0.5)"
     }
-  }
+  }), [])
 
   return (
     <div className="relative w-full overflow-x-hidden m-0 p-0">

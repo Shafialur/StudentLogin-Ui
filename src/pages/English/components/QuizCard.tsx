@@ -1,5 +1,10 @@
+import { useState } from 'react'
+import QuizModal from '../../../components/QuizModal'
+import { getQuizData } from '../../../data/quizData'
 
 const QuizCard = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+
   return (
     <div className="bg-quiz-card backdrop-blur-sm lg:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 lg:p-3 flex flex-col h-full w-full md:max-h-[250px]">
       <div className="flex items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2 lg:mb-1.5">
@@ -24,7 +29,10 @@ const QuizCard = () => {
         
         {/* Start Quiz Button - Light Blue to Darker Blue Gradient - At Bottom */}
         <div className="mt-auto">
-          <button className="bg-blue-600 hover:bg-blue-700 backdrop-blur-sm lg:backdrop-blur-md border border-white/50 rounded-full w-full text-white font-extrabold py-1.5 sm:py-2 lg:py-2 px-2 sm:px-3 lg:px-3 transition-all duration-200 flex items-center justify-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs lg:text-xs">
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="bg-blue-600 hover:bg-blue-700 backdrop-blur-sm lg:backdrop-blur-md border border-white/50 rounded-full w-full text-white font-extrabold py-1.5 sm:py-2 lg:py-2 px-2 sm:px-3 lg:px-3 transition-all duration-200 flex items-center justify-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs lg:text-xs"
+          >
             <span>Start Quiz</span>
             <div className="w-5 h-5 sm:w-5 sm:h-5 lg:w-6 lg:h-6 bg-blue-300 rounded-full flex items-center justify-center" style={{ filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.8))' }}>
               <svg 
@@ -39,6 +47,14 @@ const QuizCard = () => {
           </button>
         </div>
       </div>
+      
+      {/* Quiz Modal */}
+      <QuizModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        quizData={getQuizData('english')}
+        quizType="english"
+      />
     </div>
   )
 }

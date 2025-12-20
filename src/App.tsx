@@ -1,6 +1,7 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate, useParams, Outlet } from 'react-router-dom'
+import { lazy, Suspense, useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom'
 import { API_BASE_URL } from './utils/api'
+import type { ClassType, ClassDetails } from './types/common'
 
 // Lazy load pages for code splitting
 const GitaPage = lazy(() => import('./pages/Gita/GitaPage'))
@@ -22,7 +23,7 @@ interface FriendlyErrorProps {
   message: string
 }
 
-const FriendlyError: React.FC<FriendlyErrorProps> = ({ title, message }) => (
+const FriendlyError = ({ title, message }: FriendlyErrorProps) => (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-white to-blue-50 px-4">
     <div className="max-w-md w-full bg-white/90 backdrop-blur-md border border-orange-100 rounded-2xl shadow-xl p-8 text-center">
       <div className="text-5xl mb-4">🧩</div>
@@ -33,10 +34,7 @@ const FriendlyError: React.FC<FriendlyErrorProps> = ({ title, message }) => (
 )
 
 interface ClassInfo {
-  nextclass?: {
-    class_name?: string
-    child_name?: string
-  }
+  nextclass?: ClassDetails
 }
 
 interface VerifyResponse {
@@ -47,16 +45,11 @@ interface VerifyResponse {
 
 interface ClassInfoResponse {
   success?: boolean
-  nextclass?: {
-    class_name?: string
-    child_name?: string
-  }
+  nextclass?: ClassDetails
   message?: string
 }
 
-type ClassType = 'gita' | 'maths' | 'english' | null
-
-const CodeGate: React.FC = () => {
+const CodeGate = () => {
   const { code } = useParams<{ code: string }>()
   const [status, setStatus] = useState<'checking' | 'ok' | 'error'>('checking')
   const [errorMsg, setErrorMsg] = useState<string>('')
@@ -171,7 +164,7 @@ const CodeGate: React.FC = () => {
   )
 }
 
-const App: React.FC = () => {
+const App = () => {
   // Extract token from URL and save to localStorage
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)

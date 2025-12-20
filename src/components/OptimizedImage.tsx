@@ -1,6 +1,6 @@
-import React from 'react'
+import type { ImgHTMLAttributes } from 'react'
 
-interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface OptimizedImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   src: string
   webpSrc?: string
   alt: string
@@ -11,7 +11,7 @@ interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> 
   className?: string
 }
 
-const OptimizedImage: React.FC<OptimizedImageProps> = ({ 
+const OptimizedImage = ({ 
   src,
   webpSrc,
   alt,
@@ -21,7 +21,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   priority = false,
   className = '',
   ...props
-}) => {
+}: OptimizedImageProps) => {
   // Auto-generate WebP path from PNG path
   // "/images/chariot.png.png" → "/images/chariot.png.webp"
   const baseName = src.replace(/\.(png|jpg|jpeg)$/i, '')

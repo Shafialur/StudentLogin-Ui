@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import HeroSection from './components/HeroSection'
 import CourseCard from './components/CourseCard'
@@ -7,38 +7,40 @@ import TeacherNoteCard from './components/TeacherNoteCard'
 import AssignmentCard from './components/AssignmentCard'
 import QuizCard from './components/QuizCard'
 import SystemCheckCard from './components/SystemCheckCard'
+import type { PageProps } from '../../types/common'
 
-interface ClassDetails {
-  class_name?: string
-  child_name?: string
+// Memoize animation variants to prevent recreation on every render
+const cardVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.5,
+      ease: [0.25, 0.46, 0.45, 0.94] as const
+    }
+  })
 }
 
-interface EnglishPageProps {
-  childName?: string
-  classDetails?: ClassDetails
-  code?: string
-}
+const EnglishPage = memo(({ childName = '', classDetails, code }: PageProps) => {
+  // Memoize background image style to prevent recreation
+  const backgroundStyle = useMemo(() => ({
+    backgroundImage: 'url(/images/backgorund.webp), url(/images/backgorund.png)'
+  }), [])
 
-const EnglishPage: React.FC<EnglishPageProps> = ({ childName = '', classDetails, code }) => {
-  // Animation variants for cards
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    })
-  }
+  // Memoize grid style
+  const gridStyle = useMemo(() => ({
+    gridTemplateColumns: 'repeat(10, 1fr)',
+    gridTemplateRows: '1fr 1fr',
+    gridAutoRows: 'minmax(0, 1fr)'
+  }), [])
 
   return (
     <div 
       className="w-full min-h-screen sm:h-screen overflow-y-auto overflow-x-hidden relative bg-cover bg-center bg-no-repeat bg-fixed"
-      style={{ backgroundImage: 'url(/images/backgorund.webp), url(/images/backgorund.png)' }}
+      style={backgroundStyle}
     >
       {/* Responsive Container */}
       <div 
@@ -50,14 +52,10 @@ const EnglishPage: React.FC<EnglishPageProps> = ({ childName = '', classDetails,
         </div>
 
         {/* Dashboard Cards Section */}
-        <div className="w-full mx-auto px-3 sm:px-4 md:px-8 flex-1 lg:flex lg:flex-col relative z-10 min-h-0 lg:mt-4 lg:mb-4 pb-4 sm:pb-6 pt-3 sm:pt-4">
+        <div className="w-full mx-auto px-3 sm:px-4 lg:px-8 flex-1 lg:flex lg:flex-col relative z-10 min-h-0 lg:mt-4 lg:mb-4 pb-4 sm:pb-6 pt-3 sm:pt-4">
           {/* Mobile/Tablet: Custom layout | Desktop: Grid Layout */}
-          <div className="flex flex-col lg:grid lg:w-full lg:h-full gap-3 sm:gap-4 lg:gap-4 items-stretch" 
-            style={{ 
-              gridTemplateColumns: 'repeat(10, 1fr)', 
-              gridTemplateRows: '1fr 1fr',
-              gridAutoRows: 'minmax(0, 1fr)'
-            }}>
+          <div className="flex flex-col lg:grid lg:w-full lg:h-full gap-3 lg:gap-4 items-stretch" 
+            style={gridStyle}>
             {/* Mobile/Tablet: Course Card - Full width */}
             <motion.div 
               className="dashboard-grid-item-1 w-full lg:w-auto"
@@ -176,7 +174,9 @@ const EnglishPage: React.FC<EnglishPageProps> = ({ childName = '', classDetails,
       </div>
     </div>
   )
-}
+})
+
+EnglishPage.displayName = 'EnglishPage'
 
 export default EnglishPage
 

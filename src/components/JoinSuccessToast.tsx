@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface JoinSuccessToastProps {
@@ -7,7 +7,7 @@ interface JoinSuccessToastProps {
   childName?: string
 }
 
-const JoinSuccessToast: React.FC<JoinSuccessToastProps> = ({ show, onClose, childName = 'Student' }) => {
+const JoinSuccessToast = ({ show, onClose, childName = 'Student' }: JoinSuccessToastProps) => {
   useEffect(() => {
     if (show) {
       const timer = setTimeout(() => {

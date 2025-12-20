@@ -54,27 +54,20 @@ interface LastSessionDetails {
  * Get bearer token from localStorage first, then fallback to environment variable
  */
 const getAuthToken = (): string | undefined => {
-  // First check localStorage
-  const storedToken = localStorage.getItem('auth_token')
-  if (storedToken) {
-    return storedToken
-  }
-  
-  // Fallback to environment variable
-  return import.meta.env.VITE_TOKEN
+  return localStorage.getItem('auth_token') || import.meta.env.VITE_TOKEN
 }
 
 /**
  * Fetch header data from API
  */
 export const fetchHeaderData = async (): Promise<HeaderData> => {
-  try {
-    const token = getAuthToken()
-    
-    if (!token) {
-      throw new Error('No authentication token found in environment variables')
-    }
+  const token = getAuthToken()
+  
+  if (!token) {
+    throw new Error('No authentication token found')
+  }
 
+  try {
     const response = await fetch(`${API_BASE_URL}/parent-panel/header`, {
       method: 'GET',
       headers: {
@@ -84,19 +77,20 @@ export const fetchHeaderData = async (): Promise<HeaderData> => {
     })
 
     if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`)
+      const errorData: ApiResponse<never> = await response.json().catch(() => ({}))
+      throw new Error(errorData.message || `API Error: ${response.status} ${response.statusText}`)
     }
 
     const data: ApiResponse<HeaderData> = await response.json()
     
     if (data.success && data.data) {
       return data.data
-    } else {
-      throw new Error(data.message || 'Failed to fetch header data')
     }
+    
+    throw new Error(data.message || 'Failed to fetch header data')
   } catch (error) {
     console.error('Error fetching header data:', error)
-    throw error
+    throw error instanceof Error ? error : new Error('Failed to fetch header data')
   }
 }
 
@@ -104,17 +98,17 @@ export const fetchHeaderData = async (): Promise<HeaderData> => {
  * Add child to join queue using 6-digit code
  */
 export const addChildToJoinQueue = async (code: string): Promise<JoinQueueResponse> => {
+  const token = getAuthToken()
+  
+  if (!token) {
+    throw new Error('No authentication token found')
+  }
+
+  if (!code || !/^[a-z0-9]{6}$/i.test(code)) {
+    throw new Error('Invalid 6-digit code')
+  }
+
   try {
-    const token = getAuthToken()
-    
-    if (!token) {
-      throw new Error('No authentication token found in environment variables')
-    }
-
-    if (!code || !/^[a-z0-9]{6}$/i.test(code)) {
-      throw new Error('Invalid 6-digit code')
-    }
-
     const response = await fetch(`${API_BASE_URL}/parent-panel/add-child-in-join-queue/${code}`, {
       method: 'GET',
       headers: {
@@ -132,12 +126,12 @@ export const addChildToJoinQueue = async (code: string): Promise<JoinQueueRespon
     
     if (data.success) {
       return data
-    } else {
-      throw new Error(data.message || 'Failed to add child to join queue')
     }
+    
+    throw new Error(data.message || 'Failed to add child to join queue')
   } catch (error) {
     console.error('Error adding child to join queue:', error)
-    throw error
+    throw error instanceof Error ? error : new Error('Failed to add child to join queue')
   }
 }
 
@@ -145,17 +139,17 @@ export const addChildToJoinQueue = async (code: string): Promise<JoinQueueRespon
  * Check if class started
  */
 export const checkIfClassStarted = async (code: string): Promise<ClassStatusResponse> => {
+  const token = getAuthToken()
+  
+  if (!token) {
+    throw new Error('No authentication token found')
+  }
+
+  if (!code || !/^[a-z0-9]{6}$/i.test(code)) {
+    throw new Error('Invalid 6-digit code')
+  }
+
   try {
-    const token = getAuthToken()
-    
-    if (!token) {
-      throw new Error('No authentication token found in environment variables')
-    }
-
-    if (!code || !/^[a-z0-9]{6}$/i.test(code)) {
-      throw new Error('Invalid 6-digit code')
-    }
-
     const response = await fetch(`${API_BASE_URL}/parent-panel/check-if-class-started/${code}/`, {
       method: 'GET',
       headers: {
@@ -169,11 +163,10 @@ export const checkIfClassStarted = async (code: string): Promise<ClassStatusResp
       throw new Error(errorData.message || `API Error: ${response.status} ${response.statusText}`)
     }
 
-    const data: ClassStatusResponse = await response.json()
-    return data
+    return await response.json()
   } catch (error) {
     console.error('Error checking class status:', error)
-    throw error
+    throw error instanceof Error ? error : new Error('Failed to check class status')
   }
 }
 
@@ -181,17 +174,17 @@ export const checkIfClassStarted = async (code: string): Promise<ClassStatusResp
  * Fetch last session details
  */
 export const fetchLastSessionDetails = async (code: string): Promise<LastSessionDetails> => {
+  const token = getAuthToken()
+  
+  if (!token) {
+    throw new Error('No authentication token found')
+  }
+
+  if (!code || !/^[a-z0-9]{6}$/i.test(code)) {
+    throw new Error('Invalid 6-digit code')
+  }
+
   try {
-    const token = getAuthToken()
-    
-    if (!token) {
-      throw new Error('No authentication token found in environment variables')
-    }
-
-    if (!code || !/^[a-z0-9]{6}$/i.test(code)) {
-      throw new Error('Invalid 6-digit code')
-    }
-
     const response = await fetch(`${API_BASE_URL}/parent-panel/last_session_details?code=${code}`, {
       method: 'GET',
       headers: {
@@ -209,12 +202,12 @@ export const fetchLastSessionDetails = async (code: string): Promise<LastSession
     
     if (data.success && data.data) {
       return data.data
-    } else {
-      throw new Error(data.message || 'Failed to fetch last session details')
     }
+    
+    throw new Error(data.message || 'Failed to fetch last session details')
   } catch (error) {
     console.error('Error fetching last session details:', error)
-    throw error
+    throw error instanceof Error ? error : new Error('Failed to fetch last session details')
   }
 }
 
