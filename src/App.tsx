@@ -4,9 +4,9 @@ import { API_BASE_URL } from './utils/api'
 import type { ClassType, ClassDetails } from './types/common'
 
 // Lazy load pages for code splitting
-const GitaPage = lazy(() => import('./pages/Gita/GitaPage'))
-const EnglishPage = lazy(() => import('./pages/English/EnglishPage'))
-const MathsPage = lazy(() => import('./pages/Maths/MathsPage'))
+const GitaPage = lazy(() => import('./pages/GitaPage'))
+const EnglishPage = lazy(() => import('./pages/EnglishPage'))
+const MathsPage = lazy(() => import('./pages/MathsPage'))
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -59,9 +59,36 @@ const CodeGate = () => {
 
   const resolveClassType = (name: string = ''): ClassType => {
     const lc = name.toLowerCase()
-    if (lc.includes('gita')) return 'gita'
-    if (lc.includes('math')) return 'maths'
-    if (lc.includes('english')) return 'english'
+    
+    // English classes: Unbox English, Young Creative Writers, Masterclass-English, 
+    // Young Communicator Program, Communication Program, Young Public Speaker, 
+    // Parents' Teachers' Meeting (PTM), Homework Room, Extra Class
+    if (
+      lc.includes('english') ||
+      lc.includes('young') ||
+      lc.includes('communication') ||
+      lc.includes('communicator') ||
+      lc.includes('writers') ||
+      lc.includes('speaker') ||
+      lc.includes('ptm') ||
+      lc.includes('parents') ||
+      lc.includes('homework') ||
+      lc.includes('extra')
+    ) {
+      return 'english'
+    }
+    
+    // Gita classes: Gita for kids, Sanatan Unboxed
+    if (lc.includes('gita') || lc.includes('sanatan')) {
+      return 'gita'
+    }
+    
+    // Maths classes: Alpha Math or any other names (default)
+    if (lc.includes('math')) {
+      return 'maths'
+    }
+    
+    // Default to maths for any other names
     return 'maths'
   }
 

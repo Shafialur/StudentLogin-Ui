@@ -1,6 +1,12 @@
+import { memo } from 'react'
 import { motion } from 'framer-motion'
 
-const TeacherNoteCard = () => {
+interface TeacherNoteCardProps {
+  teacherImage: string
+  teacherName: string
+}
+
+const TeacherNoteCard = memo<TeacherNoteCardProps>(({ teacherImage, teacherName }) => {
   return (
     <div className="bg-teacher-card backdrop-blur-sm lg:backdrop-blur-md backdrop-saturate-[150%] border-2 border-gray-300 rounded-2xl p-2.5 sm:p-3 lg:p-3 relative h-full w-full lg:max-h-[250px] flex flex-col">
       {/* Sparkle stars in top right corner */}
@@ -55,8 +61,8 @@ const TeacherNoteCard = () => {
             style={{ filter: 'drop-shadow(0 0 15px rgba(251, 191, 36, 0.7))' }}
           >
             <img
-              src="/images/teacher.png.png"
-              alt="Ms. Guru"
+              src={teacherImage}
+              alt={teacherName}
               className="w-full h-full object-cover"
               loading="lazy"
               decoding="async"
@@ -64,7 +70,7 @@ const TeacherNoteCard = () => {
               height="56"
             />
           </div>
-          <h4 className="font-extrabold text-gray-900 text-[10px] sm:text-xs lg:text-xs mt-0.5 sm:mt-1 lg:mt-0.5">Ms. Guru</h4>
+          <h4 className="font-extrabold text-gray-900 text-[10px] sm:text-xs lg:text-xs mt-0.5 sm:mt-1 lg:mt-0.5">{teacherName}</h4>
         </div>
 
         {/* Message Box - Full Width */}
@@ -80,10 +86,9 @@ const TeacherNoteCard = () => {
       </div>
     </div>
   )
-}
+})
+
+TeacherNoteCard.displayName = 'TeacherNoteCard'
 
 export default TeacherNoteCard
-
-
-
 

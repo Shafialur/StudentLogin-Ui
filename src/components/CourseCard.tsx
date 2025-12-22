@@ -1,12 +1,14 @@
 import { memo, useState, useEffect } from 'react'
-import OptimizedImage from '../../../components/OptimizedImage'
-import { fetchLastSessionDetails } from '../../../utils/api'
+import OptimizedImage from './OptimizedImage'
+import { fetchLastSessionDetails } from '../utils/api'
 
 interface CourseCardProps {
   code?: string
+  fallbackImage: string
+  fallbackAlt: string
 }
 
-const CourseCard = memo<CourseCardProps>(({ code }) => {
+const CourseCard = memo<CourseCardProps>(({ code, fallbackImage, fallbackAlt }) => {
   const [iframeSrc, setIframeSrc] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
@@ -80,8 +82,8 @@ const CourseCard = memo<CourseCardProps>(({ code }) => {
       ) : (
         <div className="w-full h-full rounded-xl overflow-hidden relative">
           <OptimizedImage
-            src="/images/maths-coursecard.png"
-            alt="Maths course card"
+            src={fallbackImage}
+            alt={fallbackAlt}
             className="course-card-image w-full h-full rounded-xl"
             width={800}
             height={600}
