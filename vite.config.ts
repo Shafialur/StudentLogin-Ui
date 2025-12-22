@@ -64,6 +64,19 @@ export default defineConfig({
     hmr: {
       overlay: true,
     },
+    proxy: {
+      '/proxy-pdf': {
+        target: 'https://bambinos.live',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/proxy-pdf/, ''),
+        configure: (proxy, _options) => {
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            // Set proper headers for PDF requests
+            proxyReq.setHeader('Accept', 'application/pdf,*/*')
+          })
+        },
+      },
+    },
   },
 })
 

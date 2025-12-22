@@ -1,13 +1,18 @@
 import { memo, useMemo } from 'react'
 import { motion } from 'framer-motion'
-import HeroSection from './components/HeroSection'
-import CourseCard from './components/CourseCard'
-import ProgressCard from './components/ProgressCard'
-import TeacherNoteCard from './components/TeacherNoteCard'
-import AssignmentCard from './components/AssignmentCard'
-import QuizCard from './components/QuizCard'
-import SystemCheckCard from './components/SystemCheckCard'
-import type { PageProps } from '../../types/common'
+import HeroSection from '../components/HeroSection'
+import CourseCard from '../components/CourseCard'
+import ProgressCard from '../components/ProgressCard'
+import TeacherNoteCard from '../components/TeacherNoteCard'
+import AssignmentCard from '../components/AssignmentCard'
+import QuizCard from '../components/QuizCard'
+import SystemCheckCard from '../components/SystemCheckCard'
+import type { PageProps } from '../types/common'
+import type { SubjectTheme } from '../config/subjectThemes'
+
+interface SubjectPageProps extends PageProps {
+  theme: SubjectTheme
+}
 
 // Memoize animation variants to prevent recreation on every render
 const cardVariants = {
@@ -24,7 +29,7 @@ const cardVariants = {
   })
 }
 
-const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
+const SubjectPage = memo(({ childName = '', classDetails, code, theme }: SubjectPageProps) => {
   // Memoize background image style to prevent recreation
   const backgroundStyle = useMemo(() => ({
     backgroundImage: 'url(/images/backgorund.webp), url(/images/backgorund.png)'
@@ -48,7 +53,12 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
       >
         {/* Hero Section */}
         <div className="flex-shrink-0">
-          <HeroSection childName={childName} classDetails={classDetails} code={code} />
+          <HeroSection 
+            childName={childName} 
+            classDetails={classDetails} 
+            code={code}
+            theme={theme.hero}
+          />
         </div>
 
         {/* Dashboard Cards Section */}
@@ -65,7 +75,11 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
               custom={0}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              <CourseCard code={code} />
+              <CourseCard 
+                code={code}
+                fallbackImage={theme.courseCard.fallbackImage}
+                fallbackAlt={theme.courseCard.fallbackAlt}
+              />
             </motion.div>
 
             {/* Mobile/Tablet: Progress Card - Full width */}
@@ -77,7 +91,7 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
               custom={1}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              <ProgressCard />
+              <ProgressCard theme={theme.progress} />
             </motion.div>
 
             {/* Mobile/Tablet: Teacher Note Card - Full width */}
@@ -89,7 +103,10 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
               custom={2}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              <TeacherNoteCard />
+              <TeacherNoteCard 
+                teacherImage={theme.teacherNoteCard.teacherImage}
+                teacherName={theme.teacherNoteCard.teacherName}
+              />
             </motion.div>
 
             {/* Mobile/Tablet: Assignment Card - Full width */}
@@ -101,7 +118,10 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
               custom={3}
               whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
             >
-              <AssignmentCard code={code} />
+              <AssignmentCard 
+                code={code}
+                theme={theme.assignmentCard}
+              />
             </motion.div>
 
             {/* Mobile/Tablet: Quiz and System Check Cards - 2 per row */}
@@ -114,7 +134,13 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
                 custom={4}
                 whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
               >
-                <QuizCard />
+                <QuizCard 
+                  title={theme.quizCard.title}
+                  description={theme.quizCard.description}
+                  image={theme.quizCard.image}
+                  imageAlt={theme.quizCard.imageAlt}
+                  quizType={theme.quizCard.quizType}
+                />
               </motion.div>
               <motion.div 
                 className="dashboard-grid-item-6 flex-1 min-w-0"
@@ -124,7 +150,7 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
                 custom={5}
                 whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
               >
-                <SystemCheckCard />
+                <SystemCheckCard images={theme.systemCheckCard.images} />
               </motion.div>
             </div>
 
@@ -137,7 +163,10 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
               custom={2}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              <TeacherNoteCard />
+              <TeacherNoteCard 
+                teacherImage={theme.teacherNoteCard.teacherImage}
+                teacherName={theme.teacherNoteCard.teacherName}
+              />
             </motion.div>
             <motion.div 
               className="dashboard-grid-item-4 hidden lg:block lg:h-full"
@@ -147,7 +176,10 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
               custom={3}
               whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
             >
-              <AssignmentCard code={code} />
+              <AssignmentCard 
+                code={code}
+                theme={theme.assignmentCard}
+              />
             </motion.div>
             <motion.div 
               className="dashboard-grid-item-5 hidden lg:block lg:h-full"
@@ -157,7 +189,13 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
               custom={4}
               whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
             >
-              <QuizCard />
+              <QuizCard 
+                title={theme.quizCard.title}
+                description={theme.quizCard.description}
+                image={theme.quizCard.image}
+                imageAlt={theme.quizCard.imageAlt}
+                quizType={theme.quizCard.quizType}
+              />
             </motion.div>
             <motion.div 
               className="dashboard-grid-item-6 hidden lg:block lg:h-full"
@@ -167,7 +205,7 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
               custom={5}
               whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
             >
-              <SystemCheckCard />
+              <SystemCheckCard images={theme.systemCheckCard.images} />
             </motion.div>
           </div>
         </div>
@@ -176,7 +214,7 @@ const GitaPage = memo(({ childName = '', classDetails, code }: PageProps) => {
   )
 })
 
-GitaPage.displayName = 'GitaPage'
+SubjectPage.displayName = 'SubjectPage'
 
-export default GitaPage
+export default SubjectPage
 
