@@ -70,9 +70,19 @@ function resolvePdfUrlWithProxy(rawUrl: string) {
   if (!rawUrl) return rawUrl
 
   if (rawUrl.includes("bambinos.live")) {
-    return rawUrl
-      .replace("https://bambinos.live", "/proxy-pdf")
-      .replace("https://admin.bambinos.live", "/proxy-pdf")
+    // Check if we're in development (Vite) or production (Vercel)
+    const isDevelopment = import.meta.env.DEV
+    
+    if (isDevelopment) {
+      // Local development: Use Vite proxy which strips /proxy-pdf and forwards the path
+      // Example: https://bambinos.live/storage/... -> /proxy-pdf/storage/...
+      const urlObj = new URL(rawUrl)
+      return `/proxy-pdf${urlObj.pathname}${urlObj.search}${urlObj.hash}`
+    } else {
+      // Production (Vercel): Use API route with URL as query parameter
+      const encodedUrl = encodeURIComponent(rawUrl)
+      return `/api/proxy-pdf?url=${encodedUrl}`
+    }
   }
 
   return rawUrl
