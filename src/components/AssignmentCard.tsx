@@ -303,7 +303,15 @@ const AssignmentCard = ({ code, theme }: AssignmentCardProps) => {
                 }
               } catch (err) {
                 console.error('Error fetching homework:', err)
-                setHomeworkError(err instanceof Error ? err.message : 'Failed to load homework. Please try again.')
+                const errorMessage = err instanceof Error ? err.message : 'Failed to load homework. Please try again.'
+                // Replace authorization error messages with creative alternatives
+                if (errorMessage.toLowerCase().includes('not authorized') || errorMessage.toLowerCase().includes('not authorised')) {
+                  setHomeworkError('This homework is locked! Complete your previous assignments to unlock it.')
+                } else if (errorMessage.toLowerCase().includes('view bookings') || errorMessage.toLowerCase().includes('bookings for this child')) {
+                  setHomeworkError('Your learning journey is still being prepared. Check back soon!')
+                } else {
+                  setHomeworkError(errorMessage)
+                }
               } finally {
                 setLoadingHomework(false)
               }
@@ -727,9 +735,9 @@ const AssignmentCard = ({ code, theme }: AssignmentCardProps) => {
                         }}
                         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                       >
-                        😔
+                        🔒
                       </motion.div>
-                      <p className="text-sm sm:text-base font-bold text-gray-700 text-center mb-2">
+                      <p className="text-sm sm:text-base font-bold text-gray-700 text-center mb-2 px-4">
                         {homeworkError}
                       </p>
                     </div>
