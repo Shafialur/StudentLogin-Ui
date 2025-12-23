@@ -32,9 +32,11 @@ const CourseCard = memo<CourseCardProps>(({ code, fallbackImage, fallbackAlt }) 
       } catch (err) {
         console.error('Error fetching last session details:', err)
         const errorMessage = err instanceof Error ? err.message : 'Failed to load last class content.'
-        // Replace authorization error message
+        // Replace authorization error messages with creative alternatives
         if (errorMessage.toLowerCase().includes('not authorized') || errorMessage.toLowerCase().includes('not authorised')) {
-          setError('You are not authorized to view Presentation')
+          setError('This presentation is locked! Attend your next class to unlock it.')
+        } else if (errorMessage.toLowerCase().includes('view bookings') || errorMessage.toLowerCase().includes('bookings for this child')) {
+          setError('Your class materials are being prepared. Join a class to access them!')
         } else {
           setError(errorMessage)
         }
