@@ -166,9 +166,9 @@ export const gitaTheme: SubjectTheme = {
         position: { bottom: '-20', left: '55%' }
       },
       lotus: [
-        { src: '/images/lotus.png', position: { bottom: '0', left: '-20' } },
-        { src: '/images/lotus.png', position: { bottom: '0', left: '45%' } },
-        { src: '/images/lotus1.png', position: { bottom: '0', left: '7%' } }
+        { src: '/images/lotus.png', position: { bottom: '-20px', left: '-20' } },
+        { src: '/images/lotus.png', position: { bottom: '-20px', left: '45%' } },
+        { src: '/images/lotus1.png', position: { bottom: '0px', left: '7%' } }
       ],
       chariot: {
         src: '/images/chariot.png.png',
